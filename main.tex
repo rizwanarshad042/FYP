@@ -488,13 +488,23 @@ This chapter summarizes the academic research on problem formulation, demand for
 
 \section{Literature Review Summary Table}
 
-\begin{table}[H]
-\centering
-\caption{Summary of Literature Review}
-\resizebox{\textwidth}{!}{
-\begin{tabular}{|l|p{4cm}|c|p{6cm}|p{5cm}|}
+\scriptsize
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{0pt}
+\begin{longtable}{@{}|p{0.35cm}|p{2.3cm}|p{0.7cm}|p{4.9cm}|p{4.9cm}|@{}}
+\caption{Summary of Literature Review}\label{tab:literature-review} \\
 \hline
 \textbf{No.} & \textbf{Paper Title} & \textbf{Year} & \textbf{Summary} & \textbf{Relevance to StockSense} \\ \hline
+\endfirsthead
+\caption[]{Summary of Literature Review (continued)} \\
+\hline
+\textbf{No.} & \textbf{Paper Title} & \textbf{Year} & \textbf{Summary} & \textbf{Relevance to StockSense} \\ \hline
+\endhead
+\hline
+\multicolumn{5}{r}{Continued on next page} \\
+\endfoot
+\hline
+\endlastfoot
 1 & Exploring the Use of Deep Neural Networks for Sales Forecasting in Fashion Retail & 2018 & Deep learning outperforms shallow models for new fashion-product sales forecasting & Supports learning-based forecasting of fashion product sales \\ \hline
 2 & Clearance Pricing Optimization for a Fast-Fashion Retailer & 2012 & Formal markdown model increased clearance revenue at Zara by 6\% & Validates preventive markdown optimization as a business lever \\ \hline
 3 & Inventory Models with Lateral Transshipments: A Review & 2011 & Reviews proactive and reactive stock-transfer models between locations & Basis for treating branch-to-branch redistribution as a first-class action \\ \hline
@@ -510,9 +520,7 @@ This chapter summarizes the academic research on problem formulation, demand for
 13 & From Predictive to Prescriptive Analytics & 2020 & Framework for converting predictive models into actionable decisions & Basis for converting forecasts into recommendations, not just numbers \\ \hline
 14 & Stop Explaining Black Box Machine Learning Models for High Stakes Decisions and Use Interpretable Models Instead & 2019 & Argues interpretable models are more trustworthy than explained black boxes & Supports explainable, plain-language recommendations \\ \hline
 15 & Desperately Seeking Shelf Availability & 2003 & Worldwide study finds stockouts persistent; many customers switch stores entirely & Strengthens business case for prioritizing stockout prevention \\ \hline
-\end{tabular}
-}
-\end{table}
+\end{longtable}
 
 \section{Related Work}
 
