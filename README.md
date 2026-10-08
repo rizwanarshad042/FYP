@@ -23,6 +23,15 @@ LaTeX source for the StockSense Final Year Project report.
 
    This runs LaTeX and BibTeX as needed and creates `main.pdf`. Build output is ignored by Git.
 
+   If `latexmk` reports that Perl is blocked or unavailable, run the underlying commands directly:
+
+   ```powershell
+   pdflatex main.tex
+   bibtex main
+   pdflatex main.tex
+   pdflatex main.tex
+   ```
+
 6. Clean generated files when needed:
 
    ```powershell
