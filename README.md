@@ -18,10 +18,17 @@ LaTeX source for the StockSense Final Year Project report.
 5. Build the report:
 
    ```powershell
-   latexmk -pdf main.tex
+   .\build.ps1
    ```
 
-   This runs LaTeX and BibTeX as needed and creates `main.pdf`. Build output is ignored by Git.
+   This runs LaTeX and BibTeX as needed and creates `main.pdf`. Build output is ignored by Git. The script uses MiKTeX's installation path directly, so it works even when PowerShell has not refreshed its `PATH`.
+
+   If PowerShell blocks local scripts, run:
+
+   ```powershell
+   Set-ExecutionPolicy -Scope Process Bypass
+   .\build.ps1
+   ```
 
    If `latexmk` reports that Perl is blocked or unavailable, run the underlying commands directly:
 
