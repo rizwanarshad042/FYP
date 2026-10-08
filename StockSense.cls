@@ -29,9 +29,11 @@
 \fancyhead[R]{\thepage}
 \renewcommand{\headrulewidth}{1pt}
 \renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{14pt}
 
 \fancypagestyle{plain}{%
   \fancyhead[L]{\leftmark}
+  \fancyhead[R]{\thepage}
 }
 
 \setlength{\parskip}{6pt}

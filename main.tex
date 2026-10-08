@@ -64,6 +64,7 @@
 % ============================================================
 
 \frontmatter
+\pagestyle{fancy}
 
 \newpage
 \thispagestyle{empty}
@@ -74,8 +75,6 @@
 % ============================================================
 % ANTI-PLAGIARISM DECLARATION
 % ============================================================
-
-\pagestyle{empty}
 
 \section*{\begin{center}
 Anti-Plagiarism Declaration
@@ -188,13 +187,13 @@ To summarize, StockSense was designed to help a small business leverage the sale
 
 \pagebreak
 
-\listoffigures
 \addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
 
 \pagebreak
 
-\listoftables
 \addcontentsline{toc}{chapter}{List of Tables}
+\listoftables
 
 \mainmatter
 
@@ -500,14 +499,11 @@ This chapter summarizes the academic research on problem formulation, demand for
 \scriptsize
 \setlength{\LTleft}{0pt}
 \setlength{\LTright}{0pt}
-\setlength{\LTcapwidth}{\textwidth}
+\captionof{table}{Summary of Literature Review}\label{tab:literature-review}
 \begin{longtable}{@{}|p{0.35cm}|p{2.3cm}|p{0.7cm}|p{4.9cm}|p{4.9cm}|@{}}
-\caption{Summary of Literature Review}\label{tab:literature-review} \\
 \hline
 \textbf{No.} & \textbf{Paper Title} & \textbf{Year} & \textbf{Summary} & \textbf{Relevance to StockSense} \\ \hline
 \endfirsthead
-\caption[]{Summary of Literature Review (continued)} \\
-\hline
 \textbf{No.} & \textbf{Paper Title} & \textbf{Year} & \textbf{Summary} & \textbf{Relevance to StockSense} \\ \hline
 \endhead
 \hline
@@ -1860,9 +1856,8 @@ The algorithms used in StockSense will be selected considering time efficiency a
 
 \section{Conclusion}
 
-This chapter presented the high-level and low-level design of StockSense. The proposed architecture separates tenant and user management, POS and inventory operations, data ingestion, forecasting, recommendations, and dashboard reporting into clear modules. Tenant isolation, role-based access, data validation, background processing, and database indexing provide the foundation for a secure and scalable system. The design also supports the project's main decision flow: forecast demand, redistribute existing stock where possible, recommend markdowns for remaining slow-moving stock, and reorder only when necessary. The testing and maintenance strategy provides a basis for validating the system's correctness, performance, security, and forecast quality before deployment.
-
-\bibliographystyle{plainnat}
+In this chapter, the high level as well as the low level design of StockSense was explained. The proposed architecture separates out the tenant management, POS/inventory operations, data ingestion, forecasting, recommendations, and reporting on the dashboard into distinct modules. Tenant isolation, role-based access, data validation, background processing, and database indexing provide the foundation for a secure and scalable system. The design also supports the project's main decision flow: forecast demand, redistribute existing stock where possible, recommend markdowns for remaining slow-moving stock, and reorder only when necessary. The testing and maintenance strategy will be used to ensure the system is correct, performs well, is secure, and will be accurate before it is put into use.
+\bibliographystyle{IEEEtran}
 \bibliography{fypbib}
 
 \end{document}
