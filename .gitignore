@@ -1,0 +1,25 @@
+# LaTeX build output
+*.aux
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.toc
+*.synctex.gz
+*.bbl
+
+# Generated PDF (remove this line if the final PDF should be versioned)
+main.pdf
+
+# Editor and operating-system files
+.vscode/
+.idea/
+*.code-workspace
+.DS_Store
+Thumbs.db
+desktop.ini
