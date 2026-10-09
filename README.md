@@ -2,89 +2,124 @@
 
 LaTeX source for the StockSense Final Year Project report.
 
-## Project files
+## Files to know
 
-- `main.tex` is the document entry point.
-- `StockSense.cls` contains the report formatting and packages.
-- `fypbib.bib` contains the bibliography entries.
-- `Figures/` contains all logos, screenshots, diagrams, and sequence diagrams.
+- `main.tex` is the document entry point. Edit this file for report content.
+- `StockSense.cls` contains the report layout, packages, headings, and citation configuration.
+- `fypbib.bib` contains the bibliography records.
+- `build.ps1` builds the final PDF on Windows.
+- `latexmkrc` contains the optional `latexmk` configuration.
 
-## Run locally on Windows
+Generated files such as `.aux`, `.bbl`, `.blg`, `.lof`, `.log`, `.lot`, `.out`, `.toc`, and `.pdf` are build output. Do not edit them manually.
 
-1. Install [Git for Windows](https://git-scm.com/download/win).
-2. Install [MiKTeX](https://miktex.org/download) and select the option to install missing packages automatically when prompted.
-3. Install [Perl](https://strawberryperl.com/) if `latexmk` is not included with your TeX installation.
-4. Open a new PowerShell window in this project folder.
-5. Build the report:
+## Windows setup
 
-   ```powershell
-   .\build.ps1
-   ```
+Each group member needs the following software:
 
-   This runs LaTeX and BibTeX as needed and creates `main.pdf`. Build output is ignored by Git. The script uses MiKTeX's installation path directly, so it works even when PowerShell has not refreshed its `PATH`.
+1. [Git for Windows](https://git-scm.com/download/win) for downloading the repository and sharing changes.
+2. [MiKTeX](https://miktex.org/download) for compiling LaTeX. During installation, allow MiKTeX to install missing packages automatically.
+3. [Visual Studio Code](https://code.visualstudio.com/) or another text editor.
+4. The optional **LaTeX Workshop** VS Code extension for editing and previewing LaTeX.
 
-   If PowerShell blocks local scripts, run:
+The included build script uses the default per-user MiKTeX path:
 
-   ```powershell
-   Set-ExecutionPolicy -Scope Process Bypass
-   .\build.ps1
-   ```
-
-   If `latexmk` reports that Perl is blocked or unavailable, run the underlying commands directly:
-
-   ```powershell
-   pdflatex main.tex
-   bibtex main
-   pdflatex main.tex
-   pdflatex main.tex
-   ```
-
-6. Clean generated files when needed:
-
-   ```powershell
-   latexmk -C main.tex
-   ```
-
-You can also install the VS Code extension **LaTeX Workshop**, open `main.tex`, and use its build command.
-
-## Collaborate through GitHub
-
-One group member should create an empty GitHub repository, then run these commands from this folder:
-
-```powershell
-git init
-git add .
-git commit -m "Add StockSense FYP report"
-git branch -M main
-git remote add origin https://github.com/<github-username>/<repository-name>.git
-git push -u origin main
+```text
+C:\Users\<your-user>\AppData\Local\Programs\MiKTeX\miktex\bin\x64
 ```
 
-Replace the remote URL with the repository URL from GitHub. Each group member can then clone it:
+If MiKTeX was installed somewhere else, edit the `$miktexBin` value in `build.ps1` or use the direct commands below.
+
+## Download the project
+
+Open PowerShell and run:
 
 ```powershell
 git clone https://github.com/<github-username>/<repository-name>.git
 cd <repository-name>
+code .
 ```
 
-For each new change, use a branch and pull request:
+Replace the URL and folder name with the values for the group's GitHub repository. In VS Code, open `main.tex` to edit the report.
+
+## Build the PDF
+
+From the project folder, run:
 
 ```powershell
-git switch -c update-introduction
-git add main.tex Figures/
-git commit -m "Update introduction"
-git push -u origin update-introduction
+.\build.ps1
 ```
 
-Open a pull request on GitHub and merge it after another group member reviews it. Before starting new work, update your local copy:
+The script runs `pdflatex`, BibTeX, and two additional LaTeX passes. The final report is written to:
+
+```text
+F26-131.pdf
+```
+
+Open that PDF to review the report. Multiple LaTeX passes are required so that the table of contents, list of figures, list of tables, cross-references, and bibliography are updated correctly.
+
+### If PowerShell blocks the script
+
+Allow scripts only for the current PowerShell session, then run the build again:
 
 ```powershell
-git switch main
-git pull
+Set-ExecutionPolicy -Scope Process Bypass
+.\build.ps1
 ```
 
-Do not edit the same section at the same time without coordinating first; LaTeX files are text files and conflicting edits may need manual resolution.
+### Direct build commands
 
-## GitHub access
+If the script cannot find MiKTeX, run these commands after confirming that `pdflatex` and `bibtex` are available in your `PATH`:
 
-GitHub no longer accepts account passwords for Git over HTTPS. When prompted for a password, use a GitHub Personal Access Token, or configure SSH and use the SSH repository URL instead.
+```powershell
+pdflatex -jobname=F26-131 -interaction=nonstopmode -file-line-error main.tex
+bibtex F26-131
+pdflatex -jobname=F26-131 -interaction=nonstopmode -file-line-error main.tex
+pdflatex -jobname=F26-131 -interaction=nonstopmode -file-line-error main.tex
+```
+
+If BibTeX reports missing packages or fonts, open MiKTeX Console, install pending updates, and run the build again.
+
+## Editing workflow
+
+1. Pull the latest version before editing:
+
+   ```powershell
+   git switch main
+   git pull
+   ```
+
+2. Create a branch for your change:
+
+   ```powershell
+   git switch -c update-literature-review
+   ```
+
+3. Edit `main.tex`, `fypbib.bib`, `StockSense.cls`, or files under `Figures/`.
+4. Build the PDF and check the log for errors or unresolved references.
+5. Review the generated `F26-131.pdf` before sharing the change.
+6. Commit and push the source changes:
+
+   ```powershell
+   git status
+   git add main.tex fypbib.bib StockSense.cls Figures/
+   git commit -m "Update literature review"
+   git push -u origin update-literature-review
+   ```
+
+7. Open a pull request on GitHub. Ask another group member to review it before merging.
+
+Do not edit the same section at the same time without coordinating. LaTeX is plain text, so overlapping edits can create merge conflicts. Resolve conflicts in source files, then rebuild the PDF; never resolve conflicts by manually editing generated `.aux`, `.bbl`, or `.toc` files.
+
+## Cleaning build output
+
+To remove the auxiliary files created by `latexmk`, run:
+
+```powershell
+latexmk -C main.tex
+```
+
+The build script uses the `F26-131` job name, so remove its generated files only when needed and do not delete source files such as `main.tex`, `StockSense.cls`, `fypbib.bib`, or anything under `Figures/`.
+
+## GitHub authentication
+
+GitHub does not accept account passwords for Git over HTTPS. Use a GitHub Personal Access Token when Git asks for a password, or configure SSH and use the SSH repository URL instead.
