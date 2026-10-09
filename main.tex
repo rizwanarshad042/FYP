@@ -57,6 +57,11 @@
 
 \end{titlepage}
 
+\clearpage
+\thispagestyle{empty}
+\null
+\clearpage
+
 \makeatother
 
 
@@ -253,7 +258,7 @@ Retail inventory management is a process that’s used to decide what products s
 
 \section{Problem Statement}
 
-There is no affordable, easy-to-use solution that can analyze past sales and make product, size and location product recommendations that can be turned into stock changes. If there were no such system, retailers would have to judge manually, leading to overstocking, dead stock, over-investment in products that don't sell and loss of sales due to stockouts of popular items or sizes.
+It can be difficult for retailers to turn past sales information into product, size and location-based inventory decisions. This may result in overstocking, dead stock, unnecessary investment and stock out losses. Hence an integrated solution is required to assist with demand forecasting and inventory optimization, while providing data-driven stock management.
 
 \section{Problem Elaboration}
 
@@ -304,7 +309,7 @@ By providing data-driven innovation, StockSense helps retailers more effectively
 
 \section{Constraints}
 
-The main challenges of StockSense are: lack and quality of historical sales data, a new business must first enter or upload some sales history before its model can be trained and forecasts become available, forecast accuracy depends on data quality and quantity, public datasets are not necessarily representative of the actual behavior of small retailers, and the focus on products like clothing, footwear or any other physical product and an initial focus on short to medium term demand
+The main challenges of StockSense include limited availability and quality of historical sales data, the need for new businesses to upload sufficient sales history before reliable forecasts can be generated, and the dependence of forecast accuracy on data quality and quantity. Public datasets may not represent small retailers accurately. The system initially focuses on physical products, such as clothing and footwear, and short- to medium-term demand forecasting. Additionally, redistribution may not always be cost-effective due to transportation and handling costs, transfer delays, and the risk of stockouts at the source branch.
 
 \section{Business Opportunity}
 
@@ -361,15 +366,19 @@ This chapter summarizes the academic research on problem formulation, demand for
 
 \section{Detailed Literature Review}
 
-\subsection{Exploring the Use of Deep Neural Networks for Sales Forecasting in Fashion Retail (Loureiro et al., 2018)}
+Research on fashion retail also considers forecasting demand for new items, where limited sales history makes early prediction especially difficult~\cite{singh2019fashion}.
+
+\subsection{Exploring the Use of Deep Neural Networks for Sales Forecasting in Fashion Retail}
 
 \textbf{Summary:} Loureiro, Migu\'eis, and da Silva~\cite{loureiro2018deep} compare deep neural networks against shallow methods such as support vector regression for forecasting the sales of new fashion products, using a real dataset from a fashion retailer. They combine data-mining features describing a product's physical and distribution characteristics with expert-defined predictive variables.
+
+Related work on online retail also combines demand forecasting with price optimization~\cite{ferreira2016analytics}, which is relevant to StockSense's joint forecasting and markdown objectives.
 
 \textbf{Critical Analysis:} The study not only shows the superiority of deep learning over shallow models for new-product sales forecasting in the fashion retail domain, but it also uses a real company dataset and not a synthetic one. It does make a prediction at the new product level, though, and the data is from a single large retailer; this doesn't make the results of this model easy to apply to a small enterprise with numerous outlets.
 
 \textbf{Relationship to StockSense:} This paper justifies the selection of learning-based demand forecasting over demand estimation done manually and the use of product attributes as predictive features is directly connected to how StockSense will have to forecast demand for a product in a specific store.
 
-\subsection{Clearance Pricing Optimization for a Fast-Fashion Retailer (Caro and Gallien, 2012)}
+\subsection{Clearance Pricing Optimization for a Fast-Fashion Retailer}
 
 \textbf{Summary:} Caro and Gallien~\cite{caro2012clearance} describe a forecasting-and-optimization process that replaced Zara's manual markdown decision-making. A field experiment across all Belgian and Irish stores during a fall-winter season showed the new process increased clearance revenue by approximately six percent, and the process was subsequently adopted company-wide.
 
@@ -377,7 +386,7 @@ This chapter summarizes the academic research on problem formulation, demand for
 
 \textbf{Relationship to StockSense:} The paper confirms the fundamental concept behind StockSense' markdown optimizer: A formal forecasting/pricing process can be better than a manual and instinctual markdown decision. StockSense takes this concept and applies it to a smaller data set, but with a mindset of “markdown” not as a clearance-event process for large retailers, but as a “preventive, early-warning” measure.
 
-\subsection{Inventory Models with Lateral Transshipments: A Review (Paterson et al., 2011)}
+\subsection{Inventory Models with Lateral Transshipments: A Review}
 
 \textbf{Summary:} Paterson, Kiesm\"uller, Teunter, and Glazebrook~\cite{paterson2011inventory} review the academic literature on lateral transshipments — stock movements between locations of the same echelon — categorizing research by whether transshipments are proactive (planned in advance) or reactive (triggered by a stockout).
 
@@ -385,7 +394,7 @@ This chapter summarizes the academic research on problem formulation, demand for
 
 \textbf{Relationship to StockSense:} This review establishes the academic basis for treating inter-branch stock transfer as a distinct decision from reordering or discounting. StockSense builds on the proactive-transshipment framing described here, since its redistribution recommendations are intended to prevent dead stock and stockouts before they occur, rather than reacting to an empty shelf.
 
-\subsection{Forecasting Across Time Series Databases Using Recurrent Neural Networks on Groups of Similar Series: A Clustering Approach (Bandara et al., 2020)}
+\subsection{Forecasting Across Time Series Databases Using Recurrent Neural Networks on Groups of Similar Series: A Clustering Approach}
 
 \textbf{Summary:} Bandara, Bergmeir, and Smyl~\cite{bandara2020forecasting} propose clustering related time series and training a single global recurrent neural network per cluster, rather than one model per series, to improve forecast accuracy when individual series have limited history.
 
@@ -393,7 +402,7 @@ This chapter summarizes the academic research on problem formulation, demand for
 
 \textbf{Relationship to StockSense:} This paper supports StockSense's choice of a single shared forecasting model trained across many products and stores, rather than one model per product-size-store combination, since an individual small retailer's sales series are often too short for an accurate standalone model.
 
-\subsection{M5 Accuracy Competition: Results, Findings, and Conclusions (Makridakis et al., 2022)}
+\subsection{M5 Accuracy Competition: Results, Findings, and Conclusions}
 
 \textbf{Summary:} Makridakis, Spiliotis, and Assimakopoulos~\cite{makridakis2022m5} report the results of the M5 forecasting competition, in which thousands of teams forecasted 42,840 hierarchical retail sales series for Walmart. The competition found that machine-learning approaches, particularly gradient-boosted tree models such as LightGBM, consistently outperformed traditional statistical methods.
 
@@ -401,7 +410,7 @@ This chapter summarizes the academic research on problem formulation, demand for
 
 \textbf{Relationship to StockSense:} The competition's conclusion that gradient-boosted trees outperform simpler statistical baselines on hierarchical retail sales data directly informs the selection of a forecasting model family for StockSense's product-size-location forecasts.
 
-\subsection{Demand Forecasting for Improved Inventory Management in Small and Medium-Sized Businesses (Purnamasari et al., 2023)}
+\subsection{Demand Forecasting for Improved Inventory Management in Small and Medium-Sized Businesses}
 
 \textbf{Summary:} Purnamasari, Permadi, Saepudin, and Agusdin~\cite{purnamasari2023demand} compare machine-learning approaches, including an ensemble gradient-boosting model, against classic statistical projection methods for demand forecasting in small leathercraft businesses, using K-means clustering to group products by similarity before forecasting.
 
@@ -409,7 +418,7 @@ This chapter summarizes the academic research on problem formulation, demand for
 
 \textbf{Relationship to StockSense:} This paper is the most similar to StockSense in terms of its target audience – a small business with no data-science team. Its finding that gradient-boosting-based methods outperform classic statistical approaches on small-business sales data supports StockSense's choice of a gradient-boosted model with statistical baselines for comparison.
 
-\subsection{Retail Forecasting: Research and Practice (Fildes et al., 2022)}
+\subsection{Retail Forecasting: Research and Practice}
 
 \textbf{Summary:} Fildes, Ma, and Kolassa~\cite{fildes2022retail} present a comprehensive review of academic research in retail forecasting encompassing strategic, tactical and operational forecasting requirements and explore the disconnect between academic forecasting research and practice in retail stores.
 
@@ -417,7 +426,7 @@ This chapter summarizes the academic research on problem formulation, demand for
 
 \textbf{Relationship to StockSense:} The paper's finding that most published research and tools focused on retail forecasting still rely on a data-science team and an IT infrastructure is consistent with the premise of this project: that existing research and tools are not well suited to small retailers, and StockSense aims to address this gap.
 
-\subsection{Principles and Algorithms for Forecasting Groups of Time Series: Locality and Globality (Montero-Manso and Hyndman, 2021)}
+\subsection{Principles and Algorithms for Forecasting Groups of Time Series: Locality and Globality}
 
 \textbf{Summary:} Montero-Manso and Hyndman~\cite{montero2021principles} describe conditions under which it is preferable to predict a set of related time series using a shared (global) model rather than a separate (local) model for each series, and demonstrate that global models can outperform local models even when there is no obvious similarity between the series.
 
@@ -425,7 +434,7 @@ This chapter summarizes the academic research on problem formulation, demand for
 
 \textbf{Relationship to StockSense:} This theoretical result supports StockSense's use of one shared forecasting model across all of a tenant's products and stores, rather than training a separate model for each product-size-store series, since the latter would require more historical data than a small retailer is likely to have.
 
-\subsection{Reducing the Cost of Demand Uncertainty Through Accurate Response to Early Sales (Fisher and Raman, 1996)}
+\subsection{Reducing the Cost of Demand Uncertainty Through Accurate Response to Early Sales}
 
 \textbf{Summary:} Fisher and Raman~\cite{fisher1996reducing} show that fashion retailers who shorten lead times and react to early-season sales, rather than committing to production and ordering decisions months in advance, can substantially cut costs. Applied with a major ski-wear firm, their method increased profits by roughly 60\% relative to the firm's existing informal response process.
 
@@ -433,7 +442,7 @@ This chapter summarizes the academic research on problem formulation, demand for
 
 \textbf{Relationship to StockSense:} This paper is early, influential evidence for the general principle StockSense is built on: that reacting quickly to observed demand, rather than waiting for stock to sit unsold, reduces both lost sales and excess inventory. It supports treating recent sales velocity as a key signal for both the recommendation engine and the markdown optimizer.
 
-\subsection{Sales Forecasts in Clothing Industry: The Key Success Factor of the Supply Chain Management (Thomassey, 2010)}
+\subsection{Sales Forecasts in Clothing Industry: The Key Success Factor of the Supply Chain Management}
 
 \textbf{Summary:} Thomassey~\cite{thomassey2010sales} reviews forecasting practices in the clothing industry and proposes forecasting models designed to handle the short life cycles, strong seasonality, and sparse historical data typical of apparel sales.
 
@@ -441,7 +450,7 @@ This chapter summarizes the academic research on problem formulation, demand for
 
 \textbf{Relationship to StockSense:} This paper reinforces the project's recognition that size- and variant-level apparel demand is noisier and more seasonal than product-level demand overall, supporting StockSense's decision to forecast at the product-size-location level rather than at the product level alone.
 
-\subsection{Predictive Big Data Analytics for Supply Chain Demand Forecasting: Methods, Applications, and Research Opportunities (Seyedan and Mafakheri, 2020)}
+\subsection{Predictive Big Data Analytics for Supply Chain Demand Forecasting: Methods, Applications, and Research Opportunities}
 
 \textbf{Summary:} Seyedan and Mafakheri~\cite{seyedan2020predictive} survey the methods and applications of big-data-driven demand forecasting across supply chains, classifying approaches and identifying open research gaps.
 
@@ -449,7 +458,7 @@ This chapter summarizes the academic research on problem formulation, demand for
 
 \textbf{Relationship to StockSense:} This survey's identification of a gap between advanced forecasting techniques and organizations lacking analytics infrastructure reinforces the premise of this project: that small retailers are left out of advances that assume a data team is already in place.
 
-\subsection{Forecasting: Theory and Practice (Petropoulos et al., 2022)}
+\subsection{Forecasting: Theory and Practice}
 
 \textbf{Summary:} Petropoulos et al.~\cite{petropoulos2022forecasting} provide a wide-ranging review of forecasting theory, methods, and practice, covering model selection, evaluation, and the practical challenges of deploying forecasts in real organizations.
 
@@ -457,7 +466,7 @@ This chapter summarizes the academic research on problem formulation, demand for
 
 \textbf{Relationship to StockSense:} The paper's guidance on forecast evaluation and model selection informs how StockSense will compare its gradient-boosted forecasting model against simpler statistical baselines, as described in the forecast evaluation approach adopted for this project.
 
-\subsection{From Predictive to Prescriptive Analytics (Bertsimas and Kallus, 2020)}
+\subsection{From Predictive to Prescriptive Analytics}
 
 \textbf{Summary:} Bertsimas and Kallus~\cite{bertsimas2020predictive} propose a framework for converting predictive models into prescriptive decisions, demonstrating their approach on a real inventory-management problem for a large media distributor.
 
@@ -465,7 +474,7 @@ This chapter summarizes the academic research on problem formulation, demand for
 
 \textbf{Relationship to StockSense:} This paper supports StockSense's core design choice of not stopping at a forecast, but converting it directly into a concrete, actionable recommendation (redistribution, reorder, or markdown), which is the basis of the recommendation engine described in this project.
 
-\subsection{Stop Explaining Black Box Machine Learning Models for High Stakes Decisions and Use Interpretable Models Instead (Rudin, 2019)}
+\subsection{Stop Explaining Black Box Machine Learning Models for High Stakes Decisions and Use Interpretable Models Instead}
 
 \textbf{Summary:} Rudin~\cite{rudin2019stop} argues that for high-stakes decisions, inherently interpretable models should be used instead of black-box models paired with separate explanation techniques, since post-hoc explanations of black-box models can be unreliable.
 
@@ -473,7 +482,7 @@ This chapter summarizes the academic research on problem formulation, demand for
 
 \textbf{Relationship to StockSense:} While StockSense's recommendations are lower-stakes than the domains Rudin discusses, the same underlying concern applies: a business owner is unlikely to trust or act on a recommendation they cannot understand. This supports StockSense's design choice to generate a plain-language explanation alongside every recommendation, rather than presenting an unexplained output.
 
-\subsection{Desperately Seeking Shelf Availability: An Examination of the Extent, the Causes, and the Efforts to Address Retail Out-of-Stocks (Corsten and Gruen, 2003)}
+\subsection{Desperately Seeking Shelf Availability: An Examination of the Extent, the Causes, and the Efforts to Address Retail Out-of-Stocks}
 
 \textbf{Summary:} Corsten and Gruen~\cite{corsten2003desperately} report on a worldwide study of retail out-of-stocks, finding that stockout rates had not improved over the preceding decade despite industry efforts, and that a meaningful share of customers switch stores entirely rather than switch products when faced with an out-of-stock.
 
@@ -514,6 +523,7 @@ This chapter summarizes the academic research on problem formulation, demand for
 14 & Stop Explaining Black Box Machine Learning Models for High Stakes Decisions and Use Interpretable Models Instead & 2019 & Argues interpretable models are more trustworthy than explained black boxes & Supports explainable, plain-language recommendations \\ \hline
 15 & Desperately Seeking Shelf Availability & 2003 & Worldwide study finds stockouts persistent; many customers switch stores entirely & Strengthens business case for prioritizing stockout prevention \\ \hline
 \end{longtable}
+\addtocounter{table}{-1}
 
 \section{Related Work}
 
@@ -1148,7 +1158,7 @@ Forecasting and recommendation run as scheduled background jobs, and their resul
 
 Sales come from two sources: \texttt{Sale} and \texttt{SaleItem} records from the built-in POS (Source = POS), and CSV or Excel files from an external system (Source = Upload). Both sources use the same schema, so the later stages are independent of the source.
 
-Files are read with pandas (\texttt{read\_csv}, or \texttt{read\_excel} with \texttt{openpyxl}), in chunks to keep memory bounded for files of up to 100,000 rows. The system displays the detected columns, and the owner maps them to the canonical fields (product, size, store, date, quantity). Validation and import run as a background job. Validated rows are held until the owner approves the upload report, and are then committed in a single transaction. If the import fails, the transaction is rolled back and the data remains as it was before the import.
+CSV files are read with pandas in chunks, while Excel files are read with pandas and \texttt{openpyxl} using bounded-sheet or batch processing, to keep memory use manageable for files of up to 100,000 rows. The system displays the detected columns, and the owner maps them to the canonical fields (product, size, store, date, quantity). Validation and import run as a background job. Validated rows are held until the owner approves the upload report, and are then committed in a single transaction. If the import fails, the transaction is rolled back and the data remains as it was before the import.
 
 %==================================================
 \section{Data Validation, Cleaning, and Normalization}
@@ -1170,7 +1180,7 @@ Accepted rows are stored in the canonical format. Rejected and flagged rows are 
 \section{Demand Series Construction}
 \label{sec:series}
 
-Cleaned sales data are aggregated to the product-size-store level on a weekly and monthly basis:
+Cleaned sales data are aggregated to the product-size-store level on a weekly and monthly basis. Weekly forecasts are produced from weekly series; monthly forecasts are produced from monthly series so that the forecast horizon and evaluation period use the same time granularity:
 \begin{equation}
     y(v,s,t) = \sum_{i \in \mathcal{S}(v,s,t)} q_i,
 \end{equation}
@@ -1205,7 +1215,7 @@ To prevent data leakage, features at origin $t$ use only data available up to $t
 
 \subsection{Global Gradient-Boosted Model}
 
-The individual size-level series are too short and sparse to support one model per series. Following the global models of Montero-Manso and Hyndman and the forecasting of groups of similar series by Bandara et al., StockSense builds one global model per tenant on all of its series, with product, size, and store as categorical features. The chosen model is LightGBM (gradient-boosted decision trees). Gradient-boosted trees outperformed statistical methods on hierarchical retail sales in the M5 competition (Makridakis et al.), and LightGBM handles missing values and categorical variables natively and trains quickly on tabular data.
+The individual size-level series are too short and sparse to support one model per series. Following the global models of Montero-Manso and Hyndman and the forecasting of groups of similar series by Bandara et al., StockSense builds one global model per tenant on all of its series, with product, size, and store as categorical features. The chosen model is LightGBM (gradient-boosted decision trees). Gradient-boosted trees performed strongly against several statistical methods in the M5 competition (Makridakis et al.), and LightGBM handles missing values and categorical variables natively and trains quickly on tabular data.
 
 \subsection{Loss Function and Forecast Horizon}
 
@@ -1227,7 +1237,7 @@ To evaluate whether the more complex model is necessary, the following baselines
 
 \subsection{Initial Training Period}
 
-StockSense does not ship with a pre-trained model, and the data of one tenant is never shared with another. A new tenant therefore starts without a forecasting model. The owner first records sales through the POS or uploads historical sales reports. Until a minimum amount of history is available (for example, several weeks of sales for the tenant's products), no forecast is displayed and the user is told that more data is needed (UC-10). Once the minimum is reached, the first model is trained on the tenant's own data, and forecasting and recommendations start working. The model is then retrained on a schedule as new sales arrive, so its accuracy improves as the tenant's history grows. The minimum history is determined experimentally (Section~\ref{sec:evaluation}).
+StockSense does not ship with a pre-trained model, and the data of one tenant is never shared with another. A new tenant therefore starts without a forecasting model. The owner first records sales through the POS or uploads historical sales reports. Until a minimum amount of history is available (for example, several weeks of sales for the tenant's products), no model-based forecast is displayed and the user is told that more data is needed (UC-10). During this period, simple baseline forecasts may be shown if enough observations exist. Once the minimum is reached, the first global model is trained on the tenant's own data, and model-based forecasting and recommendations start working. The model is then retrained on a schedule as new sales arrive; accuracy is measured rather than assumed to improve as history grows. The minimum history is determined experimentally (Section~\ref{sec:evaluation}).
 
 \subsection{Forecast Uncertainty}
 
@@ -1242,10 +1252,10 @@ For every variant $v$ and store $s$, the engine compares the forecast with the s
 \begin{itemize}
     \item $I$ = on-hand stock plus pending incoming transfers (pending transfers are already accepted, so they are not recommended again),
     \item $D$ = forecast demand over the next $H$ weeks,
-    \item $SS$ = safety stock, taken from the upper-quantile forecast.
+    \item $Q_{0.9}$ = the upper-quantile forecast over the horizon, and $SS = \max(0,Q_{0.9}-D)$ = safety stock above the expected demand.
 \end{itemize}
 
-The net position is
+The net position is therefore
 \begin{equation}
     N = I - (D + SS).
 \end{equation}
@@ -1258,7 +1268,7 @@ If $N > 0$, the store has a surplus of $N$ units; if $N < 0$, it has a shortage 
     & \sum_{i} x_{ij} \le \text{shortage}_j \quad \forall j, \\
     & x_{ij} \ge 0.
 \end{align}
-Here $m$ is the unit margin (selling price minus cost price) and $c_{ij}$ is the unit transfer cost between stores $i$ and $j$. A transfer is recommended only if $m > c_{ij}$. The constraint matrix of a transportation problem is totally unimodular, so the LP solution is automatically integral, and since retailers have few branches, each problem is small and cheap to solve.
+Here $m_{ij}$ is the relevant unit margin at destination store $j$ and $c_{ij}$ is the unit transfer cost between stores $i$ and $j$. A transfer is recommended only when $m_{ij}-c_{ij}>0$. Transfer quantities are constrained to non-negative integer units; because the transportation matrix and the supply and demand values are integral, the linear-program solution has an integral optimum. Since retailers have few branches, each problem is small and cheap to solve. The model does not yet include transfer lead time or capacity limits; these are recorded as assumptions for the backtest.
 
 \textbf{Reorder.} Any shortage remaining after redistribution is converted into a reorder recommendation with a suggested quantity.
 
@@ -1270,11 +1280,11 @@ Here $m$ is the unit margin (selling price minus cost price) and $c_{ij}$ is the
 
 Any surplus that is not cleared by redistribution is passed to the markdown optimizer. Like Caro and Gallien, it follows a forecast-then-optimize structure, but it is used as an early-warning mechanism rather than an end-of-season clearance approach.
 
-A variant-store is marked as at risk when its weeks of cover exceed the remaining selling window:
+A variant-store is marked as at risk when its weeks of cover exceeds the remaining selling window. For positive forecast demand, this is calculated as:
 \begin{equation}
     \mathrm{WOC} = \frac{I}{\bar{d}} > T,
 \end{equation}
-where $\bar{d}$ is the average forecast weekly demand and $T$ is the number of weeks in which the stock should be sold. Because the alert is raised while WOC is only slightly above $T$, a small discount is usually sufficient.
+where $\bar{d}$ is the average forecast weekly demand and $T$ is the number of weeks in which the stock should be sold. If $\bar{d}=0$ and $I>0$, the item is treated as at risk and handled separately because its weeks of cover is undefined. The candidate discounts are evaluated against expected margin and sell-through; the smallest discount meeting the target is selected only when it does not produce a lower expected margin than the no-discount case.
 
 For each candidate discount $d$ from a grid (for example, 5\% to 50\% in steps of 5\%), demand is adjusted using a constant price-elasticity model:
 \begin{equation}
@@ -1324,7 +1334,7 @@ The primary metrics are
 \end{align}
 where $a_k$ is the actual demand and $f_k$ is the forecast.
 
-Size-level series contain many zeros and MAPE is undefined for zero actuals, so it is computed only on non-zero periods and always reported together with RMSE. WAPE (total absolute error divided by total actual sales) and MAE are provided as supplementary measures, since they remain valid for sparse series. Results are presented separately for each demand class, for fast and slow movers.
+Size-level series contain many zeros and MAPE is undefined for zero actuals, so non-zero-demand MAPE is computed only on periods with positive actual demand, together with the proportion of periods excluded. WAPE (total absolute error divided by total actual sales) and MAE are emphasized as supplementary measures, since they remain valid for sparse series. Results are presented separately for each demand class, for fast and slow movers.
 
 \subsection{Experiments}
 
@@ -1337,13 +1347,13 @@ Size-level series contain many zeros and MAPE is undefined for zero actuals, so 
 
 \subsection{Recommendation Backtest}
 
-The value of the recommendations is estimated by replaying history. At each cut-off date, the engine produces recommendations using only the information available up to that date. The recommended transfers and discounts are applied to a simulated stock record, and the following weeks are replayed with actual sales as demand. The outcomes are compared with a ``no action'' run and include dead stock (units whose cover is greater than $T$ weeks), units of lost sales caused by stock-outs, and the sell-through rate. The simulation assumes that transfers do not change demand, and that demand changes only through the elasticity model when a markdown is applied. These assumptions are stated together with the results.
+The value of the recommendations is estimated by replaying history. At each cut-off date, the engine produces recommendations using only the information available up to that date. The recommended transfers and discounts are applied to a simulated stock record, and the following weeks are replayed with actual sales as demand. The simulation specifies transfer lead time, assumes that stock is unavailable at the source while it is in transit, and applies an accepted markdown from its effective date. The outcomes are compared with a ``no action'' run and include dead stock (units whose cover is greater than $T$ weeks), units of lost sales caused by stock-outs, and the sell-through rate. The simulation assumes that transfers do not change demand, and that demand changes only through the elasticity model when a markdown is applied. These assumptions are stated together with the results.
 
 %==================================================
 \section{Iterative Development}
 \label{sec:iterative}
 
-StockSense is built in increments, and each increment ends with the tests in Section~6.7 and a review by the supervisor:
+StockSense is built in increments, and each increment ends with the testing activities described in Chapter 6 and a review by the supervisor:
 
 \begin{enumerate}
     \item \textbf{Multi-tenant foundation:} tenant and user management, products, inventory, POS, and the ingestion and validation pipeline.
@@ -1827,7 +1837,7 @@ Uploaded sales files will be verified prior to being submitted to the forecastin
 
 \subsection{Explainable Recommendations}
 
-If a recommendation is made, the primary reasons for the recommendation (forecast, current stock, surplus/shortage, source branch) will be saved with it, including a financial impact estimate. This enables the owner to see the reason for each suggestion on the dashboard rather than just a number.
+If a recommendation is made, the primary reasons for the recommendation (forecast, current stock, surplus/shortage, source branch) will be saved with it, including a financial impact estimate. This enables the owner to see the reason for each suggestion on the dashboard rather than an unexplained number.
 
 \subsection{System Testing}
 
@@ -1844,7 +1854,7 @@ The algorithms used in StockSense will be selected considering time efficiency a
 \section{Conclusion}
 
 In this chapter, the high level as well as the low level design of StockSense was explained. The proposed architecture separates out the tenant management, POS/inventory operations, data ingestion, forecasting, recommendations, and reporting on the dashboard into distinct modules. Tenant isolation, role-based access, data validation, background processing, and database indexing provide the foundation for a secure and scalable system. The design also supports the project's main decision flow: forecast demand, redistribute existing stock where possible, recommend markdowns for remaining slow-moving stock, and reorder only when necessary. The testing and maintenance strategy will be used to ensure the system is correct, performs well, is secure, and will be accurate before it is put into use.
-\bibliographystyle{IEEEtran}
+\bibliographystyle{IEEEtranN}
 \bibliography{fypbib}
 
 \end{document}
