@@ -591,13 +591,13 @@ This chapter describes the functional and non-functional requirements of StockSe
     \item Data validation, cleaning, and normalization of uploaded sales data.
     \item Product, size/variant, and store/location management.
     \item Product-size-location demand forecasting.
-    \item Inventory redistribution recommendations between branches.
+    \item Recommendations for inventory re-distribution between branches.
     \item Reordering recommendations.
-    \item Markdown/discount optimizer for slow-moving stock.
-    \item Explainable recommendations with estimated financial impact.
-    \item Web dashboard for sales, inventory, forecasts, and recommendations.
-    \item Freemium subscription management (free POS tier, paid analytics tier).
-    \item Cross-tenant benchmarking (where data permits).
+    \item Slow moving stock mark down/discount optimizer.
+    \item Recommendations that are easy to explain, and have an estimated financial impact.
+    \item Web dashboard to access sales, inventory, forecasts and recommendations.
+    \item Freemium subscription management (free POS tier and paid analytics tier).
+    \item Cross-tenant benchmarking (if available).
 \end{itemize}
 
 \section{Functional Requirements}
@@ -605,11 +605,11 @@ This chapter describes the functional and non-functional requirements of StockSe
 \subsection{Functional Requirements of the Business Owner}
 
 \begin{itemize}
-    \item FR-1: The business owner shall be able to register the business as a tenant and create an account.
-    \item FR-2: The business owner shall be able to add, edit, and remove stores belonging to the business.
-    \item FR-3: The business owner shall be able to view consolidated sales, inventory, and forecast data across all stores.
-    \item FR-4: The business owner shall be able to view and act on redistribution, reorder, and markdown recommendations.
-    \item FR-5: The business owner shall be able to upgrade or downgrade the subscription tier.
+    \item FR-1: The owner of the business will be able to sign up business on behalf of the tenant and to open a business account.
+    \item FR-2: The business owner should be able to manage stores within the business to add, edit and remove them.
+    \item FR-3: The owner of the business will have access to all stores' sales, inventory, and forecast data consolidated.
+    \item FR-4: The business owner should have access to and can execute redistribution, reorder and markdown suggestions.
+    \item FR-5: Business owner will be able to increase or decrease subscription level.
     \item FR-6: The business owner shall be able to invite and manage store-manager accounts.
 \end{itemize}
 
@@ -629,10 +629,10 @@ This chapter describes the functional and non-functional requirements of StockSe
     \item FR-12: The system should be able to accept and validate sales-report uploads in CSV and Excel.
     \item FR-13: The system shall normalize uploaded data into a common schema (product, size, store, date, quantity).
     \item FR-14: After each sale recorded, the system shall automatically update the inventory.
-    \item FR-15: The system shall generate demand forecasts at the product-size-location level.
-    \item FR-16: The system shall compare forecasted demand against current inventory to identify shortages and surpluses.
-    \item FR-17: When more than one branch has surplus stock and another branch has a forecasted shortage of the same product/size, the system shall provide a redistribution recommendation.
-    \item FR-18: The system shall generate a reorder recommendation when no suitable surplus exists elsewhere.
+    \item FR-15: The system shall create product-size-location level demand forecasts.
+    \item FR-16: The system shall determine if there are shortages or surpluses of the inventory as compared to the forecasted demand.
+    \item FR-17: When two or more branches have overstocked items and another branch has a projected shortage of the same type of item and size, FR-17 shall give a recommendation to redistribute.
+    \item FR-18: The system shall make a reorder suggestion if there is no other source of adequate surplus.    
     \item FR-19: The system shall identify inventory at risk of becoming dead stock and generate a markdown recommendation before it becomes unsellable.
     \item FR-20: Recommendations shall be accompanied by a clear statement of its consequences and a reasonable cost estimate.
     \item FR-21: The system shall restrict access to paid features based on the tenant's subscription tier.
