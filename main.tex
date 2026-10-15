@@ -1150,58 +1150,58 @@ The proposed approach and methodology is presented in this chapter. The chapter 
 
 StockSense is a sequential pipeline in which each stage reads data from and writes data to the PostgreSQL database through the modules described in Chapter~6. Sales are entered through the built-in POS or by file upload and are stored in one canonical schema. A demand series is created for each product-size-store combination, features are created from the history of the demand series, and the model provides weekly and monthly demand forecasts. These forecasts are then compared with the current inventory to generate redistribution, markdown, and reorder recommendations, all of which include an explanation and an estimated financial impact.
 
-Forecasting and recommendation run as scheduled background jobs, and their results are stored in the Forecast and Recommendation tables. The model name (\texttt{ModelName}) is saved with each forecast, which allows models to be compared or replaced without altering the remainder of the system. To respect tenant isolation, models are trained per tenant: a model is shared across all products, sizes, and stores of one business, but never across businesses.
+The forecast and recommendation operations are carried out as background processes and the results are put into the forecast and recommendations tables. \texttt{ModelName} is associated with each forecast, enabling different models to be compared or swapped without changing any other part of the system. In order to honor tenant isolation, the models are trained per tenant. The model will be used for all products, sizes, and stores of a business, but not between businesses.
 
 %==================================================
 \section{Data Ingestion}
 \label{sec:ingestion}
 
-Sales come from two sources: \texttt{Sale} and \texttt{SaleItem} records from the built-in POS (Source = POS), and CSV or Excel files from an external system (Source = Upload). Both sources use the same schema, so the later stages are independent of the source.
+Sales are created in two ways: through records of type \texttt{Sale} and \texttt{SaleItem} which are available from the standard POS (Source = POS) and through CSV/Excel files coming from an external source (Source = Upload). Both types have the same schema and therefore subsequent steps are independent of the source.
 
-CSV files are read with pandas in chunks, while Excel files are read with pandas and \texttt{openpyxl} using bounded-sheet or batch processing, to keep memory use manageable for files of up to 100,000 rows. The system displays the detected columns, and the owner maps them to the canonical fields (product, size, store, date, quantity). Validation and import run as a background job. Validated rows are held until the owner approves the upload report, and are then committed in a single transaction. If the import fails, the transaction is rolled back and the data remains as it was before the import.
+The CSV files are processed using chunks via pandas library, while the Excel files are processed in batches using pandas and \texttt{openpyxl} libraries in order to keep memory usage low for files containing up to 100,000 rows. The system shows the detected columns and the user maps them to canonical columns (product, size, store, date, quantity). Validation and import is done as a background task. Validated rows are buffered until the report is approved by the owner and then imported in a single database transaction. In case of failure, the transaction is rolled back.
 
 %==================================================
 \section{Data Validation, Cleaning, and Normalization}
 \label{sec:validation}
 
-The following checks are performed for every row:
+The following validations are run on each record:
 
 \begin{itemize}
-    \item \textbf{Structural:} all required fields are present and have the expected data type.
-    \item \textbf{Value:} the date is valid, the quantity is numeric, and the price is non-negative. Dates such as 03/04/2025 are ambiguous, so the owner selects the date format when the columns are mapped.
-    \item \textbf{Referential:} product, size, and store names are normalized (trimmed, case folded, and sizes converted to a standard form such as ``Medium'' to ``M'') and must match a variant and a store within the same tenant. Unmatched rows are rejected with a reason, and close matches can be suggested using string similarity.
-    \item \textbf{Duplicates:} rows repeated across overlapping exports are detected using a composite key (store, variant, date, quantity, price). They are flagged and not deleted, because identical sales can be genuine.
-    \item \textbf{Returns and outliers:} negative quantities are treated as returns and reported separately. Extreme quantities are flagged and capped only in the training copy, so the raw record is preserved.
+    \item \textbf{Structural:} all mandatory attributes are checked to be available with the correct datatype.
+    \item \textbf{Value:} the date is correct, the quantity attribute is numeric, and the price is greater than or equal to zero. Dates in the form of 03/04/2025 are ambiguous; hence the owner has an option to select the date format while mapping columns.
+    \item \textbf{Referential:} the name of the product, size, and store should be normalized (truncated, case insensitive, and size should be standardized like "Medium" to "M"), and should match a variant and a store under the same tenant.   
+    \item \textbf{Duplicated records:} Duplicate records are found through the use of a composite key composed of the store, variant, date, quantity, and price. They are identified but will not be deleted since identical sales transactions may occur in reality.
+    \item \textbf{Returns and outliers:} Negative values of quantity are considered returns, while extreme values of quantity are identified and capped only on the training copy.
 \end{itemize}
 
-Accepted rows are stored in the canonical format. Rejected and flagged rows are listed in the upload report with reasons, allowing the owner to correct the source file.
+The accepted records are saved in the standard format. The rejected and flagged records are included in the upload report with corresponding justifications.
 
 %==================================================
 \section{Demand Series Construction}
 \label{sec:series}
 
-Cleaned sales data are aggregated to the product-size-store level on a weekly and monthly basis. Weekly forecasts are produced from weekly series; monthly forecasts are produced from monthly series so that the forecast horizon and evaluation period use the same time granularity:
+Sales data are cleaned and aggregated to product/size/store weekly and monthly levels. Weekly sales forecasts are made using weekly series; monthly sales forecasts are made using monthly series, so that the forecast horizon and evaluation period have the same time resolution.
 \begin{equation}
     y(v,s,t) = \sum_{i \in \mathcal{S}(v,s,t)} q_i,
 \end{equation}
 where $\mathcal{S}(v,s,t)$ is the set of sale items of variant $v$ in store $s$ during period $t$, and $q_i$ is the quantity of sale item $i$.
 
-A period without sales is treated as zero demand only from the date on which the variant was first stocked in that store, because demand before that date is unknown, not zero.
+A period with no sales is assumed to represent zero demand only starting from the date when the variant appeared in this store, since there is no demand prior to that date, not necessarily zero.
 
-Size-level series are sparse and intermittent. Each series is therefore classified using the Syntetos--Boylan scheme, based on the average inter-demand interval (ADI) and the squared coefficient of variation of non-zero demand ($\mathrm{CV}^2$), as smooth, erratic, intermittent, or lumpy (commonly with thresholds $\mathrm{ADI}=1.32$ and $\mathrm{CV}^2=0.49$). This helps determine which baseline methods are used and makes it possible to report accuracy by demand type.
+Series at size level are often sparse and intermittent. Therefore, each series is classified as either smooth, erratic, intermittent, or lumpy according to the Syntetos–Boylan classification by the average inter-demand interval (ADI) and squared coefficient of variation of non-zero demands ($\mathrm{CV}^2$) thresholds, e.g. $\mathrm{ADI}=1.32$ and $\mathrm{CV}^2=0.49$. This aids in choosing baseline methods and allows reporting forecasting accuracy for different demand types.
 
-During a stock-out, observed sales underestimate demand. If stock history is available, weeks in which the variant was unavailable for most of the week are marked as censored and given zero weight in the training loss, instead of being learned as true zero demand.
+If a stock-out occurs, observed sales underrepresent demand. If stock history is known, weeks in which the variant was unavailable most of the time are considered as censored and ignored in the training loss.
 
 %==================================================
 \section{Feature Engineering}
 \label{sec:features}
 
-Each training example describes one variant in one store at a forecast origin $t$, with the demand at $t+h$ as the target. The feature groups are:
+Each data sample contains information about one particular variant in one shop at some forecast starting point $t$, where the demand at point $t+h$ is the target variable. There are several groups of features:
 
 \begin{itemize}
-    \item \textbf{Lag features:} demand at lags of 1 to 8 weeks, and at 52 weeks if at least one year of history exists (recent level, yearly seasonality).
-    \item \textbf{Rolling statistics:} mean, standard deviation, and share of zero-sale weeks over the past 4, 8, and 12 weeks (level, volatility, intermittency).
-    \item \textbf{Calendar features:} week of year, month, and holiday and festival indicators (seasonality, events).
+    \item \textbf{Lag features:} demand at lags 1 to 8 weeks, and at 52 weeks if at least one year of history is available (level, seasonality per year).
+    \item \textbf{Rolling statistics:} average, standard deviation, and fraction of zero sales weeks during the last 4, 8, and 12 weeks (level, volatility, intermittency).
+    \item \textbf{Calendar features:} week number, month, and holidays and festivals flags (seasonality, events).
     \item \textbf{Price features:} selling price, discount depth, and price relative to the category average (price effect).
     \item \textbf{Product and store attributes:} category, size, colour, store, and city, used as categorical features (sharing patterns across similar series).
     \item \textbf{Lifecycle features:} weeks since first sale and weeks since last sale (product age).
@@ -1268,23 +1268,22 @@ If $N > 0$, the store has a surplus of $N$ units; if $N < 0$, it has a shortage 
     & \sum_{i} x_{ij} \le \text{shortage}_j \quad \forall j, \\
     & x_{ij} \ge 0.
 \end{align}
-Here $m_{ij}$ is the relevant unit margin at destination store $j$ and $c_{ij}$ is the unit transfer cost between stores $i$ and $j$. A transfer is recommended only when $m_{ij}-c_{ij}>0$. Transfer quantities are constrained to non-negative integer units; because the transportation matrix and the supply and demand values are integral, the linear-program solution has an integral optimum. Since retailers have few branches, each problem is small and cheap to solve. The model does not yet include transfer lead time or capacity limits; these are recorded as assumptions for the backtest.
+Here $m_{ij}$ is the relevant unit margin at destination store $j$ and $c_{ij}$ is the unit transfer cost between stores $i$ and $j$. A transfer is recommended only when $m_{ij}-c_{ij}>0$. Transfer quantities are constrained to non-negative integer units; because the transportation matrix and the supply and demand values are integral, the linear-program solution has an integral optimum. Since retailers have few branches, each problem is small and cheap to solve.The model is currently missing the transfer lead times and capacity constraints, which are captured as assumptions during the backtest.
 
-\textbf{Reorder.} Any shortage remaining after redistribution is converted into a reorder recommendation with a suggested quantity.
+\textbf{Reorder.} If there is still a shortage left after the redistribution phase, this is treated as a reorder suggestion with a recommended order quantity.
 
-\textbf{Priority.} Recommendations are processed in the order redistribution, markdown, reorder, because moving existing stock is usually easier and less costly than discounting or reordering.
-
+\textbf{Priority.} The recommendations are handled according to the priority redistribution, markdown, reorder since redistributing the existing inventory is easier and cheaper than discounting or reordering.
 %==================================================
 \section{Markdown Optimization}
 \label{sec:markdown}
 
-Any surplus that is not cleared by redistribution is passed to the markdown optimizer. Like Caro and Gallien, it follows a forecast-then-optimize structure, but it is used as an early-warning mechanism rather than an end-of-season clearance approach.
+Any excess not removed through redistribution is given to the markdown optimization model. This too works in a forecast-then-optimize framework, like Caro and Gallien's method, but is intended to serve as an early warning system rather than season-end clearance method.
 
-A variant-store is marked as at risk when its weeks of cover exceeds the remaining selling window. For positive forecast demand, this is calculated as:
+The condition that causes a variant-store to be declared in danger is that its weeks of cover is higher than the selling time left. In case of positive forecasted demand, weeks of cover is computed as:
 \begin{equation}
     \mathrm{WOC} = \frac{I}{\bar{d}} > T,
 \end{equation}
-where $\bar{d}$ is the average forecast weekly demand and $T$ is the number of weeks in which the stock should be sold. If $\bar{d}=0$ and $I>0$, the item is treated as at risk and handled separately because its weeks of cover is undefined. The candidate discounts are evaluated against expected margin and sell-through; the smallest discount meeting the target is selected only when it does not produce a lower expected margin than the no-discount case.
+where $\bar{d}$ is the average weekly demand and $T$ is the number of weeks that the product needs to be sold. If $\bar{d}=0$ and $I>0$, the item is treated as at risk and handled separately because its weeks of cover is undefined. The candidate discounts are evaluated against expected margin and sell-through; the smallest discount meeting the target is selected only when it does not produce a lower expected margin than the no-discount case.
 
 For each candidate discount $d$ from a grid (for example, 5\% to 50\% in steps of 5\%), demand is adjusted using a constant price-elasticity model:
 \begin{equation}
@@ -1293,25 +1292,25 @@ For each candidate discount $d$ from a grid (for example, 5\% to 50\% in steps o
 \end{equation}
 where $D(d)$ is the total adjusted demand over the horizon.
 
-The system recommends the smallest discount for which the projected sell-through reaches a target, subject to a margin floor $p\,(1-d) \ge c$, where $p$ is the selling price and $c$ is the cost price. The estimated impact is the difference in margin with and without the discount:
+The system recommends the smallest discount for which the projected sell-through reaches a target, subject to a margin floor $p\,(1-d) \ge c$, where $p$ is the selling price and $c$ is the cost price. The impact measure is the difference in margins between the two states of using the discount:
 \begin{equation}
     \text{Impact} = \text{Sold}(d)\,\big(p(1-d) - c\big) - \text{Sold}(0)\,\big(p - c\big).
 \end{equation}
 
-The elasticity $\varepsilon$ is estimated by log-log regression on the tenant's own price history when there is sufficient price variation. Otherwise, a conservative category-level default is used, and the recommendation states that the estimate is approximate.
+The elasticity $\varepsilon$ is measured through a log-log regression on the historical prices of the tenant's product if there is enough variability in prices; otherwise, a cautious category-level estimate is used.
 
 %==================================================
 \section{Explainable Recommendations}
 \label{sec:explain}
 
-Every recommendation is stored together with a two-part explanation:
+Each recommendation is saved along with the two parts of an explanation:
 
 \begin{itemize}
-    \item A structured record of the quantities involved in the decision: forecast demand, current stock, net position, weeks of cover, source and destination stores, margin, transfer cost, and estimated impact.
-    \item The main forecast drivers, extracted from the per-feature contributions of LightGBM (\texttt{pred\_contrib}, additive SHAP-style values) and rendered as plain phrases such as ``recent weekly sales'' or ``seasonal pattern''.
+    \item A list of relevant numbers describing the situation: forecast demand, stock level, net position, weeks of supply, source and destination stores, margins, costs of transferring products, and the impact of the recommendation.
+    \item Forecast drivers, which are the contributions from LightGBM (\texttt{pred\_contrib}, additive SHAP-style values), translated into plain English phrases like ``recent weekly demand'' or ``seasonality''. 
 \end{itemize}
 
-Both parts are filled into text templates, for example: ``Size M of this product is expected to sell 12 units at Store B in the next 4 weeks, but only 3 are in stock, while Store A holds 15 units that are expected to sell only 4.'' The explanation is saved at creation time, so it always shows the situation on which the recommendation was based.
+All of these two components are put into textual templates, for instance: ``The Size M variant of this item will be sold 12 pieces at Store B during the upcoming 4 weeks, but there are only 3 pieces in stock, whereas there are 15 pieces at Store A, which will be sold 4 pieces.'' This explanation is saved at the creation time and always reflects the situation which gave rise to the recommendation.
 
 %==================================================
 \section{Forecast and Recommendation Evaluation}
@@ -1319,7 +1318,7 @@ Both parts are filled into text templates, for example: ``Size M of this product
 
 \subsection{Data}
 
-Public retail datasets are used for initial development and validation. A dataset such as M5 contains store-item sales and prices, which supports evaluation at the store level and the hierarchy level, but it does not contain size-level sales. Size-level behaviour is therefore evaluated on real retailer sales data if access is secured, and the findings from public data are interpreted with this limitation in mind, as stated in Chapter~2.
+Public retail data sets are employed for preliminary testing and validation. A dataset such as M5 contains store-item sales and prices, which supports evaluation at the store level and the hierarchy level, but it does not contain size-level sales. Size-level behaviour is therefore evaluated on real retailer sales data if access is secured, and the findings from public data are interpreted with this limitation in mind, as stated in Chapter~2.
 
 \subsection{Protocol}
 
@@ -1347,28 +1346,27 @@ Size-level series contain many zeros and MAPE is undefined for zero actuals, so 
 
 \subsection{Recommendation Backtest}
 
-The value of the recommendations is estimated by replaying history. At each cut-off date, the engine produces recommendations using only the information available up to that date. The recommended transfers and discounts are applied to a simulated stock record, and the following weeks are replayed with actual sales as demand. The simulation specifies transfer lead time, assumes that stock is unavailable at the source while it is in transit, and applies an accepted markdown from its effective date. The outcomes are compared with a ``no action'' run and include dead stock (units whose cover is greater than $T$ weeks), units of lost sales caused by stock-outs, and the sell-through rate. The simulation assumes that transfers do not change demand, and that demand changes only through the elasticity model when a markdown is applied. These assumptions are stated together with the results.
-
+The value of the recommendations is estimated by replaying history. At each cut-off date, the engine produces recommendations using only the information available up to that date. The recommended transfers and discounts are applied to a simulated stock record, and the following weeks are replayed with actual sales as demand. The simulation specifies transfer lead time, assumes that stock is unavailable at the source while it is in transit, and applies an accepted markdown from its effective date. The outcomes are compared with a ``no action'' run and include dead stock (units whose cover is greater than $T$ weeks), units of lost sales caused by stock-outs, and the sell-through rate.This is based on the fact that in the simulation process the transfer does not affect the demand, while the demand changes using the elasticity method if there is a markdown.
 %==================================================
 \section{Iterative Development}
 \label{sec:iterative}
 
-StockSense is built in increments, and each increment ends with the testing activities described in Chapter 6 and a review by the supervisor:
+StockSense development occurs incrementally, and at the end of each increment comes testing activities as detailed in Chapter 6, along with a review by the supervisor:
 
 \begin{enumerate}
-    \item \textbf{Multi-tenant foundation:} tenant and user management, products, inventory, POS, and the ingestion and validation pipeline.
-    \item \textbf{Forecasting experiments} in Jupyter Notebook: feature engineering, baselines, and LightGBM, all evaluated offline.
-    \item \textbf{Integration:} scheduled batch forecasting, the recommendation engine, and redistribution.
-    \item \textbf{Markdown optimization,} explanations, notifications, and the dashboard.
+    \item \textbf{Multi-tenant infrastructure:} tenancy, users, products, inventory, POS, and the ingestion and validation pipeline.
+    \item \textbf{Experiments on forecasting} in Jupyter Notebook: feature engineering, baselines, and LightGBM – all done offline.
+    \item \textbf{Integration:} forecasting done in batch, recommendation, and redistribution of items.
+    \item \textbf{Optimization of markdown,} explanations, notifications, and dashboards.
 \end{enumerate}
 
-Building the forecasting models offline first allows the choice of model to be checked on data before integration.
+Development of the forecasting models offline first gives an opportunity to evaluate the model chosen using data.
 
 %==================================================
 \section{Conclusion}
 \label{sec:conclusion}
 
-The methodology treats each sale as the beginning of a decision path. Data is validated and standardized, and demand is modelled at the product-size-store level using a global LightGBM model that is compared against statistical baselines. A new tenant first provides sales data so that a model can be trained on its own history, after which forecasting starts. The recommendation engine then transforms forecasts into actions in a fixed order: redistribution through a small transportation problem, early markdown through a sell-through model, and finally reorder for the remaining shortage. Every recommendation includes an explanation and an estimate of its impact. The evaluation uses chronological splits and a replay of past data, so that both forecast accuracy and the potential reduction of dead stock can be measured.
+Each transaction marks the start of a decision tree. Validation and standardization of the dataset are performed, followed by modelling of the demand at the product-size-store level with a global LightGBM model compared to statistical benchmarks. For the new tenant, sales data is provided first so that the model gets trained with its historical data and only after that, forecasting starts. The next step in the pipeline is transformation of forecasts into actions in a predefined order: redistribution using a small transportation problem, early markdown using the sell-through model, and lastly reordering for the leftover shortage. Each action has an explanation and its impact estimated. Evaluation was done using a chronological split of the data and replay of past data to assess the forecast accuracy and dead stock reduction potential.
 
 
 % ============================================================
@@ -1502,23 +1500,23 @@ The quality of forecasts depends on the quality and amount of sales data. During
 
 \subsubsection{The KISS Principle}
 
-The design should be kept simple to make maintenance and non-technical user friendly.
+The design must remain simple enough in order to allow for easy maintenance and usage even by non-technical users.
 
 \subsubsection{Separation of Tenant Data}
 
-Each firm requires its very own safeguarded data room.
+Each company needs its own secure data room.
 
 \subsubsection{Modularity and Extensibility}
 
-Forecasting, recommendations, POS, ingestion, and markdown should be separated so as to allow the inclusion of new forecasting approaches without reengineering the system.
+Forecasting, recommendations, POS, ingestion, and markdown need to be separated in order to enable addition of different forecasting algorithms without changing the entire system design.
 
 \subsubsection{Explainability}
 
-All recommendations should include the rationale for the recommendation.
+Every recommendation should have the rationale behind it.
 
 \subsection{Development Methods}
 
-StockSense will be developed iteratively, in stages. Initial modules will include tenant management, product and inventory management and data ingestion, followed by forecasting, recommendations, markdown optimization and dashboard. An evaluation will be conducted for each stage prior to the beginning of the next stage and the plan will be modified based on feedback from the supervisor.
+The StockSense application will be created iteratively in phases. The initial phase would contain the modules for tenant, product and inventory management and data ingestion. The second phase will include forecasting, recommendations, markdown optimization and dashboard creation. An evaluation would be done for every phase before moving to the next phase.
 
 \section{System Architecture}
 
@@ -1595,7 +1593,7 @@ The major classes of the system are:
     \item \textbf{Store}: a branch of a business.
     \item \textbf{Product} and \textbf{ProductVariant}: a product and its sizes/variants, each with its own SKU.
     \item \textbf{Inventory}: the quantity of one variant held at one store.
-    \item \textbf{Sale} and \textbf{SaleItem}: a customer sale (POS or uploaded) and the variants it contains.
+    \item \textbf{Sale} and \textbf{SaleItem}: a customer purchase (either POS-based or uploaded) and its variations.
     \item \textbf{UploadJob}: an uploaded CSV/Excel file with its accepted and rejected row counts.
     \item \textbf{Forecast}: the predicted demand of one variant at one store for a weekly or monthly period.
     \item \textbf{Recommendation} (abstract) with the subclasses \textbf{RedistributionRecommendation}, \textbf{ReorderRecommendation}, and \textbf{MarkdownRecommendation}.
@@ -1801,31 +1799,31 @@ While creating StockSense, the following policies and tactics will be applied:
 
 \subsection{Tools to be Used}
 
-A number of tools and libraries will be employed to develop StockSense. The most important ones are:
+A number of tools and libraries will be employed to develop StockSense. These include the following:
 
 \begin{itemize}
-    \item The web dashboard and the POS screens will be created using React.
-    \item The backend REST API will be implemented with Python and FastAPI or Django to handle authentication, tenant checks, and communication between the modules.
-    \item All business data will be stored in PostgreSQL, and there will be a tenant identifier on each table that holds data for a business.
-    \item The uploaded CSV and Excel files will be read, cleaned, and normalized using pandas and openpyxl.
-    \item Data preparation, grouping of similar series, and calculation of error metrics will be supported using scikit-learn and NumPy, with LightGBM as the primary model for demand forecasting and simple statistical baseline models calculated using statsmodels.
-    \item Version Control: Git and GitHub will be used to manage the software versions.
-    \item Development: Visual Studio Code will be used for development.
-    \item API testing: Postman will be used for API testing.
-    \item Model experiments: Jupyter Notebook will be used for model experiments.
+    \item Web dashboard and POS screens will be developed using React.
+    \item Backend REST API will be implemented using Python and FastAPI or Django which will be responsible for authentication, checking of tenants, and communication between the modules.
+    \item All business data will be saved in PostgreSQL with the help of a tenant identifier in every table that contains the data of a particular business.
+    \item CSV and Excel files that have been uploaded will be parsed, cleaned, and normalized using pandas and openpyxl.
+    \item Data preparation, grouping of similar time series, and calculating error metrics will be enabled using scikit-learn and NumPy where the main forecasting algorithm will be LightGBM while the basic statistical models will be calculated using statsmodels.
+    \item Version control will be implemented using Git and GitHub.
+    \item Development will take place using Visual Studio Code.
+    \item API testing will be carried out using Postman.
+    \item Experiments with the model will be conducted using Jupyter Notebook.
 \end{itemize}
 
 \subsection{Coding Guidelines and Conventions}
 
-The backend will be written in Python, and the forecasting code in the same language, while the frontend will be implemented using a combination of JavaScript and React. The team will use a naming convention and write functions to be brief and easy to read, adding comments when the logic is not clear. The code will be kept organized by having each module reside in its own package. All changes will be checked by another team member before they are merged. Safe coding techniques will be observed throughout, such as storing passwords only in hashed form, parameterising database queries, and never storing secret keys in the repository.
+Python will be used for implementing the backend and the forecasting code, while JavaScript and React will be used to implement the frontend part. We will adhere to a naming convention and implement functions that are concise and easily readable, and add comments where the logic is hard to understand. Our code will be neatly structured by placing each of the modules inside its own package. Every change will be reviewed by another team member before it gets merged. All safe programming practices will be followed, which include hashing passwords, using parameterised queries, and avoiding putting any secret keys into the repository.
 
 \subsection{User Interface}
 
-StockSense is designed for non-technical stock owners and managers and should be simple and easy to use, with minimal training required and clear navigation. A new user should be able to make a first sale without having to read any documentation. Forecasts will be presented as charts next to previous sales, and each recommendation is accompanied by a short explanation in plain language. Simple words will also be used to write error messages, e.g., if an uploaded file contains an error, this will be explained in a plain-language error message. The interface will be available on desktop computers, tablets, and phones.
+StockSense is meant to be used by non-technical stockholders and managers, so the software should be easy and intuitive to use, and no much training would be needed for navigating through it. A new user should be able to perform his first sell operation without reading any manual. The forecasts will be given in chart form right next to the sold stocks, and every suggestion will have a short explanation provided in plain language. Plain language will be used in writing all error messages; for example, when there is something wrong in the uploaded file, it will be explained in an error message in plain language.
 
 \subsection{Extensibility}
 
-The system will be designed in terms of modules, with each module having a specific function: POS and inventory, data ingestion, forecasting, recommendations, and markdown optimization. These modules will communicate through clear interfaces, which means that if one module is changed, the others do not need to change. The forecasting module will have a structure that allows various models to be tested and replaced without re-designing the application. The forecasting engine is general purpose and can be used by any business that stocks products with variants, sizes, or multiple stores, with new recommendation rules added as needed.
+The design of the system will be modular with each module having its own functionality as follows: POS & Inventory, data ingest, forecast, recommendation, and markdown optimization. There will be well-defined interfaces between the modules, implying that any changes made to one of the modules will not require changing the other modules. In particular, there will be a modular architecture of the forecast module enabling different models to be tried out without modifying the whole application. The forecasting engine is general purpose and can be used by any business that stocks products with variants, sizes, or multiple stores, with new recommendation rules added as needed.
 
 \subsection{Tenant Data Isolation and Security}
 
@@ -1833,27 +1831,27 @@ Each record in the system will be assigned to a tenant, and the backend will ver
 
 \subsection{Data Validation}
 
-Uploaded sales files will be verified prior to being submitted to the forecasting pipeline. Invalid and incomplete rows will be flagged or rejected, and an upload report will inform the owner of what was accepted and what was rejected. In case an upload fails halfway, the data already stored will not be affected.
+The uploaded sales data will be validated before being sent to the forecasting pipeline. Data that are invalid or incomplete will either be flagged or rejected, while an upload report will notify the owner about the accepted data and rejected data. Should an upload fail midway, no damage will be done to the data that have already been saved.
 
 \subsection{Explainable Recommendations}
 
-If a recommendation is made, the primary reasons for the recommendation (forecast, current stock, surplus/shortage, source branch) will be saved with it, including a financial impact estimate. This enables the owner to see the reason for each suggestion on the dashboard rather than an unexplained number.
+In case there is a recommendation, the main reasons for making that particular recommendation (forecasts, existing stock, surplus/shortage, source branch) will be stored together with it, along with the estimated financial impact. In this way, the owner of the company will be able to understand why this particular suggestion was made.
 
 \subsection{System Testing}
 
-StockSense will have a testing policy that will involve unit testing, integration testing, and end-to-end testing. Individual tests will be executed on the parts of the system, including the validation rules and the inventory update after a POS sale. The API, database, and modules will be tested for correct integration, and the REST endpoints will also be tested using Postman. End-to-end tests will be completed following full user flows, such as registering a business, logging a sale, uploading a file, and taking action on a recommendation. Some tests will be specific to this project: tenant separation will be checked for data leakage, role-based access will be tested with each user type, and the upload pipeline will be tested with incomplete and poorly formed files. The forecasting models and the statistical baseline will be compared using MAPE and RMSE on a data set that the models have not seen before. The performance requirements from the requirements chapter (e.g., saving a POS sale within 2 seconds, processing a file of 100,000 rows within 5 minutes) will also be tested prior to release.
+Unit testing, integration testing, and end-to-end testing will all be part of the testing policy of StockSense. Unit tests will run on the individual parts of the system, such as validation rules and inventory update after a POS sale. Integration testing will run on API, database, and modules to ensure proper integration while the REST endpoints will be tested using Postman. End-to-end tests will be done using complete user journeys, like registering a business, logging a sale, uploading a file, and performing an action after a recommendation is generated. Some specific tests for this project will include tenant separation to ensure there are no leaks, role-based access for each user type, and upload pipeline for incomplete and ill-formatted files. Forecasting models and the statistical baseline will be compared using MAPE and RMSE using a test set unseen by both the forecasting model and the statistical baseline. Performance requirements from the requirements chapter, such as saving a POS sale in less than 2 seconds and processing a file containing 100,000 rows in less than 5 minutes, will also be tested before launch.
 
 \subsection{Software Maintenance}
 
-The code will be maintained in a version-controlled repository on GitHub, and bugs and tasks will be tracked so that issues are not lost. Failed uploads, rejected records, and failed forecasting runs will be logged, making it easier to identify the cause. The models will be updated frequently with fresh data, as forecast accuracy diminishes when sales patterns change. The database will be backed up regularly to allow recovery of business data in the event of a failure. New team members will be able to grasp the system rapidly through up-to-date code and design documents.
+The code shall be stored in the version-controlled GitHub repository, and bugs and tasks shall be monitored so that there is no loss of any issues. The failed uploads, records that get rejected, and the failures during forecasting shall be recorded, which makes it easier to determine the problem. The models shall be updated frequently using the latest data as the forecasts become inaccurate when the sales trend changes. The database shall be backed up regularly so that in case of any failure, the business data can be recovered.
 
 \subsection{Algorithms}
 
-The algorithms used in StockSense will be selected considering time efficiency and space efficiency, and will be verified by Big-O analysis to ensure that they scale with the number of tenants and the size of the sales history. Gradient-boosted trees (LightGBM), a method suitable for large retail data that performed very well in the M5 competition, will be used to forecast demand. One common model will be trained for each tenant across its products, sizes, and stores. A new tenant must first record or upload enough sales history, and until then no forecast is shown. Simple statistical models from statsmodels will be retained as a baseline to show whether the more complicated model is truly necessary. The recommendation algorithm will compare the forecast demand to the current stock of all branches for each variant. It will match branches with surplus to branches where a shortage is expected, then scan the remaining slow-moving stock to propose a markdown, and lastly suggest a reorder. The markdown logic will raise an alert when an item's selling speed indicates that the stock will not clear in time, so that corrective measures can be taken early. Most businesses do not have many branches, so this matching remains low cost. Large uploads and model training will be performed in the background to keep the system fast, the most recent forecasts will be saved rather than re-calculated when served, and the database will be indexed on the tenant identifier and the main keys.
+Algorithms that will be used in the implementation of the StockSense application will be chosen depending on time and space efficiencies and checked using Big-O notation. LightGBM algorithm is an ensemble of gradient-boosted trees that performs very well in large retail data, and was successfully applied in the M5 challenge to forecast demand. The same model will be trained for each tenant with regard to all of its products and sizes. A new tenant must first record or upload enough sales history, and until then no forecast is shown. Simple statistical models from statsmodels will be retained as a baseline to show whether the more complicated model is truly necessary. The recommendation algorithm will be comparing the forecasted demand with the current stock level of all branches for each variation. It will pair branches with excess stocks with branches with shortages, then check the remaining excess slow moving stocks for markdowns, and finally recommend a reorder. Markdown algorithm will trigger alerts if the sales rate of an item shows that the stock will expire before selling out in time to take corrective action immediately. Businesses normally have very few branches, and therefore, pairing is still cost-effective. Uploads and modeling will occur in the background, the latest predictions will be cached for serving rather than calculating anew and the database will be indexed using the tenant ID and primary keys.
 
 \section{Conclusion}
 
-In this chapter, the high level as well as the low level design of StockSense was explained. The proposed architecture separates out the tenant management, POS/inventory operations, data ingestion, forecasting, recommendations, and reporting on the dashboard into distinct modules. Tenant isolation, role-based access, data validation, background processing, and database indexing provide the foundation for a secure and scalable system. The design also supports the project's main decision flow: forecast demand, redistribute existing stock where possible, recommend markdowns for remaining slow-moving stock, and reorder only when necessary. The testing and maintenance strategy will be used to ensure the system is correct, performs well, is secure, and will be accurate before it is put into use.
+In this chapter, the high level as well as the low level design of StockSense was explained. Separate modules have been defined for tenant management, point-of-sale/inventory management, data ingestion, forecasting, recommendation engine, and dashboard reporting within the suggested architecture. Tenant isolation, role-based access control, data validation, background processing, and database indexing constitute the base of the architecture for its security and scalability. The design also supports the project's main decision flow: forecast demand, redistribute existing stock where possible, recommend markdowns for remaining slow-moving stock, and reorder only when necessary. The testing and maintenance strategy will be used to ensure the system is correct, performs well, is secure, and will be accurate before it is put into use.
 \bibliographystyle{IEEEtranN}
 \bibliography{fypbib}
 
