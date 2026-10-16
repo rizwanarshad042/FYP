@@ -372,15 +372,15 @@ Research on fashion retail also considers forecasting demand for new items, wher
 
 \textbf{Summary:} Loureiro, Migu\'eis, and da Silva~\cite{loureiro2018deep} compare deep neural networks against shallow methods such as support vector regression for forecasting the sales of new fashion products, using a real dataset from a fashion retailer. They combine data-mining features describing a product's physical and distribution characteristics with expert-defined predictive variables.
 
-Related work on online retail also combines demand forecasting with price optimization~\cite{ferreira2016analytics}, which is relevant to StockSense's joint forecasting and markdown objectives.
+Online retail studies related to StockSense ~\cite{ferreira2016analytics} include price optimization that complements its forecasting goals, making it relevant to the research area StockSense falls into.
 
-\textbf{Critical Analysis:} The study not only shows the superiority of deep learning over shallow models for new-product sales forecasting in the fashion retail domain, but it also uses a real company dataset and not a synthetic one. It does make a prediction at the new product level, though, and the data is from a single large retailer; this doesn't make the results of this model easy to apply to a small enterprise with numerous outlets.
+\textbf{Critical Analysis:} This paper demonstrates not only how deep learning is better than shallow machine learning models in terms of the accuracy of the forecasting of sales of new products but that it applies a real company’s database rather than an artificially created one. What is more important, it does make predictions on a new product basis, and its data belong to a single large company, which renders the findings of the model difficult to generalize to a smaller business.
 
-\textbf{Relationship to StockSense:} This paper justifies the selection of learning-based demand forecasting over demand estimation done manually and the use of product attributes as predictive features is directly connected to how StockSense will have to forecast demand for a product in a specific store.
+\textbf{Relationship to StockSense:} The choice of learning based Demand forecasting over manual estimation of demands, along with the use of product features as predictive variables has a direct connection with the fact that StockSense would be required to do demand forecasting for a particular product in a specific store.
 
 \subsection{Clearance Pricing Optimization for a Fast-Fashion Retailer}
 
-\textbf{Summary:} Caro and Gallien~\cite{caro2012clearance} describe a forecasting-and-optimization process that replaced Zara's manual markdown decision-making. A field experiment across all Belgian and Irish stores during a fall-winter season showed the new process increased clearance revenue by approximately six percent, and the process was subsequently adopted company-wide.
+\textbf{Summary:} Caro and Gallien~\cite{caro2012clearance} outline a forecast-and-optimize approach that superseded the manual markdown decision making used by Zara. A field experiment across all Belgian and Irish stores during a fall-winter season showed the new process increased clearance revenue by approximately six percent, and the process was subsequently adopted company-wide.
 
 \textbf{Critical Analysis:} It's an uncommon, documented and now applied – at scale, with a revenue impact – markdown-optimization model. The major drawback of it for StockSense is that it is intended for a very large vertically-integrated retailer, with extensive historical pricing data for thousands of styles, that will not exist in many of the small retailers at which StockSense operates.
 
@@ -398,17 +398,17 @@ Related work on online retail also combines demand forecasting with price optimi
 
 \textbf{Summary:} Bandara, Bergmeir, and Smyl~\cite{bandara2020forecasting} propose clustering related time series and training a single global recurrent neural network per cluster, rather than one model per series, to improve forecast accuracy when individual series have limited history.
 
-\textbf{Critical Analysis:} The clustering-based global model approach is well suited to situations with many short or sparse series, which is a strong match for a small retailer's sales history. A limitation is that the approach was evaluated primarily on general time-series benchmarks rather than retail-specific size- and store-level sales data.
+\textbf{Critical Analysis:} The clustering-based global model approach is well suited to situations with many short or sparse series, which is a strong match for a small retailer's sales history. The disadvantage of the method is that the model was tested mostly using benchmark time series instead of actual sales data from retail at the product-size-store level.
 
-\textbf{Relationship to StockSense:} This paper supports StockSense's choice of a single shared forecasting model trained across many products and stores, rather than one model per product-size-store combination, since an individual small retailer's sales series are often too short for an accurate standalone model.
+\textbf{Relationship to StockSense:} The work presented in this paper confirms the StockSense strategy of having a universal model for forecasting that will be trained using multiple product-size-store data sets instead of building separate models for each product-size-store pair because of the small number of observations for an individual retailer.
 
 \subsection{M5 Accuracy Competition: Results, Findings, and Conclusions}
 
-\textbf{Summary:} Makridakis, Spiliotis, and Assimakopoulos~\cite{makridakis2022m5} report the results of the M5 forecasting competition, in which thousands of teams forecasted 42,840 hierarchical retail sales series for Walmart. The competition found that machine-learning approaches, particularly gradient-boosted tree models such as LightGBM, consistently outperformed traditional statistical methods.
+\textbf{Summary:} In Makridakis, Spiliotis, and Assimakopoulos'~\cite{makridakis2022m5} work, the authors describe the outcome of the M5 forecasting competition, where thousands of participants were predicting 42,840 retail sales time series hierarchies for Walmart. It was concluded in the M5 competition that machine-learning algorithms, especially gradient-boosted trees such as LightGBM, have better forecasting accuracy than statistical approaches.
 
-\textbf{Critical Analysis:} The M5 competition is one of the most rigorous, large-scale empirical comparisons of forecasting methods in retail, and its findings are widely cited as a benchmark for which model families perform well on real retail sales data. Its scale, however, reflects a very large retailer with extensive historical data; the competition does not directly address forecasting for small retailers with short sales histories.
+\textbf{Critical Analysis:} The M5 competition can be considered as one of the largest empirical tests of forecasting approaches in the retail sector. Its conclusions are often used as a basis for evaluation of how good different model families are on real-world retail sales data. However, the size of the competition indicates a very big company with long-term sales history; forecasting for small retailers with short sales history is not considered.
 
-\textbf{Relationship to StockSense:} The competition's conclusion that gradient-boosted trees outperform simpler statistical baselines on hierarchical retail sales data directly informs the selection of a forecasting model family for StockSense's product-size-location forecasts.
+\textbf{Relationship to StockSense:} The conclusion of M5 about superiority of gradient-boosted trees over statistical models in the context of hierarchical retail sales time series directly impacts the choice of a family of forecasting models for StockSense.
 
 \subsection{Demand Forecasting for Improved Inventory Management in Small and Medium-Sized Businesses}
 
@@ -420,7 +420,7 @@ Related work on online retail also combines demand forecasting with price optimi
 
 \subsection{Retail Forecasting: Research and Practice}
 
-\textbf{Summary:} Fildes, Ma, and Kolassa~\cite{fildes2022retail} present a comprehensive review of academic research in retail forecasting encompassing strategic, tactical and operational forecasting requirements and explore the disconnect between academic forecasting research and practice in retail stores.
+\textbf{Summary:} Fildes, Ma, and Kolassa~\cite{fildes2022retail} conduct an extensive literature review on academic research on retail forecasting considering the forecasting needs from strategic to tactical and operational levels as well as the gap between academic forecasting research and retail store practice.
 
 \textbf{Critical Analysis:} It is a survey of the field, and thus can serve as a map of the retail-forecasting research landscape, and clearly shows that new-product forecasting is not studied as much as product forecasting. It is a review and does not itself propose or test a model.
 
@@ -438,55 +438,55 @@ Related work on online retail also combines demand forecasting with price optimi
 
 \textbf{Summary:} Fisher and Raman~\cite{fisher1996reducing} show that fashion retailers who shorten lead times and react to early-season sales, rather than committing to production and ordering decisions months in advance, can substantially cut costs. Applied with a major ski-wear firm, their method increased profits by roughly 60\% relative to the firm's existing informal response process.
 
-\textbf{Critical Analysis:} This is a classic, field-validated result demonstrating that acting on early demand signals outperforms manual, instinct-based stocking decisions. Its limitation for StockSense is that it addresses a single-season production and ordering decision for one retailer, rather than ongoing, store-level redistribution between branches.
+\textbf{Critical Analysis:} This is a classic example of research that shows that responding to demand signals early is superior to traditional, instinctive methods of stocking. The drawback of using this article in relation to StockSense is that it talks about the decision of manufacturing and ordering for just one season for one particular retail chain.
 
-\textbf{Relationship to StockSense:} This paper is early, influential evidence for the general principle StockSense is built on: that reacting quickly to observed demand, rather than waiting for stock to sit unsold, reduces both lost sales and excess inventory. It supports treating recent sales velocity as a key signal for both the recommendation engine and the markdown optimizer.
+\textbf{Relationship to StockSense:} This article comes early in the literature and serves as a foundation for the concept that StockSense relies on - i.e., responding quickly to demand signals reduces both stock-outs and overstocking. It is evidence for the need to treat the sales velocity as an important signal for recommendation engine and markdown optimizer.
 
 \subsection{Sales Forecasts in Clothing Industry: The Key Success Factor of the Supply Chain Management}
 
-\textbf{Summary:} Thomassey~\cite{thomassey2010sales} reviews forecasting practices in the clothing industry and proposes forecasting models designed to handle the short life cycles, strong seasonality, and sparse historical data typical of apparel sales.
+\textbf{Summary:} Thomassey~\cite{thomassey2010sales} provides a literature review on the forecasting methods used in the clothing industry and develops forecasting methods tailored for handling the shorter life cycle, high seasonality, and lack of historical data of the clothing sales.
 
-\textbf{Critical Analysis:} The paper directly addresses the data sparsity and seasonality problems that make apparel demand forecasting harder than forecasting for staple goods, which is highly relevant to StockSense's target product categories. It is focused on a single national clothing distributor, so its specific models may not transfer directly to a small multi-branch retailer.
+\textbf{Critical Analysis:} The paper explicitly tackles the issue of data scarcity and seasonality, which makes forecasting of the demand of apparel products difficult compared to the forecasting of staple products, making the paper highly applicable to the problem being addressed by StockSense.
 
-\textbf{Relationship to StockSense:} This paper reinforces the project's recognition that size- and variant-level apparel demand is noisier and more seasonal than product-level demand overall, supporting StockSense's decision to forecast at the product-size-location level rather than at the product level alone.
+\textbf{Relationship to StockSense:} The paper supports the project's understanding that the demand of size- and variant-specific apparel products is highly seasonal compared to the product-level demand, which is why StockSense decided to develop the forecasting methods that take into account the product-size-location combinations.
 
 \subsection{Predictive Big Data Analytics for Supply Chain Demand Forecasting: Methods, Applications, and Research Opportunities}
 
-\textbf{Summary:} Seyedan and Mafakheri~\cite{seyedan2020predictive} survey the methods and applications of big-data-driven demand forecasting across supply chains, classifying approaches and identifying open research gaps.
+\textbf{Summary:} The review by Seyedan and Mafakheri~\cite{seyedan2020predictive} surveys the methodologies and applications of big-data predictive demand forecasting for supply chain management systems, categorizing methodologies and pointing out the areas of open research questions.
 
-\textbf{Critical Analysis:} As a broad survey, it usefully maps the landscape of data-driven forecasting techniques and highlights that most existing applications assume large, centrally managed supply chains with dedicated analytics capability. It does not propose or test a specific model itself.
+\textbf{Critical Analysis:} As a general survey, this provides a good overview of the current methodologies for data driven forecasting and shows that the majority of applications in practice rely on large centrally controlled supply chains with analytical capacity. This does not present or test any particular model.
 
-\textbf{Relationship to StockSense:} This survey's identification of a gap between advanced forecasting techniques and organizations lacking analytics infrastructure reinforces the premise of this project: that small retailers are left out of advances that assume a data team is already in place.
+\textbf{Relationship to StockSense:} The gap found by Seyedan and Mafakheri~\cite{seyedan2020predictive} between advanced forecast models and companies without analytical infrastructure makes a good basis for the current research idea.
 
 \subsection{Forecasting: Theory and Practice}
 
-\textbf{Summary:} Petropoulos et al.~\cite{petropoulos2022forecasting} provide a wide-ranging review of forecasting theory, methods, and practice, covering model selection, evaluation, and the practical challenges of deploying forecasts in real organizations.
+\textbf{Summary:} Petropoulos et al.~\cite{petropoulos2022forecasting} have written a comprehensive review on the topic of forecasting theory, methods, and practice.
 
-\textbf{Critical Analysis:} The review's breadth makes it a useful reference point for forecast evaluation practices and model-selection principles, though, being an encyclopedic review, it does not focus specifically on retail or small-business contexts.
+\textbf{Critical Analysis:} The scope of this review is helpful to refer to the forecast evaluation practices and model selection guidelines; however, as it is an encyclopedic review, it lacks the retail and small business focus.
 
-\textbf{Relationship to StockSense:} The paper's guidance on forecast evaluation and model selection informs how StockSense will compare its gradient-boosted forecasting model against simpler statistical baselines, as described in the forecast evaluation approach adopted for this project.
+\textbf{Relationship to StockSense:} The review provides useful insights into the forecast evaluation and model selection that guide the comparison of the gradient-boosted model and basic statistical benchmarks, as discussed in the forecast evaluation methodology of StockSense.
 
 \subsection{From Predictive to Prescriptive Analytics}
 
-\textbf{Summary:} Bertsimas and Kallus~\cite{bertsimas2020predictive} propose a framework for converting predictive models into prescriptive decisions, demonstrating their approach on a real inventory-management problem for a large media distributor.
+\textbf{Summary:} A framework for transforming prediction models into prescriptions by Bertsimas and Kallus~\cite{bertsimas2020predictive} is provided using the example of real-life inventory management for a large media company.
 
-\textbf{Critical Analysis:} The paper is a strong theoretical basis for moving beyond a plain forecast to an actionable decision, which is central to how StockSense is meant to work. Its demonstrated case involves a very large-scale distribution operation, which is a different setting from a small multi-branch retailer.
+\textbf{Critical Analysis:} The article represents a good theoretical foundation for going beyond simple prediction and reaching a decision stage, which is important in the context of StockSense's design. The use case presented is one for a very large distribution network, whereas StockSense's case is that of a multi-branch retailer.
 
-\textbf{Relationship to StockSense:} This paper supports StockSense's core design choice of not stopping at a forecast, but converting it directly into a concrete, actionable recommendation (redistribution, reorder, or markdown), which is the basis of the recommendation engine described in this project.
+\textbf{Relationship to StockSense:} This article helps to support the design decision of StockSense that goes beyond simply predicting but provides a transformation of prediction into an actionable prescription (redistribution, reordering, markdown).
 
 \subsection{Stop Explaining Black Box Machine Learning Models for High Stakes Decisions and Use Interpretable Models Instead}
 
-\textbf{Summary:} Rudin~\cite{rudin2019stop} argues that for high-stakes decisions, inherently interpretable models should be used instead of black-box models paired with separate explanation techniques, since post-hoc explanations of black-box models can be unreliable.
+\textbf{Summary:} In high-stakes decision-making processes, according to Rudin~\cite{rudin2019stop}, there is a need for inherently interpretable models rather than black-box models and subsequent explanations because explanations generated by black-box models may not be reliable.
 
 \textbf{Critical Analysis:} The argument is well-supported and widely cited, though it is framed around high-stakes domains such as criminal justice and healthcare rather than retail inventory decisions, where the stakes of an individual recommendation are comparatively low.
 
-\textbf{Relationship to StockSense:} While StockSense's recommendations are lower-stakes than the domains Rudin discusses, the same underlying concern applies: a business owner is unlikely to trust or act on a recommendation they cannot understand. This supports StockSense's design choice to generate a plain-language explanation alongside every recommendation, rather than presenting an unexplained output.
+\textbf{Relationship to StockSense:} Although the recommendations made by StockSense are not high-risk as those discussed by Rudin, it raises the same issue where an entrepreneur would definitely be skeptical about the recommendation which he doesn't understand. Hence, it justifies the approach adopted by StockSense of always providing an explanation for every recommendation.
 
 \subsection{Desperately Seeking Shelf Availability: An Examination of the Extent, the Causes, and the Efforts to Address Retail Out-of-Stocks}
 
-\textbf{Summary:} Corsten and Gruen~\cite{corsten2003desperately} report on a worldwide study of retail out-of-stocks, finding that stockout rates had not improved over the preceding decade despite industry efforts, and that a meaningful share of customers switch stores entirely rather than switch products when faced with an out-of-stock.
+\textbf{Summary:} Corsten and Gruen~\cite{corsten2003desperately} conducted a global study of out-of-stock in retail and showed that there was no improvement in the number of stockouts over the last decade, and that a substantial proportion of consumers leave the store rather than substitute the item when facing out-of-stocks.
 
-\textbf{Critical Analysis:} This is a large-scale, widely cited study that establishes stockouts as a persistent, costly, and customer-facing problem, grounding the motivation for this project in real consumer behavior rather than only internal cost. The study focuses on fast-moving consumer goods, not apparel or footwear specifically.
+\textbf{Critical Analysis:} This is a major, well-cited paper which shows out-of-stocks as a consistent and expensive issue related to consumer experience, thus providing the motivation for this project from practical grounds, not just internally. It concerns FMCGs, not apparel/footwear.
 
 \textbf{Relationship to StockSense:} This paper strengthens the business case for prioritizing redistribution and timely reordering: since customers facing a stockout may leave the store entirely rather than buy a different item, preventing a stockout has a larger business impact than simple lost-sale accounting would suggest.
 
