@@ -1,7 +1,7 @@
 % Author: Defined by Mr. Junaid Hussain Muzamal <junaid.hussain@nu.edu.pk> 
 %This document is protected by copyright laws and is intended for fair use only. Any unauthorized reproduction or distribution is prohibited. ©2023 by National University Of Computer and Emerging Sciences.
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{FastFyp}[2023/01/24]
+\ProvidesClass{StockSense}[2023/01/24]
 \LoadClass[11pt,a4paper,oneside]{book}
 
 \usepackage{amsfonts}
@@ -33,7 +33,6 @@
 
 \fancypagestyle{plain}{%
   \fancyhead[L]{\leftmark}
-  \fancyhead[R]{\thepage}
 }
 
 \setlength{\parskip}{6pt}
