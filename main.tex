@@ -12,7 +12,6 @@
 \newcommand{\university}{National University of Computer and Emerging Sciences, Lahore}
 \newcommand{\fyptitle}{StockSense}
 \newcommand{\degree}{BS}
-
 \newcommand{\Studentone}{Muhammad Usman  23L-0693  BS(CS)}
 \newcommand{\Studenttwo}{Muhammad Rizwan Arshad  23L-0755  BS(CS)}
 \newcommand{\Studentthree}{Hayyan Haider  23L-0727  BS(CS)}
@@ -494,7 +493,6 @@ Online retail studies related to StockSense ~\cite{ferreira2016analytics} includ
 
 \section{Literature Review Summary Table}
 
-\scriptsize
 \setlength{\LTleft}{0pt}
 \setlength{\LTright}{0pt}
 \captionof{table}{Summary of Literature Review}\label{tab:literature-review}
@@ -1854,6 +1852,27 @@ Algorithms that will be used in the implementation of the StockSense application
 \section{Conclusion}
 
 In this chapter, the high level as well as the low level design of StockSense was explained. Separate modules have been defined for tenant management, point-of-sale/inventory management, data ingestion, forecasting, recommendation engine, and dashboard reporting within the suggested architecture. Tenant isolation, role-based access control, data validation, background processing, and database indexing constitute the base of the architecture for its security and scalability. The design also supports the project's main decision flow: forecast demand, redistribute existing stock where possible, recommend markdowns for remaining slow-moving stock, and reorder only when necessary. The testing and maintenance strategy will be used to ensure the system is correct, performs well, is secure, and will be accurate before it is put into use.
+
+\begingroup
+\setlength{\parskip}{0pt}
+\chapter{Conclusion and Future Work}
+
+This chapter summarizes the work completed in FYP-1 and presents the plan for the work to be completed in FYP-2.
+
+\section{Conclusion}
+
+StockSense is proposed as a multi-tenant SaaS platform that helps small and medium-sized retailers manage products, variants, inventory, and stores through one system. The platform combines a free point-of-sale and inventory layer with historical sales upload, product-size-location demand forecasting, stock redistribution, markdown optimization, reorder recommendations, and explanations of the recommended actions. The report has presented the project vision, business opportunity, related work, requirements, methodology, system architecture, database design, security controls, testing strategy, and maintenance approach.
+
+The proposed design addresses the main inventory problems faced by the target retailers. It uses sales data to identify differences in demand between products, variants, and branches. It prioritizes moving available stock from a branch with surplus stock to a branch with shortage of stock before suggesting markdowns or a new order. The platform also stores the reasons and estimated financial impact of each recommendation so that business owners can understand and review the system's decisions. 
+
+The work completed in this report includes the definition of the system scope, research on competing platforms, a literature review of previous work, functional and non-functional requirements, use cases, data ingestion process, forecasting and recommendation workflow, evaluation protocol, and high-level and low-level design. The planned implementation will use a React dashboard, a Python REST backend, PostgreSQL, pandas and openpyxl for data processing, and LightGBM with statistical baselines for forecasting. In FYP-2, the backend, database, authentication, tenant isolation, dashboard, POS workflows, and CSV and Excel upload pipeline will be implemented and integrated. The forecasting models, redistribution recommendations, markdown optimization, reorder recommendations, and explanation features will then be developed. The completed system will be tested through unit, integration, and end-to-end testing, evaluated using forecasting metrics and historical data simulation, and prepared for documentation, deployment, and final demonstration.
+
+\section{Future Work}
+
+Future work will focus on solving the cold-start problem for businesses with no past sales data, so they can receive useful insights from the first day of their business. The system will also be made compatible with a wide range of POS systems and will include seasonal and promotional features. These features will consider changes in demand during periods such as holidays, festivals, or different seasons, as well as the effect of discounts and special offers on sales. This will help the system provide more accurate forecasts and recommendations.
+
+\endgroup
+
 \bibliographystyle{IEEEtranN}
 \bibliography{fypbib}
 
