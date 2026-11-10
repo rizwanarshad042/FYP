@@ -64,6 +64,8 @@
 
 \makeatother
 
+\pagestyle{empty}
+
 
 % ============================================================
 % ANTI-PLAGIARISM DECLARATION
@@ -319,7 +321,7 @@ StockSense is a freemium SaaS startup. The basic POS features are included for f
 
 The key users of StockSense are business owners, who view business level performance, inventory, forecasts, and recommendations; branch managers, who view inventory level performance, sales, forecasts, and recommendations for their branch; and the system administrator, who manages overall platform level operations, tenants, subscriptions, and system configuration.
 
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{Stakeholders of StockSense}
 \begin{tabular}{|l|p{9cm}|}
@@ -551,7 +553,7 @@ Odoo is an open-source business platform whose free Community edition includes a
 
 \section{Related Work Summary Table}
 
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{Summary of Related Work}
 \begin{tabular}{|l|p{3.2cm}|p{3.2cm}|p{5.5cm}|}
@@ -685,7 +687,7 @@ Access to the dashboard should be via modern web browser, with no need to instal
 
 \section{Use Cases}
 
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{UC-01: Register Business}
 \begin{tabular}{|l|p{9cm}|}
@@ -702,7 +704,7 @@ Alternative Flow & If the email is already registered, the system displays an er
 \end{tabular}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{UC-02: Login}
 \begin{tabular}{|l|p{9cm}|}
@@ -719,7 +721,7 @@ Alternative Flow & If the credentials are invalid, the system displays ``Incorre
 \end{tabular}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{UC-03: Manage Stores}
 \begin{tabular}{|l|p{9cm}|}
@@ -736,7 +738,7 @@ Alternative Flow & If a store being removed still has inventory or sales history
 \end{tabular}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{UC-04: Manage Store Managers}
 \begin{tabular}{|l|p{9cm}|}
@@ -753,7 +755,7 @@ Alternative Flow & If the email already belongs to another account, the system r
 \end{tabular}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{UC-05: Manage Products and Variants}
 \begin{tabular}{|l|p{9cm}|}
@@ -770,7 +772,7 @@ Alternative Flow & If a variant with the same SKU already exists, the system rej
 \end{tabular}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{UC-06: Adjust Inventory}
 \begin{tabular}{|l|p{9cm}|}
@@ -787,7 +789,7 @@ Alternative Flow & If the entered quantity is negative, the system rejects the a
 \end{tabular}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{UC-07: Record Sale (POS)}
 \begin{tabular}{|l|p{9cm}|}
@@ -804,7 +806,7 @@ Alternative Flow & If inventory is insufficient, the system warns the manager be
 \end{tabular}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{UC-08: Upload Historical Sales Data}
 \begin{tabular}{|l|p{9cm}|}
@@ -822,7 +824,7 @@ Alternative Flow & If the file format is unsupported or unreadable, the system r
 \end{tabular}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{UC-09: View Dashboard and Alerts}
 \begin{tabular}{|l|p{9cm}|}
@@ -838,7 +840,7 @@ Alternative Flow & If the tenant has no sales data yet, the dashboard asks the u
 \end{tabular}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{UC-10: View Demand Forecast}
 \begin{tabular}{|l|p{9cm}|}
@@ -855,7 +857,7 @@ Alternative Flow & If the tenant has not yet provided enough sales history to tr
 \end{tabular}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{UC-11: View and Act on Redistribution Recommendation}
 \begin{tabular}{|l|p{9cm}|}
@@ -872,7 +874,7 @@ Alternative Flow & The user dismisses the recommendation and the system marks it
 \end{tabular}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{UC-12: View Markdown Recommendation}
 \begin{tabular}{|l|p{9cm}|}
@@ -889,7 +891,7 @@ Alternative Flow & The user can dismiss the recommendation if a markdown is not 
 \end{tabular}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{UC-13: View Reorder Recommendation}
 \begin{tabular}{|l|p{9cm}|}
@@ -906,7 +908,7 @@ Alternative Flow & The user marks the recommendation as actioned or dismisses it
 \end{tabular}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{UC-14: Manage Subscription}
 \begin{tabular}{|l|p{9cm}|}
@@ -923,7 +925,7 @@ Alternative Flow & If the payment fails, the system keeps the current tier and i
 \end{tabular}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{UC-15: Manage Tenants}
 \begin{tabular}{|l|p{9cm}|}
@@ -965,7 +967,7 @@ GUI mockups of each screen, with a description of the users and functionality, a
 
 \subsection{Login Page}
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.75\linewidth]{Figures/login.png}
 \caption{Login Page}
@@ -974,7 +976,7 @@ Any registered user, whether a business owner or a store manager, logs in from t
 
 \subsection{Signup Page}
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.75\linewidth]{Figures/signup.png}
 \caption{Signup Page}
@@ -983,7 +985,7 @@ A new business owner registers their business as a tenant from this page, creati
 
 \subsection{Dashboard}
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.9\linewidth]{Figures/dashboard.png}
 \caption{Dashboard}
@@ -992,7 +994,7 @@ On this page, the user can view an overview of monthly sales, items at risk of s
 
 \subsection{Point of Sale}
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.9\linewidth]{Figures/pos.png}
 \caption{Point of Sale}
@@ -1001,7 +1003,7 @@ A store manager records a sale from this page by selecting the branch, product, 
 
 \subsection{Upload Sales Report}
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.9\linewidth]{Figures/upload.png}
 \caption{Upload Sales Report}
@@ -1010,7 +1012,7 @@ Businesses already using an external POS or spreadsheet can upload their histori
 
 \subsection{Inventory}
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.9\linewidth]{Figures/inventory.png}
 \caption{Inventory}
@@ -1019,7 +1021,7 @@ This page displays current stock levels for every product variant across all bra
 
 \subsection{Recommendations}
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.9\linewidth]{Figures/recommendations.png}
 \caption{Recommendations}
@@ -1030,7 +1032,7 @@ This page lists the system's redistribution, markdown, and reorder recommendatio
 
 \subsection{ER Diagram}
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth]{Figures/er_diagram.png}
 \caption{ER Diagram}
@@ -1051,7 +1053,7 @@ The major entities and their relationships are:
 
 \subsection{Data Dictionary}
 
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{Data Dictionary for Tenant Table}
 \begin{tabular}{|l|l|p{6cm}|}
@@ -1064,7 +1066,7 @@ CreatedDate & Date & Date the tenant registered \\ \hline
 \end{tabular}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{Data Dictionary for Store Table}
 \begin{tabular}{|l|l|p{6cm}|}
@@ -1077,7 +1079,7 @@ Location & String & Store address or region \\ \hline
 \end{tabular}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{Data Dictionary for Product Variant Table}
 \begin{tabular}{|l|l|p{6cm}|}
@@ -1090,7 +1092,7 @@ Category & String & Product category \\ \hline
 \end{tabular}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{Data Dictionary for Sale Table}
 \begin{tabular}{|l|l|p{6cm}|}
@@ -1104,7 +1106,7 @@ Quantity & Integer & Units sold \\ \hline
 \end{tabular}
 \end{table}
 
-\begin{table}[H]
+\begin{table}[htbp]
 \centering
 \caption{Data Dictionary for Recommendation Table}
 \begin{tabular}{|l|l|p{6cm}|}
@@ -1522,7 +1524,7 @@ The StockSense application will be created iteratively in phases. The initial ph
 
 StockSense has a multi-layered web structure. The users interact with the web dashboard or the POS interface, which will communicate with the API in the back end. The API verifies the identity of the user, their tenant and passes the request to the appropriate module. The cleaned sales data feeds into a forecasting engine, while the forecasts are fed into a recommendation engine and the valid stock data from the POS and inventory module feeds into a recommendation engine. The slow moving stock is passed to the markdown optimizer. All the results are recorded in the database and displayed back to the user at the dashboard. The full picture is displayed in Figure~\ref{fig:system-architecture}.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=\textwidth]{Figures/system_architecture.png}
     \caption[System Architecture Diagram]{System Architecture Diagram\\ This figure shows the System Architecture Diagram of our Application}
@@ -1616,7 +1618,7 @@ The basic relationships between these classes are as follows:
     \item A Notification is received by one User and may refer to a Recommendation.
 \end{itemize}
 
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=\textwidth]{Figures/class_diagram.png}
     \caption[Domain Model / Class Diagram]{Domain Model / Class Diagram\\ This figure shows the Domain Model / Class Diagram of our Application}
@@ -1631,7 +1633,7 @@ This section presents one sequence diagram for each use case described in Chapte
  
 This diagram shows the interaction for the use case \textbf{Register Business} (UC-01).
  
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=\textwidth,height=0.85\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC01_Register_Business.png}
     \caption[Sequence Diagram: Register Business]{Sequence Diagram: Register Business\\ This figure shows the sequence diagram of UC-01 (Register Business)}
@@ -1642,7 +1644,7 @@ This diagram shows the interaction for the use case \textbf{Register Business} (
  
 This diagram shows the interaction for the use case \textbf{Login} (UC-02).
  
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=\textwidth,height=0.85\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC02_Login.png}
     \caption[Sequence Diagram: Login]{Sequence Diagram: Login\\ This figure shows the sequence diagram of UC-02 (Login)}
@@ -1653,7 +1655,7 @@ This diagram shows the interaction for the use case \textbf{Login} (UC-02).
  
 This diagram shows the interaction for the use case \textbf{Manage Stores} (UC-03).
  
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=\textwidth,height=0.85\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC03_Manage_Stores.png}
     \caption[Sequence Diagram: Manage Stores]{Sequence Diagram: Manage Stores\\ This figure shows the sequence diagram of UC-03 (Manage Stores)}
@@ -1664,7 +1666,7 @@ This diagram shows the interaction for the use case \textbf{Manage Stores} (UC-0
  
 This diagram shows the interaction for the use case \textbf{Manage Store Managers} (UC-04).
  
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=\textwidth,height=0.85\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC04_Manage_Store_Managers.png}
     \caption[Sequence Diagram: Manage Store Managers]{Sequence Diagram: Manage Store Managers\\ This figure shows the sequence diagram of UC-04 (Manage Store Managers)}
@@ -1675,7 +1677,7 @@ This diagram shows the interaction for the use case \textbf{Manage Store Manager
  
 This diagram shows the interaction for the use case \textbf{Manage Products and Variants} (UC-05).
  
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=\textwidth,height=0.85\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC05_Manage_Products_and_Variants.png}
     \caption[Sequence Diagram: Manage Products and Variants]{Sequence Diagram: Manage Products and Variants\\ This figure shows the sequence diagram of UC-05 (Manage Products and Variants)}
@@ -1686,7 +1688,7 @@ This diagram shows the interaction for the use case \textbf{Manage Products and 
  
 This diagram shows the interaction for the use case \textbf{Adjust Inventory} (UC-06).
  
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=\textwidth,height=0.85\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC06_Adjust_Inventory.png}
     \caption[Sequence Diagram: Adjust Inventory]{Sequence Diagram: Adjust Inventory\\ This figure shows the sequence diagram of UC-06 (Adjust Inventory)}
@@ -1697,7 +1699,7 @@ This diagram shows the interaction for the use case \textbf{Adjust Inventory} (U
  
 This diagram shows the interaction for the use case \textbf{Record Sale (POS)} (UC-07).
  
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=\textwidth,height=0.85\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC07_Record_Sale_POS.png}
     \caption[Sequence Diagram: Record Sale (POS)]{Sequence Diagram: Record Sale (POS)\\ This figure shows the sequence diagram of UC-07 (Record Sale (POS))}
@@ -1708,7 +1710,7 @@ This diagram shows the interaction for the use case \textbf{Record Sale (POS)} (
  
 This diagram shows the interaction for the use case \textbf{Upload Historical Sales Data} (UC-08).
  
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=\textwidth,height=0.85\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC08_Upload_Historical_Sales_Data.png}
     \caption[Sequence Diagram: Upload Historical Sales Data]{Sequence Diagram: Upload Historical Sales Data\\ This figure shows the sequence diagram of UC-08 (Upload Historical Sales Data)}
@@ -1719,7 +1721,7 @@ This diagram shows the interaction for the use case \textbf{Upload Historical Sa
  
 This diagram shows the interaction for the use case \textbf{View Dashboard and Alerts} (UC-09).
  
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=\textwidth,height=0.85\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC09_View_Dashboard_and_Alerts.png}
     \caption[Sequence Diagram: View Dashboard and Alerts]{Sequence Diagram: View Dashboard and Alerts\\ This figure shows the sequence diagram of UC-09 (View Dashboard and Alerts)}
@@ -1731,7 +1733,7 @@ This diagram shows the interaction for the use case \textbf{View Dashboard and A
  
 This diagram shows the interaction for the use case \textbf{View Demand Forecast} (UC-10).
  
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=\textwidth,height=0.85\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC10_View_Demand_Forecast.png}
     \caption[Sequence Diagram: View Demand Forecast]{Sequence Diagram: View Demand Forecast\\ This figure shows the sequence diagram of UC-10 (View Demand Forecast)}
@@ -1742,7 +1744,7 @@ This diagram shows the interaction for the use case \textbf{View Demand Forecast
  
 This diagram shows the interaction for the use case \textbf{View and Act on Redistribution Recommendation} (UC-11).
  
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=\textwidth,height=0.85\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC11_Redistribution_Recommendation.png}
     \caption[Sequence Diagram: View and Act on Redistribution Recommendation]{Sequence Diagram: View and Act on Redistribution Recommendation\\ This figure shows the sequence diagram of UC-11 (View and Act on Redistribution Recommendation)}
@@ -1753,7 +1755,7 @@ This diagram shows the interaction for the use case \textbf{View and Act on Redi
  
 This diagram shows the interaction for the use case \textbf{View Markdown Recommendation} (UC-12).
  
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=\textwidth,height=0.85\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC12_View_Markdown_Recommendation.png}
     \caption[Sequence Diagram: View Markdown Recommendation]{Sequence Diagram: View Markdown Recommendation\\ This figure shows the sequence diagram of UC-12 (View Markdown Recommendation)}
@@ -1764,7 +1766,7 @@ This diagram shows the interaction for the use case \textbf{View Markdown Recomm
  
 This diagram shows the interaction for the use case \textbf{View Reorder Recommendation} (UC-13).
  
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=\textwidth,height=0.85\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC13_View_Reorder_Recommendation.png}
     \caption[Sequence Diagram: View Reorder Recommendation]{Sequence Diagram: View Reorder Recommendation\\ This figure shows the sequence diagram of UC-13 (View Reorder Recommendation)}
@@ -1775,7 +1777,7 @@ This diagram shows the interaction for the use case \textbf{View Reorder Recomme
  
 This diagram shows the interaction for the use case \textbf{Manage Subscription} (UC-14).
  
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=\textwidth,height=0.85\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC14_Manage_Subscription.png}
     \caption[Sequence Diagram: Manage Subscription]{Sequence Diagram: Manage Subscription\\ This figure shows the sequence diagram of UC-14 (Manage Subscription)}
@@ -1786,7 +1788,7 @@ This diagram shows the interaction for the use case \textbf{Manage Subscription}
  
 This diagram shows the interaction for the use case \textbf{Manage Tenants} (UC-15).
  
-\begin{figure}[H]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=\textwidth,height=0.85\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC15_Manage_Tenants.png}
     \caption[Sequence Diagram: Manage Tenants]{Sequence Diagram: Manage Tenants\\ This figure shows the sequence diagram of UC-15 (Manage Tenants)}
