@@ -1853,6 +1853,260 @@ Algorithms that will be used in the implementation of the StockSense application
 
 In this chapter, the high level as well as the low level design of StockSense was explained. Separate modules have been defined for tenant management, point-of-sale/inventory management, data ingestion, forecasting, recommendation engine, and dashboard reporting within the suggested architecture. Tenant isolation, role-based access control, data validation, background processing, and database indexing constitute the base of the architecture for its security and scalability. The design also supports the project's main decision flow: forecast demand, redistribute existing stock where possible, recommend markdowns for remaining slow-moving stock, and reorder only when necessary. The testing and maintenance strategy will be used to ensure the system is correct, performs well, is secure, and will be accurate before it is put into use.
 
+% ============================================================
+% CHAPTER 7 - IMPLEMENTATION AND TEST CASES
+% (paste this block just before: \begingroup \setlength{\parskip}{0pt} \chapter{Conclusion and Future Work})
+% ============================================================
+
+% helper for the test case tables (needs the float package, already loaded in main.tex)
+\newcommand{\testcase}[9]{%
+\begin{table}[H]
+\centering
+\caption{#1}
+\begin{tabular}{|l|p{9.5cm}|}
+\hline
+Test Case ID & #2 \\ \hline
+QA Test Engineer & #3 \\ \hline
+Reviewed By & #4 \\ \hline
+Test Date & To be filled \\ \hline
+Use Case Reference & #5 \\ \hline
+Objective & #6 \\ \hline
+Pre-Requisite & #7 \\ \hline
+Steps & #8 \\ \hline
+Expected Result & #9 \\ \hline
+Result & Not yet executed \\ \hline
+\end{tabular}
+\end{table}}
+
+\chapter{Implementation and Test Cases}
+
+This chapter discusses how the design of StockSense described in the previous chapters is implemented and how the system will be tested. It describes all the modules, the tools used for each module, and the test cases written for each use case in Chapter~4. The content of this chapter is not final and will be updated in FYP-2 as we implement the solution further.
+
+\section{Implementation}
+
+We implement the solution following the iterative plan specified in Section~\ref{sec:iterative}. We start with the development of the multi-tenant core. Next come the offline forecast experiments, followed by the implementation of the forecast, recommendation and markdown modules. Each module is developed separately, so that changes to one of them can be made independently of the other modules. The current state of each module is described in the table below.
+
+\begin{table}[H]
+\centering
+\caption{Implementation Status of StockSense Modules}
+\begin{tabular}{|l|p{4.2cm}|p{3.8cm}|p{3.6cm}|}
+\hline
+\textbf{No.} & \textbf{Module} & \textbf{Main Tools} & \textbf{Status} \\ \hline
+1 & Tenant and User Management & FastAPI, PostgreSQL & Design complete, implementation in FYP-2 \\ \hline
+2 & Store, Product and Inventory Management & FastAPI, PostgreSQL & Design complete, implementation in FYP-2 \\ \hline
+3 & Point of Sale & React, FastAPI & Screen designed, implementation in FYP-2 \\ \hline
+4 & Data Ingestion and Cleaning & pandas, openpyxl & Design complete, implementation in FYP-2 \\ \hline
+5 & Demand Forecasting & LightGBM, statsmodels & Offline experiments in FYP-2 \\ \hline
+6 & Recommendation Engine & Python, SciPy & Design complete, implementation in FYP-2 \\ \hline
+7 & Markdown Optimizer & Python, NumPy & Design complete, implementation in FYP-2 \\ \hline
+8 & Explainable Recommendations & LightGBM contributions, text templates & Design complete, implementation in FYP-2 \\ \hline
+9 & Dashboard and Alerts & React & Screens designed, implementation in FYP-2 \\ \hline
+10 & Subscription Management & FastAPI, PostgreSQL & Design complete, implementation in FYP-2 \\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Development Environment}
+
+The backend will be written in Python with FastAPI. The web dashboard and the POS screens will be written in React. All the data will be stored in PostgreSQL, and every business table will have a tenant ID. The editor is Visual Studio Code, version control is done with Git and GitHub, the API is tested with Postman, and the experiments are done in Jupyter Notebook. The team will work in short iterations, and the supervisor will review the results at the end of each iteration.
+
+\subsection{Tenant and User Management}
+
+This module will perform business sign up, login and the management of roles. During sign up, the business gets a tenant, a free subscription and an owner account, all created in a single database transaction. Only password hashes are stored in the database. After login, every request carries the tenant ID and the role, which the backend checks on every read and write operation on business data. A suspended tenant cannot log in.
+
+\subsection{Store, Product and Inventory Management}
+
+The owner can create, modify and archive stores, define products with sizes and variants, and invite store managers. Variants have SKUs which are unique per tenant. The inventory data is stored per product variant per store. A manual correction of the inventory needs a reason, which is logged. A store manager can view and change only his own store.
+
+\subsection{Point of Sale}
+
+Using the POS screen, a store manager can select the product and the size, enter the quantity and make a sale. First, the system checks whether there is sufficient stock. Once the sale is confirmed, the sale information, the sold items and the updated stock levels are stored in one transaction. The goal is to finish this within 2 seconds, according to the requirements.
+
+\subsection{Data Ingestion and Cleaning}
+
+This component accepts CSV and Excel files. The CSV files are parsed using pandas in chunks, while the Excel files are parsed using pandas and openpyxl in batches, so that memory consumption stays low for files of up to 100,000 rows. The owner matches the detected columns to the standard fields (product, size, store, date, quantity) and sets the date format. Then the system validates the structure, values and references, normalizes the names and sizes (e.g. ``Medium'' becomes ``M''), detects returns and unusual values, and marks possible duplicates without removing them. The upload report shows the accepted and rejected rows with reasons. Only after the owner's approval are the rows imported, in one transaction that is rolled back on any failure.
+
+\subsection{Demand Forecasting}
+
+Forecasting starts with modeling and testing in offline mode using Jupyter Notebook. The steps are as follows: creation of weekly and monthly demand series for every variant per size and store; creation of lag, rolling, calendar, price and lifecycle features; training of one global LightGBM model per tenant with the Tweedie objective function; and comparing the performance with the baselines (naive, seasonal naive, moving average, Holt-Winters and Croston). An upper-quantile model is also trained to derive the safety stock. The model hyperparameters are tuned with the rolling-origin validation procedure, with no data shuffling. Then the model is integrated into a background job that forecasts the demand and writes the results into the Forecast table with the model name. For a new tenant, no model forecast is produced if there is not enough history, and the user is asked to load more data.
+
+\subsection{Recommendation Engine}
+
+For each variant and store, the engine compares the stock on hand with the forecast demand and the safety stock in order to detect surpluses or shortages. The surplus stock is allocated to the shortage stores by solving a small transportation problem, and a transfer is suggested only if the margin exceeds the transfer cost. If a shortage still remains, a reorder recommendation is generated.
+
+\subsection{Markdown Optimizer}
+
+The excess stock is evaluated based on the weeks of cover. If the product will not be sold in time, the optimizer tries discounts of 5\%, 10\%, up to 50\% using the price elasticity. The lowest discount that meets the sell-through goal without going below the cost price is chosen. The estimated profit is stored as the impact.
+
+\subsection{Explainable Recommendations}
+
+All recommendations are stored along with the figures (forecast demand, stock, surplus or shortage, stores, margin, cost and impact) and the key forecast drivers obtained from the LightGBM feature contributions. These are inserted into text templates, so that the owner reads a short and simple sentence rather than a score.
+
+\subsection{Dashboard, Alerts and Subscription}
+
+The dashboard shows the monthly sales, the items at risk of stockout and dead stock, the recent sales, the branch status and the open recommendations. The owner or manager can approve or reject a recommendation, and an approved redistribution results in the creation of a stock transfer. On the free plan, the forecast and recommendation parts are replaced by an upgrade notice. The subscription component switches the tenant between the two plans, and a failed payment keeps the previous plan.
+
+\section{Test Case Design and Description}
+
+All use cases from Chapter~4 have at least one test case. The tests will be performed in a Linux development environment, where the React dashboard will be open in Google Chrome, and the backend and PostgreSQL will run locally. Sample tenants with two or three branches and sample sales files will be used. Forecast accuracy is not checked here, since it will be measured separately using the evaluation protocol of Section~\ref{sec:evaluation}.
+
+The Result field remains ``Not yet executed''. It will be changed to Passed or Failed, with comments, once the tests are performed in FYP-2.
+
+\testcase{Test Case 1: Register Business}{1}{Muhammad Usman}{Muhammad Rizwan Arshad}{UC-01 Register Business}
+{To check that a new business can register and gets a free-tier tenant.}
+{The email is not already registered.}
+{1. Open the signup page. 2. Enter business name, owner name, email and password. 3. Submit the form.}
+{A tenant, a free subscription and an owner account are created, and a verification email is sent. A second signup with the same email shows an error.}
+
+\testcase{Test Case 2: Login}{2}{Muhammad Usman}{Hayyan Haider}{UC-02 Login}
+{To check login with valid and invalid details and with a suspended tenant.}
+{A registered user exists.}
+{1. Log in with the correct email and password. 2. Log in with a wrong password. 3. Suspend the tenant and try to log in again.}
+{Valid details open the dashboard. A wrong password shows ``Incorrect email or password''. A suspended tenant cannot log in.}
+
+\testcase{Test Case 3: Manage Stores}{3}{Hayyan Haider}{Muhammad Usman}{UC-03 Manage Stores}
+{To check that the owner can add, edit and remove stores.}
+{The owner is logged in.}
+{1. Add a store. 2. Edit its name. 3. Remove a store that has sales history.}
+{The store is added and updated. A store with inventory or sales is archived and not deleted.}
+
+\testcase{Test Case 4: Manage Store Managers}{4}{Hayyan Haider}{Muhammad Rizwan Arshad}{UC-04 Manage Store Managers}
+{To check that the owner can invite a manager and assign a store.}
+{The owner is logged in and at least one store exists.}
+{1. Invite a manager by email and choose a store. 2. Invite an email that already has an account.}
+{The manager account is created and an invitation is sent. The second invitation is rejected with an error.}
+
+\testcase{Test Case 5: Manage Products and Variants}{5}{Muhammad Rizwan Arshad}{Muhammad Usman}{UC-05 Manage Products and Variants}
+{To check product creation and the unique SKU rule.}
+{The owner is logged in.}
+{1. Create a product with sizes 40, 41 and 42. 2. Create another variant with an existing SKU.}
+{The product and its variants are saved. The duplicate SKU is rejected.}
+
+\testcase{Test Case 6: Adjust Inventory}{6}{Muhammad Rizwan Arshad}{Hayyan Haider}{UC-06 Adjust Inventory}
+{To check manual stock correction and that a negative quantity is refused.}
+{The variant exists at the store.}
+{1. Enter a new quantity with a reason. 2. Enter a negative quantity.}
+{The first change is saved and logged. The negative value is rejected and the stock stays the same.}
+
+\testcase{Test Case 7: Record Sale (POS)}{7}{Muhammad Usman}{Hayyan Haider}{UC-07 Record Sale (POS)}
+{To check that a sale reduces inventory, and that low stock gives a warning.}
+{A store manager is logged in and stock is available.}
+{1. Select a product and size and sell 1 unit. 2. Try to sell more units than are in stock.}
+{The sale is saved and the stock goes down by one. The second sale shows an insufficient stock warning.}
+
+\testcase{Test Case 8: Upload Historical Sales Data}{8}{Hayyan Haider}{Muhammad Usman}{UC-08 Upload Historical Sales Data}
+{To check upload, column mapping, cleaning and the upload report.}
+{The owner is logged in. A CSV file with a few wrong rows is ready.}
+{1. Upload the file. 2. Map the columns. 3. Check the report. 4. Approve the import.}
+{Good rows are cleaned and imported. Wrong rows are listed with reasons. Nothing is saved before approval.}
+
+\testcase{Test Case 9: Upload of an Unsupported or Broken File}{9}{Hayyan Haider}{Muhammad Rizwan Arshad}{UC-08 Upload Historical Sales Data}
+{To check that bad files do not damage existing data.}
+{The tenant already has saved sales.}
+{1. Upload a .pdf file. 2. Upload a damaged Excel file. 3. Force a failure in the middle of an import.}
+{The file is rejected with a simple reason, and a failed import is rolled back. The existing data is unchanged.}
+
+\testcase{Test Case 10: View Dashboard and Alerts}{10}{Muhammad Rizwan Arshad}{Muhammad Usman}{UC-09 View Dashboard and Alerts}
+{To check the dashboard for free and paid tenants and for a new tenant.}
+{One free tenant and one paid tenant exist.}
+{1. Open the dashboard as a paid owner. 2. Open it as a free owner. 3. Open it for a tenant with no sales.}
+{The paid tenant sees sales, inventory, forecasts and alerts. The free tenant sees sales and inventory with an upgrade message. A new tenant is asked to add sales data.}
+
+\testcase{Test Case 11: View Demand Forecast}{11}{Muhammad Usman}{Hayyan Haider}{UC-10 View Demand Forecast}
+{To check the forecast display and the rules for the free tier and short history.}
+{A paid tenant with enough sales history exists.}
+{1. Select a product, size and store. 2. Choose weekly and then monthly view. 3. Repeat for a tenant with too little history. 4. Repeat for a free tenant.}
+{The forecast is shown next to past sales. A short history shows a ``not enough data'' message. A free tenant sees an upgrade message.}
+
+\testcase{Test Case 12: Redistribution Recommendation}{12}{Muhammad Rizwan Arshad}{Muhammad Usman}{UC-11 View and Act on Redistribution Recommendation}
+{To check that a surplus store and a shortage store give a transfer suggestion that can be approved or dismissed.}
+{One branch has surplus stock and another has a forecast shortage of the same variant.}
+{1. Run the recommendation job. 2. Open the recommendation. 3. Approve it. 4. Repeat with another one and dismiss it.}
+{A redistribution is suggested with quantity, explanation and impact. Approval creates a stock transfer and both stores are notified. A dismissed one is closed. If the source stock has changed, a warning is shown.}
+
+\testcase{Test Case 13: Markdown Recommendation}{13}{Hayyan Haider}{Muhammad Rizwan Arshad}{UC-12 View Markdown Recommendation}
+{To check that slow-moving stock that cannot be moved gets a discount suggestion.}
+{A variant has weeks of cover above the selling time and no store needs it.}
+{1. Run the optimizer. 2. Open the markdown recommendation. 3. Accept it.}
+{A discount is suggested that does not go below the cost price. Accepting it updates the price.}
+
+\testcase{Test Case 14: Reorder Recommendation}{14}{Muhammad Usman}{Hayyan Haider}{UC-13 View Reorder Recommendation}
+{To check that a reorder is suggested only when no other branch has surplus.}
+{A forecast shortage exists and no other branch has surplus.}
+{1. Run the recommendation job. 2. Open the Reorder tab. 3. Mark one as actioned.}
+{A reorder quantity is shown with its reason. The status changes to Actioned.}
+
+\testcase{Test Case 15: Manage Subscription}{15}{Muhammad Rizwan Arshad}{Muhammad Usman}{UC-14 Manage Subscription}
+{To check upgrade, downgrade and failed payment.}
+{The owner is logged in.}
+{1. Upgrade to the paid plan. 2. Try an upgrade where the payment fails. 3. Downgrade to free.}
+{Paid features turn on after a successful upgrade. A failed payment keeps the old plan. A downgrade turns paid features off but keeps all sales and inventory data.}
+
+\testcase{Test Case 16: Manage Tenants}{16}{Hayyan Haider}{Muhammad Usman}{UC-15 Manage Tenants}
+{To check that the administrator can suspend and reactivate a tenant.}
+{The administrator is logged in.}
+{1. Suspend a tenant. 2. Try to log in as that tenant's user. 3. Reactivate the tenant.}
+{Users of a suspended tenant cannot log in. After reactivation they can log in again.}
+
+\subsection{Non-Functional Test Cases}
+
+\testcase{Test Case 17: Tenant Data Isolation}{17}{Muhammad Usman}{Hayyan Haider}{FR-11, Security (Section~4.4.3)}
+{To check that one business can never see the data of another.}
+{Two tenants with different data exist.}
+{1. Log in as Tenant A. 2. Call the API with the IDs of Tenant B records. 3. Log in as a store manager and open another store's data.}
+{All such requests are refused. No data of Tenant B or of another store is returned.}
+
+\testcase{Test Case 18: POS Speed}{18}{Muhammad Rizwan Arshad}{Muhammad Usman}{Performance (Section~4.4.1)}
+{To check that a POS sale is saved in under 2 seconds.}
+{A tenant with a normal amount of data.}
+{Record 50 sales and note the time taken for each.}
+{Each sale is saved in under 2 seconds.}
+
+\testcase{Test Case 19: Large File Upload}{19}{Hayyan Haider}{Muhammad Rizwan Arshad}{Performance (Section~4.4.1)}
+{To check that a file with 100,000 rows is processed in under 5 minutes.}
+{A test CSV and a test Excel file with 100,000 rows each.}
+{Upload both files and note the processing time and memory use.}
+{Both files are processed in under 5 minutes without the system crashing.}
+
+\testcase{Test Case 20: Password and Connection Security}{20}{Muhammad Usman}{Muhammad Rizwan Arshad}{Security (Section~4.4.3)}
+{To check that passwords are hashed and the traffic uses HTTPS.}
+{A test database and a deployed test server.}
+{1. Look at the saved password field in the database. 2. Open the site over plain HTTP.}
+{Only hashed passwords are stored. Plain HTTP is not accepted.}
+
+\section{Test Metrics}
+
+The tables below will be filled in after the test cases are executed in FYP-2. Only the planned numbers are filled in at this stage.
+
+\begin{table}[H]
+\centering
+\caption{Functional Test Case Metrics}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Metric} & \textbf{Value} \\ \hline
+Number of Test Cases & 16 \\ \hline
+Number of Test Cases Passed & To be filled \\ \hline
+Number of Test Cases Failed & To be filled \\ \hline
+Test Case Defect Density & To be filled \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Non-Functional Test Case Metrics}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Metric} & \textbf{Value} \\ \hline
+Number of Test Cases & 4 \\ \hline
+Number of Test Cases Passed & To be filled \\ \hline
+Number of Test Cases Failed & To be filled \\ \hline
+Test Case Defect Density & To be filled \\ \hline
+\end{tabular}
+\end{table}
+
+\section{Conclusion}
+
+The implementation process of all the StockSense modules and the testing of these modules were discussed in this chapter. Each module has its own toolset and function, and all the use cases specified in Chapter~4 have test cases. In addition to that, four extra test cases cover the major requirements that regular functional tests do not cover. They include tenant isolation, speed of POS transactions, file uploads and security. All the testing results will be included in FYP-2 once the system is developed. If a test fails, it will be fixed and repeated.
+
 \begingroup
 \setlength{\parskip}{0pt}
 \chapter{Conclusion and Future Work}
