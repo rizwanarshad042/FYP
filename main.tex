@@ -2107,6 +2107,187 @@ Test Case Defect Density & To be filled \\ \hline
 
 The implementation process of all the StockSense modules and the testing of these modules were discussed in this chapter. Each module has its own toolset and function, and all the use cases specified in Chapter~4 have test cases. In addition to that, four extra test cases cover the major requirements that regular functional tests do not cover. They include tenant isolation, speed of POS transactions, file uploads and security. All the testing results will be included in FYP-2 once the system is developed. If a test fails, it will be fixed and repeated.
 
+% ============================================================
+% CHAPTER 9 - EXPERIMENTAL RESULTS AND DISCUSSION
+% (paste just before: \begingroup \setlength{\parskip}{0pt} \chapter{Conclusion and Future Work})
+% ============================================================
+
+\setcounter{chapter}{8} % makes this Chapter 9 and Conclusion Chapter 10, as in the template
+
+\chapter{Experimental Results and Discussion}
+\label{ch:results}
+
+In FYP-1 our work went mostly into the requirements, methodology and design of StockSense, so the forecasting and recommendation experiments have been designed but not run yet. This chapter describes each planned experiment: the data it uses, how it is set up, and the table its results will go into. The result fields are marked ``To be filled'' for now and will be completed in FYP-2, following the iterative plan in Section~\ref{sec:iterative}.
+
+\section{Objectives of the Experiments}
+
+The experiments are meant to answer the following questions:
+
+\begin{enumerate}
+    \item Is a global LightGBM model more accurate than simple statistical baselines at forecasting product-size-store demand?
+    \item When the sales history is short, does one global model per tenant do better than a separate model for each series?
+    \item How much sales history does a new tenant need before forecasts can be trusted?
+    \item Which loss function (Tweedie, Poisson or squared error) works best for sparse retail demand?
+    \item Do the redistribution and markdown recommendations reduce dead stock and lost sales compared with doing nothing?
+\end{enumerate}
+
+\section{Experimental Setup}
+
+\subsection{Datasets}
+
+\begin{itemize}
+    \item \textbf{Public retail data:} The M5 dataset~\cite{makridakis2022m5} has daily item-store sales, prices and calendar events from Walmart stores. It supports evaluation at the store and hierarchy levels, so we use it for early model development. It has no size-level sales.
+    \item \textbf{Retailer data:} Sales data from a small multi-branch clothing or footwear retailer will be used if we can get access to it. Size-level behaviour can only be tested on data like this.
+    \item \textbf{Sample tenant data:} Small sample tenants with two or three branches each are used to test the upload pipeline and the recommendation logic end to end.
+\end{itemize}
+
+\subsection{Data Preparation}
+
+The data is cleaned and aggregated into weekly and monthly series for each variant and store, as described in Section~\ref{sec:series}. Each series is labelled smooth, erratic, intermittent or lumpy using the ADI and $\mathrm{CV}^2$ thresholds of 1.32 and 0.49, so accuracy can be reported separately for each demand class. Periods in which a variant was out of stock for most of the time are treated as censored and left out of the training loss.
+
+\subsection{Environment and Tools}
+
+The experiments run offline in Jupyter Notebook with Python, pandas, NumPy, scikit-learn, LightGBM and statsmodels. Random seeds are fixed so the results can be reproduced.
+
+\subsection{Evaluation Protocol}
+
+All splits are chronological. Hyperparameters are tuned with rolling-origin validation on an expanding window, and the final comparison uses the most recent period, which no model sees during training or tuning. Accuracy is measured with RMSE, MAE, WAPE and non-zero MAPE as defined in Section~\ref{sec:evaluation}. For MAPE we also report the share of periods left out because actual demand was zero.
+
+\section{Exploratory Analysis of the Demand Data}
+
+Before training any model, we check how sparse the demand series are. If a large share of series turn out to be intermittent or lumpy, baselines built for that kind of demand, such as Croston's method, become more important in the comparison.
+
+\begin{table}[H]
+\centering
+\caption{Distribution of Demand Classes}
+\begin{tabular}{|l|p{3.5cm}|p{3.5cm}|}
+\hline
+\textbf{Demand Class} & \textbf{Number of Series} & \textbf{Share of Series (\%)} \\ \hline
+Smooth & To be filled & To be filled \\ \hline
+Erratic & To be filled & To be filled \\ \hline
+Intermittent & To be filled & To be filled \\ \hline
+Lumpy & To be filled & To be filled \\ \hline
+\end{tabular}
+\end{table}
+
+\section{Experiment 1: LightGBM Against Statistical Baselines}
+
+\textbf{Aim:} To test the main model-selection claim from Chapter~3, that the global LightGBM model is more accurate than simple baselines.
+
+\textbf{Setup:} The LightGBM model, trained with the Tweedie objective, and every baseline are evaluated on the same chronological test period with a weekly horizon.
+
+\begin{table}[H]
+\centering
+\caption{Forecast Accuracy of LightGBM and Baselines (Weekly)}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Model} & \textbf{RMSE} & \textbf{MAE} & \textbf{WAPE (\%)} & \textbf{MAPE (\%)} \\ \hline
+Naive (last value) & To be filled & To be filled & To be filled & To be filled \\ \hline
+Seasonal naive & To be filled & To be filled & To be filled & To be filled \\ \hline
+Moving average & To be filled & To be filled & To be filled & To be filled \\ \hline
+Holt--Winters & To be filled & To be filled & To be filled & To be filled \\ \hline
+Croston's method & To be filled & To be filled & To be filled & To be filled \\ \hline
+LightGBM (global) & To be filled & To be filled & To be filled & To be filled \\ \hline
+\end{tabular}
+\end{table}
+
+We will also break these results down by demand class and by fast- and slow-moving items, because an overall average can hide poor accuracy on sparse series.
+
+\section{Experiment 2: Global Model Against Separate Models}
+
+\textbf{Aim:} Montero-Manso and Hyndman~\cite{montero2021principles} and Bandara et al.~\cite{bandara2020forecasting} suggest that one shared model can beat per-series models when each series is short. This experiment checks whether that holds for StockSense's product-size-store series.
+
+\textbf{Setup:} One global model per tenant and one model per series are trained on the same data and evaluated on the same test period.
+
+\begin{table}[H]
+\centering
+\caption{Global Model Against Separate Models}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Approach} & \textbf{RMSE} & \textbf{WAPE (\%)} & \textbf{Training Time} \\ \hline
+One global model per tenant & To be filled & To be filled & To be filled \\ \hline
+One model per series & To be filled & To be filled & To be filled \\ \hline
+\end{tabular}
+\end{table}
+
+\section{Experiment 3: Amount of Training History}
+
+\textbf{Aim:} To find the minimum sales history a new tenant needs before model forecasts are shown (Section~\ref{sec:forecasting}).
+
+\textbf{Setup:} The model is trained on only the last 4, 8 and 12 weeks of history and evaluated on the same test period each time.
+
+\begin{table}[H]
+\centering
+\caption{Forecast Accuracy Against Training History}
+\begin{tabular}{|l|l|l|p{4cm}|}
+\hline
+\textbf{History Used} & \textbf{RMSE} & \textbf{WAPE (\%)} & \textbf{Better than Best Baseline?} \\ \hline
+4 weeks & To be filled & To be filled & To be filled \\ \hline
+8 weeks & To be filled & To be filled & To be filled \\ \hline
+12 weeks & To be filled & To be filled & To be filled \\ \hline
+\end{tabular}
+\end{table}
+
+The system will use the shortest history at which LightGBM clearly beats the best baseline as its minimum history threshold.
+
+\section{Experiment 4: Loss Function Comparison}
+
+\textbf{Aim:} Demand is non-negative and full of zeros, which is why we chose the Tweedie objective. This experiment checks that choice.
+
+\textbf{Setup:} LightGBM is trained with the Tweedie objective, the Poisson objective and squared error, keeping all other settings the same.
+
+\begin{table}[H]
+\centering
+\caption{Comparison of LightGBM Objective Functions}
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{Objective} & \textbf{RMSE} & \textbf{MAE} & \textbf{WAPE (\%)} \\ \hline
+Tweedie & To be filled & To be filled & To be filled \\ \hline
+Poisson & To be filled & To be filled & To be filled \\ \hline
+Squared error & To be filled & To be filled & To be filled \\ \hline
+\end{tabular}
+\end{table}
+
+\section{Experiment 5: Recommendation Backtest}
+
+\textbf{Aim:} To estimate what the redistribution, markdown and reorder recommendations are worth, by replaying past sales as described in Section~\ref{sec:evaluation}.
+
+\textbf{Setup:} At each cut-off date, the engine produces recommendations from the data available up to that date. These are applied to a simulated stock record, and the following weeks are replayed with the actual sales.
+
+\begin{table}[H]
+\centering
+\caption{Recommendation Backtest Results}
+\begin{tabular}{|p{4.5cm}|p{3cm}|p{3.2cm}|p{2.5cm}|}
+\hline
+\textbf{Measure} & \textbf{No Action} & \textbf{With StockSense} & \textbf{Change} \\ \hline
+Dead-stock units & To be filled & To be filled & To be filled \\ \hline
+Lost sales (units) & To be filled & To be filled & To be filled \\ \hline
+Sell-through rate (\%) & To be filled & To be filled & To be filled \\ \hline
+Number of transfers & -- & To be filled & -- \\ \hline
+Estimated margin impact & -- & To be filled & -- \\ \hline
+\end{tabular}
+\end{table}
+
+\section{Discussion}
+
+Once the results are in, we will look first at whether LightGBM is accurate enough over the baselines to be worth the extra complexity. This matters most for intermittent and lumpy series, where simple methods often do well. We will then look at how much history a new tenant needs, since that decides how long onboarding takes in UC-10. Finally, we will check whether redistribution cuts dead stock and lost sales more than markdowns alone, which is the main claim behind StockSense.
+
+The M5 results~\cite{makridakis2022m5} and the small-business study by Purnamasari et al.~\cite{purnamasari2023demand} lead us to expect gradient-boosted models to beat the statistical baselines, but our own experiments still have to confirm this.
+
+\subsection{Threats to Validity}
+
+\begin{itemize}
+    \item \textbf{No size-level data in M5:} Conclusions about sizes will come only from real retailer data, since M5 does not record sizes.
+    \item \textbf{Censored demand:} Sales recorded during stock-outs understate true demand, which can bias both the forecasts and the backtest.
+    \item \textbf{Simulation assumptions:} The backtest assumes fixed transfer lead times and a constant price elasticity for markdowns, and neither may hold in practice.
+    \item \textbf{Retailer differences:} Results from one retailer or dataset may not carry over to every tenant.
+\end{itemize}
+
+\section{Conclusion}
+
+This chapter set out the experiments for StockSense: a demand sparsity analysis, a comparison of LightGBM with statistical baselines, global against separate models, a minimum-history test, a loss-function comparison, and a historical backtest of the recommendations. Since the setup and result tables are fixed now, the FYP-2 experiments can be run and reported the same way. All results will be filled in and discussed in FYP-2.
+
+
 \begingroup
 \setlength{\parskip}{0pt}
 \chapter{Conclusion and Future Work}
