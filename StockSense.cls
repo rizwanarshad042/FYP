@@ -86,5 +86,29 @@
 \usepackage{setspace}
 \setstretch{1.5}
 
-\usepackage{mathptmx}
+% Times body font, as in the template, under pdfLaTeX, XeLaTeX and LuaLaTeX
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage{mathptmx}
+\else
+  \usepackage{fontspec}
+  \setmainfont{TeX Gyre Termes}
+  \usepackage{unicode-math}
+  \setmathfont{TeX Gyre Termes Math}
+\fi
 \captionsetup{font={small}}
+
+% Fill pages with floats instead of leaving large gaps
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\textfraction}{0.07}
+\renewcommand{\floatpagefraction}{0.8}
+\setcounter{topnumber}{4}
+\setcounter{bottomnumber}{3}
+\setcounter{totalnumber}{6}
+\setcounter{dbltopnumber}{3}
+\makeatletter
+\setlength{\@fptop}{0pt}
+\setlength{\@fpsep}{12pt}
+\setlength{\@fpbot}{0pt plus 1fil}
+\makeatother
