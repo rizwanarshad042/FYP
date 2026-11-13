@@ -3,6 +3,9 @@
 \usepackage{float}
 \usepackage{longtable}
 \usepackage{placeins}
+\usepackage{rotating}
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \begin{document}
 
 % ============================================================
@@ -87,7 +90,7 @@ Date: \today
 
 \begin{flushright}
 
-Name: Muhammad Usman
+\textbf{Name: Muhammad Usman}
 
 \vspace{3ex}
 
@@ -98,7 +101,7 @@ Signature: \quad\begin{tabular}[b]{@{}c@{}}
 
 \vspace{6ex}
 
-Name: Muhammad Rizwan Arshad
+\textbf{Name: Muhammad Rizwan Arshad}
 
 \vspace{3ex}
 
@@ -109,7 +112,7 @@ Signature: \quad\begin{tabular}[b]{@{}c@{}}
 
 \vspace{6ex}
 
-Name: Hayyan Haider
+\textbf{Name: Hayyan Haider}
 
 \vspace{3ex}
 
@@ -140,18 +143,16 @@ This states Authors’ declaration that the work presented in the report is thei
 \section*{Abstract}
 \thispagestyle{empty}
 
-Retailers lose money every day when a product is out of stock in one place while unsold units of the same product sit on the shelves of another. The problem is common in businesses that sell physical products in several variants, sizes or store locations, such as clothing and footwear. Large chains handle it with enterprise forecasting systems such as SAP and Blue Yonder, but these systems are too expensive and too complex for small businesses to buy or maintain. This project develops StockSense, a multi-tenant software as a service (SaaS) application built around a general-purpose forecasting engine that can serve any business that keeps stock. The platform offers a free point of sale (POS) module for recording sales and tracking inventory, while demand forecasting at the variant and location level, a markdown optimizer and stock redistribution recommendations are offered as paid subscription features. StockSense differs from current tools because it treats redistribution between branches as its first recommendation and warns the owner early enough to act before an item turns into dead stock, rather than after it has already stopped selling. Businesses that already use another POS or spreadsheets can join by uploading their past sales reports, so the system can learn from the data they already have.
+Retailers that sell products in several sizes, variants or branches often run out of popular items in one place while unsold stock of the same items builds up in another. Large chains solve this with enterprise forecasting systems such as SAP and Blue Yonder, but these are too expensive and complex for small businesses. This project develops StockSense, a multi-tenant software as a service (SaaS) platform built around a general-purpose forecasting engine for any business that keeps stock. A free point of sale (POS) module records sales and inventory, while paid features forecast demand for each variant and location, recommend moving stock between branches, suggest early markdowns and propose reorders, each with a plain explanation and an estimated financial impact. StockSense gives redistribution first priority and warns owners before items turn into dead stock. Businesses that use another POS or spreadsheets can join by uploading their past sales reports.
 
 \pagebreak
 
 \section*{Executive Summary}
 \thispagestyle{empty}
 
-Retailers face two opposite problems every day, and both cost them revenue. Dead stock stays on the shelves for months and ties up capital and space, while stockouts lose sales because the item a customer wants is not available, even as less popular items keep piling up. This affects any retailer that manages physical inventory across variants, sizes or store locations, from clothing and footwear shops to many other kinds of stores. The problem is most serious in smaller businesses, where restocking is usually decided by instinct. Owners have no systematic view of which items sell at which locations, so a manager simply reorders whatever seemed to sell well. Large retailers solve this with enterprise demand forecasting platforms such as SAP and Blue Yonder, but these are expensive and designed for companies that already have a data team and an enterprise resource planning (ERP) system. Small retailers that run a basic POS or keep their records in spreadsheets have no equivalent. Even the lighter inventory tools made for small businesses usually forecast demand per product rather than per size or variant, alert the owner only when stock is already low, list slow movers after they have stopped selling, and treat each store's inventory separately.
+Retailers face two opposite problems every day. Dead stock occupies shelves for months and ties up capital, while stockouts lose sales because the item a customer wants is not available. The problem affects any retailer that manages physical inventory across variants, sizes or store locations, and it is most serious in small businesses, where restocking is decided by instinct rather than by data. Large retailers use enterprise demand forecasting platforms such as SAP and Blue Yonder, but these are expensive and assume a data team and an enterprise resource planning (ERP) system. Small retailers that run a basic POS or keep records in spreadsheets have no equivalent, and the lighter tools available to them forecast per product rather than per size, warn only when stock is already low and treat each store separately. StockSense is a multi-tenant SaaS platform designed to fill this gap. A free POS records sales and tracks stock, which brings each business's data onto the platform, and a paid subscription adds demand forecasts at the variant and location level, a markdown optimizer and stock redistribution recommendations. Businesses that already use another system can join by uploading their past sales in comma-separated values (CSV) or Excel format.
 
-StockSense is a multi-tenant SaaS platform designed to fill this gap. It is built on a general-purpose forecasting engine that works for any business that keeps stock, not only for one product category. Small retailers get a free POS that records sales and tracks stock as part of their daily work, and this brings their data onto the platform. On top of that data, a paid subscription unlocks demand forecasts at the location and variant level, an automated markdown optimizer and stock redistribution recommendations. Businesses that already use another POS or spreadsheets can join without changing anything by uploading their past sales in comma-separated values (CSV) or Excel format. In both cases, owners and managers see their past sales, current forecasts and restocking suggestions on a simple web dashboard that does not require any technical knowledge. StockSense differs from existing solutions in three ways. First, it puts redistribution first. Existing tools make recommendations for each store separately and mention transfers only as one option among many, yet for a business with two or more branches it is almost always cheaper and faster to move unsold stock to a branch where it sells than to discount it or place a new order.
-
-Second, StockSense acts early instead of reacting late. Existing tools mark stock as dead once it is already too old to sell and then suggest a write-off or a discount, while the StockSense markdown optimizer detects an item as soon as its sales start to slow down and warns the manager while there is still time to act. Third, every recommendation is explained. Each suggestion comes with a short reason and an estimate of its financial impact, so the owner can understand it and trust it instead of following a black box. The preliminary work for the project included a review of the literature on demand forecasting and small-business inventory management, a survey of enterprise and small-business platforms, and the selection of public retail sales datasets for building and validating the first models. We did not find any platform that combines a free POS with a paid layer for reducing dead stock in small retailers, which makes this freemium model unusual in the market. Forecast accuracy will be measured with standard error metrics, and the possible reduction in dead stock will be estimated by replaying historical sales. In short, StockSense helps small businesses use the sales data they already collect but rarely analyze, and gives them the kind of forecasting and inventory optimization that has so far been available only to large retailers.
+StockSense differs from existing solutions in three ways. It puts redistribution first, because moving unsold stock to a branch where it sells is usually cheaper than discounting it or ordering more. It acts early, flagging items as soon as their sales slow down instead of after they have become dead stock. It also explains every recommendation in plain language with an estimate of its financial impact, so that owners can understand and trust it. The preliminary work included a review of the forecasting and inventory literature, a survey of enterprise and small-business platforms and the selection of public retail datasets for building the first models. No existing platform was found that combines a free POS with a paid layer for reducing dead stock in small retailers. Forecast accuracy will be measured with standard error metrics, and the reduction in dead stock will be estimated by replaying historical sales. StockSense therefore gives small businesses the kind of forecasting and inventory optimization that has so far been available only to large chains, using the sales data they already collect.
 
 \pagebreak
 
@@ -181,7 +182,9 @@ Second, StockSense acts early instead of reacting late. Existing tools mark stoc
 
 \chapter{Introduction}
 
-Retailers need the right products in the right quantities at the right locations, but small and medium-sized businesses often rely on spreadsheets, basic POS systems or manual records and rarely analyze their sales data in a systematic way. This leads to stockouts and dead stock, especially when demand for the same product differs between sizes and between branches. Large retailers use enterprise forecasting and inventory optimization tools for this, but those tools are expensive and difficult to operate without specialist staff. StockSense is proposed as a multi-tenant SaaS solution that makes data-driven inventory management accessible to smaller businesses. It combines a free POS module with demand forecasting, stock redistribution between branches, markdown optimization and recommendations that explain their own reasoning. Because it works on sales data that retailers already collect, it can show inventory risks early and let the owner act before products turn into unsold stock or run out on the shelf. This chapter states the purpose of the document, its intended audience and the terms used throughout the report.
+Retailers need the right products in the right quantities at the right locations, but small and medium-sized businesses often rely on spreadsheets, basic POS systems or manual records and rarely analyze their sales data in a systematic way. This leads to stockouts and dead stock, especially when demand for the same product differs between sizes and between branches. Large retailers use enterprise forecasting and inventory optimization tools for this, but those tools are expensive and difficult to operate without specialist staff. As a result, many small shops continue to decide what to order and where to place it by intuition, even though the information needed for better decisions is already stored in their own sales records.
+
+StockSense is proposed as a multi-tenant SaaS solution that makes data-driven inventory management accessible to smaller businesses. It combines a free POS module with demand forecasting, stock redistribution between branches, markdown optimization and recommendations that explain their own reasoning. Because it works on sales data that retailers already collect, it can show inventory risks early and let the owner act before products turn into unsold stock or run out on the shelf. Owners do not need any technical training to use it, since every forecast and recommendation is presented in plain business terms. This chapter states the purpose of the document, its intended audience and the definitions, acronyms and abbreviations used throughout the report.
 
 \section{Purpose of this Document}
 
@@ -189,7 +192,9 @@ This document describes the StockSense Final Year Project (FYP), which aims to d
 
 \section{Intended Audience}
 
-The main readers of this report are the FYP evaluation panel and the project supervisor, who will assess the problem definition, the proposed solution and the quality of the design. The report is also written for software developers who will continue the implementation, since it describes the requirements, data model, architecture and test cases in enough detail to build and verify the system. Researchers interested in demand forecasting and inventory optimization for small businesses may find the literature review and the forecasting methodology useful, as they summarize current methods and explain how they are adapted to retailers with little historical data. Finally, the report addresses business stakeholders and retailers who want to understand how data-driven tools can help smaller stores plan their inventory, reduce the risk of excess stock and avoid stockouts. No background in data science is assumed, and technical terms are explained when they are first used or listed in the next section.
+The main readers of this report are the FYP evaluation panel and the project supervisor, who will assess the problem definition, the proposed solution and the quality of the design. For them, the report presents the reasoning behind each decision, from the choice of forecasting model to the order in which recommendations are made, so that the work can be judged against the goals set at the start of the project. The report is also written for software developers who will continue the implementation, since it describes the requirements, data model, architecture and test cases in enough detail to build and verify the system.
+
+Researchers interested in demand forecasting and inventory optimization for small businesses may find the literature review and the forecasting methodology useful, as they summarize current methods and explain how they are adapted to retailers with little historical data. The report also addresses business stakeholders and retailers who want to understand how data-driven tools can help smaller stores plan their inventory, reduce the risk of excess stock and avoid stockouts. No background in data science is assumed, and technical terms are explained when they are first used or listed in the next section, so that readers from a business background can follow the main ideas without difficulty.
 
 \section{Definitions, Acronyms, and Abbreviations}
 \label{sec:definitions}
@@ -274,7 +279,15 @@ StockSense targets businesses that sell clothing, footwear or any other physical
 
 \section{Sustainable Development Goal (SDG)}
 
-StockSense contributes to two of the United Nations SDGs. Both contributions come from the same idea, which is that better use of existing sales data lets small businesses grow without wasting money and resources on stock that does not sell.
+StockSense contributes to two of the United Nations SDGs, shown in Figure~\ref{fig:sdg}. Both contributions come from the same idea, which is that better use of existing sales data lets small businesses grow without wasting money and resources on stock that does not sell.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.16\linewidth]{Figures/sdg8.jpg}\hspace{1.5em}
+\includegraphics[width=0.16\linewidth]{Figures/sdg9.jpg}
+\caption{SDG-8 and SDG-9 Addressed by StockSense}
+\label{fig:sdg}
+\end{figure}
 
 \subsection{SDG-8 (Decent Work and Economic Growth)}
 
@@ -315,7 +328,7 @@ Each stakeholder group needs something different from the system, but all of the
 
 \section{Conclusion}
 
-This chapter explained the problem domain, the problem statement, the goals, the scope and the stakeholders of StockSense. The platform is meant to help small and medium-sized businesses use their existing sales data to make better inventory decisions without the cost and complexity of enterprise solutions. Its main ideas are forecasting at the level of individual variants and locations, giving priority to redistribution between branches, acting early on slow-moving stock and explaining every recommendation. The chapter also described how the project supports SDG-8 and SDG-9, the constraints that affect the design, such as limited sales history and the cost of transfers, and the freemium business model that brings sales data onto the platform through a free POS. These elements form the basis of the requirements presented in the following chapters. The next chapter reviews the research literature and the existing commercial products related to this project and identifies the gap that StockSense is intended to fill.
+This chapter explained the problem domain, the problem statement, the goals, the scope and the stakeholders of StockSense. Its main ideas are forecasting at the level of individual variants and locations, giving priority to redistribution between branches, acting early on slow-moving stock and explaining every recommendation. It also covered the related SDGs, the main constraints and the freemium business model. The next chapter reviews the related research and commercial products.
 
 % ============================================================
 % CHAPTER 3
@@ -348,7 +361,9 @@ Global forecasting model & A single model trained on many related time series at
 
 The papers reviewed in this section were selected because each one informs a specific part of the StockSense design. Research on fashion retail shows that forecasting demand for new items is especially difficult because they have little or no sales history, and that product attributes can partly make up for the missing history~\cite{singh2019fashion}. Work on online retail has also shown that demand forecasting combined with price optimization can increase revenue in practice~\cite{ferreira2016analytics}, which supports the idea of linking forecasts directly to pricing decisions such as markdowns. The following subsections review fifteen papers in detail. For each paper, a summary is followed by a critical analysis and by an explanation of how the paper relates to StockSense, in the same format as the project template. Together the fifteen papers cover forecasting methods, inventory and pricing decisions, the link between prediction and action, and the trust that users place in model outputs.
 
-\subsection{Exploring the Use of Deep Neural Networks for Sales Forecasting in Fashion Retail}
+\subsection{Deep Neural Networks for Fashion Sales Forecasting}
+
+This subsection reviews the article ``Exploring the use of deep neural networks for sales forecasting in fashion retail'' by Loureiro, Migu\'eis and da Silva, published in Decision Support Systems in 2018. The article was chosen because it compares deep learning with simpler models for forecasting the sales of fashion products, which are similar to the products that StockSense targets. Its summary, critical analysis and relationship to StockSense are given in the following subsections.
 
 \subsubsection{Summary of the Research Item}
 
@@ -362,7 +377,9 @@ The main strength of the paper is that it evaluates the models on the data of a 
 
 The paper supports the choice of a learning-based approach to demand forecasting over manual estimation, which is the starting point of StockSense. Its use of product attributes as predictive variables is directly relevant, because StockSense also describes each product by its category, size and colour and uses these attributes as features. Since StockSense must forecast demand for each product, size and store combination, the idea of sharing information between related products through their attributes is especially useful for items with short histories. At the same time, the limitations of the paper show why StockSense prefers gradient-boosted trees, which perform well on tabular data with modest data volumes, over deep networks that need more data than a small retailer can provide. The paper also reminds us that expert knowledge remains valuable, which is why StockSense lets owners review and dismiss every recommendation instead of applying it automatically.
 
-\subsection{Clearance Pricing Optimization for a Fast-Fashion Retailer}
+\subsection{Clearance Pricing for Fast Fashion}
+
+This subsection reviews the article ``Clearance pricing optimization for a fast-fashion retailer'' by Caro and Gallien, published in Operations Research in 2012. The article was chosen because it documents one of the few markdown optimization systems that has been tested in the field and adopted in practice. Its summary, critical analysis and relationship to StockSense are given in the following subsections.
 
 \subsubsection{Summary of the Research Item}
 
@@ -376,7 +393,9 @@ The paper is a rare example of a markdown optimization model that has been docum
 
 The paper confirms the main idea behind the StockSense markdown optimizer, namely that a formal process combining forecasting and pricing gives better results than manual markdown decisions based on instinct. StockSense follows the same forecast-then-optimize structure, in which demand is first forecast and the smallest discount that reaches a sales target is then selected. The difference is that StockSense applies the idea to small data sets and uses it as an early warning measure during the season rather than as a clearance event at the end of it. Because small retailers have little price history, StockSense uses a simple price elasticity model with a cautious category-level estimate when the tenant's own price data is not varied enough. The result of the Zara experiment also gives a realistic expectation of the size of the benefit, which helps in judging the outcome of the StockSense backtest.
 
-\subsection{Inventory Models with Lateral Transshipments: A Review}
+\subsection{Lateral Transshipment Models}
+
+This subsection reviews the article ``Inventory models with lateral transshipments: A review'' by Paterson, Kiesm\"uller, Teunter and Glazebrook, published in European Journal of Operational Research in 2011. The article was chosen because it organizes the research on moving stock between locations, which is the basis of the redistribution feature of StockSense. Its summary, critical analysis and relationship to StockSense are given in the following subsections.
 
 \subsubsection{Summary of the Research Item}
 
@@ -390,7 +409,9 @@ As a review, the paper gives a broad and well-organized overview of transshipmen
 
 This review provides the academic basis for treating transfers between branches as a separate decision from reordering or discounting. StockSense builds on the proactive framing described in the paper, because its redistribution recommendations are meant to prevent dead stock and stockouts before they happen rather than react to an empty shelf. The recommendation engine formulates each transfer decision as a small transportation problem that moves surplus units to branches with a forecast shortage only when the expected margin exceeds the transfer cost. StockSense also addresses the gap identified above by placing redistribution in a fixed order of priority, ahead of markdowns and reorders, so that existing stock is used before money is spent on discounts or new purchases. In this way the review shapes both the formulation and the position of redistribution in the overall recommendation process.
 
-\subsection{Forecasting Across Time Series Databases Using Recurrent Neural Networks on Groups of Similar Series}
+\subsection{Forecasting Groups of Similar Series}
+
+This subsection reviews the article ``Forecasting across time series databases using recurrent neural networks on groups of similar series: A clustering approach'' by Bandara, Bergmeir and Smyl, published in Expert Systems with Applications in 2020. The article was chosen because it shows how one model can be trained on groups of similar series when each series on its own is short. Its summary, critical analysis and relationship to StockSense are given in the following subsections.
 
 \subsubsection{Summary of the Research Item}
 
@@ -404,7 +425,9 @@ The approach is well suited to situations with many short or sparse series, whic
 
 The paper supports the StockSense strategy of training one shared forecasting model on many product, size and store series instead of building a separate model for every combination. A small retailer has too few observations for each individual series to train a reliable local model, so sharing information across series is necessary. StockSense achieves a similar effect to clustering in a simpler way, by giving a gradient-boosted model the product, size, store and category as features, so that the model can learn which series behave alike. This keeps the advantages of a global model while avoiding the heavier training requirements of recurrent neural networks. If the experiments in Chapter~9 show that some groups of series behave very differently, the clustering idea of the paper could be added later by training separate global models for each group. The paper therefore provides both the justification for the current design and a possible direction for improving it.
 
-\subsection{M5 Accuracy Competition: Results, Findings, and Conclusions}
+\subsection{Results of the M5 Competition}
+
+This subsection reviews the article ``M5 accuracy competition: Results, findings, and conclusions'' by Makridakis, Spiliotis and Assimakopoulos, published in International Journal of Forecasting in 2022. The article was chosen because it is one of the largest comparisons of forecasting methods on real retail sales data. Its summary, critical analysis and relationship to StockSense are given in the following subsections.
 
 \subsubsection{Summary of the Research Item}
 
@@ -418,7 +441,9 @@ The M5 competition is one of the largest empirical comparisons of forecasting me
 
 The finding that gradient-boosted trees outperform statistical methods on hierarchical retail sales data directly shaped the choice of LightGBM as the main forecasting model of StockSense. The competition also supports two further design decisions, namely training a single global model on all series of a tenant and including price and calendar features. At the same time, its limitations explain why StockSense keeps simple statistical methods as baselines and plans experiments with short histories, since the advantage of gradient boosting on data from a large retailer must be confirmed on the smaller and sparser data of small businesses. The M5 dataset itself is also used in the preliminary experiments planned in Chapter~9. The uncertainty results of the competition also support the use of an upper quantile forecast to set safety stock in the recommendation engine. In this way the M5 findings influence the model, the features and the treatment of uncertainty in StockSense.
 
-\subsection{Demand Forecasting for Improved Inventory Management in Small and Medium-Sized Businesses}
+\subsection{Forecasting for Small Businesses}
+
+This subsection reviews the article ``Demand forecasting for improved inventory management in small and medium-sized businesses'' by Purnamasari, Permadi, Saepudin and Agusdin, published in Jurnal Nasional Pendidikan Teknik Informatika in 2023. The article was chosen because it is one of the few studies that targets demand forecasting for small businesses directly. Its summary, critical analysis and relationship to StockSense are given in the following subsections.
 
 \subsubsection{Summary of the Research Item}
 
@@ -432,7 +457,9 @@ This is one of the few studies that targets demand forecasting for small busines
 
 Of all the reviewed papers, this one is closest to StockSense in terms of its target users, which are small businesses without a data science team. Its finding that gradient boosting outperforms classical statistical approaches on small-business sales data supports the StockSense choice of a gradient-boosted model, with statistical methods kept as baselines for comparison. StockSense extends the idea in the directions that the paper leaves open, by forecasting at the product, size and location level, by turning the forecasts into redistribution, markdown and reorder recommendations, and by explaining each recommendation in plain language so that owners can act on it with confidence. The paper also shows that a small business can benefit from ML without employing data specialists, provided that the method is packaged in a simple and reliable tool, which is exactly the role that StockSense aims to play.
 
-\subsection{Retail Forecasting: Research and Practice}
+\subsection{Retail Forecasting Research and Practice}
+
+This subsection reviews the article ``Retail forecasting: Research and practice'' by Fildes, Ma and Kolassa, published in International Journal of Forecasting in 2022. The article was chosen because it compares retail forecasting research with the needs of retailers in practice. Its summary, critical analysis and relationship to StockSense are given in the following subsections.
 
 \subsubsection{Summary of the Research Item}
 
@@ -446,7 +473,9 @@ As a broad survey, the paper serves as a map of the retail forecasting research 
 
 The review shows that most published retail forecasting research and most practical tools assume a data science team and an established IT infrastructure, which is consistent with the main premise of this project. StockSense aims to close this gap for small retailers by providing forecasting as part of a simple platform that they already use for recording sales. The paper's emphasis on evaluating forecasts by their effect on decisions also influenced the StockSense evaluation plan, which includes a historical backtest that measures dead stock and lost sales in addition to the usual error metrics. The review also points out that forecasts for individual stores and items are among the hardest to produce, which confirms that the level of detail chosen for StockSense is challenging. This is one reason why the project keeps simple baselines and tests the minimum amount of history that a tenant needs before forecasts are shown.
 
-\subsection{Principles and Algorithms for Forecasting Groups of Time Series: Locality and Globality}
+\subsection{Global and Local Forecasting Models}
+
+This subsection reviews the article ``Principles and algorithms for forecasting groups of time series: Locality and globality'' by Montero-Manso and Hyndman, published in International Journal of Forecasting in 2021. The article was chosen because it explains when a shared global model forecasts better than separate local models. Its summary, critical analysis and relationship to StockSense are given in the following subsections.
 
 \subsubsection{Summary of the Research Item}
 
@@ -460,7 +489,9 @@ The paper offers a sound theoretical and empirical foundation for global forecas
 
 This result supports the StockSense decision to use one shared forecasting model across all products, sizes and stores of a tenant instead of training a separate model for each series, which would require far more historical data than a small retailer is likely to have. Because tenant data must never be shared between businesses, StockSense applies the global model idea within each tenant rather than across tenants. Whether this per-tenant global model is more accurate than separate local models is one of the experiments planned in Chapter~9. A global model is also cheaper to maintain, since the platform needs to train and store only one model per tenant rather than one for every product, size and store. This keeps the cost of the forecasting service low enough to be offered to small businesses at an affordable price.
 
-\subsection{Reducing the Cost of Demand Uncertainty Through Accurate Response to Early Sales}
+\subsection{Accurate Response to Early Sales}
+
+This subsection reviews the article ``Reducing the cost of demand uncertainty through accurate response to early sales'' by Fisher and Raman, published in Operations Research in 1996. The article was chosen because it shows the value of reacting quickly to early sales signals when planning stock. Its summary, critical analysis and relationship to StockSense are given in the following subsections.
 
 \subsubsection{Summary of the Research Item}
 
@@ -474,7 +505,9 @@ This is a classic paper that clearly shows the value of responding early to dema
 
 The paper provides an early foundation for the idea on which StockSense relies, that reacting quickly to demand signals reduces both stockouts and overstocking. It supports treating recent sales velocity as an important signal for both the recommendation engine and the markdown optimizer. In StockSense this idea appears in the lag and rolling features of the forecasting model, which give recent weeks a strong influence on the forecast, and in the markdown optimizer, which flags an item as soon as its weeks of cover exceed the remaining selling time instead of waiting until the end of the season. Both parts of the system therefore act on new information as soon as it appears, rather than waiting for a fixed planning date. This is especially important for small retailers, who cannot afford to hold large safety stocks and must instead respond quickly to the signals in their sales.
 
-\subsection{Sales Forecasts in Clothing Industry: The Key Success Factor of the Supply Chain Management}
+\subsection{Sales Forecasting in the Clothing Industry}
+
+This subsection reviews the article ``Sales forecasts in clothing industry: The key success factor of the supply chain management'' by Thomassey, published in International Journal of Production Economics in 2010. The article was chosen because it reviews the specific difficulties of forecasting the sales of clothing. Its summary, critical analysis and relationship to StockSense are given in the following subsections.
 
 \subsubsection{Summary of the Research Item}
 
@@ -488,7 +521,9 @@ The paper explicitly addresses data scarcity and seasonality, which make apparel
 
 The paper supports the understanding that demand for specific sizes and variants of clothing is more volatile and seasonal than demand at the product level, which is why StockSense forecasts at the level of each product, size and location. Its discussion of different decision horizons also supports the StockSense focus on weekly and monthly forecasts, which match the replenishment, transfer and markdown decisions of small retailers. The seasonality it describes is reflected in the calendar and holiday features included in the forecasting model. The paper's discussion of the lack of history for new items also explains why StockSense uses product attributes such as category, size and colour as features, so that new variants can borrow information from similar ones. In this way the review informs both the level of detail and the features of the forecasting model.
 
-\subsection{Predictive Big Data Analytics for Supply Chain Demand Forecasting}
+\subsection{Big Data Analytics for Demand Forecasting}
+
+This subsection reviews the article ``Predictive big data analytics for supply chain demand forecasting: Methods, applications, and research opportunities'' by Seyedan and Mafakheri, published in Journal of Big Data in 2020. The article was chosen because it surveys data-driven forecasting methods and the kind of organizations that are able to use them. Its summary, critical analysis and relationship to StockSense are given in the following subsections.
 
 \subsubsection{Summary of the Research Item}
 
@@ -502,7 +537,9 @@ As a general survey, the paper gives a good overview of current data-driven fore
 
 The gap identified by Seyedan and Mafakheri between advanced forecasting models and organizations that lack an analytics infrastructure forms a strong basis for the StockSense idea. StockSense addresses this gap by packaging the forecasting pipeline into a hosted platform, so that small retailers can benefit from data-driven forecasting without building their own analytical capacity. The survey also confirms that ML methods are an appropriate choice for demand forecasting when enough data is available, which StockSense ensures by asking each new tenant to provide a minimum amount of sales history before showing model-based forecasts. The survey's emphasis on matching methods to data also supports the StockSense practice of measuring how much history each tenant needs, rather than assuming that the same model suits every business.
 
-\subsection{Forecasting: Theory and Practice}
+\subsection{Forecasting Theory and Practice}
+
+This subsection reviews the article ``Forecasting: Theory and practice'' by Petropoulos and a large group of co-authors, published in International Journal of Forecasting in 2022. The article was chosen because it summarizes current knowledge on forecast evaluation and model selection. Its summary, critical analysis and relationship to StockSense are given in the following subsections.
 
 \subsubsection{Summary of the Research Item}
 
@@ -516,7 +553,9 @@ The breadth of the review makes it a valuable reference for forecast evaluation 
 
 The review provides guidance on forecast evaluation and model selection that shapes the comparison between the gradient-boosted model and the statistical benchmarks in StockSense. In particular, it supports the use of chronological data splits, rolling-origin validation and error measures that remain valid for sparse series, such as the weighted absolute percentage error (WAPE) and the mean absolute error (MAE), alongside the root mean squared error (RMSE) and the mean absolute percentage error (MAPE). These choices are described in the forecast evaluation methodology in Chapter~5 and in the experiments planned in Chapter~9. It also supports reporting results separately for different types of series, since an average over all series can hide poor performance on the series that matter most. These practices help ensure that the comparison between LightGBM and the baselines in StockSense is fair and that its conclusions can be trusted.
 
-\subsection{From Predictive to Prescriptive Analytics}
+\subsection{Predictive to Prescriptive Analytics}
+
+This subsection reviews the article ``From predictive to prescriptive analytics'' by Bertsimas and Kallus, published in Management Science in 2020. The article was chosen because it explains how predictions can be turned into decisions that minimize cost. Its summary, critical analysis and relationship to StockSense are given in the following subsections.
 
 \subsubsection{Summary of the Research Item}
 
@@ -530,7 +569,9 @@ The paper provides a strong theoretical basis for going beyond prediction to the
 
 The paper supports the StockSense design decision to turn forecasts into specific prescriptions, namely redistribution, markdown and reorder recommendations, rather than simply presenting demand predictions to the user. StockSense follows the same principle in a simpler form, by accounting for forecast uncertainty through an upper quantile forecast and a safety stock, and by choosing transfers and discounts that maximize the expected margin. This keeps the decision logic transparent enough to be explained to the owner while still linking each decision to the forecast. The historical backtest planned in Chapter~9 also follows the spirit of the paper, because it judges the system by the quality of its decisions, measured in dead stock and lost sales, rather than by the accuracy of its forecasts alone. In future work, the prescriptive methods of the paper could be used to refine the decision rules once enough data has been collected.
 
-\subsection{Stop Explaining Black Box Machine Learning Models for High Stakes Decisions}
+\subsection{Interpretable Models for High-Stakes Decisions}
+
+This subsection reviews the article ``Stop explaining black box machine learning models for high stakes decisions and use interpretable models instead'' by Rudin, published in Nature Machine Intelligence in 2019. The article was chosen because it discusses when the outputs of a model can be trusted and how they should be explained. Its summary, critical analysis and relationship to StockSense are given in the following subsections.
 
 \subsubsection{Summary of the Research Item}
 
@@ -544,59 +585,57 @@ The argument is clear, well supported and widely cited, and it has influenced ho
 
 Although StockSense recommendations are not high-stakes in the sense that Rudin describes, the same issue arises because a business owner is unlikely to follow a recommendation that he or she does not understand. This supports the StockSense approach of attaching an explanation to every recommendation. To reduce the risk raised by Rudin, the main part of each StockSense explanation is built from the actual quantities used by the decision rule, such as forecast demand, current stock and transfer cost, and only the description of the forecast drivers comes from the model's feature contributions. The decision rules themselves, such as the transportation problem and the markdown grid, are simple and transparent, so they can be explained exactly rather than approximately.
 
-\subsection{Desperately Seeking Shelf Availability}
+\subsection{Study of Retail Out-of-Stocks}
+
+This subsection reviews the article ``Desperately seeking shelf availability: An examination of the extent, the causes, and the efforts to address retail out-of-stocks'' by Corsten and Gruen, published in International Journal of Retail \& Distribution Management in 2003. The article was chosen because it measures how common and how costly stockouts are for retailers. Its summary, critical analysis and relationship to StockSense are given in the following subsections.
 
 \subsubsection{Summary of the Research Item}
 
-Corsten and Gruen~\cite{corsten2003desperately} examine the extent, causes and consequences of out-of-stocks in retail based on a large set of studies conducted worldwide. They report that out-of-stock rates had not improved over a long period, with an average of about eight percent of items unavailable at any time. Most out-of-stocks were found to be caused by problems in store ordering and replenishment rather than by shortages at suppliers. The paper also studies how consumers respond to an out-of-stock and shows that a substantial share of them buy the item at another store, delay the purchase or do not buy at all, instead of choosing a substitute in the same store. The authors therefore argue that retailers should treat out-of-stocks as a strategic problem rather than as an occasional operational issue, since lost customers may not return.
+Corsten and Gruen~\cite{corsten2003desperately} examine the extent, causes and consequences of out-of-stocks in retail based on a large set of studies conducted worldwide. They report that out-of-stock rates had not improved over a long period, with an average of about eight percent of items unavailable at any time. Most out-of-stocks were found to be caused by problems in store ordering and replenishment rather than by shortages at suppliers. The paper also studies how consumers respond to an out-of-stock and shows that a substantial share of them buy the item at another store, delay the purchase or do not buy at all, instead of choosing a substitute in the same store.
 
 \subsubsection{Critical Analysis of the Research Item}
 
-This is a major and widely cited study that shows that out-of-stocks are a persistent and costly problem for retailers, which provides practical rather than purely theoretical motivation for this project. Its findings on the causes of out-of-stocks are especially useful, because they show that better ordering decisions at the store level can address most of the problem. The main limitation for StockSense is that the study concerns fast-moving consumer goods sold in supermarkets rather than apparel and footwear, where demand is more seasonal and sizes add another level of detail. The study is also more than twenty years old, and retail practices have changed since then, although later studies have reported out-of-stock rates of a similar level. Its main conclusions about the causes and consequences of out-of-stocks are therefore still considered valid.
+This is a major and widely cited study that shows that out-of-stocks are a persistent and costly problem for retailers, which provides practical rather than purely theoretical motivation for this project. Its findings on the causes of out-of-stocks are especially useful, because they show that better ordering decisions at the store level can address most of the problem. The main limitation for StockSense is that the study concerns fast-moving consumer goods sold in supermarkets rather than apparel and footwear, where demand is more seasonal and sizes add another level of detail. Later studies have reported similar out-of-stock rates, so its main conclusions remain valid.
 
 \subsubsection{Relationship to the Proposed Research Work}
 
-The paper strengthens the business case for giving priority to redistribution and timely reordering. Since many customers facing a stockout leave the store entirely rather than buying a different item, preventing a stockout has a larger business impact than the lost sale of a single item suggests. Its finding that most stockouts come from store-level ordering problems also supports the StockSense approach of forecasting demand separately for each store, so that each branch receives stock according to its own demand rather than an average across all branches. It also shows why lost sales are one of the measures used in the StockSense backtest, alongside dead stock and sell-through, since reducing stockouts is as important to retailers as reducing excess stock. The paper thus links the technical design of StockSense to a well-documented business problem.
+The paper strengthens the business case for giving priority to redistribution and timely reordering. Since many customers facing a stockout leave the store entirely rather than buying a different item, preventing a stockout has a larger business impact than the lost sale of a single item suggests. Its finding that most stockouts come from store-level ordering problems also supports the StockSense approach of forecasting demand separately for each store, so that each branch receives stock according to its own demand rather than an average across all branches. It also explains why lost sales are measured in the StockSense backtest alongside dead stock.
 
+\clearpage
 \section{Literature Review Summary Table}
 
-Table~\ref{tab:literature-review} summarizes the fifteen reviewed papers, their year of publication, their main finding and their relevance to StockSense.
+Table~\ref{tab:literature-review} summarizes the fifteen reviewed articles in the format of the template, giving for each one its authors, the method it used, its main results and its limitations with respect to StockSense.
 
-\setlength{\LTleft}{0pt}
-\setlength{\LTright}{0pt}
-\captionof{table}{Summary of Literature Review}\label{tab:literature-review}
-\begin{longtable}{@{}|p{0.35cm}|p{2.3cm}|p{0.7cm}|p{4.9cm}|p{4.9cm}|@{}}
+\begin{longtable}{|L{0.55cm}|L{2.4cm}|L{3.9cm}|L{3.5cm}|L{3.3cm}|}
+\caption{Summary of Literature Review}\label{tab:literature-review} \\
 \hline
-\textbf{No.} & \textbf{Paper Title} & \textbf{Year} & \textbf{Summary} & \textbf{Relevance to StockSense} \\ \hline
+\textbf{No.} & \textbf{Author} & \textbf{Method} & \textbf{Results} & \textbf{Limitations} \\ \hline
 \endfirsthead
-\textbf{No.} & \textbf{Paper Title} & \textbf{Year} & \textbf{Summary} & \textbf{Relevance to StockSense} \\ \hline
+\hline
+\textbf{No.} & \textbf{Author} & \textbf{Method} & \textbf{Results} & \textbf{Limitations} \\ \hline
 \endhead
 \hline
-\multicolumn{5}{r}{Continued on next page} \\
 \endfoot
-\hline
-\endlastfoot
-1 & Exploring the Use of Deep Neural Networks for Sales Forecasting in Fashion Retail & 2018 & Deep learning outperforms shallow models for new fashion-product sales forecasting & Supports learning-based forecasting of fashion product sales \\ \hline
-2 & Clearance Pricing Optimization for a Fast-Fashion Retailer & 2012 & Formal markdown model increased clearance revenue at Zara by 6\% & Validates preventive markdown optimization as a business lever \\ \hline
-3 & Inventory Models with Lateral Transshipments: A Review & 2011 & Reviews proactive and reactive stock-transfer models between locations & Basis for treating branch-to-branch redistribution as a first-class action \\ \hline
-4 & Forecasting Across Time Series Databases Using RNNs on Groups of Similar Series & 2020 & Clustering similar series and forecasting them with one shared model improves accuracy & Basis for shared/clustered forecasting models \\ \hline
-5 & M5 Accuracy Competition: Results, Findings, and Conclusions & 2022 & Gradient-boosted tree models outperformed statistical baselines on large-scale retail data & Informs choice of forecasting model family \\ \hline
-6 & Demand Forecasting for Improved Inventory Management in SMBs & 2023 & ML outperforms classic methods for small-business demand forecasting & Directly matches StockSense's target user segment \\ \hline
-7 & Retail Forecasting: Research and Practice & 2022 & Survey of retail-forecasting research and the gap with practitioner adoption & Confirms the small-retailer research and tooling gap \\ \hline
-8 & Principles and Algorithms for Forecasting Groups of Time Series & 2021 & Formalizes when a shared global model outperforms per-series local models & Theoretical basis for shared forecasting models \\ \hline
-9 & Reducing the Cost of Demand Uncertainty Through Accurate Response to Early Sales & 1996 & Quick Response to early sales data increased a fashion retailer's profits by $\sim$60\% & Validates acting on recent sales velocity for stocking decisions \\ \hline
-10 & Sales Forecasts in Clothing Industry: The Key Success Factor of Supply Chain Management & 2010 & Reviews forecasting models suited to apparel's short life cycles and seasonality & Supports forecasting at the product-size-location level \\ \hline
-11 & Predictive Big Data Analytics for Supply Chain Demand Forecasting & 2020 & Survey of data-driven forecasting methods and research gaps across supply chains & Confirms the gap for organizations without analytics infrastructure \\ \hline
-12 & Forecasting: Theory and Practice & 2022 & Encyclopedic review of forecasting theory, methods, and evaluation practice & Informs forecast evaluation and model-selection approach \\ \hline
-13 & From Predictive to Prescriptive Analytics & 2020 & Framework for converting predictive models into actionable decisions & Basis for converting forecasts into recommendations, not just numbers \\ \hline
-14 & Stop Explaining Black Box Machine Learning Models for High Stakes Decisions and Use Interpretable Models Instead & 2019 & Argues interpretable models are more trustworthy than explained black boxes & Supports explainable, plain-language recommendations \\ \hline
-15 & Desperately Seeking Shelf Availability & 2003 & Worldwide study finds stockouts persistent; many customers switch stores entirely & Strengthens business case for prioritizing stockout prevention \\ \hline
+1 & Loureiro et al.~\cite{loureiro2018deep} & Deep neural networks compared with decision trees, random forests, support vector regression and shallow networks, using product attributes and expert variables & Deep learning gave good accuracy for new fashion products, with ensemble methods also competitive & Season-level totals only; single large retailer; no store or size detail \\ \hline
+2 & Caro and Gallien~\cite{caro2012clearance} & Forecast-then-optimize clearance pricing tested in a field experiment at Zara & About 6\% higher clearance revenue; process adopted company-wide & Needs rich price history; covers end-of-season clearance only \\ \hline
+3 & Paterson et al.~\cite{paterson2011inventory} & Review of lateral transshipment models classified as reactive or proactive & Organized results and open questions on stock transfer policies & No ready algorithm for small retailers; no link to markdowns or reorders \\ \hline
+4 & Bandara et al.~\cite{bandara2020forecasting} & Clustering of similar series and one recurrent neural network trained per cluster & Higher accuracy than a single model and univariate methods on benchmark data & Tested on competition benchmarks, not on size-level retail sales \\ \hline
+5 & Makridakis et al.~\cite{makridakis2022m5} & Analysis of the M5 competition on 42,840 Walmart sales series & Gradient-boosted trees such as LightGBM beat statistical benchmarks & Large retailer with long history; no sales by size \\ \hline
+6 & Purnamasari et al.~\cite{purnamasari2023demand} & K-means grouping of products with gradient boosting compared against classical projections & ML methods were more accurate for a small business & One small dataset and category; no size or store level \\ \hline
+7 & Fildes et al.~\cite{fildes2022retail} & Review of retail forecasting research organized by decision level & Identified gaps between research and retail practice & No new model; little attention to very small businesses \\ \hline
+8 & Montero-Manso and Hyndman~\cite{montero2021principles} & Theoretical analysis and experiments on global versus local models & Global models were often more accurate, even for unrelated series & General time series; no retail features or tenant separation \\ \hline
+9 & Fisher and Raman~\cite{fisher1996reducing} & Accurate response model that updates forecasts with early-season sales & Estimated profit increase of about 60\% at a ski-wear company & One season and one company; production rather than retail decisions \\ \hline
+10 & Thomassey~\cite{thomassey2010sales} & Review of sales forecasting methods for the clothing industry & Described short life cycles, seasonality and lack of history as key problems & Mainly for manufacturers; predates recent ML evidence \\ \hline
+11 & Seyedan and Mafakheri~\cite{seyedan2020predictive} & Survey of big data analytics methods for supply chain demand forecasting & Classified methods and applications and listed open research questions & No model tested; focus on large data volumes \\ \hline
+12 & Petropoulos et al.~\cite{petropoulos2022forecasting} & Encyclopedic review of forecasting theory and practice & Guidance on forecast evaluation and model selection & Not specific to retail or small businesses \\ \hline
+13 & Bertsimas and Kallus~\cite{bertsimas2020predictive} & ML-weighted prescriptive framework tested on the inventory of a media distributor & Better decisions than predicting first and optimizing separately & Complex to implement and harder to explain \\ \hline
+14 & Rudin~\cite{rudin2019stop} & Argument for interpretable models instead of explained black boxes & Interpretable models often reach accuracy similar to black boxes & Framed around high-stakes domains rather than retail \\ \hline
+15 & Corsten and Gruen~\cite{corsten2003desperately} & Worldwide study of the extent, causes and consumer responses to out-of-stocks & Average out-of-stock rate of about 8\%, mostly caused by store practices & Groceries rather than apparel; older data \\ \hline
 \end{longtable}
-\addtocounter{table}{-1}
 
 \section{Related Work}
 
-This section reviews six commercial platforms that address demand planning or multi-location inventory management. They range from enterprise planning suites used by large chains to POS systems aimed at small businesses. For each platform the review describes its main capabilities and explains how it differs from StockSense, especially in terms of cost, the level of detail of its forecasts and the priority it gives to redistribution between stores. The information is based on the public product pages of each vendor. The selection covers the main types of solution available to retailers today, so that the position of StockSense in the market can be seen clearly. For each platform, the features that matter most for small multi-branch retailers are emphasized, namely the cost of entry, the level of detail of the forecasts and the treatment of transfers between stores.
+This section reviews six commercial platforms that address demand planning or multi-location inventory management. They range from enterprise planning suites used by large chains to POS systems aimed at small businesses. For each platform the review describes its main capabilities and explains how it differs from StockSense, especially in terms of cost, the level of detail of its forecasts and the priority it gives to redistribution between stores. The information is based on the public product pages of each vendor. The selection covers the main types of solution available to retailers today, so that the position of StockSense in the market can be seen clearly.
 
 \subsection{SAP Integrated Business Planning}
 
@@ -630,25 +669,25 @@ Table~\ref{tab:related-work} summarizes the six platforms, their target users an
 \centering
 \caption{Summary of Related Work}
 \label{tab:related-work}
-\begin{tabular}{|l|p{3.2cm}|p{3.2cm}|p{5.5cm}|}
+\begin{tabular}{|L{3.2cm}|L{4.1cm}|L{3.4cm}|L{3.4cm}|}
 \hline
-\textbf{No.} & \textbf{Platform} & \textbf{Target Users} & \textbf{Gap Relative to StockSense} \\ \hline
-1 & SAP Integrated Business Planning & Large enterprises with ERP & Requires ERP infrastructure and enterprise budget; no free tier \\ \hline
-2 & Blue Yonder & Large retail chains & Enterprise-only; requires dedicated planning/IT teams \\ \hline
-3 & Nextail & Mid-size to large fashion chains & Closest in focus to redistribution, but priced and scaled for many-store chains, not a free small-retailer entry point \\ \hline
-4 & Shopify POS (Stocky/Sidekick) & Shopify merchants of any size & Product-level, not size/variant-level, forecasting; advanced features gated behind paid plans \\ \hline
-5 & Lightspeed Retail & Multi-location, high-SKU retailers & No demand forecasting or explainable recommendations; no free tier \\ \hline
-6 & Odoo (Community) & Small businesses wanting free, self-hosted POS/Inventory & Free tier has no demand forecasting or explainable recommendations; forecasting only via paid add-ons, product-level not size/variant-level \\ \hline
+\textbf{Application} & \textbf{Features} & \textbf{Relevance to StockSense} & \textbf{Limitations} \\ \hline
+SAP Integrated Business Planning~\cite{sapibp} & Demand sensing, supply and inventory planning integrated with ERP & Same goal of matching stock to demand & Enterprise cost; requires ERP; no free tier \\ \hline
+Blue Yonder~\cite{blueyonder} & ML-based causal demand planning with explained forecasts & Explained forecasts similar to StockSense explanations & Enterprise only; needs planning and IT teams \\ \hline
+Nextail~\cite{nextail} & In-season allocation, replenishment and rebalancing between fashion stores & Closest to the redistribution focus of StockSense & Priced for large chains; no free entry point \\ \hline
+Shopify POS~\cite{shopifypos} & Multi-location inventory, transfers, reorder and rebalancing suggestions & Easy for small retailers to adopt & Product-level forecasts; advanced features on paid plans \\ \hline
+Lightspeed Retail~\cite{lightspeed} & Stock transfers, manual reorder points and slow-mover reports & Multi-location inventory for many SKUs & No forecasting or explanations; no free tier \\ \hline
+Odoo Community~\cite{odoo} & Free POS and inventory with reordering rules & Closest to the free POS model of StockSense & Forecasting only through paid add-ons, at product level \\ \hline
 \end{tabular}
 \end{table}
 
 \section{Conclusion}
 
-The literature shows that ML forecasting and formal markdown and redistribution methods can improve inventory decisions and increase revenue. Studies of the M5 competition and of small-business data indicate that gradient-boosted models trained globally on many related series forecast retail demand more accurately than statistical methods, while work on transshipments and markdowns shows the value of moving stock proactively and discounting it in a planned way. Research on prescriptive analytics and explainability adds that forecasts are most useful when they are turned into decisions that users understand. However, most of this research, and most of the commercial solutions reviewed, are designed for large retailers that have the infrastructure and data teams to use them. The platforms that small businesses can afford offer at most product-level forecasting and treat transfers between stores as one option among many. None of the reviewed solutions combines a free POS with explained, size- and location-level forecasting and recommendations that put redistribution first for small multi-branch retailers. StockSense is designed to fill this gap.
+The literature shows that ML forecasting and formal markdown and redistribution methods can improve inventory decisions and increase revenue. Studies of the M5 competition and of small-business data indicate that gradient-boosted models trained globally on many related series forecast retail demand more accurately than statistical methods, while work on transshipments and markdowns shows the value of moving stock proactively and discounting it in a planned way. However, most of this research, and most of the commercial solutions reviewed, are designed for large retailers that have the infrastructure and data teams to use them. None of the reviewed solutions combines a free POS with explained, size- and location-level forecasting and recommendations that put redistribution first for small multi-branch retailers. StockSense is designed to fill this gap.
 
 \section{Selected Model}
 
-Based on this review, the StockSense forecasting engine will use the gradient-boosted tree family, implemented with LightGBM, as its main model, because this family performed best on hierarchical retail sales data in the M5 competition and also outperformed classical methods on small-business data. A single global model will be trained for each tenant on all of its product, size and store series, following the work of Montero-Manso and Hyndman and of Bandara et al., while simple statistical methods will be kept as baselines to check whether the more complex model is really needed. Redistribution recommendations will follow the proactive transshipment framing of Paterson et al., with moving stock between branches given priority over discounting and reordering. The markdown optimizer will follow the forecast-then-optimize approach of Caro and Gallien, but it will be applied early in the season so that items are discounted before they become unsellable. Every recommendation will carry an explanation built from the quantities behind it, in line with the concerns raised by Rudin.
+Based on this review, the StockSense forecasting engine will use the gradient-boosted tree family, implemented with LightGBM, as its main model, following the M5 results. A single global model will be trained for each tenant on all of its product, size and store series, with simple statistical methods kept as baselines. Redistribution recommendations will follow the proactive transshipment framing of Paterson et al., with moving stock between branches given priority over discounting and reordering. The markdown optimizer will follow the forecast-then-optimize approach of Caro and Gallien, but it will be applied early in the season so that items are discounted before they become unsellable. Following Rudin, every recommendation will be explained.
 
 % ============================================================
 % CHAPTER 4
@@ -1085,70 +1124,77 @@ This section presents mockups of the main screens of StockSense, which were desi
 
 Any registered user, whether a business owner, a store manager or the system administrator, logs in from this page with an email address and a password, as described in UC-02. If the credentials are wrong, the page shows a short error message and the user stays on the page. Users of a suspended tenant cannot log in until the tenant is reactivated by the administrator.
 
-\begin{figure}[!htbp]
-\centering
-\includegraphics[width=0.7\linewidth,height=0.36\textheight,keepaspectratio]{Figures/login.png}
-\caption{Login Page}
-\end{figure}
-
 \subsection{Signup Page}
 
-A new business owner registers the business as a tenant from this page by entering the business name, the owner's name, an email address and a password, as described in UC-01. The new tenant starts on the free POS tier, and a verification email is sent to the owner before the account is used.
+A new business owner registers the business as a tenant from this page by entering the business name, the owner's name, an email address and a password, as described in UC-01. The new tenant starts on the free POS tier, and a verification email is sent to the owner before the account is used. Figures~\ref{fig:login} and~\ref{fig:signup} show the two pages side by side.
 
 \begin{figure}[!htbp]
 \centering
-\includegraphics[width=0.7\linewidth,height=0.36\textheight,keepaspectratio]{Figures/signup.png}
-\caption{Signup Page}
+\begin{minipage}[b]{0.49\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=0.36\textheight,keepaspectratio]{Figures/login.png}
+\caption{Login Page\label{fig:login}}
+\end{minipage}\hfill
+\begin{minipage}[b]{0.49\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=0.36\textheight,keepaspectratio]{Figures/signup.png}
+\caption{Signup Page\label{fig:signup}}
+\end{minipage}
 \end{figure}
 
 \subsection{Dashboard}
 
 The dashboard is the first screen after login and supports UC-09. It shows the monthly sales, the items at risk of stockout or of becoming dead stock, the recent sales activity and the inventory health of each branch. Owners see all branches, while store managers see only their own store. On the paid plan, the dashboard also lists open recommendations and alerts.
 
-\begin{figure}[!htbp]
-\centering
-\includegraphics[width=0.75\linewidth,height=0.4\textheight,keepaspectratio]{Figures/dashboard.png}
-\caption{Dashboard}
-\end{figure}
-
 \subsection{POS Page}
 
-A store manager records a sale on this page by selecting the branch, the product and the variant sold and confirming the quantity, as described in UC-07. The inventory is updated automatically once the sale is confirmed, and the manager is warned before confirming a sale for which there is not enough stock.
+A store manager records a sale on this page by selecting the branch, the product and the variant sold and confirming the quantity, as described in UC-07. The inventory is updated automatically once the sale is confirmed, and the manager is warned before confirming a sale for which there is not enough stock. The dashboard and the POS page are shown in Figures~\ref{fig:dashboard} and~\ref{fig:pos}.
 
 \begin{figure}[!htbp]
 \centering
-\includegraphics[width=0.75\linewidth,height=0.4\textheight,keepaspectratio]{Figures/pos.png}
-\caption{POS Page}
+\begin{minipage}[b]{0.49\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=0.42\textheight,keepaspectratio]{Figures/dashboard.png}
+\caption{Dashboard\label{fig:dashboard}}
+\end{minipage}\hfill
+\begin{minipage}[b]{0.49\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=0.42\textheight,keepaspectratio]{Figures/pos.png}
+\caption{POS Page\label{fig:pos}}
+\end{minipage}
 \end{figure}
 
 \subsection{Upload Sales Report}
 
 Businesses that already use an external POS or a spreadsheet upload their historical sales as a CSV or Excel file on this page, as described in UC-08. The owner maps the detected columns to the required fields, reviews the upload report with the accepted and rejected rows, and approves the import.
 
-\begin{figure}[!htbp]
-\centering
-\includegraphics[width=0.75\linewidth,height=0.4\textheight,keepaspectratio]{Figures/upload.png}
-\caption{Upload Sales Report}
-\end{figure}
-
 \subsection{Inventory}
 
-This page shows the current stock level of every product variant in every branch and can be filtered by store. A status indicator marks each item as healthy, at risk of stockout or at risk of becoming dead stock, and users can correct a quantity after a physical count, as described in UC-06.
+This page shows the current stock level of every product variant in every branch and can be filtered by store. A status indicator marks each item as healthy, at risk of stockout or at risk of becoming dead stock, and users can correct a quantity after a physical count, as described in UC-06. Figures~\ref{fig:upload} and~\ref{fig:inventory} show these two pages.
 
 \begin{figure}[!htbp]
 \centering
-\includegraphics[width=0.75\linewidth,height=0.4\textheight,keepaspectratio]{Figures/inventory.png}
-\caption{Inventory}
+\begin{minipage}[b]{0.49\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=0.42\textheight,keepaspectratio]{Figures/upload.png}
+\caption{Upload Sales Report\label{fig:upload}}
+\end{minipage}\hfill
+\begin{minipage}[b]{0.49\linewidth}
+\centering
+\includegraphics[width=\linewidth,height=0.42\textheight,keepaspectratio]{Figures/inventory.png}
+\caption{Inventory\label{fig:inventory}}
+\end{minipage}
 \end{figure}
 
 \subsection{Recommendations}
 
-This page lists the redistribution, markdown and reorder recommendations of the tenant, as described in UC-11 to UC-13. Each recommendation shows a plain-language explanation and an estimated financial impact, and the user can approve or dismiss it. Approving a redistribution creates a stock transfer between the two stores.
+This page lists the redistribution, markdown and reorder recommendations of the tenant, as described in UC-11 to UC-13. Each recommendation shows a plain-language explanation and an estimated financial impact, and the user can approve or dismiss it. Approving a redistribution creates a stock transfer between the two stores. The page is shown in Figure~\ref{fig:recommendations}.
 
 \begin{figure}[!htbp]
 \centering
-\includegraphics[width=0.75\linewidth,height=0.4\textheight,keepaspectratio]{Figures/recommendations.png}
+\includegraphics[width=0.62\linewidth]{Figures/recommendations.png}
 \caption{Recommendations}
+\label{fig:recommendations}
 \end{figure}
 
 \section{Database Design}
@@ -1161,84 +1207,67 @@ Figure~\ref{fig:er} shows the entity relationship diagram of StockSense. Each te
 
 \begin{figure}[!htbp]
 \centering
-\includegraphics[width=\linewidth]{Figures/er_diagram.png}
+\includegraphics[width=\linewidth,height=0.7\textheight,keepaspectratio]{Figures/er_diagram.png}
 \caption{ER Diagram}
 \label{fig:er}
 \end{figure}
 
 \subsection{Data Dictionary}
 
-The data dictionary below describes the main tables of the database, including the type of each field and its meaning. Identifiers are integers and act as primary or foreign keys, so that for example the store and variant of each sale can be traced back to their tenant. Only the most important tables are shown here, while supporting tables such as users, subscriptions, upload jobs, stock transfers and notifications are described in the class diagram in Chapter~6. Each table also includes the identifiers needed to enforce tenant isolation, either directly or through the store or product it belongs to.
+Table~\ref{tab:data-dictionary} describes every entity of the ER diagram in Figure~\ref{fig:er} together with its attributes, the data type of each attribute and its meaning. Identifiers are integers and act as primary or foreign keys, so the store and variant of every sale, forecast and recommendation can be traced back to their tenant. The dictionary matches the ER diagram exactly, and supporting classes such as subscriptions, upload jobs, stock transfers and notifications are described in the class diagram in Chapter~6. Every entity carries the identifiers needed to enforce tenant isolation, either directly through its tenant or through the store or product to which it belongs.
 
-\begin{table}[!htbp]
-\centering
-\caption{Data Dictionary for Tenant Table}
-\begin{tabular}{|l|l|p{6cm}|}
+\begin{longtable}{|L{2.6cm}|L{3.3cm}|L{1.6cm}|L{6.2cm}|}
+\caption{Data Dictionary of StockSense Entities}\label{tab:data-dictionary} \\
 \hline
-\textbf{Field} & \textbf{Type} & \textbf{Description} \\ \hline
-TenantID & Integer & Unique identifier for each business \\ \hline
-Name & String & Business name \\ \hline
-SubscriptionTier & String & Free or Paid \\ \hline
-CreatedDate & Date & Date the tenant registered \\ \hline
-\end{tabular}
-\end{table}
-
-\begin{table}[!htbp]
-\centering
-\caption{Data Dictionary for Store Table}
-\begin{tabular}{|l|l|p{6cm}|}
+\textbf{Entity} & \textbf{Attribute} & \textbf{Type} & \textbf{Description} \\ \hline
+\endfirsthead
 \hline
-\textbf{Field} & \textbf{Type} & \textbf{Description} \\ \hline
-StoreID & Integer & Unique identifier for each store \\ \hline
-TenantID & Integer & Owning tenant \\ \hline
-Name & String & Store/branch name \\ \hline
-Location & String & Store address or region \\ \hline
-\end{tabular}
-\end{table}
-
-\begin{table}[!htbp]
-\centering
-\caption{Data Dictionary for Product Variant Table}
-\begin{tabular}{|l|l|p{6cm}|}
+\textbf{Entity} & \textbf{Attribute} & \textbf{Type} & \textbf{Description} \\ \hline
+\endhead
 \hline
-\textbf{Field} & \textbf{Type} & \textbf{Description} \\ \hline
-VariantID & Integer & Unique identifier for a product-size combination \\ \hline
-ProductID & Integer & Parent product \\ \hline
-Size & String & Size or variant label \\ \hline
-Category & String & Product category \\ \hline
-\end{tabular}
-\end{table}
-
-\begin{table}[!htbp]
-\centering
-\caption{Data Dictionary for Sale Table}
-\begin{tabular}{|l|l|p{6cm}|}
-\hline
-\textbf{Field} & \textbf{Type} & \textbf{Description} \\ \hline
-SaleID & Integer & Unique identifier for each sale \\ \hline
-VariantID & Integer & Product variant sold \\ \hline
-StoreID & Integer & Store where the sale occurred \\ \hline
-Date & Date & Date of sale \\ \hline
-Quantity & Integer & Units sold \\ \hline
-\end{tabular}
-\end{table}
-
-\begin{table}[!htbp]
-\centering
-\caption{Data Dictionary for Recommendation Table}
-\begin{tabular}{|l|l|p{6cm}|}
-\hline
-\textbf{Field} & \textbf{Type} & \textbf{Description} \\ \hline
-RecommendationID & Integer & Unique identifier for each recommendation \\ \hline
-Type & String & Redistribution, Reorder, or Markdown \\ \hline
-VariantID & Integer & Product variant involved \\ \hline
-SourceStoreID & Integer & Store with surplus (redistribution only) \\ \hline
-TargetStoreID & Integer & Store with forecasted need \\ \hline
-Explanation & String & Plain-language reasoning for the recommendation \\ \hline
-EstimatedImpact & Float & Estimated financial impact \\ \hline
-Status & String & Pending, Actioned, or Dismissed \\ \hline
-\end{tabular}
-\end{table}
+\endfoot
+\multirow{3}{*}{Tenant} & TenantID & Integer & Primary key; unique identifier of the business \\ \cline{2-4}
+ & Name & String & Business name \\ \cline{2-4}
+ & SubscriptionTier & String & Free or Paid \\ \hline
+\multirow{5}{*}{User} & UserID & Integer & Primary key; unique identifier of the user \\ \cline{2-4}
+ & TenantID & Integer & Foreign key to Tenant \\ \cline{2-4}
+ & StoreID & Integer & Foreign key to the store assigned to a store manager \\ \cline{2-4}
+ & Name & String & Full name of the user \\ \cline{2-4}
+ & Role & String & Business Owner, Store Manager or System Administrator \\ \hline
+\multirow{4}{*}{Store} & StoreID & Integer & Primary key; unique identifier of the store \\ \cline{2-4}
+ & TenantID & Integer & Foreign key to the owning Tenant \\ \cline{2-4}
+ & Name & String & Store or branch name \\ \cline{2-4}
+ & Location & String & Store address or region \\ \hline
+\multirow{4}{*}{Product} & ProductID & Integer & Primary key; unique identifier of the product \\ \cline{2-4}
+ & TenantID & Integer & Foreign key to the owning Tenant \\ \cline{2-4}
+ & Name & String & Product name \\ \cline{2-4}
+ & Category & String & Product category, such as footwear \\ \hline
+\multirow{3}{*}{ProductVariant} & VariantID & Integer & Primary key; unique identifier of a product and size combination \\ \cline{2-4}
+ & ProductID & Integer & Foreign key to the parent Product \\ \cline{2-4}
+ & Size & String & Size or variant label \\ \hline
+\multirow{4}{*}{Inventory} & InventoryID & Integer & Primary key; unique identifier of the stock record \\ \cline{2-4}
+ & VariantID & Integer & Foreign key to ProductVariant \\ \cline{2-4}
+ & StoreID & Integer & Foreign key to Store \\ \cline{2-4}
+ & Quantity & Integer & Units of the variant held at the store \\ \hline
+\multirow{5}{*}{Sale} & SaleID & Integer & Primary key; unique identifier of the sale \\ \cline{2-4}
+ & VariantID & Integer & Foreign key to the variant sold \\ \cline{2-4}
+ & StoreID & Integer & Foreign key to the store where the sale took place \\ \cline{2-4}
+ & Date & Date & Date of the sale \\ \cline{2-4}
+ & Quantity & Integer & Units sold \\ \hline
+\multirow{5}{*}{Forecast} & ForecastID & Integer & Primary key; unique identifier of the forecast \\ \cline{2-4}
+ & VariantID & Integer & Foreign key to the forecast variant \\ \cline{2-4}
+ & StoreID & Integer & Foreign key to the forecast store \\ \cline{2-4}
+ & Period & String & Week or month that the forecast covers \\ \cline{2-4}
+ & PredictedQty & Float & Forecast demand for the period \\ \hline
+\multirow{8}{*}{Recommendation} & RecommendationID & Integer & Primary key; unique identifier of the recommendation \\ \cline{2-4}
+ & ForecastID & Integer & Foreign key to the forecast it is based on \\ \cline{2-4}
+ & SourceStoreID & Integer & Foreign key to the store with surplus stock \\ \cline{2-4}
+ & TargetStoreID & Integer & Foreign key to the store with the forecast need \\ \cline{2-4}
+ & Type & String & Redistribution, Reorder or Markdown \\ \cline{2-4}
+ & Explanation & String & Plain-language reason for the recommendation \\ \cline{2-4}
+ & EstimatedImpact & Float & Estimated financial impact \\ \cline{2-4}
+ & Status & String & Pending, Actioned or Dismissed \\ \hline
+\end{longtable}
 
 \section{Risk Analysis}
 
@@ -1418,7 +1447,7 @@ StockSense is developed in increments, and each increment ends with the testing 
 \section{Conclusion}
 \label{sec:conclusion}
 
-This chapter described how StockSense turns each recorded or uploaded sale into an inventory decision. The data is first validated and standardized and then aggregated into demand series for each product, size and store. A global LightGBM model trained on each tenant's own data forecasts weekly and monthly demand and is compared with simple statistical baselines, while new tenants first provide enough sales history before model-based forecasts are shown. The forecasts are then turned into actions in a fixed order, with redistribution solved as a small transportation problem, early markdowns chosen through a sell-through model with a margin floor, and reorders covering any remaining shortage. Every action carries an explanation and an estimated financial impact. The approach will be evaluated with chronological splits and a historical replay of sales, and the next chapter presents the design that implements it.
+This chapter described how StockSense turns each recorded or uploaded sale into an inventory decision. The data is first validated and standardized and then aggregated into demand series for each product, size and store. A global LightGBM model trained on each tenant's own data forecasts weekly and monthly demand and is compared with simple statistical baselines, while new tenants first provide enough sales history before model-based forecasts are shown. The forecasts are then turned into actions in a fixed order, with redistribution solved as a small transportation problem, early markdowns chosen through a sell-through model with a margin floor, and reorders covering any remaining shortage. The approach will be evaluated with chronological splits and a historical replay of sales, and the next chapter presents the design that implements it.
 
 % ============================================================
 % CHAPTER 6
@@ -1551,7 +1580,7 @@ StockSense follows a layered web architecture, shown in Figure~\ref{fig:system-a
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\textwidth]{Figures/system_architecture.png}
-    \caption[System Architecture Diagram]{System Architecture Diagram\\ This figure shows the System Architecture Diagram of our Application}
+    \caption{System Architecture Diagram}
     \label{fig:system-architecture}
 \end{figure}
 
@@ -1593,10 +1622,10 @@ The domain model of StockSense is shown in Figure~\ref{fig:class-diagram}. It fo
 
 On the analytical side, a Forecast stores the predicted demand of one ProductVariant at one Store for a weekly or monthly period. Recommendation is an abstract class with three subclasses, RedistributionRecommendation, ReorderRecommendation and MarkdownRecommendation. Every recommendation concerns one ProductVariant, refers to a Store, may be based on a Forecast and is accepted or dismissed by a User. A RedistributionRecommendation also has a destination Store and, when it is accepted, creates one StockTransfer, which records the movement of stock between two Stores. Finally, a Notification is received by one User and may refer to a Recommendation, for example to alert a store manager that a transfer involving the store has been approved. This model gives each part of the system a clear place in the data and makes the relationships needed for tenant isolation and for the recommendation workflow explicit.
 
-\begin{figure}[!htbp]
+\begin{figure}[p]
     \centering
-    \includegraphics[width=\textwidth,height=0.62\textheight,keepaspectratio]{Figures/class_diagram.png}
-    \caption[Domain Model / Class Diagram]{Domain Model / Class Diagram\\ This figure shows the Domain Model / Class Diagram of our Application}
+    \makebox[\textwidth][c]{\includegraphics[angle=90,width=7.3in,height=0.95\textheight,keepaspectratio]{Figures/class_diagram.png}}
+    \caption{Domain Model / Class Diagram}
     \label{fig:class-diagram}
 \end{figure}
 
@@ -1607,105 +1636,105 @@ This section presents one sequence diagram for each use case described in Chapte
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC01_Register_Business.png}
-    \caption[Sequence Diagram of UC-01 Register Business]{Sequence Diagram of UC-01 Register Business\\ This figure shows the sequence diagram of UC-01 (Register Business)}
+    \caption{Sequence Diagram of UC-01 Register Business}
     \label{fig:seq-uc1}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC02_Login.png}
-    \caption[Sequence Diagram of UC-02 Login]{Sequence Diagram of UC-02 Login\\ This figure shows the sequence diagram of UC-02 (Login)}
+    \caption{Sequence Diagram of UC-02 Login}
     \label{fig:seq-uc2}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC03_Manage_Stores.png}
-    \caption[Sequence Diagram of UC-03 Manage Stores]{Sequence Diagram of UC-03 Manage Stores\\ This figure shows the sequence diagram of UC-03 (Manage Stores)}
+    \caption{Sequence Diagram of UC-03 Manage Stores}
     \label{fig:seq-uc3}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC04_Manage_Store_Managers.png}
-    \caption[Sequence Diagram of UC-04 Manage Store Managers]{Sequence Diagram of UC-04 Manage Store Managers\\ This figure shows the sequence diagram of UC-04 (Manage Store Managers)}
+    \includegraphics[width=\textwidth,height=0.52\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC04_Manage_Store_Managers.png}
+    \caption{Sequence Diagram of UC-04 Manage Store Managers}
     \label{fig:seq-uc4}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC05_Manage_Products_and_Variants.png}
-    \caption[Sequence Diagram of UC-05 Manage Products and Variants]{Sequence Diagram of UC-05 Manage Products and Variants\\ This figure shows the sequence diagram of UC-05 (Manage Products and Variants)}
+    \caption{Sequence Diagram of UC-05 Manage Products and Variants}
     \label{fig:seq-uc5}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC06_Adjust_Inventory.png}
-    \caption[Sequence Diagram of UC-06 Adjust Inventory]{Sequence Diagram of UC-06 Adjust Inventory\\ This figure shows the sequence diagram of UC-06 (Adjust Inventory)}
+    \caption{Sequence Diagram of UC-06 Adjust Inventory}
     \label{fig:seq-uc6}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC07_Record_Sale_POS.png}
-    \caption[Sequence Diagram of UC-07 Record Sale (POS)]{Sequence Diagram of UC-07 Record Sale (POS)\\ This figure shows the sequence diagram of UC-07 (Record Sale (POS))}
+    \caption{Sequence Diagram of UC-07 Record Sale (POS)}
     \label{fig:seq-uc7}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC08_Upload_Historical_Sales_Data.png}
-    \caption[Sequence Diagram of UC-08 Upload Historical Sales Data]{Sequence Diagram of UC-08 Upload Historical Sales Data\\ This figure shows the sequence diagram of UC-08 (Upload Historical Sales Data)}
+    \includegraphics[width=\textwidth,height=0.52\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC08_Upload_Historical_Sales_Data.png}
+    \caption{Sequence Diagram of UC-08 Upload Historical Sales Data}
     \label{fig:seq-uc8}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC09_View_Dashboard_and_Alerts.png}
-    \caption[Sequence Diagram of UC-09 View Dashboard and Alerts]{Sequence Diagram of UC-09 View Dashboard and Alerts\\ This figure shows the sequence diagram of UC-09 (View Dashboard and Alerts)}
+    \caption{Sequence Diagram of UC-09 View Dashboard and Alerts}
     \label{fig:seq-uc9}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC10_View_Demand_Forecast.png}
-    \caption[Sequence Diagram of UC-10 View Demand Forecast]{Sequence Diagram of UC-10 View Demand Forecast\\ This figure shows the sequence diagram of UC-10 (View Demand Forecast)}
+    \caption{Sequence Diagram of UC-10 View Demand Forecast}
     \label{fig:seq-uc10}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC11_Redistribution_Recommendation.png}
-    \caption[Sequence Diagram of UC-11 View and Act on Redistribution Recommendation]{Sequence Diagram of UC-11 View and Act on Redistribution Recommendation\\ This figure shows the sequence diagram of UC-11 (View and Act on Redistribution Recommendation)}
+    \includegraphics[width=\textwidth,height=0.62\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC11_Redistribution_Recommendation.png}
+    \caption{Sequence Diagram of UC-11 View and Act on Redistribution Recommendation}
     \label{fig:seq-uc11}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC12_View_Markdown_Recommendation.png}
-    \caption[Sequence Diagram of UC-12 View Markdown Recommendation]{Sequence Diagram of UC-12 View Markdown Recommendation\\ This figure shows the sequence diagram of UC-12 (View Markdown Recommendation)}
+    \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC12_View_Markdown_Recommendation.png}
+    \caption{Sequence Diagram of UC-12 View Markdown Recommendation}
     \label{fig:seq-uc12}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC13_View_Reorder_Recommendation.png}
-    \caption[Sequence Diagram of UC-13 View Reorder Recommendation]{Sequence Diagram of UC-13 View Reorder Recommendation\\ This figure shows the sequence diagram of UC-13 (View Reorder Recommendation)}
+    \caption{Sequence Diagram of UC-13 View Reorder Recommendation}
     \label{fig:seq-uc13}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC14_Manage_Subscription.png}
-    \caption[Sequence Diagram of UC-14 Manage Subscription]{Sequence Diagram of UC-14 Manage Subscription\\ This figure shows the sequence diagram of UC-14 (Manage Subscription)}
+    \caption{Sequence Diagram of UC-14 Manage Subscription}
     \label{fig:seq-uc14}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC15_Manage_Tenants.png}
-    \caption[Sequence Diagram of UC-15 Manage Tenants]{Sequence Diagram of UC-15 Manage Tenants\\ This figure shows the sequence diagram of UC-15 (Manage Tenants)}
+    \caption{Sequence Diagram of UC-15 Manage Tenants}
     \label{fig:seq-uc15}
 \end{figure}
 
