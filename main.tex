@@ -388,7 +388,7 @@ This paper is a rare documented case of a markdown optimization model that has b
 
 \subsubsection{Relationship to the Proposed Research Work}
 
-The paper validates the core concept of StockSense's markdown optimizer: a structured methodology that integrates forecasting and pricing is more effective than relying on instinctive manual decisions to make markdowns. StockSense, like the other approaches, is organized around forecast then optimize, with demand being forecast first and the smallest discount, which hits the sales target, being chosen. The difference is that StockSense takes the concept and makes it more applicable to small amounts of data and uses it to act as a warning bell in the season, instead of a clearance drill at the end of the season. If the tenant's price data is not sufficiently varied, StockSense employs a simple price elasticity model with a conservative category level estimate. The outcome of the Zara experiment also provides a realistic estimate about the amount of benefit, which can assist in assessing the outcome of the backtest of the StockSense.
+The paper validates the core concept of StockSense's markdown optimizer --- a structured methodology that integrates forecasting and pricing is more effective than relying on instinctive manual decisions to make markdowns. StockSense, like the other approaches, is organized around forecast then optimize, with demand being forecast first and the smallest discount, which hits the sales target, being chosen. The difference is that StockSense takes the concept and makes it more applicable to small amounts of data and uses it to act as a warning bell in the season, instead of a clearance drill at the end of the season. If the tenant's price data is not sufficiently varied, StockSense employs a simple price elasticity model with a conservative category level estimate. The outcome of the Zara experiment also provides a realistic estimate about the amount of benefit, which can assist in assessing the outcome of the backtest of the StockSense.
 
 \subsection{Lateral Transshipment Models}
 
@@ -400,7 +400,7 @@ Paterson, Kiesm\"uller, Teunter and Glazebrook~\cite{paterson2011inventory} summ
 
 \subsubsection{Critical Analysis of the Research Item}
 
-To summarise, the paper provides a wide and well-structured overview of transshipment models, and facilitates the identification of which sets of assumptions have been investigated and which have not been. The fact that it distinguishes between reactive and proactive transfers is helpful, as it can be used to build a recommendation system. The paper, however, does not suggest a particular algorithm that would work for a small retailer with only two or three branches, and most of the models that it discusses make assumptions about the detail of demand distributions and cost that small businesses don't have. The review also doesn't cover the question of what to do with a transfer, when there may be other actions that can be taken, like a markdown or ordering new stock for the same calendar year.When there's multiple actions that can be taken, such as a markdown or new orders for the same calendar year, the review does not cover how they should be combined with a transfer. The gaps may be justified for a review of theoretical models, but they indicate that a practical system will need to blend the concepts presented in the review with reduced and more powerful decision rules.
+To summarise, the paper provides a wide and well-structured overview of transshipment models, and facilitates the identification of which sets of assumptions have been investigated and which have not been. The fact that it distinguishes between reactive and proactive transfers is helpful, as it can be used to build a recommendation system. The paper, however, does not suggest a particular algorithm that would work for a small retailer with only two or three branches, and most of the models that it discusses make assumptions about the detail of demand distributions and cost that small businesses don't have. The review also doesn't cover the question of what to do with a transfer, when there may be other actions that can be taken, like a markdown or ordering new stock for the same calendar year. The gaps may be justified for a review of theoretical models, but they indicate that a practical system will need to blend the concepts presented in the review with reduced and more powerful decision rules.
 
 \subsubsection{Relationship to the Proposed Research Work}
 
@@ -412,7 +412,7 @@ This subsection is a review of the article "Forecasting across time series datab
 
 \subsubsection{Summary of the Research Item}
 
-Bandara, Bergmeir and Smyl~\cite{bandara2020forecasting} suggest a forecasting model for a large number of related time series. They do not train one model to each series, but rather group the series into clusters of similar series, and train a single recurrent neural network for all series in a cluster. The idea is that series with similar patterns can share information, in turn, with the other series in the same cluster, so that a short series can benefit from the history of other series in the same cluster. The authors compare the method with the standard univariate methods and with a number of benchmark datasets from forecasting competitions and demonstrate that learning on clusters of related series leads to better accuracy than learning a single model on all series or using several standard univariate forecasting methods. The method is therefore based on two concepts that have since become prevalent in large scale forecasting: group similar series and train a shared model. The authors also explore the possibility of grouping the series into groups based on any specific characteristics of the series, such as trend and seasonality.
+Bandara, Bergmeir and Smyl~\cite{bandara2020forecasting} suggest a forecasting model for a large number of related time series. They do not train one model to each series, but rather group the series into clusters of similar series, and train a single recurrent neural network for all series in a cluster. The idea is that series with similar patterns can share information, in turn, with the other series in the same cluster, so that a short series can benefit from the history of other series in the same cluster. The authors compare the method with the standard univariate methods and with a number of benchmark datasets from forecasting competitions and demonstrate that learning on clusters of related series leads to better accuracy than learning a single model on all series or using several standard univariate forecasting methods. The method is therefore based on two concepts that have since become prevalent in large scale forecasting --- group similar series and train a shared model. The authors also explore the possibility of grouping the series into groups based on any specific characteristics of the series, such as trend and seasonality.
 
 \subsubsection{Critical Analysis of the Research Item}
 
@@ -420,11 +420,11 @@ Many short or sparse series, as is usual in retail sales at detailed level, is w
 
 \subsubsection{Relationship to the Proposed Research Work}
 
-The paper argues the benefit of training a single forecasting model for a large number of product, size and store series, as opposed to a separate model per product, size, and store. If there are too few observations in each individual series to train a reliable local model by a small retailer, data from various series must be shared to get started. What StockSense does is the same as clustering but in a simpler manner: By providing a gradient-boosted model with the product, size, store and category as features, the model can learn the behavior of series with similar products. This preserves the benefits of global models, yet the training requirements of the recurrent neural network are reduced. The clustering idea in the paper might be implemented later in the experiments of Chapter~9, if it turned out that there are different groups of series that behave differently. The paper hence gives reasons for the design in the present state and suggests a possible improvement of the design.
+The paper argues the benefit of training a single forecasting model for a large number of product, size and store series, as opposed to a separate model per product, size, and store. If there are too few observations in each individual series to train a reliable local model by a small retailer, data from various series must be shared to get started. What StockSense does is the same as clustering but in a simpler manner. By providing a gradient-boosted model with the product, size, store and category as features, the model can learn the behavior of series with similar products. This preserves the benefits of global models, yet the training requirements of the recurrent neural network are reduced. The clustering idea in the paper might be implemented later in the experiments of Chapter~9, if it turned out that there are different groups of series that behave differently. The paper hence gives reasons for the design in the present state and suggests a possible improvement of the design.
 
 \subsection{Results of the M5 Competition}
 
-We read the article “M5 accuracy competition: Results, findings, and conclusions” by Makridakis, Spiliotis and Assimakopoulos (2022) in the International Journal of Forecasting.We read the article “M5 accuracy competition: Results, findings, and conclusions” by Makridakis, Spiliotis and Assimakopoulos (2022) in the International Journal of Forecasting. The article was chosen because it is one of the largest comparisons of forecasting methods on real retail sales data. It is summarized and analyzed critically in the following subsections and also shown its relationship with StockSense.
+We read the article “M5 accuracy competition: Results, findings, and conclusions” by Makridakis, Spiliotis and Assimakopoulos (2022) in the International Journal of Forecasting. The article was chosen because it is one of the largest comparisons of forecasting methods on real retail sales data. It is summarized and analyzed critically in the following subsections and also shown its relationship with StockSense.
 
 \subsubsection{Summary of the Research Item}
 
@@ -436,7 +436,7 @@ One of the biggest empirical comparisons of forecasting methods based on real re
 
 \subsubsection{Relationship to the Proposed Research Work}
 
-Directly influencing the choice of LightGBM as the primary forecasting model for StockSense, the finding of gradient-boosted trees outperforming statistical methods with hierarchical retail sales data. The competition also includes two other design decisions: training a single global model over all the series of a tenant and adding price and calendar features. Simultaneously, its shortcomings make it very clear that StockSense cannot sacrifice its simplicity even with simple statistics, and that it needs to test out experiments only with short histories, as the gains of gradient boosting on huge amounts of data from a large retailer will have to be proven in a much more limited and ephemeral data set for small businesses. The preliminary experiments outlined in Chapter~9 will also make use of the M5 dataset. The uncertainty results of the competition also validate the use of the upper quantile forecast for the input to the safety stock application in the recommendation engine. The findings of the M5 impact the model, the features and the treatment of uncertainty in StockSense in this way.
+Directly influencing the choice of LightGBM as the primary forecasting model for StockSense, the finding of gradient-boosted trees outperforming statistical methods with hierarchical retail sales data. The competition also includes two other design decisions, training a single global model over all the series of a tenant and adding price and calendar features. Simultaneously, its shortcomings make it very clear that StockSense cannot sacrifice its simplicity even with simple statistics, and that it needs to test out experiments only with short histories, as the gains of gradient boosting on huge amounts of data from a large retailer will have to be proven in a much more limited and ephemeral data set for small businesses. The preliminary experiments outlined in Chapter~9 will also make use of the M5 dataset. The uncertainty results of the competition also validate the use of the upper quantile forecast for the input to the safety stock application in the recommendation engine. The findings of the M5 impact the model, the features and the treatment of uncertainty in StockSense in this way.
 
 \subsection{Forecasting for Small Businesses}
 
@@ -452,7 +452,7 @@ This is one of the few studies specifically focusing on demand forecasting for s
 
 \subsubsection{Relationship to the Proposed Research Work}
 
-This paper is most similar to StockSense in terms of user bases: small businesses lacking a data science team. It identified that the gradient boosting method was superior in the context of predicting sales in small businesses and as a result, the StockSense decision is to use a gradient-boosted model, with statistical models acting as baselines for comparison. StockSense builds on this concept by predicting at product, size and location level, converting the predictions to a recommendation for redistribution, markdown and reorder, and providing clear, user-friendly explanations for each recommendation to allow the owners to make informed decisions. The paper also establishes that a small business can reap the good of ML even if it does not have access to data specialists, if the method is offered in a simple, reliable tool, as StockSense hopes to do.
+This paper is most similar to StockSense in terms of user bases, small businesses lacking a data science team. It identified that the gradient boosting method was superior in the context of predicting sales in small businesses and as a result, the StockSense decision is to use a gradient-boosted model, with statistical models acting as baselines for comparison. StockSense builds on this concept by predicting at product, size and location level, converting the predictions to a recommendation for redistribution, markdown and reorder, and providing clear, user-friendly explanations for each recommendation to allow the owners to make informed decisions. The paper also establishes that a small business can reap the good of ML even if it does not have access to data specialists, if the method is offered in a simple, reliable tool, as StockSense hopes to do.
 
 \subsection{Retail Forecasting Research and Practice}
 
@@ -476,7 +476,7 @@ In this subsection we discuss the paper ``Principles and algorithms for forecast
 
 \subsubsection{Summary of the Research Item}
 
-Montero-Manso and Hyndman~\cite{montero2021principles} investigate when a global model which is shared by a set of related time series is more useful than individual local models for each series. They provide theoretical arguments: (1) models can be as expressive as local ones, and (2) that their complexity can grow with the size of the data set without overfitting any of the series. They illustrate these claims with experiments on large numbers of time series, demonstrating that in some cases global models can be more successful than local models, even when there is no apparent similarity between the time series. The authors also talk about the selection of complexity of global models in practice. They also demonstrate how to add features and nonlinear techniques to global models, such as tree-based models and neural networks, and retain these benefits. This allows their results to be used directly in the retail forecasting models that use gradient-boosted models.
+Montero-Manso and Hyndman~\cite{montero2021principles} investigate when a global model which is shared by a set of related time series is more useful than individual local models for each series. They provide theoretical arguments, (1) models can be as expressive as local ones, and (2) that their complexity can grow with the size of the data set without overfitting any of the series. They illustrate these claims with experiments on large numbers of time series, demonstrating that in some cases global models can be more successful than local models, even when there is no apparent similarity between the time series. The authors also talk about the selection of complexity of global models in practice. They also demonstrate how to add features and nonlinear techniques to global models, such as tree-based models and neural networks, and retain these benefits. This allows their results to be used directly in the retail forecasting models that use gradient-boosted models.
 
 \subsubsection{Critical Analysis of the Research Item}
 
@@ -488,7 +488,7 @@ This finding is in line with the StockSense decision to adopt one shared forecas
 
 \subsection{Accurate Response to Early Sales}
 
-This subsection looks at the article ``Reducing the cost of demand uncertainty through accurate response to early sales,'' by Fisher & Raman (1996), published in Operations Research. The article was selected because it illustrates the importance of responding swiftly to early sales cues when making decisions about stock. Its summary, critical analysis and relationship to StockSense are given in the following subsections.
+This subsection looks at the article ``Reducing the cost of demand uncertainty through accurate response to early sales,'' by Fisher \& Raman (1996), published in Operations Research. The article was selected because it illustrates the importance of responding swiftly to early sales cues when making decisions about stock. Its summary, critical analysis and relationship to StockSense are given in the following subsections.
 
 \subsubsection{Summary of the Research Item}
 
@@ -500,7 +500,7 @@ This is the classic paper and it has clearly demonstrated the importance of reac
 
 \subsubsection{Relationship to the Proposed Research Work}
 
-The paper gives an early foundation to the concept of which StockSense is based on: quick response to demand signals leads to lower stock-out and over-stocking. It can be used to recommend and optimise markdowns, considering recent sales velocity as an important signal. In StockSense, this concept is reflected in two forecasting model features: lag and rolling, which ensure that recent weeks have a major impact on the forecast; and the markdown optimizer, which signals when an item will be sold out before its weeks of cover have concluded, rather than at the end of the season. The two components of the system process new information as soon as it becomes available, rather than at a predetermined planning time. For small retailers, who do not have the luxury of big safety stocks, this is particularly relevant: they need to be responsive to the signals that they receive in the sale.
+The paper gives an early foundation to the concept of which StockSense is based on --- quick response to demand signals leads to lower stock-out and over-stocking. It can be used to recommend and optimise markdowns, considering recent sales velocity as an important signal. In StockSense, this concept is reflected in two forecasting model features, lag and rolling, which ensure that recent weeks have a major impact on the forecast; and the markdown optimizer, which signals when an item will be sold out before its weeks of cover have concluded, rather than at the end of the season. The two components of the system process new information as soon as it becomes available, rather than at a predetermined planning time. For small retailers, who do not have the luxury of big safety stocks, this is particularly relevant. They need to be responsive to the signals that they receive in the sale.
 
 \subsection{Sales Forecasting in the Clothing Industry}
 
@@ -532,11 +532,9 @@ The paper is a general survey and presents a good overview of the use of data-dr
 
 \subsubsection{Relationship to the Proposed Research Work}
 
-The idea for StockSense starts with the challenge that Seyedan and Mafakheri saw in their research: how to close the gap between advanced forecasting models and organizations without having analytics infrastructure. StockSense fills this void by providing a hosted forecast platform, enabling small traders to leverage the power of data-based forecasting without having to invest in developing analytical skills. The survey also concludes that in the presence of sufficient data, the use of ML methods is a suitable approach to demand forecasting, as StockSense already does, asking the new tenant to supply at least a certain amount of sales history before displaying forecasts based on the model. The survey also highlights differences between matching approaches and data which support StockSense's focus on measuring the length of the data history that is required by each tenant, rather than treating the same data matching model as being appropriate for all business.
+The idea for StockSense starts with the challenge that Seyedan and Mafakheri saw in their research --- how to close the gap between advanced forecasting models and organizations without having analytics infrastructure. StockSense fills this void by providing a hosted forecast platform, enabling small traders to leverage the power of data-based forecasting without having to invest in developing analytical skills. The survey also concludes that in the presence of sufficient data, the use of ML methods is a suitable approach to demand forecasting, as StockSense already does, asking the new tenant to supply at least a certain amount of sales history before displaying forecasts based on the model. The survey also highlights differences between matching approaches and data which support StockSense's focus on measuring the length of the data history that is required by each tenant, rather than treating the same data matching model as being appropriate for all business.
 
 \subsection{Forecasting Theory and Practice}
-
-This section discusses the theory and practice of forecasting.This section covers Forecasting theory and practice.
 
 The article “Forecasting: Theory and practice” (2022) by Petropoulos and a number of other co-authors is reviewed in this subsection. The article was selected because it reviews the state of the art in the field of forecast evaluation and model selection. Its summary, critical analysis and relationship to StockSense are given in the following subsections.
 
@@ -554,7 +552,7 @@ The review offers advice regarding the evaluation of forecasts and the choice of
 
 \subsection{Predictive to Prescriptive Analytics}
 
-This subsection summarizes the article “From predictive to prescriptive analytics” [2] of Bertsimas and Kallus (2020), published in Management Science. The article is selected because it provides an explanation of how predictions can be converted into decisions that reduce the cost. The following subsections present a summary, critical analysis and comparison of it with StockSense.
+This subsection summarizes the article “From predictive to prescriptive analytics”~\cite{bertsimas2020predictive} of Bertsimas and Kallus (2020), published in Management Science. The article is selected because it provides an explanation of how predictions can be converted into decisions that reduce the cost. The following subsections present a summary, critical analysis and comparison of it with StockSense.
 
 \subsubsection{Summary of the Research Item}
 
@@ -642,7 +640,7 @@ SAP Integrated Business Planning (IBP) is an enterprise demand sensing and suppl
 
 \subsection{Blue Yonder}
 
-Large retailers use a Panasonic subsidiary, Blue Yonder, to leverage ML for demand planning and retail planning software.Retail planning software and demand planning software based on ML, are provided by Blue Yonder, a Panasonic company, used by large retailers. Its forecasting is more than the historical average, it is based on a model of the causal influences on demand, including prices, promotions, weather and events; and its forecasting is done in a manner that makes the planner aware of the reasons behind a forecast. These are good qualities and in particular, the explanation of forecasts is similar in spirit to the StockSense approach. But as with SAP, Blue Yonder is an enterprise application that would take a lot of work to implement, integrate with current systems and depends on a technical infrastructure that small companies don't have. It focuses its products and implementation on enterprise retailers. StockSense is the name of the idea of the explained, causally informed forecast and brings it in a far more simple package, appropriate to a small retailer.
+Large retailers use a Panasonic subsidiary, Blue Yonder, to leverage ML for demand planning and retail planning software~\cite{blueyonder}. Its forecasting is more than the historical average, it is based on a model of the causal influences on demand, including prices, promotions, weather and events; and its forecasting is done in a manner that makes the planner aware of the reasons behind a forecast. These are good qualities and in particular, the explanation of forecasts is similar in spirit to the StockSense approach. But as with SAP, Blue Yonder is an enterprise application that would take a lot of work to implement, integrate with current systems and depends on a technical infrastructure that small companies don't have. It focuses its products and implementation on enterprise retailers. StockSense is the name of the idea of the explained, causally informed forecast and brings it in a far more simple package, appropriate to a small retailer.
 
 \subsection{Nextail}
 
@@ -1301,7 +1299,7 @@ There are two ways that sales are added to StockSense. The records created from 
 \section{Data Validation, Cleaning, and Normalization}
 \label{sec:validation}
 
-All records submitted are subject to multiple validations before being accepted. The structural checks ensure that all the necessary elements are included and that their data types are correct. The value check includes that the date is valid as well as that the quantity is a number and that the price is not negative. A date, like 03/04/2025, may be interpreted in two different ways, so it is up to the owner to decide which date format to use when the columns are mapped. Referential checks normalize the names of products, sizes and stores by trimming spaces, ignoring case, standardizing sizes (such as converting ``Medium'' to ``M'', etc.), and then check to see if a record corresponds to a variant and a store with the same tenant. If two records are the same, they are identified by a composite key consisting of the store, variant, date, quantity and price; however, they are not deleted because it is possible for two or more identical sales to happen. Negative quantities are accounted for as returns, and extreme quantities are marked as outliers and capped only when training the data – no changes are made to the original data. Rejected and flagged records are reported in the upload report alongside the reason for the rejection/flag, allowing the owner to amend the source record and upload it again.Rejected and flagged records are not saved but are reported in the upload report with the reason for rejection/flag so that the owner can amend the source record and then upload it again.
+All records submitted are subject to multiple validations before being accepted. The structural checks ensure that all the necessary elements are included and that their data types are correct. The value check includes that the date is valid as well as that the quantity is a number and that the price is not negative. A date, like 03/04/2025, may be interpreted in two different ways, so it is up to the owner to decide which date format to use when the columns are mapped. Referential checks normalize the names of products, sizes and stores by trimming spaces, ignoring case, standardizing sizes (such as converting ``Medium'' to ``M'', etc.), and then check to see if a record corresponds to a variant and a store with the same tenant. If two records are the same, they are identified by a composite key consisting of the store, variant, date, quantity and price; however, they are not deleted because it is possible for two or more identical sales to happen. Negative quantities are accounted for as returns, and extreme quantities are marked as outliers and capped only when training the data – no changes are made to the original data. Rejected and flagged records are reported in the upload report alongside the reason for the rejection/flag, allowing the owner to amend the source record and upload it again.
 
 %==================================================
 \section{Demand Series Construction}
@@ -1811,11 +1809,11 @@ Result & Not yet executed \\ \hline
 
 \chapter{Implementation and Test Cases}
 
-This chapter explains how the design of StockSense described in the previous chapters will be implemented and how the system will be tested. It describes each module of the system, the tools used to build it and its current status, and then presents the test cases written for every use case in Chapter~4, followed by additional test cases for the most important non-functional requirements. In FYP-1 the work concentrated on the requirements, methodology and design of the system, so most modules are fully designed but not yet implemented. The descriptions below therefore state how each module will be built in FYP-2, and the test cases are written so that they can be executed as soon as each module is ready. The content of this chapter is not final and will be updated in FYP-2 as the implementation progresses and the test results become available.
+In this chapter we discuss how the StockSense system described in the previous chapters will be implemented and tested. First, we describe each module of the system, the tools and technologies we use to implement the system and its current status, and finally present the test cases created for every use case discussed in Chapter~4 and some additional test cases for the key non-functional requirements. In FYP-1 our focus was on the requirements, methodology and design of the system, so most of the modules are now fully designed but not implemented yet. Therefore, the descriptions below discuss how we will implement each of the modules in FYP-2 and the test cases are designed in such a way that they can be executed as soon as the corresponding modules will be ready. This chapter is not final and will be updated in FYP-2 depending on the progress in the implementation and test results.
 
 \section{Implementation}
 
-The solution will be implemented according to the iterative plan described in Section~\ref{sec:iterative}. Development starts with the multi-tenant core, which includes tenants, users, stores, products, inventory, the POS and the ingestion pipeline, because every later module depends on the data that these parts provide. The offline forecasting experiments follow, in which the features, baselines and LightGBM model are developed and compared in Jupyter Notebook on historical data. The selected model is then integrated as a background job, and the recommendation and markdown modules are built on top of its forecasts, followed by the explanations and the dashboard views. Each module is developed separately, so that changes to one of them can be made without affecting the others, and each one is tested before the next is started. Table~\ref{tab:impl-status} summarizes the main tools and the current status of each module.
+Our system will be implemented in accordance with the iterative approach outlined in Section~\ref{sec:iterative}. We start the development with the multi-tenant core module that includes tenants, users, stores, products, inventory, the POS and the ingestion pipeline since all other modules depend on the data they provide. Then, the offline forecasting experiment takes place, where the features, baseline and LightGBM models are created and compared using Jupyter Notebook on the historical data. The chosen model is integrated as a background job and modules for the recommendations and markdowns are implemented based on the forecast. Finally, explanations and the dashboard modules are added on top of this. Modules are implemented separately to avoid problems with one of the modules that would require changes in other modules. Also, modules are tested separately before moving to the next one. The summary of tools and current status of modules is presented in Table~\ref{tab:impl-status}.
 
 \begin{table}[!htbp]
 \centering
@@ -1839,174 +1837,174 @@ The solution will be implemented according to the iterative plan described in Se
 
 \subsection{Development Environment}
 
-The backend will be written in Python with FastAPI, and the web dashboard and the POS screens will be written in React. All data will be stored in PostgreSQL, and every business table will have a tenant identifier. The team will use Visual Studio Code as the editor, Git and GitHub for version control, Postman for testing the API and Jupyter Notebook for the forecasting experiments. Each team member will run the full system locally, with the backend, the frontend and a PostgreSQL database, so that changes can be tested before they are merged. The team will work in short iterations, and the supervisor will review the results at the end of each iteration. Code will be merged into the main branch only after review by another team member, which keeps the main branch in a working state and spreads knowledge of each module across the team.
+The backend will be implemented using Python and FastAPI framework. The dashboard and the point-of-sale screens will be implemented using ReactJS framework. The database will be based on PostgreSQL. Each business table will contain a tenant identifier. The members of the team will use Visual Studio Code as the editor. Git and GitHub will be used for the version control, Postman – for testing the API, Jupyter Notebook – for the forecasting experiments. Each team member will have the whole system locally installed, including the backend, the frontend and a PostgreSQL database. This approach allows testing the code before it will be committed into the main branch. Short iterations will be used. After each iteration, the supervisor will review the results. The code will be merged into the main branch only after the review by another team member. Such an approach guarantees that the main branch is always in a working state and all team members know about each module.
 
 \subsection{Tenant and User Management}
 
-This module will handle business registration, login and the management of roles. When a business signs up, a tenant, a free subscription and an owner account will be created in a single database transaction, so that a failure part of the way through cannot leave an incomplete tenant behind. Only password hashes will be stored in the database. After login, every request will carry the tenant identifier and the role of the user, and the backend will check both on every read and write of business data, so that no request can reach data that belongs to another tenant or, for store managers, to another store. The module will also let the owner invite store managers by email and assign them to a store, and it will let the system administrator suspend and reactivate tenants, with the rule that users of a suspended tenant cannot log in until the tenant is reactivated.
+This module will perform such actions as the business registration, login and the management of roles. During the registration, the new tenant, the free subscription and the owner account will be created in one database transaction. In case of any failures, the incomplete tenant will not be left in the database. Only the password hashes will be saved. During the login, the request will contain the tenant identifier and the role of the user. The backend will check both during any requests concerning the business data reading and writing operations. Such checking will make impossible to reach the data of another tenant or, for store managers, another store. Also, the module will allow the owner to invite the store managers by email and assign them to a store. It will also allow the system administrator to suspend and reactivate the tenants. For suspended tenant, the rule is the following – no user from the tenant will be able to log in until the tenant will be reactivated.
 
 \subsection{Store, Product and Inventory Management}
 
-The owner will be able to create, modify and archive stores, define products together with their sizes and variants, and invite store managers. Each variant will have an SKU that is unique within the tenant, and an attempt to create a duplicate SKU will be rejected with a clear message. A store that still has inventory or sales history will be archived instead of deleted, so that its history remains available for forecasting. Inventory will be stored for each product variant in each store, and a manual correction of the inventory, for example after a physical count, will require a reason that is logged together with the change. A store manager will be able to view and change only the data of the assigned store. Together these functions provide the catalog and stock data on which the POS, the forecasting module and the recommendation engine depend.
+The owner will have the ability to create, edit and archive stores, configure products with their variants and sizes, and assign managers to the stores. Each variant of the product will have an SKU, which must be unique in the tenant, so the system will reject attempts to create the same SKU. If there are any sales or inventory in the store, the store will be archived but not deleted. Inventory will be kept for each product variant in each store separately, and the manual correction of the inventory, e.g. after counting, will have to specify the reason for the correction, which will be stored along with the correction. A store manager will only be able to see and update the information about his assigned store. All these features combined form the catalog and the inventory data needed by the POS, the forecasting and the recommendation engines.
 
 \subsection{POS Module}
 
-On the POS screen, a store manager will select the product and the size, enter the quantity and complete the sale. The system will first check whether enough stock is available and will warn the manager before confirming a sale that would exceed it. Once the sale is confirmed, the sale, the sold items and the updated stock levels will be stored in one transaction, so that the inventory always matches the recorded sales. The goal is to complete this within two seconds, as required in Chapter~4, because the POS is used while customers wait at the counter. The POS will remain available even when the forecasting or upload modules are busy, since it does not depend on them. As the free part of the platform, the POS is also the main source of the sales data that later feeds the forecasting and recommendation modules.
+On the POS screen, a store manager will choose the product and the size, enter the quantity and confirm the sale. First, the system will check that there is enough stock, and will inform the manager that sale cannot be completed due to insufficient stock. Then, when the sale is confirmed, the sale itself, the sold items and the new stock levels will be saved in a single transaction, making sure that the inventory reflects the sales accurately. This has to be done in two seconds, according to Chapter~4, since POS is used while customers wait at the checkout line. POS will work independently from forecasting and upload modules, which might be very busy. Since it is the free part of the platform, POS will also be the main provider of the sales data, later used by other modules.
 
 \subsection{Data Ingestion and Cleaning}
 
-This module will accept CSV and Excel files. CSV files will be parsed with pandas in chunks, while Excel files will be parsed with pandas and openpyxl in batches, so that memory use stays low for files of up to 100,000 rows. The owner will match the detected columns to the standard fields of product, size, store, date and quantity and will choose the date format. The system will then validate the structure, values and references of every row, normalize the names of products and sizes, for example by turning ``Medium'' into ``M'', detect returns and unusual values, and mark possible duplicates without removing them. The upload report will show the accepted and rejected rows together with the reason for each rejection. Only after the owner approves the report will the rows be imported, in one transaction that is rolled back if any part of it fails.
+This module will handle CSV and Excel files as input. CSV files will be read in chunks with pandas; and Excel files will be read in batches with pandas and openpyxl so that memory consumption does not exceed limits for 100,000-row files. The owner will map the columns found in the file with the following fields: product, size, store, date, and quantity and will specify the format of the date field. Then, the system will validate the structure, values and references of all rows, normalize the names of products and sizes, e.g., changing ``Medium'' to ``M'', find potential returns and outliers, and identify duplicates without deleting them. The report will include the list of accepted and rejected rows, along with the reason for rejection for the latter. Only after approval of the report from the owner will the rows be added, in one transaction, which will be rolled back if anything goes wrong during this operation.
 
 \subsection{Demand Forecasting}
 
-Forecasting will first be developed and tested offline in Jupyter Notebook. The steps are to build weekly and monthly demand series for every variant and store, to compute the lag, rolling, calendar, price and lifecycle features, to train one global LightGBM model per tenant with the Tweedie objective, and to compare its performance with the naive, seasonal naive, moving average, Holt-Winters and Croston baselines. An upper quantile model will also be trained to derive the safety stock used by the recommendation engine. The hyperparameters will be tuned with rolling-origin validation and without any shuffling of the data. The selected model will then be integrated into a background job that forecasts demand and writes the results, together with the model name, into the forecast table. For a new tenant without enough history, no model forecast will be produced, and the user will be asked to record or upload more data.
+First of all, forecasting will be built and validated offline using Jupyter Notebook. The sequence of operations will include creation of the weekly and monthly time series of demand for each variant and each store; calculation of lag, rolling, calendar, price and life cycle features; training of one global LightGBM model for each tenant with the Tweedie objective function; and comparison with the performance of naive, seasonal naive, moving average, Holt-Winters and Croston baselines. In addition, an upper quantile model will be trained to calculate the safety stock, which is necessary for recommendations. All models will be tuned via rolling-origin cross-validation without shuffling of the data. Finally, the selected model will be embedded into the background process that performs the forecast of demand and stores the results, along with the name of the model, in the forecast table. If there is not enough history for the new tenant, no model-based forecast will be created, and the user will be asked to add or upload some data.
 
 \subsection{Recommendation Engine}
 
-For each variant and store, the engine will compare the stock on hand with the forecast demand and the safety stock in order to detect a surplus or a shortage. The surplus stock will then be allocated to the stores with shortages by solving a small transportation problem, and a transfer will be suggested only if the margin at the destination is greater than the cost of the transfer. If a shortage still remains after redistribution, a reorder recommendation will be generated for the remaining quantity. Accepted transfers that have not yet arrived will be counted as incoming stock, so the same transfer is never recommended twice. The engine will be implemented in Python, with SciPy used to solve the transportation problems, and it will run as a background job after each forecasting run so that the recommendations always reflect the latest forecasts.
+For each combination of a variant and a store, the engine will look for a surplus or a shortage comparing the on-hand stock with the forecasted demand and the safety stock. The surplus will be transferred between stores with shortages using a solution of a small-scale transportation problem, but only if the margin on arrival is higher than the cost of the transfer. In case there is still some shortage after redistribution, a reordering recommendation will be created for the difference. The transfers, which are accepted, but not delivered yet, will be considered incoming stock, so that the same transfer won't be recommended again. The optimizer will be developed in Python using SciPy for solving transportation problems. It will be executed as a background process after each forecast, so that the recommendations would be always up-to-date.
 
 \subsection{Markdown Optimizer}
 
-The stock that remains in surplus after redistribution will be evaluated by its weeks of cover. If an item is not expected to sell within the time left, the optimizer will try discounts of 5\%, 10\% and so on up to 50\%, adjusting the expected demand with the price elasticity of the product. The smallest discount that reaches the sell-through target without going below the cost price will be chosen, provided that it does not reduce the expected margin compared with not discounting at all. The estimated change in profit will be stored as the impact of the recommendation. Elasticity will be estimated from the tenant's own price history when it is varied enough, and otherwise a cautious estimate for the category will be used, so that the optimizer does not suggest discounts that are deeper than necessary.
+The stock, which is in surplus after the redistribution, will be analyzed based on its weeks of cover. If a product is expected to remain unsold until the end of this period, the optimizer will offer to give a discount of 5\%, 10\% and so on up to 50\%, while changing the expected demand based on the price elasticity of the product. The smallest discount, which brings the expected number of sell-through to the target without becoming smaller than the cost price and decreasing the expected margin, will be selected. The estimated impact on the profit will be saved as the impact of the recommendation. The elasticity of a product will be estimated based on the price history of the tenant in case of sufficient variation, otherwise the conservative estimate for the category will be used.
 
 \subsection{Explainable Recommendations}
 
-All recommendations will be stored together with the figures that led to them, which are the forecast demand, the stock, the surplus or shortage, the stores involved, the margin, the cost and the impact, and with the main forecast drivers obtained from the LightGBM feature contributions. These values will be inserted into text templates, so that the owner reads a short and simple sentence rather than a score or a table of numbers. Because the explanation is created at the same moment as the recommendation and stored with it, it will always describe the situation that produced the recommendation, even if the stock or the forecast changes later. This part of the system is central to the goal of making ML-based advice understandable and trustworthy for owners who have no background in data analysis.
+Recommendations will be accompanied by figures used to calculate them. These are forecast demand, stock, surplus/shortage, stores involved, margin, cost and impact, as well as most important factors behind the forecast, which will be identified via LightGBM feature contributions. Values will be inserted into text templates to give the owner an easily digestible sentence instead of some numeric scores or tables. Since explanation generation takes place at the time of recommendation and stored along with it, it will always refer to the conditions that led to that recommendation regardless of future change in stock or forecasts. This part of the system is crucial to our aim of ensuring that ML-based recommendation is easy to understand and trustable for owners without any data analytics expertise.
 
 \subsection{Dashboard, Alerts and Subscription}
 
-The dashboard will show the monthly sales, the items at risk of stockout and dead stock, the recent sales, the status of each branch and the open recommendations. The owner or a store manager will be able to approve or reject a recommendation, and an approved redistribution will create a stock transfer and notify both stores. On the free plan, the forecast and recommendation sections will be replaced by an upgrade notice. The subscription component will switch the tenant between the free and paid plans, and a failed payment will keep the previous plan unchanged. A downgrade will turn the paid features off but will keep all sales and inventory data, so that the tenant loses nothing if it upgrades again later. Alerts will notify users when new recommendations are raised or when an upload or forecasting job has finished.
+The dashboard will include monthly sales, products at risk of stockouts and dead stock, recent sales, branch statuses and recommendations. Owner or a store manager will have ability to accept or decline a recommendation and accepting the redistribution will generate a stock transfer notification. In case of a free plan, the forecast and recommendation modules will be substituted by a prompt to upgrade the plan. The subscription module will allow switching between the free and paid plans, and unsuccessful payment will retain the old plan status. Plan downgrade will simply turn off the paid functionality but leave all the sales and inventory data untouched, thus preventing the tenant from losing anything in case of upgrading back. Alerts will notify about newly raised recommendations and completion of any upload or forecasting jobs.
 
 \section{Test Case Design and Description}
 
-Every use case from Chapter~4 has at least one test case, and the upload use case has two, one for a normal file and one for an unsupported or broken file. The tests will be performed in a Linux development environment, with the React dashboard open in Google Chrome and the backend and PostgreSQL running locally. Sample tenants with two or three branches and sample sales files, including files with deliberate errors, will be used as test data. Each test case table states the engineer who will run the test, the reviewer, the related use case or requirement, the objective, the pre-requisites, the steps and the expected result. Forecast accuracy is not checked by these test cases, since it will be measured separately using the evaluation protocol described in Section~\ref{sec:evaluation}. The Result field of every test case currently reads ``Not yet executed'' and will be changed to Passed or Failed, with comments, when the tests are performed in FYP-2.
+Each use case in Chapter~4 has at least one test case, and the upload use case has two, one for a standard file and one for a file that cannot be supported or is faulty. The testing will take place in a Linux development environment where the React dashboard will be opened in Google Chrome browser and the backend as well as PostgreSQL will be running on the local machine. Samples of tenants with 2-3 branches and sales files, including those containing intentional mistakes, will serve as the test data. The following fields are provided in each test case table: the engineer who will conduct the test, the reviewer, the use case/requirement, the purpose of the test, the pre-requisites, the actions and the expected results. The forecast accuracy will not be checked by these test cases because this will be evaluated independently in accordance with the protocol described in Section~\ref{sec:evaluation}. Currently the Result field of every test case says ``Not yet executed'' and will be filled with Passed or Failed (with comments) after the completion of testing in FYP-2.
 
-Test Cases 1 to 16 check that each use case behaves as specified, but they do not check the most important non-functional requirements of Chapter~4. Four additional test cases, numbered 17 to 20, therefore cover tenant data isolation, the speed of POS transactions, the processing time for large file uploads, and the storage of passwords together with the use of encrypted connections. These requirements are critical for a multi-tenant platform that small businesses must be able to trust with their sales data and use during busy business hours. They are written in the same format as the functional test cases and refer to the requirement or section they verify instead of a use case. Like the other test cases, they will be executed in FYP-2 once the corresponding modules are complete.
+Test Cases 1-16 test whether each use case works according to its specification, but do not test such vital non-functional requirements of Chapter~4. There are four additional test cases, numbered 17-20, covering data isolation of tenants, transaction speed of POS, large file upload process speed and password security and the usage of secure connections. Such requirements are essential for a multi-tenant system that can be trusted by small businesses for the storage of their sales data and the usage during busy business hours. Test cases have the same format as functional test cases, only they refer to a requirement or section instead of a use case. As the other test cases, they will be tested in FYP-2 upon the completion of corresponding modules.
 
 \testcase{Test Case 1 (Register Business)}{1}{Muhammad Usman}{Muhammad Rizwan Arshad}{UC-01 Register Business}
-{To check that a new business can register and gets a free-tier tenant.}
-{The email is not already registered.}
-{1. Open the signup page. 2. Enter business name, owner name, email and password. 3. Submit the form.}
-{A tenant, a free subscription and an owner account are created, and a verification email is sent. A second signup with the same email shows an error.}
+{To ensure that a new business registers and a free tier tenant is generated for it.}
+{The email has not registered yet.}
+{1. Visit the registration page. 2. Fill out the form with business name, owner name, email and password. 3. Submit the form.}
+{A tenant account, free subscription and owner account are created, while a verification email is sent. When registering again using the same email, an error occurs.}
 
 \testcase{Test Case 2 (Login)}{2}{Muhammad Usman}{Hayyan Haider}{UC-02 Login}
-{To check login with valid and invalid details and with a suspended tenant.}
-{A registered user exists.}
-{1. Log in with the correct email and password. 2. Log in with a wrong password. 3. Suspend the tenant and try to log in again.}
-{Valid details open the dashboard. A wrong password shows ``Incorrect email or password''. A suspended tenant cannot log in.}
+{To test login process with valid and invalid credentials and when the tenant account is suspended.}
+{There is a registered user account.}
+{1. Login using the email and password. 2. Login using the wrong password. 3. Suspend the tenant account and try logging in.}
+{Logging in with valid credentials opens the dashboard. Entering the wrong password prompts ``Incorrect email or password''. Suspended tenants are unable to login.}
 
 \testcase{Test Case 3 (Manage Stores)}{3}{Hayyan Haider}{Muhammad Usman}{UC-03 Manage Stores}
-{To check that the owner can add, edit and remove stores.}
-{The owner is logged in.}
-{1. Add a store. 2. Edit its name. 3. Remove a store that has sales history.}
-{The store is added and updated. A store with inventory or sales is archived and not deleted.}
+{To validate the process of adding, editing and removing the store.}
+{Owner logs into the system.}
+{1. Add a new store. 2. Update the name of the added store. 3. Delete a store that contains sales history.}
+{A new store is added and edited. An existing store containing sales history cannot be removed, but rather gets archived.}
 
 \testcase{Test Case 4 (Manage Store Managers)}{4}{Hayyan Haider}{Muhammad Rizwan Arshad}{UC-04 Manage Store Managers}
-{To check that the owner can invite a manager and assign a store.}
-{The owner is logged in and at least one store exists.}
-{1. Invite a manager by email and choose a store. 2. Invite an email that already has an account.}
-{The manager account is created and an invitation is sent. The second invitation is rejected with an error.}
+{To ensure the owner invites a manager and assigns a store.}
+{The owner is logged in and there is at least one store.}
+{1. Invite a manager by filling out an email and assigning him/her a store. 2. Invite a different email address with an existing account.}
+{An account is created and invitation is sent to the invited manager. The second invitation fails because the invited manager has an existing account.}
 
 \testcase{Test Case 5 (Manage Products and Variants)}{5}{Muhammad Rizwan Arshad}{Muhammad Usman}{UC-05 Manage Products and Variants}
-{To check product creation and the unique SKU rule.}
-{The owner is logged in.}
-{1. Create a product with sizes 40, 41 and 42. 2. Create another variant with an existing SKU.}
-{The product and its variants are saved. The duplicate SKU is rejected.}
+{To verify product creation and unique SKU constraint.}
+{Owner has signed-in.}
+{1. Create a product having sizes 40, 41 and 42. 2. Create another variant having already existing SKU.}
+{The product and its variants get saved. Duplicacy in SKU gets rejected.}
 
 \testcase{Test Case 6 (Adjust Inventory)}{6}{Muhammad Rizwan Arshad}{Hayyan Haider}{UC-06 Adjust Inventory}
-{To check manual stock correction and that a negative quantity is refused.}
-{The variant exists at the store.}
+{To verify manual correction of stock and negative quantity gets rejected.}
+{Variant already exists in the store.}
 {1. Enter a new quantity with a reason. 2. Enter a negative quantity.}
-{The first change is saved and logged. The negative value is rejected and the stock stays the same.}
+{First correction gets saved and logs in the history. Negative value gets rejected and the stock remains the same.}
 
 \testcase{Test Case 7 (Record Sale (POS))}{7}{Muhammad Usman}{Hayyan Haider}{UC-07 Record Sale (POS)}
-{To check that a sale reduces inventory, and that low stock gives a warning.}
-{A store manager is logged in and stock is available.}
-{1. Select a product and size and sell 1 unit. 2. Try to sell more units than are in stock.}
-{The sale is saved and the stock goes down by one. The second sale shows an insufficient stock warning.}
+{To verify sales decreases inventory, and low stock results in warning.}
+{Store manager signed in and stock available.}
+{1. Select product and its size and make 1 unit sale. 2. Make sale greater than stock availability.}
+{Sale gets logged, and stock decreased by one unit. Second sale results in insufficient stock warning.}
 
 \testcase{Test Case 8 (Upload Historical Sales Data)}{8}{Hayyan Haider}{Muhammad Usman}{UC-08 Upload Historical Sales Data}
-{To check upload, column mapping, cleaning and the upload report.}
-{The owner is logged in. A CSV file with a few wrong rows is ready.}
-{1. Upload the file. 2. Map the columns. 3. Check the report. 4. Approve the import.}
-{Good rows are cleaned and imported. Wrong rows are listed with reasons. Nothing is saved before approval.}
+{To verify upload process, mapping, cleansing and upload report.}
+{Owner signed-in. A CSV file having some invalid rows available.}
+{1. Upload the file. 2. Map the columns. 3. Review the report. 4. Approve the upload.}
+{Valid rows gets cleansed and imported. Invalid rows get identified with appropriate message. Nothing gets saved until approval of the upload.}
 
 \testcase{Test Case 9 (Upload of an Unsupported or Broken File)}{9}{Hayyan Haider}{Muhammad Rizwan Arshad}{UC-08 Upload Historical Sales Data}
-{To check that bad files do not damage existing data.}
-{The tenant already has saved sales.}
-{1. Upload a .pdf file. 2. Upload a damaged Excel file. 3. Force a failure in the middle of an import.}
-{The file is rejected with a simple reason, and a failed import is rolled back. The existing data is unchanged.}
+{To verify that faulty uploads do not affect the already uploaded data.}
+{A tenant has uploaded sales already.}
+{1. Upload a .pdf file. 2. Upload a corrupt Excel file. 3. Make sure an import operation fails in the middle.}
+{The file is simply rejected and failed imports rolled back. The previous data is intact.}
 
 \testcase{Test Case 10 (View Dashboard and Alerts)}{10}{Muhammad Rizwan Arshad}{Muhammad Usman}{UC-09 View Dashboard and Alerts}
-{To check the dashboard for free and paid tenants and for a new tenant.}
-{One free tenant and one paid tenant exist.}
-{1. Open the dashboard as a paid owner. 2. Open it as a free owner. 3. Open it for a tenant with no sales.}
-{The paid tenant sees sales, inventory, forecasts and alerts. The free tenant sees sales and inventory with an upgrade message. A new tenant is asked to add sales data.}
+{To test the dashboard and the alerts displayed for a free tenant and paid tenant.}
+{There is one paid tenant and one free tenant.}
+{1. Go into the dashboard as a paid tenant owner. 2. Do the same as a free tenant owner. 3. Try to go into the dashboard as a tenant without any sales history.}
+{The paid tenant will see sales, inventory, forecasts and alerts. The free tenant will see sales and inventory and will be shown an alert telling him to upgrade. No sales history will trigger an alert asking to upload sales history.}
 
 \testcase{Test Case 11 (View Demand Forecast)}{11}{Muhammad Usman}{Hayyan Haider}{UC-10 View Demand Forecast}
-{To check the forecast display and the rules for the free tier and short history.}
-{A paid tenant with enough sales history exists.}
-{1. Select a product, size and store. 2. Choose weekly and then monthly view. 3. Repeat for a tenant with too little history. 4. Repeat for a free tenant.}
-{The forecast is shown next to past sales. A short history shows a ``not enough data'' message. A free tenant sees an upgrade message.}
+{To test how the forecast will be displayed and the restrictions applied on free tenants and short history.}
+{A paid tenant with sufficient sales history exists.}
+{1. Choose a product variant. 2. Select a size and location. 3. View it by week then by month. 4. View forecast of another tenant who has not uploaded much sales history. 5. View it from a free tenant.}
+{The forecast will be displayed next to past sales. Short history will show a ``not enough data''. Free tenant will see an upgrade message.}
 
 \testcase{Test Case 12 (Redistribution Recommendation)}{12}{Muhammad Rizwan Arshad}{Muhammad Usman}{UC-11 View and Act on Redistribution Recommendation}
-{To check that a surplus store and a shortage store give a transfer suggestion that can be approved or dismissed.}
-{One branch has surplus stock and another has a forecast shortage of the same variant.}
-{1. Run the recommendation job. 2. Open the recommendation. 3. Approve it. 4. Repeat with another one and dismiss it.}
-{A redistribution is suggested with quantity, explanation and impact. Approval creates a stock transfer and both stores are notified. A dismissed one is closed. If the source stock has changed, a warning is shown.}
+{To verify that a surplus and a shortage location make a suggestion which can either be approved or dismissed.}
+{One branch has excess stock and another branch has forecasted shortages of the same variant.}
+{1. Run the recommendation job. 2. View the suggestion. 3. Approve it. 4. Do the same with another suggestion but this time dismiss it.}
+{The redistribution suggestion will include the quantity, rationale and the impact. Upon approval, a transfer will be created between the two branches. If source stock has been changed since creation, a warning will be raised.}
 
 \testcase{Test Case 13 (Markdown Recommendation)}{13}{Hayyan Haider}{Muhammad Rizwan Arshad}{UC-12 View Markdown Recommendation}
-{To check that slow-moving stock that cannot be moved gets a discount suggestion.}
-{A variant has weeks of cover above the selling time and no store needs it.}
-{1. Run the optimizer. 2. Open the markdown recommendation. 3. Accept it.}
-{A discount is suggested that does not go below the cost price. Accepting it updates the price.}
+{To verify that slow-moving stock that cannot be moved receives a markdown suggestion.}
+{The variation includes a few weeks coverage above selling period and no stores require it.}
+{1. Run the optimizer. 2. Go to the markdown recommendation section. 3. Accept the suggestion.}
+{A markdown suggestion that is not below the cost price is provided. Upon accepting it, the price will change accordingly.}
 
 \testcase{Test Case 14 (Reorder Recommendation)}{14}{Muhammad Usman}{Hayyan Haider}{UC-13 View Reorder Recommendation}
-{To check that a reorder is suggested only when no other branch has surplus.}
-{A forecast shortage exists and no other branch has surplus.}
-{1. Run the recommendation job. 2. Open the Reorder tab. 3. Mark one as actioned.}
-{A reorder quantity is shown with its reason. The status changes to Actioned.}
+{To verify that a reorder is recommended only if there is no surplus at another branch.}
+{A forecast shortage occurs but no other branch has surplus.}
+{1. Run the recommendation job. 2. Go to the reorder tab. 3. Click on action for one.}
+{A reorder quantity along with its reasons is provided. The status is changed to Actioned.}
 
 \testcase{Test Case 15 (Manage Subscription)}{15}{Muhammad Rizwan Arshad}{Muhammad Usman}{UC-14 Manage Subscription}
-{To check upgrade, downgrade and failed payment.}
-{The owner is logged in.}
-{1. Upgrade to the paid plan. 2. Try an upgrade where the payment fails. 3. Downgrade to free.}
-{Paid features turn on after a successful upgrade. A failed payment keeps the old plan. A downgrade turns paid features off but keeps all sales and inventory data.}
+{To verify upgrade, downgrade and failed payment.}
+{The account is logged in by the owner.}
+{1. Upgrade to the paid version. 2. Upgrade while the payment will fail. 3. Downgrade to the free version.}
+{Features become available after the successful payment. Failing to pay leaves the same plan. In case of downgrading, the paid features get disabled while sales and inventory data remains.}
 
 \testcase{Test Case 16 (Manage Tenants)}{16}{Hayyan Haider}{Muhammad Usman}{UC-15 Manage Tenants}
-{To check that the administrator can suspend and reactivate a tenant.}
-{The administrator is logged in.}
-{1. Suspend a tenant. 2. Try to log in as that tenant's user. 3. Reactivate the tenant.}
-{Users of a suspended tenant cannot log in. After reactivation they can log in again.}
+{To verify that the administrator can suspend and activate a tenant.}
+{The account is logged in by the administrator.}
+{1. Suspend a tenant. 2. Log in with that tenant's account. 3. Activate the tenant.}
+{A suspended tenant users are unable to log in. Upon activating it, they can log in.}
 
-\testcase{Test Case 17 (Tenant Data Isolation)}{17}{Muhammad Usman}{Hayyan Haider}{FR-11, Security (Section~4.4.3)}
-{To check that one business can never see the data of another.}
-{Two tenants with different data exist.}
-{1. Log in as Tenant A. 2. Call the API with the IDs of Tenant B records. 3. Log in as a store manager and open another store's data.}
-{All such requests are refused. No data of Tenant B or of another store is returned.}
+\testcase{Test Case 17 (Isolation of Tenant Data)}{17}{Muhammad Usman}{Hayyan Haider}{FR-11, Security (Section~4.4.3)}
+{To make sure that the data of any one business cannot be viewed by any other business.}
+{Two tenants having different sets of data.}
+{1. Login with Tenant A. 2. Invoke the API by using the ID of Tenant B data. 3. Login with the store manager account to view data of another store.}
+{All such requests are denied. None of the data of Tenant B and another store is revealed.}
 
-\testcase{Test Case 18 (POS Speed)}{18}{Muhammad Rizwan Arshad}{Muhammad Usman}{Performance (Section~4.4.1)}
-{To check that a POS sale is saved in under 2 seconds.}
-{A tenant with a normal amount of data.}
-{Record 50 sales and note the time taken for each.}
-{Each sale is saved in under 2 seconds.}
+\testcase{Test Case 18 (POS speed)}{18}{Muhammad Rizwan Arshad}{Muhammad Usman}{Performance (Section~4.4.1)}
+{To make sure that a transaction in POS takes less than 2 seconds.}
+{A tenant with normal amount of data.}
+{Record 50 transactions and measure the time taken by each transaction.}
+{Each transaction takes less than 2 seconds.}
 
-\testcase{Test Case 19 (Large File Upload)}{19}{Hayyan Haider}{Muhammad Rizwan Arshad}{Performance (Section~4.4.1)}
-{To check that a file with 100,000 rows is processed in under 5 minutes.}
-{A test CSV and a test Excel file with 100,000 rows each.}
-{Upload both files and note the processing time and memory use.}
-{Both files are processed in under 5 minutes without the system crashing.}
+\testcase{Test Case 19 (Big File Upload)}{19}{Hayyan Haider}{Muhammad Rizwan Arshad}{Performance (Section~4.4.1)}
+{To make sure that a file with 100,000 rows of data is processed in less than 5 minutes.}
+{A test CSV file and a test Excel file containing 100,000 rows of data each.}
+{Upload both files and measure the processing time and memory usage.}
+{Both files get processed in less than 5 minutes without causing system crash.}
 
 \testcase{Test Case 20 (Password and Connection Security)}{20}{Muhammad Usman}{Muhammad Rizwan Arshad}{Security (Section~4.4.3)}
-{To check that passwords are hashed and the traffic uses HTTPS.}
-{A test database and a deployed test server.}
-{1. Look at the saved password field in the database. 2. Open the site over plain HTTP.}
-{Only hashed passwords are stored. Plain HTTP is not accepted.}
+{To make sure that the passwords are encrypted and the connection uses HTTPS protocol.}
+{A test database and a test deployed server.}
+{1. See the saved password column in the database. 2. Visit the website via plain HTTP.}
+{Only encrypted passwords are saved in the database. Plain HTTP connection is rejected.}
 
 \FloatBarrier
 \section{Test Metrics}
 
-The test metrics in Tables~\ref{tab:metrics-functional} and~\ref{tab:metrics-nonfunctional} will be filled in after the test cases are executed in FYP-2, and only the planned number of test cases is given at this stage. The functional metrics cover the sixteen test cases written for the use cases, and the non-functional metrics cover the four additional test cases for isolation, speed, large uploads and security. For each group, the number of passed and failed test cases and the defect density will be reported, where the defect density is the number of defects found divided by the number of test cases executed. Any test that fails will be investigated, the defect will be fixed, and the test will be repeated until it passes, so that the final metrics reflect the state of the system at the time of the final demonstration.
+The test metrics in Tables~\ref{tab:metrics-functional} and~\ref{tab:metrics-nonfunctional} will be provided after the tests are carried out in FYP-2, with only the proposed test cases being stated now. There are sixteen test cases under the functional metrics, which include the test cases for the use cases, and there are four more under the non-functional metrics for isolation, speed, large uploads and security. For both categories, the metrics will show the number of passed and failed test cases, together with the defect density, which will be calculated as the number of defects found over the number of test cases executed. All test cases that fail will be reviewed, the defects will be corrected, and the test case will be run again until it succeeds.
 
 \begin{table}[!htbp]
 \centering
@@ -2039,7 +2037,7 @@ Test Case Defect Density & To be filled \\ \hline
 \FloatBarrier
 \section{Conclusion}
 
-This chapter described how each module of StockSense will be implemented and how the system will be tested. Each module has its own tools and responsibility, from tenant management and the POS to forecasting, recommendations, markdown optimization and the dashboard, and the order of development follows the dependencies between them, with the data-producing modules built first. Every use case specified in Chapter~4 has at least one test case, and four further test cases cover the requirements that ordinary functional tests do not check, namely tenant isolation, the speed of POS transactions, the processing of large uploads and the security of passwords and connections. All test results will be recorded in FYP-2 once the system has been developed, and any test that fails will be fixed and repeated. The next chapter describes the experiments that will evaluate the forecasting models and the recommendations.
+In this chapter, implementation plan for each module of StockSense has been mentioned along with how testing of the system will be done. Each module has different set of tools and is responsible for something different from managing tenants to POS to forecasting to recommendations to markdown optimization to dashboard and development process of each module depends on the dependency between them. Also, every use case mentioned in Chapter~4 has test case and four more test cases have been defined to test the requirements which are not tested by regular functional test cases. These are tenant isolation, POS transaction time, uploading large files and security of password and connection. Test results will be kept in FYP-2 once system is developed and any failing test case will be corrected and retested. Following chapter mentions experiments for forecasting models and recommendations.
 
 % ============================================================
 % CHAPTER 9 - EXPERIMENTAL RESULTS AND DISCUSSION
@@ -2050,31 +2048,31 @@ This chapter described how each module of StockSense will be implemented and how
 \chapter{Experimental Results and Discussion}
 \label{ch:results}
 
-The development effort spent in FYP-1 focused mainly on requirements, methodology and design aspects of StockSense, and consequently, none of the planned forecasting and recommendation experiments were conducted. In this chapter we describe each individual experiment, along with the data used in it, experimental setup, and the table in which results of the experiment will be entered. All the result fields are labelled ``To be filled'' at this point and will be filled in FYP-2 according to the iterative process described in Section~\ref{sec:iterative}. The decision to fixate the experimental design at this point brings two advantages. On one hand, the fixed experimental design ensures that the experiments will validate particular decisions taken during the model construction in Chapter~5, and not just the resulting models, and on the other hand, it will ensure that the evaluation is fixed before the results are known, and cannot therefore be changed afterwards to adjust to the results. The chapter begins with statement of research questions answered by the experiments, and continues with description of datasets and data preparation procedure, experimental design and evaluation protocol and descriptions of all five experiments.
+As mentioned above, while FYP-1 development effort was mostly spent on StockSense requirements, methodology and design, the forecasting part of the approach was validated offline on public retail data. This chapter provides a description of each individual experiment, the dataset it is based on, the experimental setup, and the results of each experiment. All experiments are performed on the public M5 dataset~\cite{makridakis2022m5} since the data from the partner retailer are not available at the moment, and the experiments will be repeated on the retailer data in FYP-2 following the iterative process presented in Section~\ref{sec:iterative}. Having the experiment designed in advance makes two things easier. First, the experiments validate the specific design decisions made during the model building process in Chapter~\ref{ch:methodology} instead of the models itself, and second, the experiment cannot be modified after it is performed to fit its results. This chapter starts with the statements of the research questions being answered by the experiments followed by the description of the dataset and the way it was prepared, the protocol used in the experiments and their results.
 
 \section{Objectives of the Experiments}
 
-Each experiment answers one out of five questions that stem from the proposed approach to the problem of inventory control for small-scale retailers. The first question asks whether there is added benefit of using global LightGBM model over baseline statistical forecasting for product/size/store. The second question asks whether having one global model per tenant is more beneficial than having individual models for each series when sales history is limited. The third question asks for how long the sales history is sufficient for making a tenant new before we could have reliable forecast, so we'll know how long the client should wait after opening a business to receive predictions based on our models. The fourth question asks which loss function for LightGBM is the most appropriate for retail demand - Tweedie, Poisson or mean squared. The fifth question asks whether redistribution and markdown recommendations really decrease dead stocks and missed sales or doing nothing would yield more revenue. Questions one to four are related to the accuracy of forecast, whereas the fifth one is related to usefulness of the model.
+Each experiment answers one out of five questions stemming from the proposed approach to the problem of small-scale retailers inventory control. The first question is whether there is any advantage of using the global LightGBM model instead of the baseline statistical forecasting for product/size/store combination. The second question is whether having one global model per tenant is better than using individual models for each series in case of small sales history. The third question is how long the sales history is enough to make a tenant new in order to receive a reliable forecast and know how much time the client should wait after starting the business to get the predictions from our models. The fourth question is which loss function for LightGBM is the most appropriate for retail demand – Tweedie, Poisson or mean squared. The fifth question is whether the redistribution recommendations are helpful to reduce dead stock and lost sales or doing nothing would provide more profit. Questions one to four are about the prediction accuracy, while the fifth one is about the model usefulness.
 
 \section{Experimental Setup}
 
-Here we describe the dataset, pre-processing process, software and evaluation protocol which will be common for all the experiments.
+In this section we discuss the datasets, pre-processing steps, software and evaluation methodology common to all the experiments.
 
 \subsection{Datasets}
 
-Three datasets will be used in the research. First, M5 dataset~\cite{makridakis2022m5}, publically available and containing daily sales, prices and calendar events of products in Walmart stores will be used for testing and training the models and it will provide store-level forecasting and higher hierarchies as well. It is not possible to evaluate behaviour of sizes here, so the dataset will be used just for initial training of the models. The other two sources of data are sales data from multi-branch retailer and small sample clients. If access to the first source of data is available, it is planned to use it and conclude only with respect to size-related questions. Small samples will be used to test the upload pipeline and recommendation logic end-to-end.
+The M5 dataset~\cite{makridakis2022m5} is publicly available and provides daily sales volume, weekly prices and calendar information about products in ten Walmart stores. In order to make the setting similar to a small multi-branch retailer, one tenant was created using the Hobbies category from three stores of the same state (CA\_1, CA\_2 and CA\_3). This results in 565 products and 1,695 product-store time series with 277 complete weeks from January 2011 to May 2016, with 2.52 million units sold overall. There is no information about product sizes or stock level in M5, thus no questions related to the size of the product and stock can be answered using the dataset. The stock in Experiment~5 will be simulated. Sales data from a multi-branch retailer and small sample clients will be provided in FYP-2 to answer the size-related questions and to test the data upload and recommendation algorithm as a whole.
 
 \subsection{Data Preparation}
 
-Each series is then preprocessed and aggregated to weekly and monthly series according to the procedure outlined in Section~\ref{sec:series}. Smooth, erratic, intermittent and lumpy series are identified through the ADI and $\mathrm{CV}^2$ cutoff values of 1.32 and 0.49, respectively, in order to measure model accuracy independently for each demand class. Periods when stock-outs happen for a major part of time are regarded as censored and are omitted from the training process in order to exclude the fact that the observed sales underestimate true demand. All the features introduced in Section~\ref{sec:features} are then calculated for all series based on the historical data available at each forecasting moment. Experiments are conducted offline using Jupyter Notebook with Python, pandas, NumPy, scikit-learn, LightGBM and statsmodels. Random seeds are set in order to replicate results by each team member.
+Daily sales volumes were aggregated to weekly series following the procedure described in Section~\ref{sec:series}. The weeks before the first sale in a series were removed as it is impossible to know the demand before the product was launched, thus this demand is unknown rather than equal to zero. The smooth, erratic, intermittent and lumpy time series were classified according to ADI and $\mathrm{CV}^2$ threshold values of 1.32 and 0.49, respectively, based only on weeks before the test set in order to evaluate the models' accuracy independently for each class. Since M5 dataset does not provide any information on stock, the stock-outs cannot be identified and removed; hence, the sales are considered as demand. This issue is considered in the threats to validity section. The features listed in Section~\ref{sec:features} were calculated for all series based only on the data available at each forecast moment: lagged weekly sales (1 to 8 and 52 weeks), rolling averages, standard deviation and share of zero weeks over 4, 8 and 12 weeks, week of year, month, price, relative price and price change, series age, weeks since last sale, and store, department and item IDs. Experiments were performed offline using the Python code with pandas, NumPy, LightGBM 4.7.0 and statsmodels 0.15.0 packages. The random seed was fixed to 42 in order to allow replication of the results by each team member.
 
 \subsection{Evaluation Protocol}
 
-The time splits are all chronological, so that the models are always trained on earlier horizons and validated on subsequent horizons. The hyperparameters of the models are tuned using a rolling origin validation procedure on an increasing time window, and in the final evaluation, the most recent horizon is used; this is never observed by any model during training or hyperparameter tuning. All models and baselines are always evaluated on exactly the same time splits, which ensures that any differences in performance can be attributed to the difference between the models and not to any difference in the data. Performance is measured in terms of the RMSE, MAE, WAPE, and non-zero MAPE defined in Section~\ref{sec:evaluation}, and the percentage of periods that were excluded due to zero demand in the actual forecast is also given when reporting the MAPE.
+All of the time splits are chronological so the models are always trained on earlier weeks and tested on later weeks. The last 13 weeks (from 20 February to 14 May 2016) constitute the test period which was never seen by any of the models during the training and the parameter tuning. 13 weeks preceding it served as the validation period for LightGBM early stopping; the rest of the parameters were left at the commonly used values and not tuned. All models and baselines provide one-week-ahead forecasts and they are all evaluated on exactly the same 22,035 test points (1,695 series $\times$ 13 weeks). This guarantees that any differences in the performance are due to the difference between the models and not due to the difference in the data. The performance is quantified using the RMSE, MAE, WAPE, and non-zero MAPE described in Section~\ref{sec:evaluation}. In the test period 20.4\% of the actual values are zeroes, and these points are not considered when calculating the MAPE.
 
 \section{Exploratory Analysis of the Demand Data}
 
-Prior to training of any models, the analysis of the sparsity of the demand series should be performed and the results of the analysis will be shown in Table~\ref{tab:demand-classes}, where the number and the proportion of series belonging to each demand class will be recorded. The importance of the sparsity analysis comes from the fact that it affects both the choice of the most appropriate baseline and the expected accuracy of the model. In case if the proportion of the series of intermittent or lumpy demand is high, then the use of the baselines appropriate for these demand series, such as Croston's approach, becomes more significant and percentage errors like MAPE lose their meaning. Also, the proportion of the stockouts and censored data will help to identify how much underestimated demand is in sales figures. This procedure will be done for each dataset separately since the public data set and retailer's one should differ greatly in their sparsity.
+Before any models were trained, the degree of sparsity of the demand series was studied, and the number and the proportion of series of each demand class is given in Table~\ref{tab:demand-classes}. The significance of the analysis of sparsity lies in the fact that it influences both the choice of the best suited baseline and the expected accuracy of the model. Nearly half of the series (47\%) are intermittent or lumpy, and 25.2\% of all series-weeks before the test period had zero sales, even after the weekly aggregation. With such a share of sparse series, the baselines designed for the intermittent demand, such as Croston's method, acquire extra significance and percentage errors such as MAPE become less meaningful. Such an analysis will be done on the retailer data in FYP-2, as the sparsity in the retailer's demand at the size level is expected to be much higher.
 
 \begin{table}[!htbp]
 \centering
@@ -2083,16 +2081,17 @@ Prior to training of any models, the analysis of the sparsity of the demand seri
 \begin{tabular}{|l|p{3.5cm}|p{3.5cm}|}
 \hline
 \textbf{Demand Class} & \textbf{Number of Series} & \textbf{Share of Series (\%)} \\ \hline
-Smooth & To be filled & To be filled \\ \hline
-Erratic & To be filled & To be filled \\ \hline
-Intermittent & To be filled & To be filled \\ \hline
-Lumpy & To be filled & To be filled \\ \hline
+Smooth & 816 & 48.1 \\ \hline
+Erratic & 83 & 4.9 \\ \hline
+Intermittent & 611 & 36.0 \\ \hline
+Lumpy & 185 & 10.9 \\ \hline
+\textbf{Total} & \textbf{1,695} & \textbf{100.0} \\ \hline
 \end{tabular}
 \end{table}
 
-\section{Experiment 1 -- LightGBM Against Statistical Baselines}
+\section{Experiment 1 -- LightGBM vs. Statistical Baselines}
 
-The goal of the current experiment is to examine the key assertion concerning model selection made in Chapter~3 that the global LightGBM model is superior in accuracy to the simple baselines in forecasting retail demand with a high degree of precision. The global LightGBM model using the Tweedie objective function and all of the baselines will be tested on the same chronological test period with a weekly horizon, and their outcomes will be presented in Table~\ref{tab:exp1}. The outcomes will be further broken down into demand classes and fast-moving and slow-moving goods, as the average outcome will obscure the poor accuracy of the methods in forecasting sparse series that are critical in dealing with dead stock.
+In this experiment, we aim at investigating the central claim regarding the model selection discussed in Chapter~3 that the global LightGBM model is more accurate than any baseline models in retail demand prediction. Both the global LightGBM model trained on the Tweedie objective function and all baselines were compared in terms of their performance in forecasting on the same chronological holdout period with one-week ahead horizon, and the results are summarized in Table~\ref{tab:exp1}. For the moving average, the number of prior periods used is equal to 4 weeks, Holt-Winters applies the additive trend with damping and yearly seasonality (52 weeks), Croston uses the smoothing parameter of 0.1, while the seasonal naive forecast relies on the last period observation at 0.2\% of test cases that do not have one-year history.
 
 \begin{table}[!htbp]
 \centering
@@ -2101,51 +2100,73 @@ The goal of the current experiment is to examine the key assertion concerning mo
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \textbf{Model} & \textbf{RMSE} & \textbf{MAE} & \textbf{WAPE (\%)} & \textbf{MAPE (\%)} \\ \hline
-Naive (last value) & To be filled & To be filled & To be filled & To be filled \\ \hline
-Seasonal naive & To be filled & To be filled & To be filled & To be filled \\ \hline
-Moving average & To be filled & To be filled & To be filled & To be filled \\ \hline
-Holt--Winters & To be filled & To be filled & To be filled & To be filled \\ \hline
-Croston's method & To be filled & To be filled & To be filled & To be filled \\ \hline
-LightGBM (global) & To be filled & To be filled & To be filled & To be filled \\ \hline
+Naive (last value) & 6.99 & 3.36 & 53.27 & 77.56 \\ \hline
+Seasonal naive & 8.62 & 4.09 & 64.84 & 82.84 \\ \hline
+Moving average & 5.73 & 2.81 & 44.52 & 61.43 \\ \hline
+Holt--Winters & 6.42 & 3.10 & 49.09 & 64.99 \\ \hline
+Croston's method & 5.76 & 2.86 & 45.33 & 57.30 \\ \hline
+\textbf{LightGBM (global)} & \textbf{5.56} & \textbf{2.69} & \textbf{42.66} & \textbf{55.93} \\ \hline
+\end{tabular}
+\end{table}
+
+LightGBM yields the smallest error on all four performance metrics. The difference in WAPE between LightGBM and the most accurate baseline (four-week moving average) is 1.9 percentage points; in relative terms, it is about 4\%. This improvement is not big, which confirms the M5 results about the difficulty in beating simple models at the item level~\cite{makridakis2022m5}. The WAPE values are separated by demand classes in Table~\ref{tab:exp1-class}, since the average value may disguise the lack of accuracy of the algorithm on sparse series, which are important to detect dead inventory. LightGBM is the most accurate method in all classes, with the biggest gains on intermittent (2.6 points) and lumpy (3.6 points) series.
+
+\begin{table}[!htbp]
+\centering
+\caption{WAPE (\%) by Demand Class}
+\label{tab:exp1-class}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{Model} & \textbf{Smooth} & \textbf{Erratic} & \textbf{Intermittent} & \textbf{Lumpy} \\ \hline
+Moving average & 39.62 & 51.73 & 54.69 & 71.51 \\ \hline
+Holt--Winters & 44.32 & 58.49 & 58.54 & 73.69 \\ \hline
+Croston's method & 39.78 & 54.92 & 58.03 & 70.81 \\ \hline
+\textbf{LightGBM (global)} & \textbf{37.96} & \textbf{50.95} & \textbf{52.07} & \textbf{67.90} \\ \hline
 \end{tabular}
 \end{table}
 
 \section{Experiment 2 -- Global Model Against Separate Models}
 
-In their research, Montero-Manso and Hyndman~\cite{montero2021principles} and Bandara et al.~\cite{bandara2020forecasting} claim that one model for all time series may be more accurate than individual models for different time series in the case of relatively small time series length. In this research, the hypothesis is tested using three time series of StockSense product, size, and stores, respectively. The same data set for both training and testing will be used, and accuracy and training times will be provided in Table~\ref{tab:exp2}. Training time will also be included as a performance metric because a large number of tenants need a system to train models often. Thus, slightly more accurate, but a lot slower approach will not be suitable. The experiment results will also be analyzed in terms of time series lengths because the main advantage of a global model should manifest itself in short time series.
+In their experiments, Montero-Manso and Hyndman~\cite{montero2021principles} and Bandara et al.~\cite{bandara2020forecasting} argue that a single model for all time series can be more accurate than several models for distinct time series when the length of time series is relatively short. In order to test this, one global LightGBM model based on all 1,695 series was compared with 1,695 distinct LightGBM models, one per series, with the same features (excluding the identifier features), the same training data and the same test period. The results are presented in Table~\ref{tab:exp2}, and the training times are included as well, since a high-performance system, which has to train many models frequently, should not use a slower approach even if it is slightly more accurate. Both of the times were measured on the same laptop.
 
 \begin{table}[!htbp]
 \centering
-\caption{Global Model Against Separate Models}
+\caption{Global Model vs Separate Models}
 \label{tab:exp2}
 \begin{tabular}{|l|l|l|l|}
 \hline
 \textbf{Approach} & \textbf{RMSE} & \textbf{WAPE (\%)} & \textbf{Training Time} \\ \hline
-One global model per tenant & To be filled & To be filled & To be filled \\ \hline
-One model per series & To be filled & To be filled & To be filled \\ \hline
+One global model per tenant & 5.56 & 42.66 & 8 s \\ \hline
+One model per series & 6.01 & 46.66 & 92 s \\ \hline
 \end{tabular}
 \end{table}
 
+As can be seen, the global model performs better in both ways: its WAPE is 4.0 points less, and the training time is approximately 11 times less. Moreover, the separate models are also inferior to the moving average baseline (44.52\%), since each of them has only a few hundred weeks for learning. This justifies the decision to use one global model per tenant, made in Chapter~5.
+
 \section{Experiment 3 -- Amount of Training History}
 
-Since a new tenant will not have access to the model predictions until having enough history of sales, which is explained in Section~\ref{sec:forecasting}, this experiment aims to find the smallest one through training the model using 4, 8 and 12 weeks of history and testing it against the same period of time each, and the results will be shown in Table~\ref{tab:exp3}. The shortest history, starting from which the performance of the model is significantly higher than the performance of the best baseline will be used by the system as its minimum history criterion. Below this criterion, a new tenant will have access either to the baseline forecasting or a request to collect more data. Thus, this experiment can affect the onboarding process of a new business directly because the smaller threshold makes useful forecasting possible earlier.
+Given that the model will be unavailable to the new tenant, who will not have enough history of sales to use model predictions, which is discussed in the forecasting section (Section~\ref{sec:forecasting}), the goal of this experiment is to identify the minimum necessary history. The tenant was assumed new in that sense by removing all the historical data older than 4, 8, 12 and 26 weeks before the test period, training the global model using the remaining data (aggregated across all series) and testing on the 13 test weeks. 
 
 \begin{table}[!htbp]
 \centering
-\caption{Forecast Accuracy Against Training History}
+\caption{Forecast Accuracy Versus Training History}
 \label{tab:exp3}
 \begin{tabular}{|l|l|l|p{4cm}|}
 \hline
 \textbf{History Used} & \textbf{RMSE} & \textbf{WAPE (\%)} & \textbf{Better than Best Baseline?} \\ \hline
-4 weeks & To be filled & To be filled & To be filled \\ \hline
-8 weeks & To be filled & To be filled & To be filled \\ \hline
-12 weeks & To be filled & To be filled & To be filled \\ \hline
+4 weeks & 6.09 & 45.95 & No ($+1.43$) \\ \hline
+8 weeks & 5.87 & 44.75 & No ($+0.23$) \\ \hline
+12 weeks & 5.76 & 44.02 & Yes ($-0.50$) \\ \hline
+26 weeks & 5.65 & 43.45 & Yes ($-1.07$) \\ \hline
+Full history (5 years) & 5.56 & 42.66 & Yes ($-1.86$) \\ \hline
 \end{tabular}
 \end{table}
 
+Accuracy increases progressively with the amount of history used. While 4 or 8 weeks yield a model worse than the moving average (WAPE 44.52\%) baseline, 12 weeks already give a marginally better model, and the improvement continues up to the full history. The minimum history criterion for the system, therefore, is set to 12 weeks; for less history, the new tenant gets a moving average forecast. Given the small improvement at 12 weeks, the dashboard must indicate early forecasts as provisional up to 26 weeks of data.
+
 \section{Experiment 4 -- Loss Function Comparison}
 
-Demand is always non-negative with lots of zeroes and thus Tweedie objective function was selected in chapter~5. The goal of the present experiment is to verify this decision via retraining LightGBM with the Tweedie objective function, Poisson objective and square error objectives with other parameters being the same; results of this experiment will be reported in Table~\ref{tab:exp4}. Square error function is included into experiment as the reference point for comparison, since it is the default objective function of most regression algorithms even though its behavior does not fit the structure of sparse demand data. If Poisson objective function performs equally good to Tweedie, it would be better to use it as a simpler case with one less tuning parameter. Comparison should be done for each demand class since Tweedie and Poisson advantages over square error will be greatest for intermittent and lumpy classes.
+Demand is always non-negative with plenty of zeroes and, therefore, the Tweedie objective function was chosen in Chapter~5. In order to confirm that decision in this experiment, LightGBM model is being retrained using three different objective functions: Tweedie objective function with variance power 1.2, Poisson objective and square error objectives with all other parameters remaining the same; the results of this experiment are given in Table~\ref{tab:exp4}. Squared error objective function is used in this experiment as a baseline to compare the models with, despite the fact that it is not the appropriate objective function for this type of data and is a default regression objective function for many algorithms.
 
 \begin{table}[!htbp]
 \centering
@@ -2154,43 +2175,49 @@ Demand is always non-negative with lots of zeroes and thus Tweedie objective fun
 \begin{tabular}{|l|l|l|l|}
 \hline
 \textbf{Objective} & \textbf{RMSE} & \textbf{MAE} & \textbf{WAPE (\%)} \\ \hline
-Tweedie & To be filled & To be filled & To be filled \\ \hline
-Poisson & To be filled & To be filled & To be filled \\ \hline
-Squared error & To be filled & To be filled & To be filled \\ \hline
+Tweedie & 5.56 & 2.69 & 42.66 \\ \hline
+Poisson & 5.59 & 2.69 & 42.70 \\ \hline
+Squared error & 5.55 & 2.73 & 43.27 \\ \hline
 \end{tabular}
 \end{table}
+
+The differences are marginal. Tweedie and Poisson are nearly identical and have lower MAE and WAPE compared to squared error, but squared error has lower RMSE due to the fact that it directly minimizes squared deviation. As Tweedie is not obviously superior to Poisson on this particular data, Poisson is an acceptable alternative with fewer parameters to tune. For now, Tweedie is going to be left as a default and comparison will be repeated on size-level retailer data in FYP-2, where the difference between objectives is going to be more pronounced.
 
 \section{Experiment 5 -- Recommendation Backtest}
 
-The final experiment determines the value of the redistribution, markdown and reorder recommendations by re-playing historical sales, as explained in Section~\ref{sec:evaluation}. For each cut-off date, the engine makes the recommendations based on the data up until the cut-off date. This is done against a simulated stock file, and then the subsequent weeks are re-played using the actual sales as demand. The same weeks are re-played without taking any action, and the two re-plays are compared in Table~\ref{tab:exp5} by looking at the number of dead-stock items, the number of lost sale items due to out-of-stocks, the sell-through rate, the number of transfers, and the effect on margin. In contrast to the first four experiments, this one evaluates the impact of StockSense on business results, which is the key metric for the retailer.
+The fifth experiment reveals the value of the recommendations by re-playing historical sales, as described in Section~\ref{sec:evaluation}. Because there is no stock data in M5, a simple stock dataset was created: for each item, the initial stock at the cut-off date was set to the actual total sales during the following eight weeks in all three stores divided equally between the stores. This allows keeping the total stock constant and testing the impact of positioning it correctly. For each of four cut-off dates (which occur eight weeks apart and span the last 32 weeks of data), a LightGBM model trained on the data prior to the cut-off date makes predictions about the eight-week demand per store using a 90\% quantile model for extra safety. Then, the engine redistributes excess units from branches with excess stock to branches with insufficient stock, and transfers happen after a week. In the following eight weeks, the re-play is performed twice, using actual sales as the demand – with transfers and with no action taken at all, and their results are shown in Table~\ref{tab:exp5}. Markdown and reorder recommendations were not tested because they require data about costs and price elasticity which M5 lacks.
 
 \begin{table}[!htbp]
 \centering
-\caption{Recommendation Backtest Results}
+\caption{Backtest Results for Recommendations}
 \label{tab:exp5}
 \begin{tabular}{|p{4.5cm}|p{3cm}|p{3.2cm}|p{2.5cm}|}
 \hline
-\textbf{Measure} & \textbf{No Action} & \textbf{With StockSense} & \textbf{Change} \\ \hline
-Dead-stock units & To be filled & To be filled & To be filled \\ \hline
-Lost sales (units) & To be filled & To be filled & To be filled \\ \hline
-Sell-through rate (\%) & To be filled & To be filled & To be filled \\ \hline
-Number of transfers & -- & To be filled & -- \\ \hline
-Estimated margin impact & -- & To be filled & -- \\ \hline
+\textbf{Metric} & \textbf{No Action} & \textbf{With StockSense} & \textbf{Change} \\ \hline
+Dead-stock units & 57,021 & 42,803 & $-24.9\%$ \\ \hline
+Lost sales (units) & 57,021 & 42,803 & $-24.9\%$ \\ \hline
+Sell-through rate (\%) & 83.6 & 87.7 & $+4.1$ points \\ \hline
+Number of transfers & -- & 1,133 (18,544 units) & -- \\ \hline
+Recovered sales revenue (USD) & -- & 72,390 & -- \\ \hline
+Markdown recommendations & To be filled & To be filled & To be filled \\ \hline
+Reorder recommendations & To be filled & To be filled & To be filled \\ \hline
 \end{tabular}
 \end{table}
+
+During four windows, 347,478 units were simulated as stock. Redistribution decreased the dead stock and lost sales by 24.9\% each and increased the sell-through rate from 83.6\% to 87.7\% by transferring 5.3\% of the stock in 1,133 transfers. Dead stock and lost sales are identical in this case because the total stock equals the total demand, and thus each unsold unit in one branch means the loss of a sale in another. The sales revenue is computed using M5 selling prices; it is impossible to compute the profit margins because the product costs are unknown.
 
 \FloatBarrier
 \section{Discussion}
 
-After results have been obtained, the discussion will be concerned with three issues. First, it will be assessed whether LightGBM can be accurate enough relative to the baselines to compensate for the increased complexity of the model, which is especially important for intermittent and lumpy series, as simple models tend to perform well in such cases. Second, the discussion will consider how many historical periods a new tenant should have, because this will determine how long the onboarding process takes in UC-10 and thus how fast a new company recognizes the benefits from the paid functionalities. Third, whether the process of redistribution helps to lower the level of dead stock and missed sales compared to markdowns alone will be discussed, as this is the key proposition behind StockSense and its competitive advantage against the platforms considered in Chapter~3. The M5 results~\cite{makridakis2022m5} and the research on small businesses by Purnamasari et al.~\cite{purnamasari2023demand} make one think that gradient-boosted models will outperform statistical baselines, yet this belief has to be confirmed with our own experiments, especially in the case of short historical data.
+This section addresses three questions raised above. First, LightGBM proved to be the best-performing model overall and in each demand category with the biggest improvements in performance on intermittent and lumpy series, where the simple model works well. Improvement over the moving average model is not very large (less than 4\% in WAPE), so the increase in model complexity is motivated primarily by the fact that a single model applies to all tenants as quickly as Experiment~2 has shown. Secondly, a new tenant will require about 12 weeks of historical data to exceed the baseline level, which is the length of the onboarding process in UC-10, after which forecasts from paid functionality will start to work. Thirdly, the redistribution step alone resulted in the reduction of dead stock and missed sales by about a quarter without increasing stock levels, which supports the main idea behind StockSense and its competitive advantage over the platforms discussed in Chapter~3. This agrees with the M5 results~\cite{makridakis2022m5} and research on small businesses by Purnamasari et al.~\cite{purnamasari2023demand} showing the superiority of gradient-boosted models compared to statistical baselines, albeit only when enough data is available.
 
 \subsection{Threats to Validity}
 
-There are several possible threats to the generalizability of the results. First of all, the M5 dataset does not store information on product size, and thus any inference on demand by size can be made only on the basis of data from a real retailer. Sales in cases when a stockout has occurred underestimate demand, thus introducing bias in both forecasting and backtesting after exclusion of censored periods due to the fact that some short or partial stockouts might go unnoticed. Furthermore, the backtest is performed on the assumption of constant transfer lead time and constant price elasticity for markdowns, assumptions that do not necessarily hold in practice, and the obtained estimates of the effect should be treated only as indications and not exact forecasts. Results obtained on one particular retailer or dataset cannot be generalized to every single tenant, as businesses vary in terms of the product portfolio, seasonality, and number of branches.
+The following are potential threats to generalizability of the experiment's findings. First of all, the M5 dataset lacks data on the size of items, so demand analysis by size can be done only based on data from a real retailer. The presence of stockouts makes sales data underestimates demand, and M5 being without stock data made it impossible to exclude these periods, which introduces a bias into both the forecasting part and the backtest. The backtest was done using a simulated stock file where stock is divided equally and total stock equals total demand with a fixed transfer lead time of one week, so the effect sizes are only indicative and not actual forecasts; using initial stock allocation of a real retailer would make the effect size smaller. Hyperparameters were not optimized, and there was only one test period in Experiments~1 to 4, so minor differences in results, such as those between objective functions, may be statistically insignificant. Finally, results obtained for one category of three Walmart stores cannot be generalized to all tenants, as businesses differ in their product range, seasonality, and number of locations.
 
 \section{Conclusion}
 
-The experiments used to assess StockSense were outlined in this chapter, which involved demand sparsity analysis, the comparison between LightGBM and statistical baselines, the comparison between global and separate models, the assessment of minimum training history, the comparison between loss functions, and a historical backtesting of the recommendations. Both datasets and data pre-processing, the evaluation process, and the result tables were predetermined to ensure the consistency of experiments carried out in FYP-2. Overall, the experiments will test all key decisions related to the methodology used in this research project, starting with the choice of the model and loss function used and ending with the priority given to redistribution. In addition to measuring the forecasting accuracy and its influence on dead stock and lost sales, the results will be included into the tables given above and discussed in FYP-2.
+In this chapter, the experiments that were done in order to evaluate StockSense based on the public M5 data set have been described: demand sparsity experiments, LightGBM vs baselines experiment, global vs separate models experiment, minimum required training history evaluation, loss functions comparison, and redistribution backtesting experiment. The most accurate approach is the global LightGBM model; it works significantly faster than separate models and requires about 12 weeks of history to outperform all baselines. The global LightGBM model performs similarly to the Tweedie and Poisson objectives. As a result of redistribution backtesting, the dead stock and losses were decreased by about 25\%. In FYP-2 the same experiments will be done using the retailer data with actual size and stock information, and also markdown and reorders will be included in backtesting.
 
 % ============================================================
 % CHAPTER 10 - CONCLUSION AND FUTURE WORK
@@ -2202,13 +2229,13 @@ This chapter summarizes the work completed in FYP-1 and presents the plan for th
 
 \section{Conclusion}
 
-StockSense is proposed as a multi-tenant SaaS platform that helps small and medium-sized retailers manage their products, variants, inventory and stores in a single system. The platform combines a free POS and inventory layer with the upload of historical sales, demand forecasting at the product, size and location level, stock redistribution, markdown optimization, reorder recommendations and explanations for every recommended action. The proposed design addresses the main inventory problems of the target retailers. It uses sales data to reveal differences in demand between products, variants and branches, and it gives priority to moving available stock from a branch with a surplus to a branch with a shortage before suggesting markdowns or new orders. It also stores the reasons and estimated financial impact of each recommendation, so that business owners can understand and review the decisions of the system rather than follow a black box. The report has presented the project vision, the business opportunity, the related research and commercial products, the requirements, the methodology, the system architecture, the database design, the security controls, the testing strategy, the maintenance approach and the planned experiments.
+StockSense is presented as a multi-tenant SaaS solution that enables small and medium-sized retailers to manage their products, variants, inventory and stores using a single application. The application consists of a free POS and inventory layer, uploading of past sales, demand forecast on the level of product, variant and store, redistribution of the stock, markdown optimization, recommendations to reorder and reasons of these recommendations. The design of StockSense solves inventory challenges that the target retailers face. The application leverages sales history to highlight the disparities between demand for the products, variants and stores and puts emphasis on the relocation of the excess stock from one store to another in case of need prior to the markdowns or new orders. In addition, the application keeps track of the reasoning behind each recommendation and its financial impact to provide business owners with understanding of the decision-making process and not treat it as a black box. The report has reviewed the project vision, the business opportunity, the research and commercial products relevant to the problem, the requirements, the methodology, the architecture, the database design, the security measures, the testing, the maintenance and the experiments.
 
-The work completed in FYP-1 therefore covers the definition of the system scope, the review of competing platforms and previous research, the functional and non-functional requirements, the use cases, the data ingestion process, the forecasting and recommendation workflow, the evaluation protocol and the high-level and low-level design. The plan for FYP-2 follows the iterative approach described in Chapter~5. The backend, database, authentication, tenant isolation, dashboard, POS workflows and CSV and Excel upload pipeline will be implemented and integrated first, using a React dashboard, a Python REST backend, PostgreSQL, and pandas with openpyxl for data processing. The forecasting experiments of Chapter~9 will then be run, and the selected LightGBM model will be integrated together with its statistical baselines. After that, the redistribution recommendations, markdown optimization, reorder suggestions and explanation features will be developed. The completed system will be tested through unit, integration and end-to-end testing, evaluated with forecasting metrics and the historical backtest, and prepared for documentation, deployment and the final demonstration.
+The work done in FYP-1 is thus related to the determination of the system scope, the analysis of the competitors' systems and the literature, the functional and non-functional requirements, the use cases, the data ingestion, the forecasting and recommendation pipeline, the evaluation methodology and the high level and low level design. The plan for FYP-2 is based on the iterative procedure explained in Chapter~5. The backend, database, authentication, multi-tenancy, dashboard, POS flow and CSV/Excel import pipeline will thus be built and integrated first, by means of React dashboard, Python REST backend, PostgreSQL and pandas + openpyxl data processing library. After that, the experiments with the forecasting in Chapter~9 will be performed and the LightGBM algorithm chosen and integrated together with its statistical baselines. Finally, the redistribution recommendations, markdown optimization, reorder recommendations and explanation features will be developed.
 
 \section{Future Work}
 
-Several extensions are planned beyond the scope of FYP-2. The first is to address the cold-start problem for businesses that have no past sales data at all, so that they can receive useful insights from the first day instead of waiting until enough history has been recorded. This could be done by using aggregated and anonymized patterns from similar businesses, with strict safeguards to preserve tenant isolation. The second is to make the platform compatible with a wide range of external POS systems through direct integrations, so that data can flow into StockSense automatically instead of being uploaded manually. The third is to add seasonal and promotional features that take into account changes in demand during holidays, festivals and different seasons, as well as the effect of discounts and special offers on sales. The fourth is to extend the redistribution model with transfer lead times and capacity limits, which are currently handled only as assumptions in the backtest. Together these extensions will help the system provide more accurate forecasts and more useful recommendations to a wider range of businesses.
+There are several extensions planned outside the scope of FYP-2. Firstly, it is necessary to solve the issue of cold start, meaning the situation when there are no historical sales data in any way. Therefore, the system should be able to analyze the business based on the patterns aggregated from similar businesses, and do this with the highest security measures to keep tenant isolation. Secondly, it would be great to make the platform compatible with a variety of external POS systems via direct integration, in order not to require manual uploading of the data but make it possible to flow into StockSense automatically. Thirdly, there should be a set of features related to seasonality and promotion, which take into account such factors as holiday and festival periods and different seasons, as well as discounts and special offers. Fourthly, it would be reasonable to develop a model of redistribution which takes into account the transfer lead time and capacity, both of which are only assumed in backtest.
 
 \bibliographystyle{IEEEtranN}
 \bibliography{fypbib}
