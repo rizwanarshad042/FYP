@@ -1793,25 +1793,6 @@ This chapter described the high and low-level designs of StockSense. The archite
 % CHAPTER 7 - IMPLEMENTATION AND TEST CASES
 % ============================================================
 
-% helper for the test case tables
-\newcommand{\testcase}[9]{%
-\begin{table}[!htbp]
-\centering
-\caption{#1}
-\begin{tabular}{|l|p{9.5cm}|}
-\hline
-Test Case ID & #2 \\ \hline
-QA Test Engineer & #3 \\ \hline
-Reviewed By & #4 \\ \hline
-Test Date & To be filled \\ \hline
-Use Case Reference & #5 \\ \hline
-Objective & #6 \\ \hline
-Pre-Requisite & #7 \\ \hline
-Steps & #8 \\ \hline
-Expected Result & #9 \\ \hline
-Result & Not yet executed \\ \hline
-\end{tabular}
-\end{table}}
 
 \chapter{Implementation and Test Cases}
 
@@ -1887,125 +1868,520 @@ Each use case in Chapter~4 has at least one test case, and the upload use case h
 
 Test Cases 1-16 test whether each use case works according to its specification, but do not test such vital non-functional requirements of Chapter~4. There are four additional test cases, numbered 17-20, covering data isolation of tenants, transaction speed of POS, large file upload process speed and password security and the usage of secure connections. Such requirements are essential for a multi-tenant system that can be trusted by small businesses for the storage of their sales data and the usage during busy business hours. Test cases have the same format as functional test cases, only they refer to a requirement or section instead of a use case. As the other test cases, they will be tested in FYP-2 upon the completion of corresponding modules.
 
-\testcase{Test Case 1 (Register Business)}{1}{Muhammad Usman}{Muhammad Rizwan Arshad}{UC-01 Register Business}
-{To ensure that a new business registers and a free tier tenant is generated for it.}
-{The email has not registered yet.}
-{1. Visit the registration page. 2. Fill out the form with business name, owner name, email and password. 3. Submit the form.}
-{A tenant account, free subscription and owner account are created, while a verification email is sent. When registering again using the same email, an error occurs.}
+\begin{table}[!htbp]
+\centering
+\caption{Test Case 1 (Register Business)}
+{\small\linespread{1}\selectfont
+\begin{tabular}{|p{0.2\textwidth}|p{0.28\textwidth}|p{0.2\textwidth}|p{0.22\textwidth}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Tenant and User Management}} \\ \hline
+\multicolumn{4}{|c|}{\textbf{UC-01 Register Business}} \\ \hline
+\textbf{Test Case ID:} & 1 & \textbf{QA Test Engineer:} & Muhammad Usman \\ \hline
+\textbf{Test Case Version:} & 1.0 & \textbf{Reviewed By:} & Muhammad Rizwan Arshad \\ \hline
+\textbf{Test Date:} & To be filled & \textbf{Use Case Reference(s):} & UC-01 \\ \hline
+\textbf{Revision History:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{None (first version)} \\ \hline
+\textbf{Objective:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{To ensure that a new business registers and a free tier tenant is generated for it.} \\ \hline
+\textbf{Product/Ver/Module:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{StockSense 1.0 / Tenant and User Management} \\ \hline
+\textbf{Environment:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{Linux development environment, Google Chrome, local backend and PostgreSQL database} \\ \hline
+\textbf{Assumptions:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{The sample tenants and test data described in Section 7.2 are available.} \\ \hline
+\textbf{Pre-Requisite:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{The email has not registered yet.} \\ \hline
+\textbf{Step No.} & \textbf{Execution Description} & \multicolumn{2}{l|}{\textbf{Procedure Result}} \\ \hline
+1 & Visit the registration page. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{The registration page opens.} \\ \hline
+2 & Fill out the form with business name, owner name, email and password. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{The form accepts the entered details.} \\ \hline
+3 & Submit the form. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{A tenant account, free subscription and owner account are created, while a verification email is sent. When registering again using the same email, an error occurs.} \\ \hline
+\multicolumn{4}{|l|}{\textbf{Comments:} Not yet executed; the test will be run in FYP-2.} \\ \hline
+\multicolumn{4}{|c|}{\textbf{Passed \quad Failed \quad Not Executed}} \\ \hline
+\end{tabular}\par}
+\end{table}
 
-\testcase{Test Case 2 (Login)}{2}{Muhammad Usman}{Hayyan Haider}{UC-02 Login}
-{To test login process with valid and invalid credentials and when the tenant account is suspended.}
-{There is a registered user account.}
-{1. Login using the email and password. 2. Login using the wrong password. 3. Suspend the tenant account and try logging in.}
-{Logging in with valid credentials opens the dashboard. Entering the wrong password prompts ``Incorrect email or password''. Suspended tenants are unable to login.}
+\begin{table}[!htbp]
+\centering
+\caption{Test Case 2 (Login)}
+{\small\linespread{1}\selectfont
+\begin{tabular}{|p{0.2\textwidth}|p{0.28\textwidth}|p{0.2\textwidth}|p{0.22\textwidth}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Tenant and User Management}} \\ \hline
+\multicolumn{4}{|c|}{\textbf{UC-02 Login}} \\ \hline
+\textbf{Test Case ID:} & 2 & \textbf{QA Test Engineer:} & Muhammad Usman \\ \hline
+\textbf{Test Case Version:} & 1.0 & \textbf{Reviewed By:} & Hayyan Haider \\ \hline
+\textbf{Test Date:} & To be filled & \textbf{Use Case Reference(s):} & UC-02 \\ \hline
+\textbf{Revision History:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{None (first version)} \\ \hline
+\textbf{Objective:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{To test login process with valid and invalid credentials and when the tenant account is suspended.} \\ \hline
+\textbf{Product/Ver/Module:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{StockSense 1.0 / Tenant and User Management} \\ \hline
+\textbf{Environment:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{Linux development environment, Google Chrome, local backend and PostgreSQL database} \\ \hline
+\textbf{Assumptions:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{The sample tenants and test data described in Section 7.2 are available.} \\ \hline
+\textbf{Pre-Requisite:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{There is a registered user account.} \\ \hline
+\textbf{Step No.} & \textbf{Execution Description} & \multicolumn{2}{l|}{\textbf{Procedure Result}} \\ \hline
+1 & Login using the email and password. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{Logging in with valid credentials opens the dashboard.} \\ \hline
+2 & Login using the wrong password. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{Entering the wrong password prompts ``Incorrect email or password''.} \\ \hline
+3 & Suspend the tenant account and try logging in. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{Suspended tenants are unable to login.} \\ \hline
+\multicolumn{4}{|l|}{\textbf{Comments:} Not yet executed; the test will be run in FYP-2.} \\ \hline
+\multicolumn{4}{|c|}{\textbf{Passed \quad Failed \quad Not Executed}} \\ \hline
+\end{tabular}\par}
+\end{table}
 
-\testcase{Test Case 3 (Manage Stores)}{3}{Hayyan Haider}{Muhammad Usman}{UC-03 Manage Stores}
-{To validate the process of adding, editing and removing the store.}
-{Owner logs into the system.}
-{1. Add a new store. 2. Update the name of the added store. 3. Delete a store that contains sales history.}
-{A new store is added and edited. An existing store containing sales history cannot be removed, but rather gets archived.}
+\begin{table}[!htbp]
+\centering
+\caption{Test Case 3 (Manage Stores)}
+{\small\linespread{1}\selectfont
+\begin{tabular}{|p{0.2\textwidth}|p{0.28\textwidth}|p{0.2\textwidth}|p{0.22\textwidth}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Store, Product and Inventory Management}} \\ \hline
+\multicolumn{4}{|c|}{\textbf{UC-03 Manage Stores}} \\ \hline
+\textbf{Test Case ID:} & 3 & \textbf{QA Test Engineer:} & Hayyan Haider \\ \hline
+\textbf{Test Case Version:} & 1.0 & \textbf{Reviewed By:} & Muhammad Usman \\ \hline
+\textbf{Test Date:} & To be filled & \textbf{Use Case Reference(s):} & UC-03 \\ \hline
+\textbf{Revision History:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{None (first version)} \\ \hline
+\textbf{Objective:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{To validate the process of adding, editing and removing the store.} \\ \hline
+\textbf{Product/Ver/Module:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{StockSense 1.0 / Store, Product and Inventory Management} \\ \hline
+\textbf{Environment:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{Linux development environment, Google Chrome, local backend and PostgreSQL database} \\ \hline
+\textbf{Assumptions:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{The sample tenants and test data described in Section 7.2 are available.} \\ \hline
+\textbf{Pre-Requisite:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{Owner logs into the system.} \\ \hline
+\textbf{Step No.} & \textbf{Execution Description} & \multicolumn{2}{l|}{\textbf{Procedure Result}} \\ \hline
+1 & Add a new store. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{The new store is added.} \\ \hline
+2 & Update the name of the added store. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{The store name is updated.} \\ \hline
+3 & Delete a store that contains sales history. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{A new store is added and edited. An existing store containing sales history cannot be removed, but rather gets archived.} \\ \hline
+\multicolumn{4}{|l|}{\textbf{Comments:} Not yet executed; the test will be run in FYP-2.} \\ \hline
+\multicolumn{4}{|c|}{\textbf{Passed \quad Failed \quad Not Executed}} \\ \hline
+\end{tabular}\par}
+\end{table}
 
-\testcase{Test Case 4 (Manage Store Managers)}{4}{Hayyan Haider}{Muhammad Rizwan Arshad}{UC-04 Manage Store Managers}
-{To ensure the owner invites a manager and assigns a store.}
-{The owner is logged in and there is at least one store.}
-{1. Invite a manager by filling out an email and assigning him/her a store. 2. Invite a different email address with an existing account.}
-{An account is created and invitation is sent to the invited manager. The second invitation fails because the invited manager has an existing account.}
+\begin{table}[!htbp]
+\centering
+\caption{Test Case 4 (Manage Store Managers)}
+{\small\linespread{1}\selectfont
+\begin{tabular}{|p{0.2\textwidth}|p{0.28\textwidth}|p{0.2\textwidth}|p{0.22\textwidth}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Tenant and User Management}} \\ \hline
+\multicolumn{4}{|c|}{\textbf{UC-04 Manage Store Managers}} \\ \hline
+\textbf{Test Case ID:} & 4 & \textbf{QA Test Engineer:} & Hayyan Haider \\ \hline
+\textbf{Test Case Version:} & 1.0 & \textbf{Reviewed By:} & Muhammad Rizwan Arshad \\ \hline
+\textbf{Test Date:} & To be filled & \textbf{Use Case Reference(s):} & UC-04 \\ \hline
+\textbf{Revision History:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{None (first version)} \\ \hline
+\textbf{Objective:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{To ensure the owner invites a manager and assigns a store.} \\ \hline
+\textbf{Product/Ver/Module:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{StockSense 1.0 / Tenant and User Management} \\ \hline
+\textbf{Environment:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{Linux development environment, Google Chrome, local backend and PostgreSQL database} \\ \hline
+\textbf{Assumptions:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{The sample tenants and test data described in Section 7.2 are available.} \\ \hline
+\textbf{Pre-Requisite:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{The owner is logged in and there is at least one store.} \\ \hline
+\textbf{Step No.} & \textbf{Execution Description} & \multicolumn{2}{l|}{\textbf{Procedure Result}} \\ \hline
+1 & Invite a manager by filling out an email and assigning him/her a store. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{An account is created and invitation is sent to the invited manager.} \\ \hline
+2 & Invite a different email address with an existing account. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{The second invitation fails because the invited manager has an existing account.} \\ \hline
+\multicolumn{4}{|l|}{\textbf{Comments:} Not yet executed; the test will be run in FYP-2.} \\ \hline
+\multicolumn{4}{|c|}{\textbf{Passed \quad Failed \quad Not Executed}} \\ \hline
+\end{tabular}\par}
+\end{table}
 
-\testcase{Test Case 5 (Manage Products and Variants)}{5}{Muhammad Rizwan Arshad}{Muhammad Usman}{UC-05 Manage Products and Variants}
-{To verify product creation and unique SKU constraint.}
-{Owner has signed-in.}
-{1. Create a product having sizes 40, 41 and 42. 2. Create another variant having already existing SKU.}
-{The product and its variants get saved. Duplicacy in SKU gets rejected.}
+\begin{table}[!htbp]
+\centering
+\caption{Test Case 5 (Manage Products and Variants)}
+{\small\linespread{1}\selectfont
+\begin{tabular}{|p{0.2\textwidth}|p{0.28\textwidth}|p{0.2\textwidth}|p{0.22\textwidth}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Store, Product and Inventory Management}} \\ \hline
+\multicolumn{4}{|c|}{\textbf{UC-05 Manage Products and Variants}} \\ \hline
+\textbf{Test Case ID:} & 5 & \textbf{QA Test Engineer:} & Muhammad Rizwan Arshad \\ \hline
+\textbf{Test Case Version:} & 1.0 & \textbf{Reviewed By:} & Muhammad Usman \\ \hline
+\textbf{Test Date:} & To be filled & \textbf{Use Case Reference(s):} & UC-05 \\ \hline
+\textbf{Revision History:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{None (first version)} \\ \hline
+\textbf{Objective:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{To verify product creation and unique SKU constraint.} \\ \hline
+\textbf{Product/Ver/Module:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{StockSense 1.0 / Store, Product and Inventory Management} \\ \hline
+\textbf{Environment:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{Linux development environment, Google Chrome, local backend and PostgreSQL database} \\ \hline
+\textbf{Assumptions:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{The sample tenants and test data described in Section 7.2 are available.} \\ \hline
+\textbf{Pre-Requisite:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{Owner has signed-in.} \\ \hline
+\textbf{Step No.} & \textbf{Execution Description} & \multicolumn{2}{l|}{\textbf{Procedure Result}} \\ \hline
+1 & Create a product having sizes 40, 41 and & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{The product and its variants get saved.} \\ \hline
+2 & 2. Create another variant having already existing SKU. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{Duplicacy in SKU gets rejected.} \\ \hline
+\multicolumn{4}{|l|}{\textbf{Comments:} Not yet executed; the test will be run in FYP-2.} \\ \hline
+\multicolumn{4}{|c|}{\textbf{Passed \quad Failed \quad Not Executed}} \\ \hline
+\end{tabular}\par}
+\end{table}
 
-\testcase{Test Case 6 (Adjust Inventory)}{6}{Muhammad Rizwan Arshad}{Hayyan Haider}{UC-06 Adjust Inventory}
-{To verify manual correction of stock and negative quantity gets rejected.}
-{Variant already exists in the store.}
-{1. Enter a new quantity with a reason. 2. Enter a negative quantity.}
-{First correction gets saved and logs in the history. Negative value gets rejected and the stock remains the same.}
+\begin{table}[!htbp]
+\centering
+\caption{Test Case 6 (Adjust Inventory)}
+{\small\linespread{1}\selectfont
+\begin{tabular}{|p{0.2\textwidth}|p{0.28\textwidth}|p{0.2\textwidth}|p{0.22\textwidth}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Store, Product and Inventory Management}} \\ \hline
+\multicolumn{4}{|c|}{\textbf{UC-06 Adjust Inventory}} \\ \hline
+\textbf{Test Case ID:} & 6 & \textbf{QA Test Engineer:} & Muhammad Rizwan Arshad \\ \hline
+\textbf{Test Case Version:} & 1.0 & \textbf{Reviewed By:} & Hayyan Haider \\ \hline
+\textbf{Test Date:} & To be filled & \textbf{Use Case Reference(s):} & UC-06 \\ \hline
+\textbf{Revision History:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{None (first version)} \\ \hline
+\textbf{Objective:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{To verify manual correction of stock and negative quantity gets rejected.} \\ \hline
+\textbf{Product/Ver/Module:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{StockSense 1.0 / Store, Product and Inventory Management} \\ \hline
+\textbf{Environment:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{Linux development environment, Google Chrome, local backend and PostgreSQL database} \\ \hline
+\textbf{Assumptions:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{The sample tenants and test data described in Section 7.2 are available.} \\ \hline
+\textbf{Pre-Requisite:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{Variant already exists in the store.} \\ \hline
+\textbf{Step No.} & \textbf{Execution Description} & \multicolumn{2}{l|}{\textbf{Procedure Result}} \\ \hline
+1 & Enter a new quantity with a reason. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{First correction gets saved and logs in the history.} \\ \hline
+2 & Enter a negative quantity. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{Negative value gets rejected and the stock remains the same.} \\ \hline
+\multicolumn{4}{|l|}{\textbf{Comments:} Not yet executed; the test will be run in FYP-2.} \\ \hline
+\multicolumn{4}{|c|}{\textbf{Passed \quad Failed \quad Not Executed}} \\ \hline
+\end{tabular}\par}
+\end{table}
 
-\testcase{Test Case 7 (Record Sale (POS))}{7}{Muhammad Usman}{Hayyan Haider}{UC-07 Record Sale (POS)}
-{To verify sales decreases inventory, and low stock results in warning.}
-{Store manager signed in and stock available.}
-{1. Select product and its size and make 1 unit sale. 2. Make sale greater than stock availability.}
-{Sale gets logged, and stock decreased by one unit. Second sale results in insufficient stock warning.}
+\begin{table}[!htbp]
+\centering
+\caption{Test Case 7 (Record Sale (POS))}
+{\small\linespread{1}\selectfont
+\begin{tabular}{|p{0.2\textwidth}|p{0.28\textwidth}|p{0.2\textwidth}|p{0.22\textwidth}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{POS Module}} \\ \hline
+\multicolumn{4}{|c|}{\textbf{UC-07 Record Sale (POS)}} \\ \hline
+\textbf{Test Case ID:} & 7 & \textbf{QA Test Engineer:} & Muhammad Usman \\ \hline
+\textbf{Test Case Version:} & 1.0 & \textbf{Reviewed By:} & Hayyan Haider \\ \hline
+\textbf{Test Date:} & To be filled & \textbf{Use Case Reference(s):} & UC-07 \\ \hline
+\textbf{Revision History:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{None (first version)} \\ \hline
+\textbf{Objective:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{To verify sales decreases inventory, and low stock results in warning.} \\ \hline
+\textbf{Product/Ver/Module:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{StockSense 1.0 / POS Module} \\ \hline
+\textbf{Environment:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{Linux development environment, Google Chrome, local backend and PostgreSQL database} \\ \hline
+\textbf{Assumptions:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{The sample tenants and test data described in Section 7.2 are available.} \\ \hline
+\textbf{Pre-Requisite:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{Store manager signed in and stock available.} \\ \hline
+\textbf{Step No.} & \textbf{Execution Description} & \multicolumn{2}{l|}{\textbf{Procedure Result}} \\ \hline
+1 & Select product and its size and make 1 unit sale. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{Sale gets logged, and stock decreased by one unit.} \\ \hline
+2 & Make sale greater than stock availability. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{Second sale results in insufficient stock warning.} \\ \hline
+\multicolumn{4}{|l|}{\textbf{Comments:} Not yet executed; the test will be run in FYP-2.} \\ \hline
+\multicolumn{4}{|c|}{\textbf{Passed \quad Failed \quad Not Executed}} \\ \hline
+\end{tabular}\par}
+\end{table}
 
-\testcase{Test Case 8 (Upload Historical Sales Data)}{8}{Hayyan Haider}{Muhammad Usman}{UC-08 Upload Historical Sales Data}
-{To verify upload process, mapping, cleansing and upload report.}
-{Owner signed-in. A CSV file having some invalid rows available.}
-{1. Upload the file. 2. Map the columns. 3. Review the report. 4. Approve the upload.}
-{Valid rows gets cleansed and imported. Invalid rows get identified with appropriate message. Nothing gets saved until approval of the upload.}
+\begin{table}[!htbp]
+\centering
+\caption{Test Case 8 (Upload Historical Sales Data)}
+{\small\linespread{1}\selectfont
+\begin{tabular}{|p{0.2\textwidth}|p{0.28\textwidth}|p{0.2\textwidth}|p{0.22\textwidth}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Data Ingestion and Cleaning}} \\ \hline
+\multicolumn{4}{|c|}{\textbf{UC-08 Upload Historical Sales Data}} \\ \hline
+\textbf{Test Case ID:} & 8 & \textbf{QA Test Engineer:} & Hayyan Haider \\ \hline
+\textbf{Test Case Version:} & 1.0 & \textbf{Reviewed By:} & Muhammad Usman \\ \hline
+\textbf{Test Date:} & To be filled & \textbf{Use Case Reference(s):} & UC-08 \\ \hline
+\textbf{Revision History:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{None (first version)} \\ \hline
+\textbf{Objective:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{To verify upload process, mapping, cleansing and upload report.} \\ \hline
+\textbf{Product/Ver/Module:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{StockSense 1.0 / Data Ingestion and Cleaning} \\ \hline
+\textbf{Environment:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{Linux development environment, Google Chrome, local backend and PostgreSQL database} \\ \hline
+\textbf{Assumptions:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{The sample tenants and test data described in Section 7.2 are available.} \\ \hline
+\textbf{Pre-Requisite:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{Owner signed-in. A CSV file having some invalid rows available.} \\ \hline
+\textbf{Step No.} & \textbf{Execution Description} & \multicolumn{2}{l|}{\textbf{Procedure Result}} \\ \hline
+1 & Upload the file. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{The file is accepted and its columns are detected.} \\ \hline
+2 & Map the columns. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{The columns are mapped to the required fields.} \\ \hline
+3 & Review the report. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{Valid rows gets cleansed and imported.} \\ \hline
+4 & Approve the upload. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{Invalid rows get identified with appropriate message. Nothing gets saved until approval of the upload.} \\ \hline
+\multicolumn{4}{|l|}{\textbf{Comments:} Not yet executed; the test will be run in FYP-2.} \\ \hline
+\multicolumn{4}{|c|}{\textbf{Passed \quad Failed \quad Not Executed}} \\ \hline
+\end{tabular}\par}
+\end{table}
 
-\testcase{Test Case 9 (Upload of an Unsupported or Broken File)}{9}{Hayyan Haider}{Muhammad Rizwan Arshad}{UC-08 Upload Historical Sales Data}
-{To verify that faulty uploads do not affect the already uploaded data.}
-{A tenant has uploaded sales already.}
-{1. Upload a .pdf file. 2. Upload a corrupt Excel file. 3. Make sure an import operation fails in the middle.}
-{The file is simply rejected and failed imports rolled back. The previous data is intact.}
+\begin{table}[!htbp]
+\centering
+\caption{Test Case 9 (Upload of an Unsupported or Broken File)}
+{\small\linespread{1}\selectfont
+\begin{tabular}{|p{0.2\textwidth}|p{0.28\textwidth}|p{0.2\textwidth}|p{0.22\textwidth}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Data Ingestion and Cleaning}} \\ \hline
+\multicolumn{4}{|c|}{\textbf{UC-08 Upload Historical Sales Data}} \\ \hline
+\textbf{Test Case ID:} & 9 & \textbf{QA Test Engineer:} & Hayyan Haider \\ \hline
+\textbf{Test Case Version:} & 1.0 & \textbf{Reviewed By:} & Muhammad Rizwan Arshad \\ \hline
+\textbf{Test Date:} & To be filled & \textbf{Use Case Reference(s):} & UC-08 \\ \hline
+\textbf{Revision History:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{None (first version)} \\ \hline
+\textbf{Objective:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{To verify that faulty uploads do not affect the already uploaded data.} \\ \hline
+\textbf{Product/Ver/Module:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{StockSense 1.0 / Data Ingestion and Cleaning} \\ \hline
+\textbf{Environment:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{Linux development environment, Google Chrome, local backend and PostgreSQL database} \\ \hline
+\textbf{Assumptions:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{The sample tenants and test data described in Section 7.2 are available.} \\ \hline
+\textbf{Pre-Requisite:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{A tenant has uploaded sales already.} \\ \hline
+\textbf{Step No.} & \textbf{Execution Description} & \multicolumn{2}{l|}{\textbf{Procedure Result}} \\ \hline
+1 & Upload a .pdf file. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{The file is rejected with a simple reason.} \\ \hline
+2 & Upload a corrupt Excel file. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{The file is rejected with a simple reason.} \\ \hline
+3 & Make sure an import operation fails in the middle. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{The file is simply rejected and failed imports rolled back. The previous data is intact.} \\ \hline
+\multicolumn{4}{|l|}{\textbf{Comments:} Not yet executed; the test will be run in FYP-2.} \\ \hline
+\multicolumn{4}{|c|}{\textbf{Passed \quad Failed \quad Not Executed}} \\ \hline
+\end{tabular}\par}
+\end{table}
 
-\testcase{Test Case 10 (View Dashboard and Alerts)}{10}{Muhammad Rizwan Arshad}{Muhammad Usman}{UC-09 View Dashboard and Alerts}
-{To test the dashboard and the alerts displayed for a free tenant and paid tenant.}
-{There is one paid tenant and one free tenant.}
-{1. Go into the dashboard as a paid tenant owner. 2. Do the same as a free tenant owner. 3. Try to go into the dashboard as a tenant without any sales history.}
-{The paid tenant will see sales, inventory, forecasts and alerts. The free tenant will see sales and inventory and will be shown an alert telling him to upgrade. No sales history will trigger an alert asking to upload sales history.}
+\begin{table}[!htbp]
+\centering
+\caption{Test Case 10 (View Dashboard and Alerts)}
+{\small\linespread{1}\selectfont
+\begin{tabular}{|p{0.2\textwidth}|p{0.28\textwidth}|p{0.2\textwidth}|p{0.22\textwidth}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Dashboard and Alerts}} \\ \hline
+\multicolumn{4}{|c|}{\textbf{UC-09 View Dashboard and Alerts}} \\ \hline
+\textbf{Test Case ID:} & 10 & \textbf{QA Test Engineer:} & Muhammad Rizwan Arshad \\ \hline
+\textbf{Test Case Version:} & 1.0 & \textbf{Reviewed By:} & Muhammad Usman \\ \hline
+\textbf{Test Date:} & To be filled & \textbf{Use Case Reference(s):} & UC-09 \\ \hline
+\textbf{Revision History:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{None (first version)} \\ \hline
+\textbf{Objective:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{To test the dashboard and the alerts displayed for a free tenant and paid tenant.} \\ \hline
+\textbf{Product/Ver/Module:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{StockSense 1.0 / Dashboard and Alerts} \\ \hline
+\textbf{Environment:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{Linux development environment, Google Chrome, local backend and PostgreSQL database} \\ \hline
+\textbf{Assumptions:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{The sample tenants and test data described in Section 7.2 are available.} \\ \hline
+\textbf{Pre-Requisite:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{There is one paid tenant and one free tenant.} \\ \hline
+\textbf{Step No.} & \textbf{Execution Description} & \multicolumn{2}{l|}{\textbf{Procedure Result}} \\ \hline
+1 & Go into the dashboard as a paid tenant owner. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{The paid tenant will see sales, inventory, forecasts and alerts.} \\ \hline
+2 & Do the same as a free tenant owner. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{The free tenant will see sales and inventory and will be shown an alert telling him to upgrade.} \\ \hline
+3 & Try to go into the dashboard as a tenant without any sales history. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{No sales history will trigger an alert asking to upload sales history.} \\ \hline
+\multicolumn{4}{|l|}{\textbf{Comments:} Not yet executed; the test will be run in FYP-2.} \\ \hline
+\multicolumn{4}{|c|}{\textbf{Passed \quad Failed \quad Not Executed}} \\ \hline
+\end{tabular}\par}
+\end{table}
 
-\testcase{Test Case 11 (View Demand Forecast)}{11}{Muhammad Usman}{Hayyan Haider}{UC-10 View Demand Forecast}
-{To test how the forecast will be displayed and the restrictions applied on free tenants and short history.}
-{A paid tenant with sufficient sales history exists.}
-{1. Choose a product variant. 2. Select a size and location. 3. View it by week then by month. 4. View forecast of another tenant who has not uploaded much sales history. 5. View it from a free tenant.}
-{The forecast will be displayed next to past sales. Short history will show a ``not enough data''. Free tenant will see an upgrade message.}
+\begin{table}[!htbp]
+\centering
+\caption{Test Case 11 (View Demand Forecast)}
+{\small\linespread{1}\selectfont
+\begin{tabular}{|p{0.2\textwidth}|p{0.28\textwidth}|p{0.2\textwidth}|p{0.22\textwidth}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Demand Forecasting}} \\ \hline
+\multicolumn{4}{|c|}{\textbf{UC-10 View Demand Forecast}} \\ \hline
+\textbf{Test Case ID:} & 11 & \textbf{QA Test Engineer:} & Muhammad Usman \\ \hline
+\textbf{Test Case Version:} & 1.0 & \textbf{Reviewed By:} & Hayyan Haider \\ \hline
+\textbf{Test Date:} & To be filled & \textbf{Use Case Reference(s):} & UC-10 \\ \hline
+\textbf{Revision History:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{None (first version)} \\ \hline
+\textbf{Objective:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{To test how the forecast will be displayed and the restrictions applied on free tenants and short history.} \\ \hline
+\textbf{Product/Ver/Module:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{StockSense 1.0 / Demand Forecasting} \\ \hline
+\textbf{Environment:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{Linux development environment, Google Chrome, local backend and PostgreSQL database} \\ \hline
+\textbf{Assumptions:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{The sample tenants and test data described in Section 7.2 are available.} \\ \hline
+\textbf{Pre-Requisite:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{A paid tenant with sufficient sales history exists.} \\ \hline
+\textbf{Step No.} & \textbf{Execution Description} & \multicolumn{2}{l|}{\textbf{Procedure Result}} \\ \hline
+1 & Choose a product variant. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{The product variant is selected.} \\ \hline
+2 & Select a size and location. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{The size and location are selected.} \\ \hline
+3 & View it by week then by month. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{The forecast will be displayed next to past sales.} \\ \hline
+4 & View forecast of another tenant who has not uploaded much sales history. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{Short history will show a ``not enough data''.} \\ \hline
+5 & View it from a free tenant. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{Free tenant will see an upgrade message.} \\ \hline
+\multicolumn{4}{|l|}{\textbf{Comments:} Not yet executed; the test will be run in FYP-2.} \\ \hline
+\multicolumn{4}{|c|}{\textbf{Passed \quad Failed \quad Not Executed}} \\ \hline
+\end{tabular}\par}
+\end{table}
 
-\testcase{Test Case 12 (Redistribution Recommendation)}{12}{Muhammad Rizwan Arshad}{Muhammad Usman}{UC-11 View and Act on Redistribution Recommendation}
-{To verify that a surplus and a shortage location make a suggestion which can either be approved or dismissed.}
-{One branch has excess stock and another branch has forecasted shortages of the same variant.}
-{1. Run the recommendation job. 2. View the suggestion. 3. Approve it. 4. Do the same with another suggestion but this time dismiss it.}
-{The redistribution suggestion will include the quantity, rationale and the impact. Upon approval, a transfer will be created between the two branches. If source stock has been changed since creation, a warning will be raised.}
+\begin{table}[!htbp]
+\centering
+\caption{Test Case 12 (Redistribution Recommendation)}
+{\small\linespread{1}\selectfont
+\begin{tabular}{|p{0.2\textwidth}|p{0.28\textwidth}|p{0.2\textwidth}|p{0.22\textwidth}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Recommendation Engine}} \\ \hline
+\multicolumn{4}{|c|}{\textbf{UC-11 View and Act on Redistribution Recommendation}} \\ \hline
+\textbf{Test Case ID:} & 12 & \textbf{QA Test Engineer:} & Muhammad Rizwan Arshad \\ \hline
+\textbf{Test Case Version:} & 1.0 & \textbf{Reviewed By:} & Muhammad Usman \\ \hline
+\textbf{Test Date:} & To be filled & \textbf{Use Case Reference(s):} & UC-11 \\ \hline
+\textbf{Revision History:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{None (first version)} \\ \hline
+\textbf{Objective:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{To verify that a surplus and a shortage location make a suggestion which can either be approved or dismissed.} \\ \hline
+\textbf{Product/Ver/Module:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{StockSense 1.0 / Recommendation Engine} \\ \hline
+\textbf{Environment:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{Linux development environment, Google Chrome, local backend and PostgreSQL database} \\ \hline
+\textbf{Assumptions:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{The sample tenants and test data described in Section 7.2 are available.} \\ \hline
+\textbf{Pre-Requisite:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{One branch has excess stock and another branch has forecasted shortages of the same variant.} \\ \hline
+\textbf{Step No.} & \textbf{Execution Description} & \multicolumn{2}{l|}{\textbf{Procedure Result}} \\ \hline
+1 & Run the recommendation job. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{A redistribution suggestion is created.} \\ \hline
+2 & View the suggestion. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{The redistribution suggestion will include the quantity, rationale and the impact.} \\ \hline
+3 & Approve it. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{Upon approval, a transfer will be created between the two branches. If source stock has been changed since creation, a warning will be raised.} \\ \hline
+4 & Do the same with another suggestion but this time dismiss it. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{The dismissed suggestion is closed.} \\ \hline
+\multicolumn{4}{|l|}{\textbf{Comments:} Not yet executed; the test will be run in FYP-2.} \\ \hline
+\multicolumn{4}{|c|}{\textbf{Passed \quad Failed \quad Not Executed}} \\ \hline
+\end{tabular}\par}
+\end{table}
 
-\testcase{Test Case 13 (Markdown Recommendation)}{13}{Hayyan Haider}{Muhammad Rizwan Arshad}{UC-12 View Markdown Recommendation}
-{To verify that slow-moving stock that cannot be moved receives a markdown suggestion.}
-{The variation includes a few weeks coverage above selling period and no stores require it.}
-{1. Run the optimizer. 2. Go to the markdown recommendation section. 3. Accept the suggestion.}
-{A markdown suggestion that is not below the cost price is provided. Upon accepting it, the price will change accordingly.}
+\begin{table}[!htbp]
+\centering
+\caption{Test Case 13 (Markdown Recommendation)}
+{\small\linespread{1}\selectfont
+\begin{tabular}{|p{0.2\textwidth}|p{0.28\textwidth}|p{0.2\textwidth}|p{0.22\textwidth}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Markdown Optimizer}} \\ \hline
+\multicolumn{4}{|c|}{\textbf{UC-12 View Markdown Recommendation}} \\ \hline
+\textbf{Test Case ID:} & 13 & \textbf{QA Test Engineer:} & Hayyan Haider \\ \hline
+\textbf{Test Case Version:} & 1.0 & \textbf{Reviewed By:} & Muhammad Rizwan Arshad \\ \hline
+\textbf{Test Date:} & To be filled & \textbf{Use Case Reference(s):} & UC-12 \\ \hline
+\textbf{Revision History:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{None (first version)} \\ \hline
+\textbf{Objective:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{To verify that slow-moving stock that cannot be moved receives a markdown suggestion.} \\ \hline
+\textbf{Product/Ver/Module:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{StockSense 1.0 / Markdown Optimizer} \\ \hline
+\textbf{Environment:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{Linux development environment, Google Chrome, local backend and PostgreSQL database} \\ \hline
+\textbf{Assumptions:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{The sample tenants and test data described in Section 7.2 are available.} \\ \hline
+\textbf{Pre-Requisite:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{The variation includes a few weeks coverage above selling period and no stores require it.} \\ \hline
+\textbf{Step No.} & \textbf{Execution Description} & \multicolumn{2}{l|}{\textbf{Procedure Result}} \\ \hline
+1 & Run the optimizer. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{The optimizer flags the slow-moving variant.} \\ \hline
+2 & Go to the markdown recommendation section. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{A markdown suggestion that is not below the cost price is provided.} \\ \hline
+3 & Accept the suggestion. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{Upon accepting it, the price will change accordingly.} \\ \hline
+\multicolumn{4}{|l|}{\textbf{Comments:} Not yet executed; the test will be run in FYP-2.} \\ \hline
+\multicolumn{4}{|c|}{\textbf{Passed \quad Failed \quad Not Executed}} \\ \hline
+\end{tabular}\par}
+\end{table}
 
-\testcase{Test Case 14 (Reorder Recommendation)}{14}{Muhammad Usman}{Hayyan Haider}{UC-13 View Reorder Recommendation}
-{To verify that a reorder is recommended only if there is no surplus at another branch.}
-{A forecast shortage occurs but no other branch has surplus.}
-{1. Run the recommendation job. 2. Go to the reorder tab. 3. Click on action for one.}
-{A reorder quantity along with its reasons is provided. The status is changed to Actioned.}
+\begin{table}[!htbp]
+\centering
+\caption{Test Case 14 (Reorder Recommendation)}
+{\small\linespread{1}\selectfont
+\begin{tabular}{|p{0.2\textwidth}|p{0.28\textwidth}|p{0.2\textwidth}|p{0.22\textwidth}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Recommendation Engine}} \\ \hline
+\multicolumn{4}{|c|}{\textbf{UC-13 View Reorder Recommendation}} \\ \hline
+\textbf{Test Case ID:} & 14 & \textbf{QA Test Engineer:} & Muhammad Usman \\ \hline
+\textbf{Test Case Version:} & 1.0 & \textbf{Reviewed By:} & Hayyan Haider \\ \hline
+\textbf{Test Date:} & To be filled & \textbf{Use Case Reference(s):} & UC-13 \\ \hline
+\textbf{Revision History:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{None (first version)} \\ \hline
+\textbf{Objective:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{To verify that a reorder is recommended only if there is no surplus at another branch.} \\ \hline
+\textbf{Product/Ver/Module:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{StockSense 1.0 / Recommendation Engine} \\ \hline
+\textbf{Environment:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{Linux development environment, Google Chrome, local backend and PostgreSQL database} \\ \hline
+\textbf{Assumptions:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{The sample tenants and test data described in Section 7.2 are available.} \\ \hline
+\textbf{Pre-Requisite:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{A forecast shortage occurs but no other branch has surplus.} \\ \hline
+\textbf{Step No.} & \textbf{Execution Description} & \multicolumn{2}{l|}{\textbf{Procedure Result}} \\ \hline
+1 & Run the recommendation job. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{A reorder recommendation is created.} \\ \hline
+2 & Go to the reorder tab. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{A reorder quantity along with its reasons is provided.} \\ \hline
+3 & Click on action for one. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{The status is changed to Actioned.} \\ \hline
+\multicolumn{4}{|l|}{\textbf{Comments:} Not yet executed; the test will be run in FYP-2.} \\ \hline
+\multicolumn{4}{|c|}{\textbf{Passed \quad Failed \quad Not Executed}} \\ \hline
+\end{tabular}\par}
+\end{table}
 
-\testcase{Test Case 15 (Manage Subscription)}{15}{Muhammad Rizwan Arshad}{Muhammad Usman}{UC-14 Manage Subscription}
-{To verify upgrade, downgrade and failed payment.}
-{The account is logged in by the owner.}
-{1. Upgrade to the paid version. 2. Upgrade while the payment will fail. 3. Downgrade to the free version.}
-{Features become available after the successful payment. Failing to pay leaves the same plan. In case of downgrading, the paid features get disabled while sales and inventory data remains.}
+\begin{table}[!htbp]
+\centering
+\caption{Test Case 15 (Manage Subscription)}
+{\small\linespread{1}\selectfont
+\begin{tabular}{|p{0.2\textwidth}|p{0.28\textwidth}|p{0.2\textwidth}|p{0.22\textwidth}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Subscription Management}} \\ \hline
+\multicolumn{4}{|c|}{\textbf{UC-14 Manage Subscription}} \\ \hline
+\textbf{Test Case ID:} & 15 & \textbf{QA Test Engineer:} & Muhammad Rizwan Arshad \\ \hline
+\textbf{Test Case Version:} & 1.0 & \textbf{Reviewed By:} & Muhammad Usman \\ \hline
+\textbf{Test Date:} & To be filled & \textbf{Use Case Reference(s):} & UC-14 \\ \hline
+\textbf{Revision History:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{None (first version)} \\ \hline
+\textbf{Objective:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{To verify upgrade, downgrade and failed payment.} \\ \hline
+\textbf{Product/Ver/Module:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{StockSense 1.0 / Subscription Management} \\ \hline
+\textbf{Environment:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{Linux development environment, Google Chrome, local backend and PostgreSQL database} \\ \hline
+\textbf{Assumptions:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{The sample tenants and test data described in Section 7.2 are available.} \\ \hline
+\textbf{Pre-Requisite:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{The account is logged in by the owner.} \\ \hline
+\textbf{Step No.} & \textbf{Execution Description} & \multicolumn{2}{l|}{\textbf{Procedure Result}} \\ \hline
+1 & Upgrade to the paid version. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{Features become available after the successful payment.} \\ \hline
+2 & Upgrade while the payment will fail. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{Failing to pay leaves the same plan.} \\ \hline
+3 & Downgrade to the free version. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{In case of downgrading, the paid features get disabled while sales and inventory data remains.} \\ \hline
+\multicolumn{4}{|l|}{\textbf{Comments:} Not yet executed; the test will be run in FYP-2.} \\ \hline
+\multicolumn{4}{|c|}{\textbf{Passed \quad Failed \quad Not Executed}} \\ \hline
+\end{tabular}\par}
+\end{table}
 
-\testcase{Test Case 16 (Manage Tenants)}{16}{Hayyan Haider}{Muhammad Usman}{UC-15 Manage Tenants}
-{To verify that the administrator can suspend and activate a tenant.}
-{The account is logged in by the administrator.}
-{1. Suspend a tenant. 2. Log in with that tenant's account. 3. Activate the tenant.}
-{A suspended tenant users are unable to log in. Upon activating it, they can log in.}
+\begin{table}[!htbp]
+\centering
+\caption{Test Case 16 (Manage Tenants)}
+{\small\linespread{1}\selectfont
+\begin{tabular}{|p{0.2\textwidth}|p{0.28\textwidth}|p{0.2\textwidth}|p{0.22\textwidth}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Tenant and User Management}} \\ \hline
+\multicolumn{4}{|c|}{\textbf{UC-15 Manage Tenants}} \\ \hline
+\textbf{Test Case ID:} & 16 & \textbf{QA Test Engineer:} & Hayyan Haider \\ \hline
+\textbf{Test Case Version:} & 1.0 & \textbf{Reviewed By:} & Muhammad Usman \\ \hline
+\textbf{Test Date:} & To be filled & \textbf{Use Case Reference(s):} & UC-15 \\ \hline
+\textbf{Revision History:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{None (first version)} \\ \hline
+\textbf{Objective:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{To verify that the administrator can suspend and activate a tenant.} \\ \hline
+\textbf{Product/Ver/Module:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{StockSense 1.0 / Tenant and User Management} \\ \hline
+\textbf{Environment:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{Linux development environment, Google Chrome, local backend and PostgreSQL database} \\ \hline
+\textbf{Assumptions:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{The sample tenants and test data described in Section 7.2 are available.} \\ \hline
+\textbf{Pre-Requisite:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{The account is logged in by the administrator.} \\ \hline
+\textbf{Step No.} & \textbf{Execution Description} & \multicolumn{2}{l|}{\textbf{Procedure Result}} \\ \hline
+1 & Suspend a tenant. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{The tenant is suspended.} \\ \hline
+2 & Log in with that tenant's account. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{A suspended tenant users are unable to log in.} \\ \hline
+3 & Activate the tenant. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{Upon activating it, they can log in.} \\ \hline
+\multicolumn{4}{|l|}{\textbf{Comments:} Not yet executed; the test will be run in FYP-2.} \\ \hline
+\multicolumn{4}{|c|}{\textbf{Passed \quad Failed \quad Not Executed}} \\ \hline
+\end{tabular}\par}
+\end{table}
 
-\testcase{Test Case 17 (Isolation of Tenant Data)}{17}{Muhammad Usman}{Hayyan Haider}{FR-11, Security (Section~4.4.3)}
-{To make sure that the data of any one business cannot be viewed by any other business.}
-{Two tenants having different sets of data.}
-{1. Login with Tenant A. 2. Invoke the API by using the ID of Tenant B data. 3. Login with the store manager account to view data of another store.}
-{All such requests are denied. None of the data of Tenant B and another store is revealed.}
+\begin{table}[!htbp]
+\centering
+\caption{Test Case 17 (Isolation of Tenant Data)}
+{\small\linespread{1}\selectfont
+\begin{tabular}{|p{0.2\textwidth}|p{0.28\textwidth}|p{0.2\textwidth}|p{0.22\textwidth}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Tenant and User Management}} \\ \hline
+\multicolumn{4}{|c|}{\textbf{FR-11, Security (Section~4.4.3)}} \\ \hline
+\textbf{Test Case ID:} & 17 & \textbf{QA Test Engineer:} & Muhammad Usman \\ \hline
+\textbf{Test Case Version:} & 1.0 & \textbf{Reviewed By:} & Hayyan Haider \\ \hline
+\textbf{Test Date:} & To be filled & \textbf{Use Case Reference(s):} & FR-11 \\ \hline
+\textbf{Revision History:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{None (first version)} \\ \hline
+\textbf{Objective:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{To make sure that the data of any one business cannot be viewed by any other business.} \\ \hline
+\textbf{Product/Ver/Module:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{StockSense 1.0 / Tenant and User Management} \\ \hline
+\textbf{Environment:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{Linux development environment, Google Chrome, local backend and PostgreSQL database} \\ \hline
+\textbf{Assumptions:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{The sample tenants and test data described in Section 7.2 are available.} \\ \hline
+\textbf{Pre-Requisite:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{Two tenants having different sets of data.} \\ \hline
+\textbf{Step No.} & \textbf{Execution Description} & \multicolumn{2}{l|}{\textbf{Procedure Result}} \\ \hline
+1 & Login with Tenant A. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{The dashboard of Tenant A opens.} \\ \hline
+2 & Invoke the API by using the ID of Tenant B data. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{All such requests are denied.} \\ \hline
+3 & Login with the store manager account to view data of another store. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{None of the data of Tenant B and another store is revealed.} \\ \hline
+\multicolumn{4}{|l|}{\textbf{Comments:} Not yet executed; the test will be run in FYP-2.} \\ \hline
+\multicolumn{4}{|c|}{\textbf{Passed \quad Failed \quad Not Executed}} \\ \hline
+\end{tabular}\par}
+\end{table}
 
-\testcase{Test Case 18 (POS speed)}{18}{Muhammad Rizwan Arshad}{Muhammad Usman}{Performance (Section~4.4.1)}
-{To make sure that a transaction in POS takes less than 2 seconds.}
-{A tenant with normal amount of data.}
-{Record 50 transactions and measure the time taken by each transaction.}
-{Each transaction takes less than 2 seconds.}
+\begin{table}[!htbp]
+\centering
+\caption{Test Case 18 (POS speed)}
+{\small\linespread{1}\selectfont
+\begin{tabular}{|p{0.2\textwidth}|p{0.28\textwidth}|p{0.2\textwidth}|p{0.22\textwidth}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{POS Module}} \\ \hline
+\multicolumn{4}{|c|}{\textbf{Performance (Section~4.4.1)}} \\ \hline
+\textbf{Test Case ID:} & 18 & \textbf{QA Test Engineer:} & Muhammad Rizwan Arshad \\ \hline
+\textbf{Test Case Version:} & 1.0 & \textbf{Reviewed By:} & Muhammad Usman \\ \hline
+\textbf{Test Date:} & To be filled & \textbf{Use Case Reference(s):} & Not applicable \\ \hline
+\textbf{Revision History:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{None (first version)} \\ \hline
+\textbf{Objective:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{To make sure that a transaction in POS takes less than 2 seconds.} \\ \hline
+\textbf{Product/Ver/Module:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{StockSense 1.0 / POS Module} \\ \hline
+\textbf{Environment:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{Linux development environment, Google Chrome, local backend and PostgreSQL database} \\ \hline
+\textbf{Assumptions:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{The sample tenants and test data described in Section 7.2 are available.} \\ \hline
+\textbf{Pre-Requisite:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{A tenant with normal amount of data.} \\ \hline
+\textbf{Step No.} & \textbf{Execution Description} & \multicolumn{2}{l|}{\textbf{Procedure Result}} \\ \hline
+1 & Record 50 transactions and measure the time taken by each transaction. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{Each transaction takes less than 2 seconds.} \\ \hline
+\multicolumn{4}{|l|}{\textbf{Comments:} Not yet executed; the test will be run in FYP-2.} \\ \hline
+\multicolumn{4}{|c|}{\textbf{Passed \quad Failed \quad Not Executed}} \\ \hline
+\end{tabular}\par}
+\end{table}
 
-\testcase{Test Case 19 (Big File Upload)}{19}{Hayyan Haider}{Muhammad Rizwan Arshad}{Performance (Section~4.4.1)}
-{To make sure that a file with 100,000 rows of data is processed in less than 5 minutes.}
-{A test CSV file and a test Excel file containing 100,000 rows of data each.}
-{Upload both files and measure the processing time and memory usage.}
-{Both files get processed in less than 5 minutes without causing system crash.}
+\begin{table}[!htbp]
+\centering
+\caption{Test Case 19 (Big File Upload)}
+{\small\linespread{1}\selectfont
+\begin{tabular}{|p{0.2\textwidth}|p{0.28\textwidth}|p{0.2\textwidth}|p{0.22\textwidth}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Data Ingestion and Cleaning}} \\ \hline
+\multicolumn{4}{|c|}{\textbf{Performance (Section~4.4.1)}} \\ \hline
+\textbf{Test Case ID:} & 19 & \textbf{QA Test Engineer:} & Hayyan Haider \\ \hline
+\textbf{Test Case Version:} & 1.0 & \textbf{Reviewed By:} & Muhammad Rizwan Arshad \\ \hline
+\textbf{Test Date:} & To be filled & \textbf{Use Case Reference(s):} & Not applicable \\ \hline
+\textbf{Revision History:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{None (first version)} \\ \hline
+\textbf{Objective:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{To make sure that a file with 100,000 rows of data is processed in less than 5 minutes.} \\ \hline
+\textbf{Product/Ver/Module:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{StockSense 1.0 / Data Ingestion and Cleaning} \\ \hline
+\textbf{Environment:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{Linux development environment, Google Chrome, local backend and PostgreSQL database} \\ \hline
+\textbf{Assumptions:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{The sample tenants and test data described in Section 7.2 are available.} \\ \hline
+\textbf{Pre-Requisite:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{A test CSV file and a test Excel file containing 100,000 rows of data each.} \\ \hline
+\textbf{Step No.} & \textbf{Execution Description} & \multicolumn{2}{l|}{\textbf{Procedure Result}} \\ \hline
+1 & Upload both files and measure the processing time and memory usage. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{Both files get processed in less than 5 minutes without causing system crash.} \\ \hline
+\multicolumn{4}{|l|}{\textbf{Comments:} Not yet executed; the test will be run in FYP-2.} \\ \hline
+\multicolumn{4}{|c|}{\textbf{Passed \quad Failed \quad Not Executed}} \\ \hline
+\end{tabular}\par}
+\end{table}
 
-\testcase{Test Case 20 (Password and Connection Security)}{20}{Muhammad Usman}{Muhammad Rizwan Arshad}{Security (Section~4.4.3)}
-{To make sure that the passwords are encrypted and the connection uses HTTPS protocol.}
-{A test database and a test deployed server.}
-{1. See the saved password column in the database. 2. Visit the website via plain HTTP.}
-{Only encrypted passwords are saved in the database. Plain HTTP connection is rejected.}
+\begin{table}[!htbp]
+\centering
+\caption{Test Case 20 (Password and Connection Security)}
+{\small\linespread{1}\selectfont
+\begin{tabular}{|p{0.2\textwidth}|p{0.28\textwidth}|p{0.2\textwidth}|p{0.22\textwidth}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Tenant and User Management}} \\ \hline
+\multicolumn{4}{|c|}{\textbf{Security (Section~4.4.3)}} \\ \hline
+\textbf{Test Case ID:} & 20 & \textbf{QA Test Engineer:} & Muhammad Usman \\ \hline
+\textbf{Test Case Version:} & 1.0 & \textbf{Reviewed By:} & Muhammad Rizwan Arshad \\ \hline
+\textbf{Test Date:} & To be filled & \textbf{Use Case Reference(s):} & Not applicable \\ \hline
+\textbf{Revision History:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{None (first version)} \\ \hline
+\textbf{Objective:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{To make sure that the passwords are encrypted and the connection uses HTTPS protocol.} \\ \hline
+\textbf{Product/Ver/Module:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{StockSense 1.0 / Tenant and User Management} \\ \hline
+\textbf{Environment:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{Deployed test server with a test database} \\ \hline
+\textbf{Assumptions:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{The sample tenants and test data described in Section 7.2 are available.} \\ \hline
+\textbf{Pre-Requisite:} & \multicolumn{3}{p{\dimexpr0.70\textwidth+4\tabcolsep\relax}|}{A test database and a test deployed server.} \\ \hline
+\textbf{Step No.} & \textbf{Execution Description} & \multicolumn{2}{l|}{\textbf{Procedure Result}} \\ \hline
+1 & See the saved password column in the database. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{Only encrypted passwords are saved in the database.} \\ \hline
+2 & Visit the website via plain HTTP. & \multicolumn{2}{p{\dimexpr0.42\textwidth+2\tabcolsep\relax}|}{Plain HTTP connection is rejected.} \\ \hline
+\multicolumn{4}{|l|}{\textbf{Comments:} Not yet executed; the test will be run in FYP-2.} \\ \hline
+\multicolumn{4}{|c|}{\textbf{Passed \quad Failed \quad Not Executed}} \\ \hline
+\end{tabular}\par}
+\end{table}
 
 \FloatBarrier
 \section{Test Metrics}
