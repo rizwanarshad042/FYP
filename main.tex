@@ -602,31 +602,31 @@ The paper builds on the business argument for the importance of giving priority 
 
 Table~\ref{tab:literature-review} summarizes the fifteen reviewed articles in the format of the template, giving for each one its authors, the method it used, its main results and its limitations with respect to StockSense.
 
-\begin{longtable}{|L{0.55cm}|L{2.4cm}|L{3.9cm}|L{3.5cm}|L{3.3cm}|}
+\begin{longtable}{|L{2.6cm}|L{4.1cm}|L{3.6cm}|L{3.4cm}|}
 \caption{Summary of Literature Review}\label{tab:literature-review} \\
 \hline
-\textbf{No.} & \textbf{Author} & \textbf{Method} & \textbf{Results} & \textbf{Limitations} \\ \hline
+\textbf{Author} & \textbf{Method} & \textbf{Results} & \textbf{Limitations} \\ \hline
 \endfirsthead
 \hline
-\textbf{No.} & \textbf{Author} & \textbf{Method} & \textbf{Results} & \textbf{Limitations} \\ \hline
+\textbf{Author} & \textbf{Method} & \textbf{Results} & \textbf{Limitations} \\ \hline
 \endhead
 \hline
 \endfoot
-1 & Loureiro et al.~\cite{loureiro2018deep} & Deep neural networks compared with decision trees, random forests, support vector regression and shallow networks, using product attributes and expert variables & Deep learning gave good accuracy for new fashion products, with ensemble methods also competitive & Season-level totals only; single large retailer; no store or size detail \\ \hline
-2 & Caro and Gallien~\cite{caro2012clearance} & Forecast-then-optimize clearance pricing tested in a field experiment at Zara & About 6\% higher clearance revenue; process adopted company-wide & Needs rich price history; covers end-of-season clearance only \\ \hline
-3 & Paterson et al.~\cite{paterson2011inventory} & Review of lateral transshipment models classified as reactive or proactive & Organized results and open questions on stock transfer policies & No ready algorithm for small retailers; no link to markdowns or reorders \\ \hline
-4 & Bandara et al.~\cite{bandara2020forecasting} & Clustering of similar series and one recurrent neural network trained per cluster & Higher accuracy than a single model and univariate methods on benchmark data & Tested on competition benchmarks, not on size-level retail sales \\ \hline
-5 & Makridakis et al.~\cite{makridakis2022m5} & Analysis of the M5 competition on 42,840 Walmart sales series & Gradient-boosted trees such as LightGBM beat statistical benchmarks & Large retailer with long history; no sales by size \\ \hline
-6 & Purnamasari et al.~\cite{purnamasari2023demand} & K-means grouping of products with gradient boosting compared against classical projections & ML methods were more accurate for a small business & One small dataset and category; no size or store level \\ \hline
-7 & Fildes et al.~\cite{fildes2022retail} & Review of retail forecasting research organized by decision level & Identified gaps between research and retail practice & No new model; little attention to very small businesses \\ \hline
-8 & Montero-Manso and Hyndman~\cite{montero2021principles} & Theoretical analysis and experiments on global versus local models & Global models were often more accurate, even for unrelated series & General time series; no retail features or tenant separation \\ \hline
-9 & Fisher and Raman~\cite{fisher1996reducing} & Accurate response model that updates forecasts with early-season sales & Estimated profit increase of about 60\% at a ski-wear company & One season and one company; production rather than retail decisions \\ \hline
-10 & Thomassey~\cite{thomassey2010sales} & Review of sales forecasting methods for the clothing industry & Described short life cycles, seasonality and lack of history as key problems & Mainly for manufacturers; predates recent ML evidence \\ \hline
-11 & Seyedan and Mafakheri~\cite{seyedan2020predictive} & Survey of big data analytics methods for supply chain demand forecasting & Classified methods and applications and listed open research questions & No model tested; focus on large data volumes \\ \hline
-12 & Petropoulos et al.~\cite{petropoulos2022forecasting} & Encyclopedic review of forecasting theory and practice & Guidance on forecast evaluation and model selection & Not specific to retail or small businesses \\ \hline
-13 & Bertsimas and Kallus~\cite{bertsimas2020predictive} & ML-weighted prescriptive framework tested on the inventory of a media distributor & Better decisions than predicting first and optimizing separately & Complex to implement and harder to explain \\ \hline
-14 & Rudin~\cite{rudin2019stop} & Argument for interpretable models instead of explained black boxes & Interpretable models often reach accuracy similar to black boxes & Framed around high-stakes domains rather than retail \\ \hline
-15 & Corsten and Gruen~\cite{corsten2003desperately} & Worldwide study of the extent, causes and consumer responses to out-of-stocks & Average out-of-stock rate of about 8\%, mostly caused by store practices & Groceries rather than apparel; older data \\ \hline
+Loureiro et al.~\cite{loureiro2018deep} & Deep neural networks compared with decision trees, random forests, support vector regression and shallow networks, using product attributes and expert variables & Deep learning gave good accuracy for new fashion products, with ensemble methods also competitive & Season-level totals only; single large retailer; no store or size detail \\ \hline
+Caro and Gallien~\cite{caro2012clearance} & Forecast-then-optimize clearance pricing tested in a field experiment at Zara & About 6\% higher clearance revenue; process adopted company-wide & Needs rich price history; covers end-of-season clearance only \\ \hline
+Paterson et al.~\cite{paterson2011inventory} & Review of lateral transshipment models classified as reactive or proactive & Organized results and open questions on stock transfer policies & No ready algorithm for small retailers; no link to markdowns or reorders \\ \hline
+Bandara et al.~\cite{bandara2020forecasting} & Clustering of similar series and one recurrent neural network trained per cluster & Higher accuracy than a single model and univariate methods on benchmark data & Tested on competition benchmarks, not on size-level retail sales \\ \hline
+Makridakis et al.~\cite{makridakis2022m5} & Analysis of the M5 competition on 42,840 Walmart sales series & Gradient-boosted trees such as LightGBM beat statistical benchmarks & Large retailer with long history; no sales by size \\ \hline
+Purnamasari et al.~\cite{purnamasari2023demand} & K-means grouping of products with gradient boosting compared against classical projections & ML methods were more accurate for a small business & One small dataset and category; no size or store level \\ \hline
+Fildes et al.~\cite{fildes2022retail} & Review of retail forecasting research organized by decision level & Identified gaps between research and retail practice & No new model; little attention to very small businesses \\ \hline
+Montero-Manso and Hyndman~\cite{montero2021principles} & Theoretical analysis and experiments on global versus local models & Global models were often more accurate, even for unrelated series & General time series; no retail features or tenant separation \\ \hline
+Fisher and Raman~\cite{fisher1996reducing} & Accurate response model that updates forecasts with early-season sales & Estimated profit increase of about 60\% at a ski-wear company & One season and one company; production rather than retail decisions \\ \hline
+Thomassey~\cite{thomassey2010sales} & Review of sales forecasting methods for the clothing industry & Described short life cycles, seasonality and lack of history as key problems & Mainly for manufacturers; predates recent ML evidence \\ \hline
+Seyedan and Mafakheri~\cite{seyedan2020predictive} & Survey of big data analytics methods for supply chain demand forecasting & Classified methods and applications and listed open research questions & No model tested; focus on large data volumes \\ \hline
+Petropoulos et al.~\cite{petropoulos2022forecasting} & Encyclopedic review of forecasting theory and practice & Guidance on forecast evaluation and model selection & Not specific to retail or small businesses \\ \hline
+Bertsimas and Kallus~\cite{bertsimas2020predictive} & ML-weighted prescriptive framework tested on the inventory of a media distributor & Better decisions than predicting first and optimizing separately & Complex to implement and harder to explain \\ \hline
+Rudin~\cite{rudin2019stop} & Argument for interpretable models instead of explained black boxes & Interpretable models often reach accuracy similar to black boxes & Framed around high-stakes domains rather than retail \\ \hline
+Corsten and Gruen~\cite{corsten2003desperately} & Worldwide study of the extent, causes and consumer responses to out-of-stocks & Average out-of-stock rate of about 8\%, mostly caused by store practices & Groceries rather than apparel; older data \\ \hline
 \end{longtable}
 
 \section{Related Work}
