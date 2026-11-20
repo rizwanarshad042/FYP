@@ -844,6 +844,7 @@ The use cases below describe how each actor interacts with StockSense to achieve
 \begin{table}[!htbp]
 \centering
 \caption{UC-01 Register Business}
+{\small\linespread{1}\selectfont
 \begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
 \textbf{Name} & Register Business \\ \hline
@@ -860,12 +861,13 @@ The use cases below describe how each actor interacts with StockSense to achieve
 3 & The owner enters business and account details. & 4 & The system creates the tenant and sends a verification email. \\ \hline
 \multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
 3 & The owner enters an email that is already registered. & 4-A & The system displays an error and asks for a different email. \\ \hline
-\end{tabular}
+\end{tabular}\par}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-02 Login}
+{\small\linespread{1}\selectfont
 \begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
 \textbf{Name} & Login \\ \hline
@@ -882,12 +884,13 @@ The use cases below describe how each actor interacts with StockSense to achieve
 3 & The user enters the email and password. & 4 & The system verifies the credentials and opens the dashboard. \\ \hline
 \multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
 3 & The user enters invalid credentials. & 4-A & The system displays ``Incorrect email or password'' and stays on the login page. \\ \hline
-\end{tabular}
+\end{tabular}\par}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-03 Manage Stores}
+{\small\linespread{1}\selectfont
 \begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
 \textbf{Name} & Manage Stores \\ \hline
@@ -904,12 +907,13 @@ The use cases below describe how each actor interacts with StockSense to achieve
 3 & The owner chooses to add, edit, or remove a store and enters the details. & 4 & The system validates and saves the change. \\ \hline
 \multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
 3 & The owner removes a store that still has inventory or sales history. & 4-A & The system archives it instead of deleting it. \\ \hline
-\end{tabular}
+\end{tabular}\par}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-04 Manage Store Managers}
+{\small\linespread{1}\selectfont
 \begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
 \textbf{Name} & Manage Store Managers \\ \hline
@@ -926,12 +930,13 @@ The use cases below describe how each actor interacts with StockSense to achieve
 3 & The owner invites a manager by email and selects the store to assign. & 4 & The system creates the account and sends an invitation. \\ \hline
 \multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
 3 & The owner enters an email that already belongs to another account. & 4-A & The system rejects the invitation and shows an error. \\ \hline
-\end{tabular}
+\end{tabular}\par}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-05 Manage Products and Variants}
+{\small\linespread{1}\selectfont
 \begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
 \textbf{Name} & Manage Products and Variants \\ \hline
@@ -948,12 +953,13 @@ The use cases below describe how each actor interacts with StockSense to achieve
 3 & The owner creates or edits a product and its sizes/variants. & 4 & The system validates and saves the product catalog. \\ \hline
 \multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
 3 & The owner enters a variant with an SKU that already exists. & 4-A & The system rejects the entry and asks for a different SKU. \\ \hline
-\end{tabular}
+\end{tabular}\par}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-06 Adjust Inventory}
+{\small\linespread{1}\selectfont
 \begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
 \textbf{Name} & Adjust Inventory \\ \hline
@@ -970,12 +976,13 @@ The use cases below describe how each actor interacts with StockSense to achieve
 3 & The user enters the new quantity and a reason. & 4 & The system updates the inventory and records the adjustment. \\ \hline
 \multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
 3 & The user enters a negative quantity. & 4-A & The system rejects the adjustment. \\ \hline
-\end{tabular}
+\end{tabular}\par}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-07 Record Sale (POS)}
+{\small\linespread{1}\selectfont
 \begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
 \textbf{Name} & Record Sale (POS) \\ \hline
@@ -992,12 +999,13 @@ The use cases below describe how each actor interacts with StockSense to achieve
 3 & The manager confirms the quantity and completes the sale. & 4 & The system logs the sale and updates inventory. \\ \hline
 \multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
 3 & The manager enters a quantity larger than the available inventory. & 4-A & The system warns the manager before confirming. \\ \hline
-\end{tabular}
+\end{tabular}\par}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-08 Upload Historical Sales Data}
+{\small\linespread{1}\selectfont
 \begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
 \textbf{Name} & Upload Historical Sales Data \\ \hline
@@ -1015,12 +1023,13 @@ The use cases below describe how each actor interacts with StockSense to achieve
 5 & The owner approves the report. & 6 & The system imports the rows. \\ \hline
 \multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
 1 & The owner selects a file with an unsupported or unreadable format. & 2-A & The system rejects the upload and explains why. Rejected rows are listed in the report with reasons. \\ \hline
-\end{tabular}
+\end{tabular}\par}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-09 View Dashboard and Alerts}
+{\small\linespread{1}\selectfont
 \begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
 \textbf{Name} & View Dashboard and Alerts \\ \hline
@@ -1036,12 +1045,13 @@ The use cases below describe how each actor interacts with StockSense to achieve
 1 & The user logs in and is directed to the dashboard. & 2 & The system displays sales trends, current inventory, open recommendations, and alerts. \\ \hline
 \multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
 1 & The user logs in to a tenant that has no sales data yet. & 2-A & The dashboard asks the user to record or upload sales. \\ \hline
-\end{tabular}
+\end{tabular}\par}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-10 View Demand Forecast}
+{\small\linespread{1}\selectfont
 \begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
 \textbf{Name} & View Demand Forecast \\ \hline
@@ -1059,12 +1069,13 @@ The use cases below describe how each actor interacts with StockSense to achieve
 \multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
 3 & The user selects a series of a tenant that has not yet provided enough sales history to train a model. & 4-A & No forecast is shown and the user is asked to record or upload more data. \\ \hline
 1 & A user of a tenant on the free tier opens the Forecasts page. & 2-A & The system asks the user to upgrade. \\ \hline
-\end{tabular}
+\end{tabular}\par}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-11 View and Act on Redistribution Recommendation}
+{\small\linespread{1}\selectfont
 \begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
 \textbf{Name} & View and Act on Redistribution Recommendation \\ \hline
@@ -1081,12 +1092,13 @@ The use cases below describe how each actor interacts with StockSense to achieve
 3 & The user approves it. & 4 & The system creates the stock transfer and notifies both stores. \\ \hline
 \multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
 3 & The user dismisses the recommendation. & 4-A & The system marks it as dismissed. \\ \hline
-\end{tabular}
+\end{tabular}\par}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-12 View Markdown Recommendation}
+{\small\linespread{1}\selectfont
 \begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
 \textbf{Name} & View Markdown Recommendation \\ \hline
@@ -1103,12 +1115,13 @@ The use cases below describe how each actor interacts with StockSense to achieve
 3 & The user selects a markdown recommendation. & 4 & The system displays the item, suggested discount, explanation, and estimated financial impact. \\ \hline
 \multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
 5 & The user dismisses the recommendation if a markdown is not desired. & 6 & The system marks the recommendation as dismissed. \\ \hline
-\end{tabular}
+\end{tabular}\par}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-13 View Reorder Recommendation}
+{\small\linespread{1}\selectfont
 \begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
 \textbf{Name} & View Reorder Recommendation \\ \hline
@@ -1125,12 +1138,13 @@ The use cases below describe how each actor interacts with StockSense to achieve
 3 & The user selects a reorder recommendation. & 4 & The system displays the item, store, suggested quantity, and explanation. \\ \hline
 \multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
 5 & The user marks the recommendation as actioned or dismisses it. & 6 & The system updates the status of the recommendation. \\ \hline
-\end{tabular}
+\end{tabular}\par}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-14 Manage Subscription}
+{\small\linespread{1}\selectfont
 \begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
 \textbf{Name} & Manage Subscription \\ \hline
@@ -1147,12 +1161,13 @@ The use cases below describe how each actor interacts with StockSense to achieve
 3 & The owner selects a plan and confirms the change. & 4 & The system updates the tier and the available features. \\ \hline
 \multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
 3 & The owner confirms a plan change but the payment fails. & 4-A & The system keeps the current tier and informs the owner. \\ \hline
-\end{tabular}
+\end{tabular}\par}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-15 Manage Tenants}
+{\small\linespread{1}\selectfont
 \begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
 \textbf{Name} & Manage Tenants \\ \hline
@@ -1169,9 +1184,10 @@ The use cases below describe how each actor interacts with StockSense to achieve
 3 & The administrator selects a tenant and chooses an action (suspend, reactivate, or change plan). & 4 & The system applies the change and records it. \\ \hline
 \multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
 5 & A user of a suspended tenant tries to log in. & 6 & The system does not allow the login until the tenant is reactivated. \\ \hline
-\end{tabular}
+\end{tabular}\par}
 \end{table}
 
+\FloatBarrier
 \section{Hardware and Software Requirements}
 
 This section lists the hardware needed to host and use StockSense and the software stack with which it will be built. The stack follows the model choice made in Chapter~3 and the architecture described in Chapter~6.
@@ -1190,11 +1206,11 @@ In this part, the prototypes of the key screens of StockSense are provided. They
 
 \subsection{Login Page}
 
-Any registered user, whether a business owner, a store manager or the system administrator, logs in from this page with an email address and a password, as described in UC-02. If the credentials are wrong, the page shows a short error message and the user stays on the page. Users of a suspended tenant cannot log in until the tenant is reactivated by the administrator. After a successful login, the user is taken to the dashboard of the tenant, and the session stays active until the user logs out or remains idle for too long.
+Any registered user, whether a business owner, a store manager or the system administrator, logs in from this page with an email address and a password, as described in UC-02. If the credentials are wrong, the page shows a short error message and the user stays on the page. Users of a suspended tenant cannot log in until the tenant is reactivated by the administrator. Once the login is successful, the user goes straight to the dashboard of their business, and the session ends when the user logs out or stays idle for a while.
 
 \subsection{Signup Page}
 
-A new business owner registers the business as a tenant from this page by entering the business name, the owner's name, an email address and a password, as described in UC-01. The new tenant starts on the free POS tier, and a verification email is sent to the owner before the account is used. If the email address is already registered, the page shows an error and asks for a different email, so that two tenants never share the same account. Figures~\ref{fig:login} and~\ref{fig:signup} show the two pages side by side.
+A new business owner registers the business as a tenant from this page by entering the business name, the owner's name, an email address and a password, as described in UC-01. The new tenant starts on the free POS tier, and a verification email is sent to the owner before the account is used. If someone tries to sign up with an email that is already registered, an error is shown and a different email is needed, so one account can never belong to two tenants. Figures~\ref{fig:login} and~\ref{fig:signup} show the two pages side by side.
 
 \begin{figure}[!htbp]
 \centering
@@ -1212,11 +1228,11 @@ A new business owner registers the business as a tenant from this page by enteri
 
 \subsection{Dashboard}
 
-The dashboard is the first screen after login and supports UC-09. It shows the monthly sales, the items at risk of stockout or of becoming dead stock, the recent sales activity and the inventory health of each branch. Owners see all branches, while store managers see only their own store. On the paid plan, the dashboard also lists open recommendations and alerts. The figures on the dashboard are read from the stored sales, forecasts and recommendations, so the page opens quickly even for tenants with a long sales history.
+The dashboard is the first screen after login and supports UC-09. It shows the monthly sales, the items at risk of stockout or of becoming dead stock, the recent sales activity and the inventory health of each branch. Owners see all branches, while store managers see only their own store. On the paid plan, the dashboard also lists open recommendations and alerts. Since the dashboard only reads sales, forecasts and recommendations that are already saved, it loads fast even when a tenant has years of sales data.
 
 \subsection{POS Page}
 
-A store manager records a sale on this page by selecting the branch, the product and the variant sold and confirming the quantity, as described in UC-07. The inventory is updated automatically once the sale is confirmed, and the manager is warned before confirming a sale for which there is not enough stock. The page is kept simple so that a sale can be recorded in a few clicks while the customer is waiting at the counter. The dashboard and the POS page are shown in Figures~\ref{fig:dashboard} and~\ref{fig:pos}.
+A store manager records a sale on this page by selecting the branch, the product and the variant sold and confirming the quantity, as described in UC-07. The inventory is updated automatically once the sale is confirmed, and the manager is warned before confirming a sale for which there is not enough stock. The screen has been kept simple on purpose, because the manager usually records the sale while the customer is standing at the counter. The dashboard and the POS page are shown in Figures~\ref{fig:dashboard} and~\ref{fig:pos}.
 
 \begin{figure}[!htbp]
 \centering
@@ -1234,11 +1250,11 @@ A store manager records a sale on this page by selecting the branch, the product
 
 \subsection{Upload Sales Report}
 
-Businesses that already use an external POS or a spreadsheet upload their historical sales as a CSV or Excel file on this page, as described in UC-08. The owner maps the detected columns to the required fields, reviews the upload report with the accepted and rejected rows, and approves the import. Rows that cannot be read or matched to a product, size or store are listed with the reason, so that the owner can correct the source file and upload it again.
+Businesses that already use an external POS or a spreadsheet upload their historical sales as a CSV or Excel file on this page, as described in UC-08. The owner maps the detected columns to the required fields, reviews the upload report with the accepted and rejected rows, and approves the import. Any row that cannot be read, or does not match a product, size or store of the tenant, is shown with its reason, and the owner can fix the file and upload it again.
 
 \subsection{Inventory}
 
-This page shows the current stock level of every product variant in every branch and can be filtered by store. A status indicator marks each item as healthy, at risk of stockout or at risk of becoming dead stock, and users can correct a quantity after a physical count, as described in UC-06. The owner can see the stock of every branch on this page, while a store manager sees only the stock of the assigned store. Figures~\ref{fig:upload} and~\ref{fig:inventory} show these two pages.
+This page shows the current stock level of every product variant in every branch and can be filtered by store. A status indicator marks each item as healthy, at risk of stockout or at risk of becoming dead stock, and users can correct a quantity after a physical count, as described in UC-06. Owners can view the stock of all branches here, whereas a store manager can only view the stock of their own store. Figures~\ref{fig:upload} and~\ref{fig:inventory} show these two pages.
 
 \begin{figure}[!htbp]
 \centering
@@ -1256,7 +1272,7 @@ This page shows the current stock level of every product variant in every branch
 
 \subsection{Recommendations}
 
-This page lists the redistribution, markdown and reorder recommendations of the tenant, as described in UC-11 to UC-13. Each recommendation shows a plain-language explanation and an estimated financial impact, and the user can approve or dismiss it. Approving a redistribution creates a stock transfer between the two stores. The recommendations are listed in the order in which the engine handles them, with redistribution first, markdowns second and reorders last. The page is shown in Figure~\ref{fig:recommendations}.
+This page lists the redistribution, markdown and reorder recommendations of the tenant, as described in UC-11 to UC-13. Each recommendation shows a plain-language explanation and an estimated financial impact, and the user can approve or dismiss it. Approving a redistribution creates a stock transfer between the two stores. The list follows the same order as the engine, which means redistribution comes first, then markdowns, and reorders at the end. The page is shown in Figure~\ref{fig:recommendations}.
 
 \begin{figure}[!htbp]
 \centering
