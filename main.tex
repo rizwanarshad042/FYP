@@ -288,7 +288,7 @@ StockSense helps achieve two of the United Nations SDGs as illustrated in Figure
 
 \subsection{SDG-8 (Decent Work and Economic Growth)}
 
-Small businesses are among the primary job providers but struggle to find the analytics tools that are essential to large retailers' success and are too expensive for them. At this time, demand forecasting and inventory optimization have largely been available to enterprise systems and data teams of large chains. These features are accessible to small grocery stores with StockSense's free Point of Sale (POS) and affordable subscription, enabling them to sell more of what's popular with their customers, lower loss rates on unsold merchandise, and invest their capital in a more effective way. A store with lower stockout rate and less of a discount/loss of inventory is in a better position to retain their employees, open new store locations and to hire more employees. The project contributes to productive employment and sustained economic growth in the small business sector – the focus of SDG-8 – in this way.
+Small businesses are among the primary job providers but struggle to find the analytics tools that are essential to large retailers' success and are too expensive for them. At this time, demand forecasting and inventory optimization have largely been available to enterprise systems and data teams of large chains. These features are accessible to small grocery stores with StockSense's free POS and affordable subscription, enabling them to sell more of what's popular with their customers, lower loss rates on unsold merchandise, and invest their capital in a more effective way. A store with lower stockout rate and less of a discount/loss of inventory is in a better position to retain their employees, open new store locations and to hire more employees. The project contributes to productive employment and sustained economic growth in the small business sector – the focus of SDG-8 – in this way.
 
 \subsection{SDG-9 (Industry, Innovation, and Infrastructure)}
 
@@ -420,7 +420,7 @@ Many short or sparse series, as is usual in retail sales at detailed level, is w
 
 \subsubsection{Relationship to the Proposed Research Work}
 
-The paper argues the benefit of training a single forecasting model for a large number of product, size and store series, as opposed to a separate model per product, size, and store. If there are too few observations in each individual series to train a reliable local model by a small retailer, data from various series must be shared to get started. What StockSense does is the same as clustering but in a simpler manner. By providing a gradient-boosted model with the product, size, store and category as features, the model can learn the behavior of series with similar products. This preserves the benefits of global models, yet the training requirements of the recurrent neural network are reduced. The clustering idea in the paper might be implemented later in the experiments of Chapter~8, if it turned out that there are different groups of series that behave differently. The paper hence gives reasons for the design in the present state and suggests a possible improvement of the design.
+The paper argues the benefit of training a single forecasting model for a large number of product, size and store series, as opposed to a separate model per product, size, and store. If there are too few observations in each individual series to train a reliable local model by a small retailer, data from various series must be shared to get started. What StockSense does is the same as clustering but in a simpler manner. By providing a gradient-boosted model with the product, size, store and category as features, the model can learn the behavior of series with similar products. This preserves the benefits of global models, yet the training requirements of the recurrent neural network are reduced. The clustering idea in the paper might be implemented later in the experiments of Chapter~9, if it turned out that there are different groups of series that behave differently. The paper hence gives reasons for the design in the present state and suggests a possible improvement of the design.
 
 \subsection{Results of the M5 Competition}
 
@@ -436,7 +436,7 @@ One of the biggest empirical comparisons of forecasting methods based on real re
 
 \subsubsection{Relationship to the Proposed Research Work}
 
-Directly influencing the choice of LightGBM as the primary forecasting model for StockSense, the finding of gradient-boosted trees outperforming statistical methods with hierarchical retail sales data. The competition also includes two other design decisions, training a single global model over all the series of a tenant and adding price and calendar features. Simultaneously, its shortcomings make it very clear that StockSense cannot sacrifice its simplicity even with simple statistics, and that it needs to test out experiments only with short histories, as the gains of gradient boosting on huge amounts of data from a large retailer will have to be proven in a much more limited and ephemeral data set for small businesses. The preliminary experiments outlined in Chapter~8 will also make use of the M5 dataset. The uncertainty results of the competition also validate the use of the upper quantile forecast for the input to the safety stock application in the recommendation engine. The findings of the M5 impact the model, the features and the treatment of uncertainty in StockSense in this way.
+Directly influencing the choice of LightGBM as the primary forecasting model for StockSense, the finding of gradient-boosted trees outperforming statistical methods with hierarchical retail sales data. The competition also includes two other design decisions, training a single global model over all the series of a tenant and adding price and calendar features. Simultaneously, its shortcomings make it very clear that StockSense cannot sacrifice its simplicity even with simple statistics, and that it needs to test out experiments only with short histories, as the gains of gradient boosting on huge amounts of data from a large retailer will have to be proven in a much more limited and ephemeral data set for small businesses. The preliminary experiments outlined in Chapter~9 will also make use of the M5 dataset. The uncertainty results of the competition also validate the use of the upper quantile forecast for the input to the safety stock application in the recommendation engine. The findings of the M5 impact the model, the features and the treatment of uncertainty in StockSense in this way.
 
 \subsection{Forecasting for Small Businesses}
 
@@ -484,7 +484,7 @@ The paper provides a useful theoretical and empirical basis for global forecasti
 
 \subsubsection{Relationship to the Proposed Research Work}
 
-This finding is in line with the StockSense decision to adopt one shared forecasting model for all product, size and store levels of a tenant as opposed to having a model for each series, as this would require a much longer history of data than a small retailer would have. Unlike the global model idea, StockSense applies the global model idea within each tenant and not across tenants since tenant data is not supposed to be shared with other businesses. One of the experiments planned in Chapter~8 is to determine whether this per-tenant global model is more accurate than separate local models. A global model is also lower cost to maintain, as only a single model needs to be trained and stored on the platform – not one for each product, size and store. This results in a low cost forecasting service and makes it affordable for small businesses.
+This finding is in line with the StockSense decision to adopt one shared forecasting model for all product, size and store levels of a tenant as opposed to having a model for each series, as this would require a much longer history of data than a small retailer would have. Unlike the global model idea, StockSense applies the global model idea within each tenant and not across tenants since tenant data is not supposed to be shared with other businesses. One of the experiments planned in Chapter~9 is to determine whether this per-tenant global model is more accurate than separate local models. A global model is also lower cost to maintain, as only a single model needs to be trained and stored on the platform – not one for each product, size and store. This results in a low cost forecasting service and makes it affordable for small businesses.
 
 \subsection{Accurate Response to Early Sales}
 
@@ -548,7 +548,7 @@ The wide range of the review makes it a useful reference for the practices of fo
 
 \subsubsection{Relationship to the Proposed Research Work}
 
-The review offers advice regarding the evaluation of forecasts and the choice of model that impacts the comparison of the gradient-boosted model with the statistical benchmarks used in StockSense. It also allows the use of chronological data splits, rolling-origin validation and error measures that are suitable for sparse series, such as weighted absolute percentage error (WAPE), weighted mean absolute error (WMAE), mean absolute error (MAE) and mean absolute percentage error (MAPE) (in addition to the root mean squared error (RMSE)). These options are explained in the forecast evaluation methodology, presented in Chapter~5, and in the experiments to be carried out, presented in Chapter~8. It also enables results to be reported separately for series of each type, as a good performance on the series that matters most is offset by a bad performance on the one that didn't. These practices enable a fair comparison of LightGBM and the baselines in StockSense, and can help ensure that the results can be believed.
+The review offers advice regarding the evaluation of forecasts and the choice of model that impacts the comparison of the gradient-boosted model with the statistical benchmarks used in StockSense. It also allows the use of chronological data splits, rolling-origin validation and error measures that are suitable for sparse series, such as weighted absolute percentage error (WAPE), weighted mean absolute error (WMAE), mean absolute error (MAE) and mean absolute percentage error (MAPE) (in addition to the root mean squared error (RMSE)). These options are explained in the forecast evaluation methodology, presented in Chapter~5, and in the experiments to be carried out, presented in Chapter~9. It also enables results to be reported separately for series of each type, as a good performance on the series that matters most is offset by a bad performance on the one that didn't. These practices enable a fair comparison of LightGBM and the baselines in StockSense, and can help ensure that the results can be believed.
 
 \subsection{Predictive to Prescriptive Analytics}
 
@@ -564,7 +564,7 @@ The paper's theoretical foundations are solid enough to take them past the predi
 
 \subsubsection{Relationship to the Proposed Research Work}
 
-The paper reinforces the StockSense design choice of providing the user with a set of concrete recommendations – either a redistribution or markdown recommendation or an order recommendation – rather than just a prediction of demand. Similarly, StockSense works in a simpler way, by incorporating an upper quantile forecast and a safety stock, and selecting transfers and discounts to maximize the expected margin, while taking into consideration the uncertainty about the forecast. This ensures that the decision logic is clear enough to be described to the owner and that each decision is associated with the forecast. The historical back test that is scheduled in Chapter~8 most closely follows the spirit of the paper since it rates the system not only on how accurate its forecasts are, but dead stock and lost sales as well. The methods presented in the paper could aid in the optimization of the decision rules after the accumulation of sufficient data in future work.
+The paper reinforces the StockSense design choice of providing the user with a set of concrete recommendations – either a redistribution or markdown recommendation or an order recommendation – rather than just a prediction of demand. Similarly, StockSense works in a simpler way, by incorporating an upper quantile forecast and a safety stock, and selecting transfers and discounts to maximize the expected margin, while taking into consideration the uncertainty about the forecast. This ensures that the decision logic is clear enough to be described to the owner and that each decision is associated with the forecast. The historical back test that is scheduled in Chapter~9 most closely follows the spirit of the paper since it rates the system not only on how accurate its forecasts are, but dead stock and lost sales as well. The methods presented in the paper could aid in the optimization of the decision rules after the accumulation of sufficient data in future work.
 
 \subsection{Interpretable Models for High-Stakes Decisions}
 
@@ -651,7 +651,7 @@ Shopify POS provides multi-location inventory management, stocks transfers betwe
 
 \subsection{Lightspeed Retail}
 
-Lightspeed Retail is a point of sale (POS) and inventory system for retailers with multiple stores and many SKUs (stock keeping units)~\cite{lightspeed}. It enables stocks to be moved between stores, offers individual reorder points for each store and reports on slow moving stock, helping you control branch stocks. The platform does not provide demand forecasting at the size or variant level, explanations for its suggestions or a separate tool for choosing the timing of markdowns. It also lacks a free version, meaning that retailers will have to pay for the POS even if they don't require more sophisticated inventory analytics capabilities. The difference with StockSense is that it provides the POS free of charge and that it replaces the manual reorder points and past reports with forecasting and timely suggestions.
+Lightspeed Retail is a POS and inventory system for retailers with multiple stores and many SKUs~\cite{lightspeed}. It enables stocks to be moved between stores, offers individual reorder points for each store and reports on slow moving stock, helping you control branch stocks. The platform does not provide demand forecasting at the size or variant level, explanations for its suggestions or a separate tool for choosing the timing of markdowns. It also lacks a free version, meaning that retailers will have to pay for the POS even if they don't require more sophisticated inventory analytics capabilities. The difference with StockSense is that it provides the POS free of charge and that it replaces the manual reorder points and past reports with forecasting and timely suggestions.
 
 \subsection{Odoo}
 
@@ -844,255 +844,331 @@ The use cases below describe how each actor interacts with StockSense to achieve
 \begin{table}[!htbp]
 \centering
 \caption{UC-01 Register Business}
-\begin{tabular}{|l|p{9cm}|}
+\begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
-Name & Register Business \\ \hline
-Actors & Business Owner \\ \hline
-Summary & A new business signs up as a tenant on StockSense. \\ \hline
-Pre-Conditions & The business is not already registered. \\ \hline
-Post-Conditions & A new tenant account is created on the free POS tier. \\ \hline
-\multirow{3}{*}{Basic Flow} & 1. The owner opens the registration page. \\
- & 2. The owner enters business and account details. \\
- & 3. The system creates the tenant and sends a verification email. \\ \hline
-Alternative Flow & If the email is already registered, the system displays an error and asks for a different email. \\ \hline
+\textbf{Name} & Register Business \\ \hline
+\textbf{Actors} & Business Owner \\ \hline
+\textbf{Summary} & A new business signs up as a tenant on StockSense. \\ \hline
+\textbf{Pre-Conditions} & The business is not already registered. \\ \hline
+\textbf{Post-Conditions} & A new tenant account is created on the free POS tier. \\ \hline
+\textbf{Special Requirements} & None \\ \hline
+\end{tabular}\par\nointerlineskip
+\begin{tabular}{|p{0.04\textwidth}|p{\dimexpr0.40\textwidth-2\tabcolsep-\arrayrulewidth\relax}|p{0.05\textwidth}|p{\dimexpr0.43\textwidth-2\tabcolsep-\arrayrulewidth\relax}|}
+\multicolumn{4}{|c|}{\textbf{Basic Flow}} \\ \hline
+\multicolumn{2}{|c|}{\textbf{Actor Action}} & \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
+1 & The owner opens the registration page. & 2 & The system displays the registration form. \\ \hline
+3 & The owner enters business and account details. & 4 & The system creates the tenant and sends a verification email. \\ \hline
+\multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
+3 & The owner enters an email that is already registered. & 4-A & The system displays an error and asks for a different email. \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-02 Login}
-\begin{tabular}{|l|p{9cm}|}
+\begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
-Name & Login \\ \hline
-Actors & Business Owner, Store Manager, System Administrator \\ \hline
-Summary & A registered user logs in using an email and password. \\ \hline
-Pre-Conditions & The user has an account and is not already logged in. \\ \hline
-Post-Conditions & A session is established and the user is redirected to the dashboard. \\ \hline
-\multirow{3}{*}{Basic Flow} & 1. The user opens the login page. \\
- & 2. The user enters the email and password. \\
- & 3. The system verifies the credentials and opens the dashboard. \\ \hline
-Alternative Flow & If the credentials are invalid, the system displays ``Incorrect email or password'' and stays on the login page. \\ \hline
+\textbf{Name} & Login \\ \hline
+\textbf{Actors} & Business Owner, Store Manager, System Administrator \\ \hline
+\textbf{Summary} & A registered user logs in using an email and password. \\ \hline
+\textbf{Pre-Conditions} & The user has an account and is not already logged in. \\ \hline
+\textbf{Post-Conditions} & A session is established and the user is redirected to the dashboard. \\ \hline
+\textbf{Special Requirements} & None \\ \hline
+\end{tabular}\par\nointerlineskip
+\begin{tabular}{|p{0.04\textwidth}|p{\dimexpr0.40\textwidth-2\tabcolsep-\arrayrulewidth\relax}|p{0.05\textwidth}|p{\dimexpr0.43\textwidth-2\tabcolsep-\arrayrulewidth\relax}|}
+\multicolumn{4}{|c|}{\textbf{Basic Flow}} \\ \hline
+\multicolumn{2}{|c|}{\textbf{Actor Action}} & \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
+1 & The user opens the login page. & 2 & The system displays the login form. \\ \hline
+3 & The user enters the email and password. & 4 & The system verifies the credentials and opens the dashboard. \\ \hline
+\multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
+3 & The user enters invalid credentials. & 4-A & The system displays ``Incorrect email or password'' and stays on the login page. \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-03 Manage Stores}
-\begin{tabular}{|l|p{9cm}|}
+\begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
-Name & Manage Stores \\ \hline
-Actors & Business Owner \\ \hline
-Summary & The owner adds, edits, or removes the stores (branches) of the business. \\ \hline
-Pre-Conditions & The owner is logged in. \\ \hline
-Post-Conditions & The list of stores of the tenant is updated. \\ \hline
-\multirow{3}{*}{Basic Flow} & 1. The owner opens the Stores page. \\
- & 2. The owner chooses to add, edit, or remove a store and enters the details. \\
- & 3. The system validates and saves the change. \\ \hline
-Alternative Flow & If a store being removed still has inventory or sales history, the system archives it instead of deleting it. \\ \hline
+\textbf{Name} & Manage Stores \\ \hline
+\textbf{Actors} & Business Owner \\ \hline
+\textbf{Summary} & The owner adds, edits, or removes the stores (branches) of the business. \\ \hline
+\textbf{Pre-Conditions} & The owner is logged in. \\ \hline
+\textbf{Post-Conditions} & The list of stores of the tenant is updated. \\ \hline
+\textbf{Special Requirements} & None \\ \hline
+\end{tabular}\par\nointerlineskip
+\begin{tabular}{|p{0.04\textwidth}|p{\dimexpr0.40\textwidth-2\tabcolsep-\arrayrulewidth\relax}|p{0.05\textwidth}|p{\dimexpr0.43\textwidth-2\tabcolsep-\arrayrulewidth\relax}|}
+\multicolumn{4}{|c|}{\textbf{Basic Flow}} \\ \hline
+\multicolumn{2}{|c|}{\textbf{Actor Action}} & \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
+1 & The owner opens the Stores page. & 2 & The system displays the list of stores. \\ \hline
+3 & The owner chooses to add, edit, or remove a store and enters the details. & 4 & The system validates and saves the change. \\ \hline
+\multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
+3 & The owner removes a store that still has inventory or sales history. & 4-A & The system archives it instead of deleting it. \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-04 Manage Store Managers}
-\begin{tabular}{|l|p{9cm}|}
+\begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
-Name & Manage Store Managers \\ \hline
-Actors & Business Owner \\ \hline
-Summary & The owner invites store managers, assigns them to a store, or removes their access. \\ \hline
-Pre-Conditions & The owner is logged in and at least one store exists. \\ \hline
-Post-Conditions & The store manager accounts of the tenant are updated. \\ \hline
-\multirow{3}{*}{Basic Flow} & 1. The owner opens the Users page. \\
- & 2. The owner invites a manager by email and selects the store to assign. \\
- & 3. The system creates the account and sends an invitation. \\ \hline
-Alternative Flow & If the email already belongs to another account, the system rejects the invitation and shows an error. \\ \hline
+\textbf{Name} & Manage Store Managers \\ \hline
+\textbf{Actors} & Business Owner \\ \hline
+\textbf{Summary} & The owner invites store managers, assigns them to a store, or removes their access. \\ \hline
+\textbf{Pre-Conditions} & The owner is logged in and at least one store exists. \\ \hline
+\textbf{Post-Conditions} & The store manager accounts of the tenant are updated. \\ \hline
+\textbf{Special Requirements} & None \\ \hline
+\end{tabular}\par\nointerlineskip
+\begin{tabular}{|p{0.04\textwidth}|p{\dimexpr0.40\textwidth-2\tabcolsep-\arrayrulewidth\relax}|p{0.05\textwidth}|p{\dimexpr0.43\textwidth-2\tabcolsep-\arrayrulewidth\relax}|}
+\multicolumn{4}{|c|}{\textbf{Basic Flow}} \\ \hline
+\multicolumn{2}{|c|}{\textbf{Actor Action}} & \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
+1 & The owner opens the Users page. & 2 & The system displays the store managers of the tenant. \\ \hline
+3 & The owner invites a manager by email and selects the store to assign. & 4 & The system creates the account and sends an invitation. \\ \hline
+\multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
+3 & The owner enters an email that already belongs to another account. & 4-A & The system rejects the invitation and shows an error. \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-05 Manage Products and Variants}
-\begin{tabular}{|l|p{9cm}|}
+\begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
-Name & Manage Products and Variants \\ \hline
-Actors & Business Owner \\ \hline
-Summary & The owner adds, edits, or removes products and their sizes/variants. \\ \hline
-Pre-Conditions & The owner is logged in. \\ \hline
-Post-Conditions & The product catalog of the tenant is updated. \\ \hline
-\multirow{3}{*}{Basic Flow} & 1. The owner opens the Products page. \\
- & 2. The owner creates or edits a product and its sizes/variants. \\
- & 3. The system validates and saves the product catalog. \\ \hline
-Alternative Flow & If a variant with the same SKU already exists, the system rejects the entry and asks for a different SKU. \\ \hline
+\textbf{Name} & Manage Products and Variants \\ \hline
+\textbf{Actors} & Business Owner \\ \hline
+\textbf{Summary} & The owner adds, edits, or removes products and their sizes/variants. \\ \hline
+\textbf{Pre-Conditions} & The owner is logged in. \\ \hline
+\textbf{Post-Conditions} & The product catalog of the tenant is updated. \\ \hline
+\textbf{Special Requirements} & None \\ \hline
+\end{tabular}\par\nointerlineskip
+\begin{tabular}{|p{0.04\textwidth}|p{\dimexpr0.40\textwidth-2\tabcolsep-\arrayrulewidth\relax}|p{0.05\textwidth}|p{\dimexpr0.43\textwidth-2\tabcolsep-\arrayrulewidth\relax}|}
+\multicolumn{4}{|c|}{\textbf{Basic Flow}} \\ \hline
+\multicolumn{2}{|c|}{\textbf{Actor Action}} & \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
+1 & The owner opens the Products page. & 2 & The system displays the product catalog. \\ \hline
+3 & The owner creates or edits a product and its sizes/variants. & 4 & The system validates and saves the product catalog. \\ \hline
+\multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
+3 & The owner enters a variant with an SKU that already exists. & 4-A & The system rejects the entry and asks for a different SKU. \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-06 Adjust Inventory}
-\begin{tabular}{|l|p{9cm}|}
+\begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
-Name & Adjust Inventory \\ \hline
-Actors & Business Owner, Store Manager \\ \hline
-Summary & A user corrects the stock quantity of a variant at a store, for example after a physical count. \\ \hline
-Pre-Conditions & The user is logged in and the variant exists. \\ \hline
-Post-Conditions & The stock quantity is updated and the adjustment is logged. \\ \hline
-\multirow{3}{*}{Basic Flow} & 1. The user selects a store and a variant. \\
- & 2. The user enters the new quantity and a reason. \\
- & 3. The system updates the inventory and records the adjustment. \\ \hline
-Alternative Flow & If the entered quantity is negative, the system rejects the adjustment. \\ \hline
+\textbf{Name} & Adjust Inventory \\ \hline
+\textbf{Actors} & Business Owner, Store Manager \\ \hline
+\textbf{Summary} & A user corrects the stock quantity of a variant at a store, for example after a physical count. \\ \hline
+\textbf{Pre-Conditions} & The user is logged in and the variant exists. \\ \hline
+\textbf{Post-Conditions} & The stock quantity is updated and the adjustment is logged. \\ \hline
+\textbf{Special Requirements} & None \\ \hline
+\end{tabular}\par\nointerlineskip
+\begin{tabular}{|p{0.04\textwidth}|p{\dimexpr0.40\textwidth-2\tabcolsep-\arrayrulewidth\relax}|p{0.05\textwidth}|p{\dimexpr0.43\textwidth-2\tabcolsep-\arrayrulewidth\relax}|}
+\multicolumn{4}{|c|}{\textbf{Basic Flow}} \\ \hline
+\multicolumn{2}{|c|}{\textbf{Actor Action}} & \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
+1 & The user selects a store and a variant. & 2 & The system displays the current stock of the variant. \\ \hline
+3 & The user enters the new quantity and a reason. & 4 & The system updates the inventory and records the adjustment. \\ \hline
+\multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
+3 & The user enters a negative quantity. & 4-A & The system rejects the adjustment. \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-07 Record Sale (POS)}
-\begin{tabular}{|l|p{9cm}|}
+\begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
-Name & Record Sale (POS) \\ \hline
-Actors & Store Manager \\ \hline
-Summary & A store manager records a sale through the built-in POS. \\ \hline
-Pre-Conditions & The manager is logged in; the product and size exist in inventory. \\ \hline
-Post-Conditions & A sales record is created and inventory is decremented. \\ \hline
-\multirow{3}{*}{Basic Flow} & 1. The manager selects the product and size sold. \\
- & 2. The manager confirms the quantity and completes the sale. \\
- & 3. The system logs the sale and updates inventory. \\ \hline
-Alternative Flow & If inventory is insufficient, the system warns the manager before confirming. \\ \hline
+\textbf{Name} & Record Sale (POS) \\ \hline
+\textbf{Actors} & Store Manager \\ \hline
+\textbf{Summary} & A store manager records a sale through the built-in POS. \\ \hline
+\textbf{Pre-Conditions} & The manager is logged in; the product and size exist in inventory. \\ \hline
+\textbf{Post-Conditions} & A sales record is created and inventory is decremented. \\ \hline
+\textbf{Special Requirements} & None \\ \hline
+\end{tabular}\par\nointerlineskip
+\begin{tabular}{|p{0.04\textwidth}|p{\dimexpr0.40\textwidth-2\tabcolsep-\arrayrulewidth\relax}|p{0.05\textwidth}|p{\dimexpr0.43\textwidth-2\tabcolsep-\arrayrulewidth\relax}|}
+\multicolumn{4}{|c|}{\textbf{Basic Flow}} \\ \hline
+\multicolumn{2}{|c|}{\textbf{Actor Action}} & \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
+1 & The manager selects the product and size sold. & 2 & The system displays the price and the available stock. \\ \hline
+3 & The manager confirms the quantity and completes the sale. & 4 & The system logs the sale and updates inventory. \\ \hline
+\multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
+3 & The manager enters a quantity larger than the available inventory. & 4-A & The system warns the manager before confirming. \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-08 Upload Historical Sales Data}
-\begin{tabular}{|l|p{9cm}|}
+\begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
-Name & Upload Historical Sales Data \\ \hline
-Actors & Business Owner \\ \hline
-Summary & The owner uploads a CSV or Excel file of historical sales from an external POS or spreadsheet. \\ \hline
-Pre-Conditions & The owner is logged in and belongs to a registered tenant. \\ \hline
-Post-Conditions & Valid rows are cleaned, normalized, and stored; invalid rows are listed in an upload report. \\ \hline
-\multirow{4}{*}{Basic Flow} & 1. The owner selects a CSV/Excel file. \\
- & 2. The system shows the detected columns and the owner maps them to the required fields. \\
- & 3. The system validates and normalizes the data and shows an upload report. \\
- & 4. The owner approves the report and the system imports the rows. \\ \hline
-Alternative Flow & If the file format is unsupported or unreadable, the system rejects the upload and explains why. Rejected rows are listed in the report with reasons. \\ \hline
+\textbf{Name} & Upload Historical Sales Data \\ \hline
+\textbf{Actors} & Business Owner \\ \hline
+\textbf{Summary} & The owner uploads a CSV or Excel file of historical sales from an external POS or spreadsheet. \\ \hline
+\textbf{Pre-Conditions} & The owner is logged in and belongs to a registered tenant. \\ \hline
+\textbf{Post-Conditions} & Valid rows are cleaned, normalized, and stored; invalid rows are listed in an upload report. \\ \hline
+\textbf{Special Requirements} & None \\ \hline
+\end{tabular}\par\nointerlineskip
+\begin{tabular}{|p{0.04\textwidth}|p{\dimexpr0.40\textwidth-2\tabcolsep-\arrayrulewidth\relax}|p{0.05\textwidth}|p{\dimexpr0.43\textwidth-2\tabcolsep-\arrayrulewidth\relax}|}
+\multicolumn{4}{|c|}{\textbf{Basic Flow}} \\ \hline
+\multicolumn{2}{|c|}{\textbf{Actor Action}} & \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
+1 & The owner selects a CSV/Excel file. & 2 & The system shows the detected columns. \\ \hline
+3 & The owner maps them to the required fields. & 4 & The system validates and normalizes the data and shows an upload report. \\ \hline
+5 & The owner approves the report. & 6 & The system imports the rows. \\ \hline
+\multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
+1 & The owner selects a file with an unsupported or unreadable format. & 2-A & The system rejects the upload and explains why. Rejected rows are listed in the report with reasons. \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-09 View Dashboard and Alerts}
-\begin{tabular}{|l|p{9cm}|}
+\begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
-Name & View Dashboard and Alerts \\ \hline
-Actors & Business Owner, Store Manager \\ \hline
-Summary & The user views a summary of sales, inventory, forecasts, recommendations, and alerts. \\ \hline
-Pre-Conditions & The user is logged in. \\ \hline
-Post-Conditions & The dashboard displays current, tenant-scoped data. \\ \hline
-\multirow{2}{*}{Basic Flow} & 1. The user logs in and is directed to the dashboard. \\
- & 2. The system displays sales trends, current inventory, open recommendations, and alerts. \\ \hline
-Alternative Flow & If the tenant has no sales data yet, the dashboard asks the user to record or upload sales. \\ \hline
+\textbf{Name} & View Dashboard and Alerts \\ \hline
+\textbf{Actors} & Business Owner, Store Manager \\ \hline
+\textbf{Summary} & The user views a summary of sales, inventory, forecasts, recommendations, and alerts. \\ \hline
+\textbf{Pre-Conditions} & The user is logged in. \\ \hline
+\textbf{Post-Conditions} & The dashboard displays current, tenant-scoped data. \\ \hline
+\textbf{Special Requirements} & None \\ \hline
+\end{tabular}\par\nointerlineskip
+\begin{tabular}{|p{0.04\textwidth}|p{\dimexpr0.40\textwidth-2\tabcolsep-\arrayrulewidth\relax}|p{0.05\textwidth}|p{\dimexpr0.43\textwidth-2\tabcolsep-\arrayrulewidth\relax}|}
+\multicolumn{4}{|c|}{\textbf{Basic Flow}} \\ \hline
+\multicolumn{2}{|c|}{\textbf{Actor Action}} & \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
+1 & The user logs in and is directed to the dashboard. & 2 & The system displays sales trends, current inventory, open recommendations, and alerts. \\ \hline
+\multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
+1 & The user logs in to a tenant that has no sales data yet. & 2-A & The dashboard asks the user to record or upload sales. \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-10 View Demand Forecast}
-\begin{tabular}{|l|p{9cm}|}
+\begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
-Name & View Demand Forecast \\ \hline
-Actors & Business Owner, Store Manager \\ \hline
-Summary & The user views the forecasted weekly or monthly demand of a product-size-store combination. \\ \hline
-Pre-Conditions & The user is logged in and the tenant has a paid subscription. \\ \hline
-Post-Conditions & The forecast is displayed next to the past sales. \\ \hline
-\multirow{3}{*}{Basic Flow} & 1. The user opens the Forecasts page. \\
- & 2. The user selects a product, size, and store. \\
- & 3. The system displays the stored forecast with the past sales. \\ \hline
-Alternative Flow & If the tenant has not yet provided enough sales history to train a model, no forecast is shown and the user is asked to record or upload more data. On the free tier, the system asks the user to upgrade. \\ \hline
+\textbf{Name} & View Demand Forecast \\ \hline
+\textbf{Actors} & Business Owner, Store Manager \\ \hline
+\textbf{Summary} & The user views the forecasted weekly or monthly demand of a product-size-store combination. \\ \hline
+\textbf{Pre-Conditions} & The user is logged in and the tenant has a paid subscription. \\ \hline
+\textbf{Post-Conditions} & The forecast is displayed next to the past sales. \\ \hline
+\textbf{Special Requirements} & None \\ \hline
+\end{tabular}\par\nointerlineskip
+\begin{tabular}{|p{0.04\textwidth}|p{\dimexpr0.40\textwidth-2\tabcolsep-\arrayrulewidth\relax}|p{0.05\textwidth}|p{\dimexpr0.43\textwidth-2\tabcolsep-\arrayrulewidth\relax}|}
+\multicolumn{4}{|c|}{\textbf{Basic Flow}} \\ \hline
+\multicolumn{2}{|c|}{\textbf{Actor Action}} & \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
+1 & The user opens the Forecasts page. & 2 & The system displays the forecast options. \\ \hline
+3 & The user selects a product, size, and store. & 4 & The system displays the stored forecast with the past sales. \\ \hline
+\multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
+3 & The user selects a series of a tenant that has not yet provided enough sales history to train a model. & 4-A & No forecast is shown and the user is asked to record or upload more data. \\ \hline
+1 & A user of a tenant on the free tier opens the Forecasts page. & 2-A & The system asks the user to upgrade. \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-11 View and Act on Redistribution Recommendation}
-\begin{tabular}{|l|p{9cm}|}
+\begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
-Name & View and Act on Redistribution Recommendation \\ \hline
-Actors & Business Owner, Store Manager \\ \hline
-Summary & The user reviews a suggestion to move stock from one branch to another and approves or dismisses it. \\ \hline
-Pre-Conditions & A forecasted shortage at one store coincides with a forecasted surplus of the same item at another. \\ \hline
-Post-Conditions & An approved recommendation creates a stock transfer; a dismissed one is closed. \\ \hline
-\multirow{3}{*}{Basic Flow} & 1. The user opens the Recommendations page and selects a redistribution recommendation. \\
- & 2. The system displays source and destination stores, quantity, explanation, and estimated financial impact. \\
- & 3. The user approves it and the system creates the stock transfer and notifies both stores. \\ \hline
-Alternative Flow & The user dismisses the recommendation and the system marks it as dismissed. \\ \hline
+\textbf{Name} & View and Act on Redistribution Recommendation \\ \hline
+\textbf{Actors} & Business Owner, Store Manager \\ \hline
+\textbf{Summary} & The user reviews a suggestion to move stock from one branch to another and approves or dismisses it. \\ \hline
+\textbf{Pre-Conditions} & A forecasted shortage at one store coincides with a forecasted surplus of the same item at another. \\ \hline
+\textbf{Post-Conditions} & An approved recommendation creates a stock transfer; a dismissed one is closed. \\ \hline
+\textbf{Special Requirements} & None \\ \hline
+\end{tabular}\par\nointerlineskip
+\begin{tabular}{|p{0.04\textwidth}|p{\dimexpr0.40\textwidth-2\tabcolsep-\arrayrulewidth\relax}|p{0.05\textwidth}|p{\dimexpr0.43\textwidth-2\tabcolsep-\arrayrulewidth\relax}|}
+\multicolumn{4}{|c|}{\textbf{Basic Flow}} \\ \hline
+\multicolumn{2}{|c|}{\textbf{Actor Action}} & \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
+1 & The user opens the Recommendations page and selects a redistribution recommendation. & 2 & The system displays source and destination stores, quantity, explanation, and estimated financial impact. \\ \hline
+3 & The user approves it. & 4 & The system creates the stock transfer and notifies both stores. \\ \hline
+\multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
+3 & The user dismisses the recommendation. & 4-A & The system marks it as dismissed. \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-12 View Markdown Recommendation}
-\begin{tabular}{|l|p{9cm}|}
+\begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
-Name & View Markdown Recommendation \\ \hline
-Actors & Business Owner, Store Manager \\ \hline
-Summary & The user views a suggestion to discount a slow-moving item before it becomes dead stock. \\ \hline
-Pre-Conditions & The markdown optimizer has flagged an item as at risk of becoming dead stock. \\ \hline
-Post-Conditions & The user sees the recommended discount, explanation, and estimated impact. \\ \hline
-\multirow{3}{*}{Basic Flow} & 1. The user opens the Recommendations page. \\
- & 2. The user selects a markdown recommendation. \\
- & 3. The system displays the item, suggested discount, explanation, and estimated financial impact. \\ \hline
-Alternative Flow & The user can dismiss the recommendation if a markdown is not desired. \\ \hline
+\textbf{Name} & View Markdown Recommendation \\ \hline
+\textbf{Actors} & Business Owner, Store Manager \\ \hline
+\textbf{Summary} & The user views a suggestion to discount a slow-moving item before it becomes dead stock. \\ \hline
+\textbf{Pre-Conditions} & The markdown optimizer has flagged an item as at risk of becoming dead stock. \\ \hline
+\textbf{Post-Conditions} & The user sees the recommended discount, explanation, and estimated impact. \\ \hline
+\textbf{Special Requirements} & None \\ \hline
+\end{tabular}\par\nointerlineskip
+\begin{tabular}{|p{0.04\textwidth}|p{\dimexpr0.40\textwidth-2\tabcolsep-\arrayrulewidth\relax}|p{0.05\textwidth}|p{\dimexpr0.43\textwidth-2\tabcolsep-\arrayrulewidth\relax}|}
+\multicolumn{4}{|c|}{\textbf{Basic Flow}} \\ \hline
+\multicolumn{2}{|c|}{\textbf{Actor Action}} & \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
+1 & The user opens the Recommendations page. & 2 & The system lists the open recommendations. \\ \hline
+3 & The user selects a markdown recommendation. & 4 & The system displays the item, suggested discount, explanation, and estimated financial impact. \\ \hline
+\multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
+5 & The user dismisses the recommendation if a markdown is not desired. & 6 & The system marks the recommendation as dismissed. \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-13 View Reorder Recommendation}
-\begin{tabular}{|l|p{9cm}|}
+\begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
-Name & View Reorder Recommendation \\ \hline
-Actors & Business Owner \\ \hline
-Summary & The user views a suggestion to reorder an item when no surplus exists at other branches. \\ \hline
-Pre-Conditions & A forecasted shortage remains after redistribution has been considered. \\ \hline
-Post-Conditions & The user sees the suggested reorder quantity with its explanation. \\ \hline
-\multirow{3}{*}{Basic Flow} & 1. The user opens the Recommendations page. \\
- & 2. The user selects a reorder recommendation. \\
- & 3. The system displays the item, store, suggested quantity, and explanation. \\ \hline
-Alternative Flow & The user marks the recommendation as actioned or dismisses it. \\ \hline
+\textbf{Name} & View Reorder Recommendation \\ \hline
+\textbf{Actors} & Business Owner \\ \hline
+\textbf{Summary} & The user views a suggestion to reorder an item when no surplus exists at other branches. \\ \hline
+\textbf{Pre-Conditions} & A forecasted shortage remains after redistribution has been considered. \\ \hline
+\textbf{Post-Conditions} & The user sees the suggested reorder quantity with its explanation. \\ \hline
+\textbf{Special Requirements} & None \\ \hline
+\end{tabular}\par\nointerlineskip
+\begin{tabular}{|p{0.04\textwidth}|p{\dimexpr0.40\textwidth-2\tabcolsep-\arrayrulewidth\relax}|p{0.05\textwidth}|p{\dimexpr0.43\textwidth-2\tabcolsep-\arrayrulewidth\relax}|}
+\multicolumn{4}{|c|}{\textbf{Basic Flow}} \\ \hline
+\multicolumn{2}{|c|}{\textbf{Actor Action}} & \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
+1 & The user opens the Recommendations page. & 2 & The system lists the open recommendations. \\ \hline
+3 & The user selects a reorder recommendation. & 4 & The system displays the item, store, suggested quantity, and explanation. \\ \hline
+\multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
+5 & The user marks the recommendation as actioned or dismisses it. & 6 & The system updates the status of the recommendation. \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-14 Manage Subscription}
-\begin{tabular}{|l|p{9cm}|}
+\begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
-Name & Manage Subscription \\ \hline
-Actors & Business Owner \\ \hline
-Summary & The owner views the current plan and upgrades or downgrades between the free and paid tiers. \\ \hline
-Pre-Conditions & The owner is logged in. \\ \hline
-Post-Conditions & The subscription tier is updated and paid features are enabled or disabled accordingly. \\ \hline
-\multirow{3}{*}{Basic Flow} & 1. The owner opens the Subscription page. \\
- & 2. The owner selects a plan and confirms the change. \\
- & 3. The system updates the tier and the available features. \\ \hline
-Alternative Flow & If the payment fails, the system keeps the current tier and informs the owner. \\ \hline
+\textbf{Name} & Manage Subscription \\ \hline
+\textbf{Actors} & Business Owner \\ \hline
+\textbf{Summary} & The owner views the current plan and upgrades or downgrades between the free and paid tiers. \\ \hline
+\textbf{Pre-Conditions} & The owner is logged in. \\ \hline
+\textbf{Post-Conditions} & The subscription tier is updated and paid features are enabled or disabled accordingly. \\ \hline
+\textbf{Special Requirements} & None \\ \hline
+\end{tabular}\par\nointerlineskip
+\begin{tabular}{|p{0.04\textwidth}|p{\dimexpr0.40\textwidth-2\tabcolsep-\arrayrulewidth\relax}|p{0.05\textwidth}|p{\dimexpr0.43\textwidth-2\tabcolsep-\arrayrulewidth\relax}|}
+\multicolumn{4}{|c|}{\textbf{Basic Flow}} \\ \hline
+\multicolumn{2}{|c|}{\textbf{Actor Action}} & \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
+1 & The owner opens the Subscription page. & 2 & The system displays the current plan. \\ \hline
+3 & The owner selects a plan and confirms the change. & 4 & The system updates the tier and the available features. \\ \hline
+\multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
+3 & The owner confirms a plan change but the payment fails. & 4-A & The system keeps the current tier and informs the owner. \\ \hline
 \end{tabular}
 \end{table}
 
 \begin{table}[!htbp]
 \centering
 \caption{UC-15 Manage Tenants}
-\begin{tabular}{|l|p{9cm}|}
+\begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
-Name & Manage Tenants \\ \hline
-Actors & System Administrator \\ \hline
-Summary & The administrator views tenants and manages their status and plans. \\ \hline
-Pre-Conditions & The administrator is logged in. \\ \hline
-Post-Conditions & The status or plan of the selected tenant is updated. \\ \hline
-\multirow{3}{*}{Basic Flow} & 1. The administrator opens the Tenants page. \\
- & 2. The administrator selects a tenant and chooses an action (suspend, reactivate, or change plan). \\
- & 3. The system applies the change and records it. \\ \hline
-Alternative Flow & Users of a suspended tenant cannot log in until the tenant is reactivated. \\ \hline
+\textbf{Name} & Manage Tenants \\ \hline
+\textbf{Actors} & System Administrator \\ \hline
+\textbf{Summary} & The administrator views tenants and manages their status and plans. \\ \hline
+\textbf{Pre-Conditions} & The administrator is logged in. \\ \hline
+\textbf{Post-Conditions} & The status or plan of the selected tenant is updated. \\ \hline
+\textbf{Special Requirements} & None \\ \hline
+\end{tabular}\par\nointerlineskip
+\begin{tabular}{|p{0.04\textwidth}|p{\dimexpr0.40\textwidth-2\tabcolsep-\arrayrulewidth\relax}|p{0.05\textwidth}|p{\dimexpr0.43\textwidth-2\tabcolsep-\arrayrulewidth\relax}|}
+\multicolumn{4}{|c|}{\textbf{Basic Flow}} \\ \hline
+\multicolumn{2}{|c|}{\textbf{Actor Action}} & \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
+1 & The administrator opens the Tenants page. & 2 & The system displays the list of tenants. \\ \hline
+3 & The administrator selects a tenant and chooses an action (suspend, reactivate, or change plan). & 4 & The system applies the change and records it. \\ \hline
+\multicolumn{4}{|c|}{\textbf{Alternative Flow}} \\ \hline
+5 & A user of a suspended tenant tries to log in. & 6 & The system does not allow the login until the tenant is reactivated. \\ \hline
 \end{tabular}
 \end{table}
 
@@ -1114,11 +1190,11 @@ In this part, the prototypes of the key screens of StockSense are provided. They
 
 \subsection{Login Page}
 
-Any registered user, whether a business owner, a store manager or the system administrator, logs in from this page with an email address and a password, as described in UC-02. If the credentials are wrong, the page shows a short error message and the user stays on the page. Users of a suspended tenant cannot log in until the tenant is reactivated by the administrator.
+Any registered user, whether a business owner, a store manager or the system administrator, logs in from this page with an email address and a password, as described in UC-02. If the credentials are wrong, the page shows a short error message and the user stays on the page. Users of a suspended tenant cannot log in until the tenant is reactivated by the administrator. After a successful login, the user is taken to the dashboard of the tenant, and the session stays active until the user logs out or remains idle for too long.
 
 \subsection{Signup Page}
 
-A new business owner registers the business as a tenant from this page by entering the business name, the owner's name, an email address and a password, as described in UC-01. The new tenant starts on the free POS tier, and a verification email is sent to the owner before the account is used. Figures~\ref{fig:login} and~\ref{fig:signup} show the two pages side by side.
+A new business owner registers the business as a tenant from this page by entering the business name, the owner's name, an email address and a password, as described in UC-01. The new tenant starts on the free POS tier, and a verification email is sent to the owner before the account is used. If the email address is already registered, the page shows an error and asks for a different email, so that two tenants never share the same account. Figures~\ref{fig:login} and~\ref{fig:signup} show the two pages side by side.
 
 \begin{figure}[!htbp]
 \centering
@@ -1136,11 +1212,11 @@ A new business owner registers the business as a tenant from this page by enteri
 
 \subsection{Dashboard}
 
-The dashboard is the first screen after login and supports UC-09. It shows the monthly sales, the items at risk of stockout or of becoming dead stock, the recent sales activity and the inventory health of each branch. Owners see all branches, while store managers see only their own store. On the paid plan, the dashboard also lists open recommendations and alerts.
+The dashboard is the first screen after login and supports UC-09. It shows the monthly sales, the items at risk of stockout or of becoming dead stock, the recent sales activity and the inventory health of each branch. Owners see all branches, while store managers see only their own store. On the paid plan, the dashboard also lists open recommendations and alerts. The figures on the dashboard are read from the stored sales, forecasts and recommendations, so the page opens quickly even for tenants with a long sales history.
 
 \subsection{POS Page}
 
-A store manager records a sale on this page by selecting the branch, the product and the variant sold and confirming the quantity, as described in UC-07. The inventory is updated automatically once the sale is confirmed, and the manager is warned before confirming a sale for which there is not enough stock. The dashboard and the POS page are shown in Figures~\ref{fig:dashboard} and~\ref{fig:pos}.
+A store manager records a sale on this page by selecting the branch, the product and the variant sold and confirming the quantity, as described in UC-07. The inventory is updated automatically once the sale is confirmed, and the manager is warned before confirming a sale for which there is not enough stock. The page is kept simple so that a sale can be recorded in a few clicks while the customer is waiting at the counter. The dashboard and the POS page are shown in Figures~\ref{fig:dashboard} and~\ref{fig:pos}.
 
 \begin{figure}[!htbp]
 \centering
@@ -1158,11 +1234,11 @@ A store manager records a sale on this page by selecting the branch, the product
 
 \subsection{Upload Sales Report}
 
-Businesses that already use an external POS or a spreadsheet upload their historical sales as a CSV or Excel file on this page, as described in UC-08. The owner maps the detected columns to the required fields, reviews the upload report with the accepted and rejected rows, and approves the import.
+Businesses that already use an external POS or a spreadsheet upload their historical sales as a CSV or Excel file on this page, as described in UC-08. The owner maps the detected columns to the required fields, reviews the upload report with the accepted and rejected rows, and approves the import. Rows that cannot be read or matched to a product, size or store are listed with the reason, so that the owner can correct the source file and upload it again.
 
 \subsection{Inventory}
 
-This page shows the current stock level of every product variant in every branch and can be filtered by store. A status indicator marks each item as healthy, at risk of stockout or at risk of becoming dead stock, and users can correct a quantity after a physical count, as described in UC-06. Figures~\ref{fig:upload} and~\ref{fig:inventory} show these two pages.
+This page shows the current stock level of every product variant in every branch and can be filtered by store. A status indicator marks each item as healthy, at risk of stockout or at risk of becoming dead stock, and users can correct a quantity after a physical count, as described in UC-06. The owner can see the stock of every branch on this page, while a store manager sees only the stock of the assigned store. Figures~\ref{fig:upload} and~\ref{fig:inventory} show these two pages.
 
 \begin{figure}[!htbp]
 \centering
@@ -1180,7 +1256,7 @@ This page shows the current stock level of every product variant in every branch
 
 \subsection{Recommendations}
 
-This page lists the redistribution, markdown and reorder recommendations of the tenant, as described in UC-11 to UC-13. Each recommendation shows a plain-language explanation and an estimated financial impact, and the user can approve or dismiss it. Approving a redistribution creates a stock transfer between the two stores. The page is shown in Figure~\ref{fig:recommendations}.
+This page lists the redistribution, markdown and reorder recommendations of the tenant, as described in UC-11 to UC-13. Each recommendation shows a plain-language explanation and an estimated financial impact, and the user can approve or dismiss it. Approving a redistribution creates a stock transfer between the two stores. The recommendations are listed in the order in which the engine handles them, with redistribution first, markdowns second and reorders last. The page is shown in Figure~\ref{fig:recommendations}.
 
 \begin{figure}[!htbp]
 \centering
@@ -1236,7 +1312,7 @@ Table~\ref{tab:data-dictionary} describes every entity of the ER diagram in Figu
  & Category & String & Product category, such as footwear \\ \hline
 \multirow{3}{*}{ProductVariant} & VariantID & Integer & Primary key; unique identifier of a product and size combination \\* \cline{2-4}
  & ProductID & Integer & Foreign key to the parent Product \\* \cline{2-4}
- & Size & String & Size or variant label \\ \hline \pagebreak
+ & Size & String & Size or variant label \\ \hline
 \multirow{4}{*}{Inventory} & InventoryID & Integer & Primary key; unique identifier of the stock record \\* \cline{2-4}
  & VariantID & Integer & Foreign key to ProductVariant \\* \cline{2-4}
  & StoreID & Integer & Foreign key to Store \\* \cline{2-4}
@@ -1276,7 +1352,7 @@ The requirements, quality attributes, assumptions, use cases, user interface, an
 \chapter{Proposed Approach and Methodology}
 \label{ch:methodology}
 
-The approach and methodology of StockSense are described in this chapter. It shows how the system converts the raw sales data into the stock recommendations. All the transformations that occur from the data ingestion at the POS or file upload until recommendation and its explanation are explained in the chapter. Evaluation process of the forecasts and recommendations is described too. How the work will be developed in increments is shown in this chapter. Every single decision taken in this chapter is based on the literature presented in Chapter~3, namely on the support for global gradient-boosted models, the proactive policy for transshipment and the forecast-then-optimize strategy for markdowns. The methods described here are detailed enough to implement them in the next phase of the project and test in the experiments described in Chapter~8.
+The approach and methodology of StockSense are described in this chapter. It shows how the system converts the raw sales data into the stock recommendations. All the transformations that occur from the data ingestion at the POS or file upload until recommendation and its explanation are explained in the chapter. Evaluation process of the forecasts and recommendations is described too. How the work will be developed in increments is shown in this chapter. Every single decision taken in this chapter is based on the literature presented in Chapter~3, namely on the support for global gradient-boosted models, the proactive policy for transshipment and the forecast-then-optimize strategy for markdowns. The methods described here are detailed enough to implement them in the next phase of the project and test in the experiments described in Chapter~9.
 
 %==================================================
 \section{Overall Pipeline}
@@ -1400,7 +1476,7 @@ Each recommendation is stored together with an explanation made of two parts. Th
 \section{Forecast and Recommendation Evaluation}
 \label{sec:evaluation}
 
-This section describes the data, procedures, metrics, and experiments that were used for the forecast evaluation. This section also describes the historical backtest that was used for the recommendation evaluation. All experimental details and result tables are presented in Chapter~8.
+This section describes the data, procedures, metrics, and experiments that were used for the forecast evaluation. This section also describes the historical backtest that was used for the recommendation evaluation. All experimental details and result tables are presented in Chapter~9.
 
 \subsection{Data}
 
@@ -1539,7 +1615,7 @@ The StockSense system will need to be able to accept CSV and Excel files exporte
 
 \subsubsection{Verification and Validation Requirements}
 
-The upload process needs to be validated on files that have faults or damages to ensure that any bad data is filtered out without damaging existing data. Tenant isolation needs to be validated for any potential data leakage between companies or stores within a company. The forecasts need to be validated using historical data that is unseen by the model based on the procedure discussed in Chapter~5, and the recommendations need to be validated using the historical backtest. All the functional requirements will be associated with at least one test case such that the validation of the system will trace back to the functional requirements. This verification effort will be planned since the beginning of development rather than waiting until the end of development because it will allow the finding of defects when it is inexpensive to fix. The outcomes will be documented in Chapter~7 and Chapter~8 of FYP-2.
+The upload process needs to be validated on files that have faults or damages to ensure that any bad data is filtered out without damaging existing data. Tenant isolation needs to be validated for any potential data leakage between companies or stores within a company. The forecasts need to be validated using historical data that is unseen by the model based on the procedure discussed in Chapter~5, and the recommendations need to be validated using the historical backtest. All the functional requirements will be associated with at least one test case such that the validation of the system will trace back to the functional requirements. This verification effort will be planned since the beginning of development rather than waiting until the end of development because it will allow the finding of defects when it is inexpensive to fix. The outcomes will be documented in Chapter~7 and Chapter~9 of FYP-2.
 
 \subsection{Goals and Guidelines}
 
@@ -1809,7 +1885,7 @@ Our system will be implemented in accordance with the iterative approach outline
 2 & Store, Product and Inventory Management & FastAPI, PostgreSQL & Implemented in FYP-1 \\ \hline
 3 & POS & Next.js, FastAPI & Implemented in FYP-1 \\ \hline
 4 & Data Ingestion and Cleaning & pandas, openpyxl & Design complete, implementation in FYP-2 \\ \hline
-5 & Demand Forecasting & LightGBM, statsmodels & Offline experiments in FYP-2 \\ \hline
+5 & Demand Forecasting & LightGBM, statsmodels & Offline experiments done, final results in FYP-2 \\ \hline
 6 & Recommendation Engine & Python, SciPy & Design complete, implementation in FYP-2 \\ \hline
 7 & Markdown Optimizer & Python, NumPy & Design complete, implementation in FYP-2 \\ \hline
 8 & Explainable Recommendations & LightGBM contributions, text templates & Design complete, implementation in FYP-2 \\ \hline
@@ -2308,7 +2384,7 @@ Test Cases 1-16 test whether each use case works according to its specification,
 
 \begin{table}[!htbp]
 \centering
-\caption{Test Case 18 (POS speed)}
+\caption{Test Case 18 (POS Speed)}
 {\small\linespread{1}\selectfont
 \begin{tabular}{|p{0.2\textwidth}|p{0.28\textwidth}|p{0.2\textwidth}|p{0.22\textwidth}|}
 \hline
@@ -2418,8 +2494,10 @@ Test Case Defect Density & To be filled \\ \hline
 In this chapter, implementation plan for each module of StockSense has been mentioned along with how testing of the system will be done. Each module has different set of tools and is responsible for something different from managing tenants to POS to forecasting to recommendations to markdown optimization to dashboard and development process of each module depends on the dependency between them. Also, every use case mentioned in Chapter~4 has test case and four more test cases have been defined to test the requirements which are not tested by regular functional test cases. These are tenant isolation, POS transaction time, uploading large files and security of password and connection. Test results will be kept in FYP-2 once system is developed and any failing test case will be corrected and retested. Following chapter mentions experiments for forecasting models and recommendations.
 
 % ============================================================
-% CHAPTER 8 - EXPERIMENTAL RESULTS AND DISCUSSION
+% CHAPTER 9 - EXPERIMENTAL RESULTS AND DISCUSSION
 % ============================================================
+
+\setcounter{chapter}{8} % R&D projects: results are Chapter 9 and the conclusion is Chapter 10, as in the template
 
 \chapter{Experimental Results and Discussion}
 \label{ch:results}
@@ -2603,7 +2681,7 @@ The following are potential threats to generalizability of the experiment's find
 In this chapter, the experiments that were done in order to evaluate StockSense based on the public M5 data set have been described: demand sparsity experiments, LightGBM vs baselines experiment, global vs separate models experiment, minimum required training history evaluation, loss functions comparison, and redistribution backtesting experiment. The most accurate approach is the global LightGBM model; it works significantly faster than separate models and requires about 12 weeks of history to outperform all baselines. The global LightGBM model performs similarly to the Tweedie and Poisson objectives. As a result of redistribution backtesting, the dead stock and losses were decreased by about 25\%. In FYP-2 the same experiments will be done using the retailer data with actual size and stock information, and also markdown and reorders will be included in backtesting.
 
 % ============================================================
-% CHAPTER 9 - CONCLUSION AND FUTURE WORK
+% CHAPTER 10 - CONCLUSION AND FUTURE WORK
 % ============================================================
 
 \chapter{Conclusion and Future Work}
@@ -2614,7 +2692,7 @@ This chapter summarizes the work completed in FYP-1 and presents the plan for th
 
 StockSense is presented as a multi-tenant SaaS solution that enables small and medium-sized retailers to manage their products, variants, inventory and stores using a single application. The application consists of a free POS and inventory layer, uploading of past sales, demand forecast on the level of product, variant and store, redistribution of the stock, markdown optimization, recommendations to reorder and reasons of these recommendations. The design of StockSense solves inventory challenges that the target retailers face. The application leverages sales history to highlight the disparities between demand for the products, variants and stores and puts emphasis on the relocation of the excess stock from one store to another in case of need prior to the markdowns or new orders. In addition, the application keeps track of the reasoning behind each recommendation and its financial impact to provide business owners with understanding of the decision-making process and not treat it as a black box. The report has reviewed the project vision, the business opportunity, the research and commercial products relevant to the problem, the requirements, the methodology, the architecture, the database design, the security measures, the testing, the maintenance and the experiments.
 
-The work done in FYP-1 is thus related to the determination of the system scope, the analysis of the competitors' systems and the literature, the functional and non-functional requirements, the use cases, the data ingestion, the forecasting and recommendation pipeline, the evaluation methodology and the high level and low level design. The plan for FYP-2 is based on the iterative procedure explained in Chapter~5. The backend, database, authentication, multi-tenancy, dashboard, POS flow and CSV/Excel import pipeline will thus be built and integrated first, by means of Next.js dashboard, Python REST backend, PostgreSQL and pandas + openpyxl data processing library. After that, the experiments with the forecasting in Chapter~8 will be performed and the LightGBM algorithm chosen and integrated together with its statistical baselines. Finally, the redistribution recommendations, markdown optimization, reorder recommendations and explanation features will be developed. In addition, the preliminary experiments in Chapter~8 on the public M5 data showed that the global LightGBM model is more accurate than the statistical baselines and that redistribution can reduce dead stock, and these results will be confirmed on retailer data in FYP-2.
+The work done in FYP-1 is thus related to the determination of the system scope, the analysis of the competitors' systems and the literature, the functional and non-functional requirements, the use cases, the data ingestion, the forecasting and recommendation pipeline, the evaluation methodology and the high level and low level design. The plan for FYP-2 is based on the iterative procedure explained in Chapter~5. The backend, database, authentication, multi-tenancy, dashboard, POS flow and CSV/Excel import pipeline will thus be built and integrated first, by means of Next.js dashboard, Python REST backend, PostgreSQL and pandas + openpyxl data processing library. After that, the experiments with the forecasting in Chapter~9 will be performed and the LightGBM algorithm chosen and integrated together with its statistical baselines. Finally, the redistribution recommendations, markdown optimization, reorder recommendations and explanation features will be developed. In addition, the preliminary experiments in Chapter~9 on the public M5 data showed that the global LightGBM model is more accurate than the statistical baselines and that redistribution can reduce dead stock, and these results will be confirmed on retailer data in FYP-2.
 
 \section{Future Work}
 
