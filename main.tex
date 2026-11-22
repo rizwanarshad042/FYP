@@ -2579,7 +2579,7 @@ Croston's method & 5.76 & 2.86 & 45.33 & 57.30 \\ \hline
 \par\vspace{3pt}{\small These are tentative results and the final results will be written in FYP-2.}
 \end{table}
 
-LightGBM yields the smallest error on all four performance metrics. The difference in WAPE between LightGBM and the most accurate baseline (four-week moving average) is 1.9 percentage points; in relative terms, it is about 4\%. This improvement is not big, which confirms the M5 results about the difficulty in beating simple models at the item level~\cite{makridakis2022m5}. The WAPE values are separated by demand classes in Table~\ref{tab:exp1-class}, since the average value may disguise the lack of accuracy of the algorithm on sparse series, which are important to detect dead inventory. LightGBM is the most accurate method in all classes, with the biggest gains on intermittent (2.6 points) and lumpy (3.6 points) series.
+LightGBM yields the smallest error on all four performance metrics. Figure~\ref{fig:exp1-baselines} shows how closely the four-week moving average follows LightGBM overall. Their WAPE values differ by 1.86 percentage points, or about 4\% relative to the moving average. This improvement is not big, which confirms the M5 results about the difficulty in beating simple models at the item level~\cite{makridakis2022m5}. The WAPE values are separated by demand classes in Table~\ref{tab:exp1-class}, since the average value may disguise the lack of accuracy of the algorithm on sparse series, which are important to detect dead inventory. LightGBM is the most accurate method in all classes, with the biggest gains over the moving average on intermittent (2.6 points) and lumpy (3.6 points) series.
 
 \begin{table}[!htbp]
 \centering
@@ -2596,6 +2596,14 @@ Croston's method & 39.78 & 54.92 & 58.03 & 70.81 \\ \hline
 \par\vspace{3pt}{\small These are tentative results and the final results will be written in FYP-2.}
 \end{table}
 
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.98\linewidth]{Figures/Experiments/baselines.pdf}
+\caption[Forecast error against statistical baselines]{Preliminary M5 forecast errors and the reduction in WAPE from using LightGBM in place of the four-week moving average in each demand class.}
+\label{fig:exp1-baselines}
+\end{figure}
+
+\FloatBarrier
 \section{Experiment 2 -- Global Model Against Separate Models}
 
 In their experiments, Montero-Manso and Hyndman~\cite{montero2021principles} and Bandara et al.~\cite{bandara2020forecasting} argue that a single model for all time series can be more accurate than several models for distinct time series when the length of time series is relatively short. In order to test this, one global LightGBM model based on all 1,695 series was compared with 1,695 distinct LightGBM models, one per series, with the same features (excluding the identifier features), the same training data and the same test period. The results are presented in Table~\ref{tab:exp2}, and the training times are included as well, since a high-performance system, which has to train many models frequently, should not use a slower approach even if it is slightly more accurate. Both of the times were measured on the same laptop.
@@ -2613,8 +2621,16 @@ One model per series & 6.01 & 46.66 & 92 s \\ \hline
 \par\vspace{3pt}{\small These are tentative results and the final results will be written in FYP-2.}
 \end{table}
 
-As can be seen, the global model performs better in both ways: its WAPE is 4.0 points less, and the training time is approximately 11 times less. Moreover, the separate models are also inferior to the moving average baseline (44.52\%), since each of them has only a few hundred weeks for learning. This justifies the decision to use one global model per tenant, made in Chapter~5.
+Figure~\ref{fig:exp2-pooling} shows that pooling the series reduces WAPE by 4.00 percentage points and cuts training time from 92 to 8 seconds on the same laptop. Moreover, the separate models are also inferior to the moving average baseline (44.52\%), since each of them has only a few hundred weeks for learning. This justifies the decision to use one global model per tenant, made in Chapter~5.
 
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.98\linewidth]{Figures/Experiments/pooling.pdf}
+\caption[Forecast error and training time by modeling approach]{Preliminary forecast error and training time for one global model and 1,695 separate models. Lower values are better in both panels.}
+\label{fig:exp2-pooling}
+\end{figure}
+
+\FloatBarrier
 \section{Experiment 3 -- Amount of Training History}
 
 Given that the model will be unavailable to the new tenant, who will not have enough history of sales to use model predictions, which is discussed in the forecasting section (Section~\ref{sec:forecasting}), the goal of this experiment is to identify the minimum necessary history. The tenant was assumed new in that sense by removing all the historical data older than 4, 8, 12 and 26 weeks before the test period, training the global model using the remaining data (aggregated across all series) and testing on the 13 test weeks. 
@@ -2635,8 +2651,16 @@ Full history (5 years) & 5.56 & 42.66 & Yes ($-1.86$) \\ \hline
 \par\vspace{3pt}{\small These are tentative results and the final results will be written in FYP-2.}
 \end{table}
 
-Accuracy increases progressively with the amount of history used. While 4 or 8 weeks yield a model worse than the moving average (WAPE 44.52\%) baseline, 12 weeks already give a marginally better model, and the improvement continues up to the full history. The minimum history criterion for the system, therefore, is set to 12 weeks; for less history, the new tenant gets a moving average forecast. Given the small improvement at 12 weeks, the dashboard must indicate early forecasts as provisional up to 26 weeks of data.
+Figure~\ref{fig:exp3-history} shows that 12 weeks is the shortest history tested for which LightGBM beats the moving average. Its WAPE falls from 44.75\% at eight weeks to 44.02\% at twelve weeks, crossing the baseline of 44.52\%. The minimum history criterion for the system, therefore, is set to 12 weeks; for less history, the new tenant gets a moving average forecast. Given the small improvement at 12 weeks, the dashboard must indicate early forecasts as provisional up to 26 weeks of data.
 
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.98\linewidth]{Figures/Experiments/training-history.pdf}
+\caption[Forecast error by amount of training history]{Preliminary WAPE for five training histories. Points below the dashed line outperform the four-week moving average on the same holdout.}
+\label{fig:exp3-history}
+\end{figure}
+
+\FloatBarrier
 \section{Experiment 4 -- Loss Function Comparison}
 
 Demand is always non-negative with plenty of zeroes and, therefore, the Tweedie objective function was chosen in Chapter~5. In order to confirm that decision in this experiment, LightGBM model is being retrained using three different objective functions: Tweedie objective function with variance power 1.2, Poisson objective and square error objectives with all other parameters remaining the same; the results of this experiment are given in Table~\ref{tab:exp4}. Squared error objective function is used in this experiment as a baseline to compare the models with, despite the fact that it is not the appropriate objective function for this type of data and is a default regression objective function for many algorithms.
@@ -2655,8 +2679,16 @@ Squared error & 5.55 & 2.73 & 43.27 \\ \hline
 \par\vspace{3pt}{\small These are tentative results and the final results will be written in FYP-2.}
 \end{table}
 
-The differences are marginal. Tweedie and Poisson are nearly identical and have lower MAE and WAPE compared to squared error, but squared error has lower RMSE due to the fact that it directly minimizes squared deviation. As Tweedie is not obviously superior to Poisson on this particular data, Poisson is an acceptable alternative with fewer parameters to tune. For now, Tweedie is going to be left as a default and comparison will be repeated on size-level retailer data in FYP-2, where the difference between objectives is going to be more pronounced.
+Figure~\ref{fig:exp4-objectives} shows how little separates Tweedie and Poisson. Both have a reported MAE of 2.69 units, and their WAPE differs by only 0.04 percentage points. Squared error has the lowest RMSE (5.55 units), consistent with its training objective. As Tweedie is not obviously superior to Poisson on this particular data, Poisson is an acceptable alternative with fewer parameters to tune. For now, Tweedie is going to be left as a default and comparison will be repeated on size-level retailer data in FYP-2, where the difference between objectives is going to be more pronounced.
 
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.98\linewidth]{Figures/Experiments/objectives.pdf}
+\caption[Forecast errors by LightGBM objective function]{Preliminary forecast errors for three LightGBM objectives. Each panel has its own scale. Points farther left indicate lower error.}
+\label{fig:exp4-objectives}
+\end{figure}
+
+\FloatBarrier
 \section{Experiment 5 -- Recommendation Backtest}
 
 The fifth experiment reveals the value of the recommendations by re-playing historical sales, as described in Section~\ref{sec:evaluation}. Because there is no stock data in M5, a simple stock dataset was created: for each item, the initial stock at the cut-off date was set to the actual total sales during the following eight weeks in all three stores divided equally between the stores. This allows keeping the total stock constant and testing the impact of positioning it correctly. For each of four cut-off dates (which occur eight weeks apart and span the last 32 weeks of data), a LightGBM model trained on the data prior to the cut-off date makes predictions about the eight-week demand per store using a 90\% quantile model for extra safety. Then, the engine redistributes excess units from branches with excess stock to branches with insufficient stock, and transfers happen after a week. In the following eight weeks, the re-play is performed twice, using actual sales as the demand – with transfers and with no action taken at all, and their results are shown in Table~\ref{tab:exp5}. Markdown and reorder recommendations were not tested because they require data about costs and price elasticity which M5 lacks.
@@ -2679,7 +2711,14 @@ Reorder recommendations & -- & 5,049 (120,363 units) & -- \\ \hline
 \par\vspace{3pt}{\small These are tentative results and the final results will be written in FYP-2.}
 \end{table}
 
-During four windows, 347,478 units were simulated as stock. Redistribution decreased the dead stock and lost sales by 24.9\% each and increased the sell-through rate from 83.6\% to 87.7\% by transferring 5.3\% of the stock in 1,133 transfers. Dead stock and lost sales are identical in this case because the total stock equals the total demand, and thus each unsold unit in one branch means the loss of a sale in another. The sales revenue is computed using M5 selling prices; it is impossible to compute the profit margins because the product costs are unknown.
+During four windows, 347,478 units were simulated as stock. As Figure~\ref{fig:exp5-redistribution} shows, redistribution decreased dead stock and lost sales by 24.9\% each and increased the sell-through rate from 83.6\% to 87.7\% by transferring 5.3\% of the stock in 1,133 transfers. Dead stock and lost sales are identical in this case because the total stock equals the total demand, and thus each unsold unit in one branch means the loss of a sale in another. The sales revenue is computed using M5 selling prices; it is impossible to compute the profit margins because the product costs are unknown.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=0.98\linewidth]{Figures/Experiments/redistribution.pdf}
+\caption[Stock redistribution outcomes in the simulated backtest]{Preliminary redistribution outcomes across four simulated eight-week windows. The unit counts apply separately to dead stock and lost sales.}
+\label{fig:exp5-redistribution}
+\end{figure}
 
 \FloatBarrier
 \section{Discussion}
