@@ -1,11 +1,17 @@
 \documentclass{StockSense}
-\usepackage{multirow}
+\usepackage[longtable]{multirow}
 \usepackage{float}
 \usepackage{longtable}
 \usepackage{placeins}
 \usepackage{rotating}
 \usepackage{array}
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcommand{\sequencediagram}[2]{%
+    \vspace*{-4pt}%
+    \captionsetup{skip=6pt}%
+    \makebox[\linewidth][c]{\includegraphics[trim=18bp 16bp 14bp 18bp,clip,
+        width=1.06\linewidth,height=#1,keepaspectratio]{Figures/SequenceDiagrams/#2}}%
+}
 \begin{document}
 
 % ============================================================
@@ -1028,8 +1034,9 @@ The use cases below describe how each actor interacts with StockSense to achieve
 
 \begin{table}[!htbp]
 \centering
+\vspace*{2\baselineskip}
 \caption{UC-09 View Dashboard and Alerts}
-{\small\linespread{1}\selectfont
+{\normalsize\linespread{1.10}\selectfont
 \begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
 \textbf{Name} & View Dashboard and Alerts \\ \hline
@@ -1050,8 +1057,9 @@ The use cases below describe how each actor interacts with StockSense to achieve
 
 \begin{table}[!htbp]
 \centering
+\vspace*{2\baselineskip}
 \caption{UC-10 View Demand Forecast}
-{\small\linespread{1}\selectfont
+{\normalsize\linespread{1.10}\selectfont
 \begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
 \textbf{Name} & View Demand Forecast \\ \hline
@@ -1074,8 +1082,9 @@ The use cases below describe how each actor interacts with StockSense to achieve
 
 \begin{table}[!htbp]
 \centering
+\vspace*{2\baselineskip}
 \caption{UC-11 View and Act on Redistribution Recommendation}
-{\small\linespread{1}\selectfont
+{\normalsize\linespread{1.10}\selectfont
 \begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
 \textbf{Name} & View and Act on Redistribution Recommendation \\ \hline
@@ -1097,8 +1106,9 @@ The use cases below describe how each actor interacts with StockSense to achieve
 
 \begin{table}[!htbp]
 \centering
+\vspace*{2\baselineskip}
 \caption{UC-12 View Markdown Recommendation}
-{\small\linespread{1}\selectfont
+{\normalsize\linespread{1.10}\selectfont
 \begin{tabular}{|p{0.23\textwidth}|p{0.69\textwidth}|}
 \hline
 \textbf{Name} & View Markdown Recommendation \\ \hline
@@ -1726,79 +1736,82 @@ This section presents one sequence diagram for each use case described in Chapte
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC01_Register_Business.png}
+    \sequencediagram{0.47\textheight}{UC01_Register_Business.png}
     \caption{Sequence Diagram of UC-01 Register Business}
     \label{fig:seq-uc1}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC02_Login.png}
+    \sequencediagram{0.47\textheight}{UC02_Login.png}
     \caption{Sequence Diagram of UC-02 Login}
     \label{fig:seq-uc2}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC03_Manage_Stores.png}
+    \vspace*{-4pt}
+    \captionsetup{skip=6pt}
+    \includegraphics[trim=18bp 16bp 14bp 18bp,clip,width=\textwidth,height=\dimexpr0.42\textheight+8pt\relax,keepaspectratio]{Figures/SequenceDiagrams/UC03_Manage_Stores.png}
     \caption{Sequence Diagram of UC-03 Manage Stores}
     \label{fig:seq-uc3}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\textwidth,height=0.52\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC04_Manage_Store_Managers.png}
+    \sequencediagram{0.58\textheight}{UC04_Manage_Store_Managers.png}
     \caption{Sequence Diagram of UC-04 Manage Store Managers}
     \label{fig:seq-uc4}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC05_Manage_Products_and_Variants.png}
+    \sequencediagram{0.47\textheight}{UC05_Manage_Products_and_Variants.png}
     \caption{Sequence Diagram of UC-05 Manage Products and Variants}
     \label{fig:seq-uc5}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC06_Adjust_Inventory.png}
+    \sequencediagram{0.47\textheight}{UC06_Adjust_Inventory.png}
     \caption{Sequence Diagram of UC-06 Adjust Inventory}
     \label{fig:seq-uc6}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC07_Record_Sale_POS.png}
+    \sequencediagram{0.56\textheight}{UC07_Record_Sale_POS.png}
     \caption{Sequence Diagram of UC-07 Record Sale (POS)}
     \label{fig:seq-uc7}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\textwidth,height=0.6\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC08_Upload_Historical_Sales_Data.png}
+    \sequencediagram{0.66\textheight}{UC08_Upload_Historical_Sales_Data.png}
     \caption{Sequence Diagram of UC-08 Upload Historical Sales Data}
     \label{fig:seq-uc8}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC09_View_Dashboard_and_Alerts.png}
+    \sequencediagram{0.47\textheight}{UC09_View_Dashboard_and_Alerts.png}
     \caption{Sequence Diagram of UC-09 View Dashboard and Alerts}
     \label{fig:seq-uc9}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC10_View_Demand_Forecast.png}
+    \sequencediagram{0.47\textheight}{UC10_View_Demand_Forecast.png}
     \caption{Sequence Diagram of UC-10 View Demand Forecast}
     \label{fig:seq-uc10}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio]{Figures/SequenceDiagrams/UC11_Redistribution_Recommendation.png}
+    \sequencediagram{\dimexpr0.7\textheight+23pt\relax}{UC11_Redistribution_Recommendation.png}
     \caption{Sequence Diagram of UC-11 View and Act on Redistribution Recommendation}
     \label{fig:seq-uc11}
+    \vspace{-15pt}% Keep the following Data Validation section on the same page.
 \end{figure}
 
 \begin{figure}[!htbp]
